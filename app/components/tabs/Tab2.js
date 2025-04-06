@@ -1,6 +1,7 @@
 'use client';
 import React from "react";
 import Image from "next/image";
+import { motion } from "framer-motion";
 
 
 export default function Tab2() {
@@ -34,7 +35,7 @@ export default function Tab2() {
                       newIndexes[index] >= project.images.length - 1 ? 0 : newIndexes[index] + 1;
                     return newIndexes;
                   });
-                }, 1000);
+                }, 2500);
               }
             }}
             onMouseOut={() => {
@@ -42,13 +43,25 @@ export default function Tab2() {
               intervalRefs.current[index] = null; // Reset stored interval
             }}
           >
-            <Image
-              src={project.images[activeIndexes[index]]}
-              width={500}
-              height={300}
-              alt="Project Image"
-              className="p-1 cursor-pointer transition-opacity duration-500"
-            />
+            <motion.div
+              className="pa-10 h-60 relative"
+              key={activeIndexes[index]}
+              initial={{ opacity: 0 }}
+              animate={{ opacity: 1 }}
+              exit={{ opacity: 0 }}
+              transition={{ duration: 0.4 }}
+            >
+              <div className="absolute inset-0">
+                <Image
+                  src={project.images[activeIndexes[index]]}
+                  layout="fill"
+                  objectFit="cover"
+                  alt="Project Image"
+                  className="p-1 cursor-pointer transition-opacity duration-500 "
+                />
+              </div>
+            </motion.div>
+           
             {project.name}
           </div>
         ))}

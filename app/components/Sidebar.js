@@ -21,11 +21,11 @@ export default function Sidebar() {
     ];
 
     return (
-        <div className="min-h-screen w-85 bg-zinc-950 p-2 border-r border-gray-700 font-[montserrat]">
+        <div className="min-h-screen w-85 bg-zinc-950 p-2 border-r border-gray-700 font-[montserrat] ">
           <div className='px-10 py-3'>
             <Image
               src={profile.image} width={45} height={45} alt="Responsive Image" layout="responsive"
-              className={`rounded-full p-1 border-2 border-sky-500 shadow-md shadow-sky-300/50`}
+              className={`rounded-full p-1 border-3 border-blue-900 shadow-md shadow-sky-300/50 hover:border-blue-700 cursor-pointer`}
             />
           </div>
           

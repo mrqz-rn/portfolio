@@ -42,7 +42,7 @@ export default function Home() {
             animate={{ opacity: 1, y: 0 }}
             exit={{ opacity: 0, y: 10 }}
             transition={{ duration: 0.3 }}
-            className="w-full py-4 px-6"
+            className="w-full py-4 px-2"
           >
             {activeTab === 1 && (
               <Tab1/>
