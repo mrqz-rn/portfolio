@@ -13,22 +13,30 @@ export default function Home() {
     { id: 2, title: "Project", icon: "mdi mdi-code-json", },
     { id: 3, title: "Others", icon: "mdi mdi-shape-square-plus", },
   ];
+  const [isModalOpen, setIsModalOpen] = React.useState(false);
 
 
 
   return (
     <div className="text-white w-full bg-zinc-950 text-blue-50 font-[montserrat]">
+       {/* <button
+        className="px-6 py-3 bg-blue-600 text-white rounded-xl hover:bg-blue-700 transition"
+        onClick={() => setIsModalOpen(true)}
+      >
+        Open Modal
+      </button> */}
+     
+
+      
       <div className="p-3 px-32 ">
-        <div className="w-full inline-flex flex-wrap justify-center bg-zinc-700 rounded-[20px] p-1">
+        <div class="w-full flex justify-center p-1 rounded-[20px] bg-zinc-700">
           {tabs.map((tab) => (
-            <div
-              key={tab.id}
-              className={`flex-1 px-4 rounded-2xl whitespace-nowrap cursor-pointer
-              transition-colors duration-150 ease-in-out text-center flex items-center justify-center
-              ${activeTab === tab.id ? "bg-blue-600 text-white" : "text-slate-600 text-white "}`}
-              onClick={() => setActiveTab(tab.id)}>
+            <div key={tab.id} class={`grow px-4 rounded-2xl whitespace-nowrap cursor-pointer
+            transition-colors duration-150 ease-in-out text-center flex items-center justify-center
+            ${activeTab === tab.id ? "bg-blue-600 text-white" : "text-slate-600 text-white "}`}
+            onClick={() => setActiveTab(tab.id)}>
               <span className={`${tab.icon} text-lg font-medium px-2`}></span>
-              <span className=" text-sm font-medium">{tab.title}</span>
+              <span className=" text-sm font-medium pa-0">{tab.title}</span>
             </div>
           ))}
         </div>

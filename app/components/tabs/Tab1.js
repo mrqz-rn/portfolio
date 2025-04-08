@@ -32,6 +32,40 @@ export default function Tab1() {
             ]    
         },
     ];
+    const education = [
+        {id: 1, degree: 'Bachelor of Science in Computer Engineering', 
+        school: 'Rizal Technological University', start: '2019', end: '2023',
+            details: [
+                "Dean's Lister 4rd Year First Semester", 
+                "Dean's Lister 3rd Year Second Semester",
+                "Dean's Lister 3rd Year First Semester ",
+                "Academic Achiever 2nd Year Second Semester",
+            ]    
+        },
+        {id: 2, degree: 'TVL - Computer Programming', 
+        school: 'Antipolo City Senrior High School', start: '2017', end: '2019',
+            details: [
+                'Member of Student Academic Council', 
+                'Computer Programming Strand Representative',
+                'Outstanding Club Organization Achievement',
+                'Outstanding Performance in Computer Programming'
+            ]    
+        },
+    ];
+    const certs = [
+        {id: 1, title: 'Technical Support Fundamentals', 
+        issuer: 'Coursera', issued: '2022', details: ['']   
+        },
+        {id: 2, title: 'IP Addressing and Subnetting', 
+        issuer: 'Udemy', issued: '2022', details: ['']   
+        },
+        {id: 3, title: 'Cisco Networking Foundation: Fundamentals of Cisco Networking', 
+        issuer: 'LinkedIn', issued: '2022', details: ['']   
+        },
+        {id: 4, title: 'Computer System Servicing NC II', 
+        issuer: 'TESDA', issued: '2019', details: ['']   
+        },
+        ];
 return(
     <div className="max-h-[86vh] overflow-y-scroll custom-scrollbar px-6">
         <h3 className="text-lg font-bold border-b border-gray-700 py-2">Career Summary</h3>
@@ -60,6 +94,39 @@ return(
             ))}
         </div>
       
+        <h3 className="text-lg font-bold border-b border-gray-700 py-2">Education</h3>
+        <div className="py-2">
+         {education.map((educ) => (
+             <div key={educ.id} className="mb-3">
+                <div>
+                    <p className="text-base font-semibold">{educ.degree}</p>
+                    <p className="text-base">{educ.school}  |  {educ.start} - {educ.end}</p>
+                </div>
+                <div>
+                {educ.details.map((detail, idd) => (
+                    <p key={`dt`+idd} className="text-sm pt-1 px-6 text-justify">
+                        • {detail}
+                    </p>
+                ))}
+                </div>
+                
+            </div>
+         ))}
+        </div>
+
+        <h3 className="text-lg font-bold border-b border-gray-700 py-2">Certifications</h3>
+        <div className="py-2">
+         {certs.map((cert) => (
+             <div key={cert.id} className="mb-3">
+                <div>
+                    <p>
+                        <span className="text-base font-semibold">{cert.title} </span>
+                        <span className="text-base">| {cert.issuer} - {cert.issued}</span>
+                    </p>
+                </div>
+            </div>
+         ))}
+        </div>
   </div>
 )
 }

@@ -5,19 +5,19 @@ export default function Sidebar() {
   
     const profile = {
       name: 'RON-RON MARQUEZ',
-      position: 'Web Developer',
-      image: '/user.jpg'
+      position: 'Junior Programmer',
+      image: '/icons/user.jpg'
     };
     const info = [
-      {id: 1, type: 'email', data: 'test@gmail.com', image: '/mail.png'},
-      {id: 2, type: 'phone', data: '09346345234', image: '/phone.png'},
-      {id: 3, type: 'location', data: 'Makati City, Philippines', image: '/map.png'},
+      {id: 1, type: 'email', data: 'test@gmail.com', image: '/icons/mail.png'},
+      {id: 2, type: 'phone', data: '09346345234', image: '/icons/phone.png'},
+      {id: 3, type: 'location', data: 'Makati City, Philippines', image: '/icons/map.png'},
     ];
     const socials = [
-        {id: 1, name: 'Linkedin', image: '/linkedin.png', url: 'https://www.google.com'},
-        {id: 2, name: 'Github', image: '/github.png', url: 'https://www.google.com'},
-        {id: 3, name: 'Facebook', image: '/facebook.png', url: 'https://www.google.com'},
-        {id: 4, name: 'Messenger', image: '/messenger.jpg', url: 'https://www.google.com'},
+        {id: 1, name: 'Linkedin', image: '/icons/linkedin.png', url: 'https://www.google.com'},
+        {id: 2, name: 'Github', image: '/icons/github.png', url: 'https://www.google.com'},
+        {id: 3, name: 'Facebook', image: '/icons/facebook.png', url: 'https://www.google.com'},
+        {id: 4, name: 'Messenger', image: '/icons/messenger.jpg', url: 'https://www.google.com'},
     ];
 
     return (
@@ -35,11 +35,11 @@ export default function Sidebar() {
           </div>
           
 
-          <div className="flex justify-center border-y border-gray-700 gap-3 my-3 mb-2">
+          <div className="flex justify-center border-y border-gray-700 gap-3 my-3 mb-2 p-2">
             {socials.map((soc) => (
               <Link key={soc.id} href={soc.url} target="_blank" rel="noopener noreferrer">
                 <Image src={soc.image} width={45} height={45} alt="Icon"
-                  className="rounded-full p-1 cursor-pointer"/>
+                  className="rounded-full p-1 cursor-pointer border-2 border-blue-0 duration-150 ease-in-out hover:border-blue-700"/>
               </Link>
             ))} 
           </div>
@@ -47,7 +47,7 @@ export default function Sidebar() {
           <div className='p-2 border-1 rounded-lg border-gray-700 text-base my-8'>
             <p className="text-center text-blue-50 font-semibold py-1">Information</p>
             {info.map((dt) => (
-            <div key={dt.id} className="flex items-center py-2 px-1">
+            <div key={dt.id} className="flex items-center py-1 px-1">
               <Image src={dt.image} width={38} height={38} alt="Icon"
                 className="p-1 "
               />
@@ -55,6 +55,8 @@ export default function Sidebar() {
             </div>
             ))}
           </div>
+          <button className="w-full text-center bg-blue-600 rounded-lg text-white font-semibold p-2 cursor-pointer
+          hover:scale-102 transition-transform duration-300 ease-in-out">Download CV</button>
         </div>
     )
 }
