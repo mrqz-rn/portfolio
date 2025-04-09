@@ -67,7 +67,7 @@ export default function Tab1() {
         },
         ];
 return(
-    <div className="max-h-[86vh] overflow-y-scroll custom-scrollbar px-6">
+    <div className="h-[92vh] overflow-y-auto custom-scrollbar px-8">
         <h3 className="text-lg font-bold border-b border-gray-700 py-2">Career Summary</h3>
         <div className="py-2">
             <p className="text-base text-justify">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; {summary}</p>

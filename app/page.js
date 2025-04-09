@@ -18,7 +18,7 @@ export default function Home() {
 
 
   return (
-    <div className="text-white w-full bg-zinc-950 text-blue-50 font-[montserrat]">
+    <div className="text-white w-full bg-zinc-950 text-blue-50 font-[montserrat] ">
        {/* <button
         className="px-6 py-3 bg-blue-600 text-white rounded-xl hover:bg-blue-700 transition"
         onClick={() => setIsModalOpen(true)}
@@ -26,20 +26,19 @@ export default function Home() {
         Open Modal
       </button> */}
      
-
-      
-      <div className="p-3 px-32 ">
-        <div class="w-full flex justify-center p-1 rounded-[20px] bg-zinc-700">
+     <div className="inline-flex w-full sticky top-0 z-50  backdrop-blur-sm bg-opacity-10 p-3 " >
+          <div className="flex p-1 h-fit gap-2 items-center flex-nowrap  scrollbar-hide bg-default-100 rounded-medium w-full p-1 rounded-[20px] bg-zinc-700">
           {tabs.map((tab) => (
-            <div key={tab.id} class={`grow px-4 rounded-2xl whitespace-nowrap cursor-pointer
-            transition-colors duration-150 ease-in-out text-center flex items-center justify-center
-            ${activeTab === tab.id ? "bg-blue-600 text-white" : "text-slate-600 text-white "}`}
-            onClick={() => setActiveTab(tab.id)}>
-              <span className={`${tab.icon} text-lg font-medium px-2`}></span>
-              <span className=" text-sm font-medium pa-0">{tab.title}</span>
-            </div>
-          ))}
-        </div>
+              
+              <div key={tab.id} className={`z-0 w-full px-3 py-1 flex group relative justify-center items-center cursor-pointer rounded-2xl
+               h-8 text-small rounded-small transition-colors duration-250 ease-in-out
+              ${activeTab === tab.id ? "bg-blue-600 text-white" : "text-slate-600 text-white "}`} 
+              onClick={() => setActiveTab(tab.id)}>
+                 <span className={`${tab.icon} text-lg font-medium px-2`}></span>
+                 <span className=" text-sm font-medium pa-0">{tab.title}</span>
+              </div>
+            ))}
+          </div>  
       </div>
   
       <div className="">
@@ -50,7 +49,7 @@ export default function Home() {
             animate={{ opacity: 1, y: 0 }}
             exit={{ opacity: 0, y: 10 }}
             transition={{ duration: 0.3 }}
-            className="w-full py-4 px-2"
+            className="w-full"
           >
             {activeTab === 1 && (
               <Tab1/>

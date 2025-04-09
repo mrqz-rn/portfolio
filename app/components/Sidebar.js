@@ -55,8 +55,11 @@ export default function Sidebar() {
             </div>
             ))}
           </div>
-          <button className="w-full text-center bg-blue-600 rounded-lg text-white font-semibold p-2 cursor-pointer
-          hover:scale-102 transition-transform duration-300 ease-in-out">Download CV</button>
+          <div className=' p-2 border border-gray-700 m-2 rounded-lg cursor-pointer text-center'>
+            Download CV
+          </div>
+          {/* <button className="w-60 absolute bottom-0 text-center bg-blue-600 rounded-lg text-white font-semibold p-2 m-2 cursor-pointer
+          hover:scale-102 transition-transform duration-300 ease-in-out">Download CV</button> */}
         </div>
     )
 }
