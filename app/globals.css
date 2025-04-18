@@ -38,6 +38,81 @@ body {
   background: transparent;
 }
 .custom-scrollbar::-webkit-scrollbar-thumb {
-  background-color: #7f7f83;
+  background-color: oklch(54.6% .245 262.881);
   border-radius: 20px;
+}
+.Ionic{
+  background: #272525;
+  border: 1px solid #0053c7;
+  box-shadow: 0 0 4px #086bf5;
+}
+.Vue{
+  background: #272525;
+  border: 1px solid #038a4e;
+  box-shadow: 0 0 4px #03c56e;
+}
+.Codeigniter{
+  background: #272525;
+  border: 1px solid #c9340a;
+  box-shadow: 0 0 4px #dd4814;
+}
+.MySQL{
+  background: #272525;
+  border: 1px solid #fc8f00;
+  box-shadow: 0 0 4px #f3951a;
+}
+.Java{
+  background: #272525;
+  border: 1px solid #ec2025;
+  box-shadow: 0 0 4px #ec3639;
+}
+.Tailwind{
+  background: #272525;
+  border: 1px solid #35dee5;
+  box-shadow: 0 0 4px #53f3f8;
+}
+.NextJS{
+  background: #272525;
+  border: 1px solid #2a53a9;
+  box-shadow: 0 0 4px #3569da;
+}
+.NoSQL{
+  background: #272525;
+  border: 1px solid #cefc00;
+  box-shadow: 0 0 4px #d6fc00;
+}
+.Access{
+  background: #272525;
+  border: 1px solid #b92714;
+  box-shadow: 0 0 4px #b92714;
+}
+.Bootstrap{
+  background: #272525;
+  border: 1px solid #5314b9;
+  box-shadow: 0 0 4px #6d1feb;
+}
+.PHP{
+  background: #272525;
+  border: 1px solid #2d14b9;
+  box-shadow: 0 0 4px #3e20e9;
+}
+.Kodular{
+  background: #272525;
+  border: 1px solid #5a00c0;
+  box-shadow: 0 0 4px #8316ff;
+}
+.Firebase{
+  background: #272525;
+  border: 1px solid #f1c500;
+  box-shadow: 0 0 4px #ffdd46;
+}
+.Arduino{
+  background: #272525;
+  border: 1px solid #00a545;
+  box-shadow: 0 0 4px #0cdf64;
+}
+.Android{
+  background: #272525;
+  border: 1px solid #1fbd00;
+  box-shadow: 0 0 4px #38fa11;
 }

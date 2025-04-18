@@ -67,23 +67,23 @@ export default function Tab1() {
         },
         ];
 return(
-    <div className="h-[92vh] overflow-y-auto custom-scrollbar px-8">
-        <h3 className="text-lg font-bold border-b border-gray-700 py-2">Career Summary</h3>
+    <div className="px-6 md:px-14">
+        <h3 className="text-base font-bold border-b border-gray-700 py-2">CAREER SUMMARY</h3>
         <div className="py-2">
-            <p className="text-base text-justify">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; {summary}</p>
+            <p className="text-sm text-justify">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; {summary}</p>
         </div>
 
-        <h3 className="text-lg font-bold border-b border-gray-700 py-2">Experience</h3>
+        <h3 className="text-base font-bold border-b border-gray-700 pb-2 py-4">EXPERIENCE</h3>
         <div className="py-2">
             {jobs.map((job) => (
                 <div key={job.id} className="mb-3">
                     <div>
-                        <p className="text-base font-semibold">{job.position}</p>
-                        <p className="text-base">{job.company}  |  {job.start} - {job.end}</p>
+                        <p className="text-sm font-semibold">{job.position}</p>
+                        <p className="text-sm">{job.company} &nbsp;|&nbsp; {job.start} - {job.end}</p>
                     </div>
                     <div>
                     {job.details.map((detail, idd) => (
-                        <p key={`dt`+idd} className="text-sm pt-1 px-6 text-justify">
+                        <p key={`dt`+idd} className="text-sm italic pt-1 px-6 text-justify">
                             • {detail}
                         </p>
 
@@ -94,17 +94,17 @@ return(
             ))}
         </div>
       
-        <h3 className="text-lg font-bold border-b border-gray-700 py-2">Education</h3>
+        <h3 className="text-base font-bold border-b border-gray-700 py-2">EDUCATION</h3>
         <div className="py-2">
          {education.map((educ) => (
              <div key={educ.id} className="mb-3">
                 <div>
-                    <p className="text-base font-semibold">{educ.degree}</p>
-                    <p className="text-base">{educ.school}  |  {educ.start} - {educ.end}</p>
+                    <p className="text-sm font-semibold">{educ.degree}</p>
+                    <p className="text-sm">{educ.school}  |  {educ.start} - {educ.end}</p>
                 </div>
                 <div>
                 {educ.details.map((detail, idd) => (
-                    <p key={`dt`+idd} className="text-sm pt-1 px-6 text-justify">
+                    <p key={`dt`+idd} className="text-sm italic pt-1 px-6 text-justify">
                         • {detail}
                     </p>
                 ))}
@@ -114,14 +114,14 @@ return(
          ))}
         </div>
 
-        <h3 className="text-lg font-bold border-b border-gray-700 py-2">Certifications</h3>
+        <h3 className="text-base font-bold border-b border-gray-700 py-2">CERTIFICATIONS</h3>
         <div className="py-2">
          {certs.map((cert) => (
              <div key={cert.id} className="mb-3">
                 <div>
                     <p>
-                        <span className="text-base font-semibold">{cert.title} </span>
-                        <span className="text-base">| {cert.issuer} - {cert.issued}</span>
+                        <span className="text-sm font-semibold">{cert.title} </span>
+                        <span className="text-sm">| {cert.issuer} - {cert.issued}</span>
                     </p>
                 </div>
             </div>
