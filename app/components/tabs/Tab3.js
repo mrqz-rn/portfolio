@@ -55,6 +55,7 @@ export default function Tab3() {
             {id: 0, name: "HTML", icon: "html.png"},
             {id: 1, name: "CSS", icon: "css.png"},
             {id: 2, name: "Javascript", icon: "javascript.png"},
+            {id: 13, name: "Typescript", icon: "typescript.png"},
             {id: 3, name: "Next JS", icon: "next.png"},
             {id: 4, name: "Vue JS", icon: "vue.png"},
             {id: 5, name: "Ionic", icon: "ionic.png"},
@@ -128,7 +129,7 @@ export default function Tab3() {
                   <div key={service.id} className="p-4 border border-gray-700 rounded-lg text-justify mb-6 w-full">
                     <div className="flex justify-between">
                     <h4 className="text-base font-bold">{service.name}</h4>
-                    <span className="mdi mdi-open-in-new text-xl text-blue-500 cursor-pointer scale-100 active:scale-75 transition duration-300 ease-in-out"/>
+                    {/* <span className="mdi mdi-open-in-new text-xl text-blue-500 cursor-pointer scale-100 active:scale-75 transition duration-300 ease-in-out"/> */}
                     </div>
                     <ul className="md:list-disc md:list-inside">
                       {service.jobs.map((job) => (

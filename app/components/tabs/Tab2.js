@@ -56,7 +56,8 @@ export default function Tab2() {
         involvement: ['Design', 'Development'],
         company: "Slac",
         detail: [
-          ""
+          "Restructured the application's data models to align with the organization's hierarchical structure, ensuring seamless integration with the Human Resource and Human Resource Information System (HHRIS). This included mapping positions, departments, and reporting lines accurately across systems.",
+          "Redesigned and streamlined various internal workflows within the system to reduce redundancy, improve efficiency, and enhance user experience for recruiters and HR personnel."
         ],
         imagefit: 'contain',
         images: ['/works/w5/img1.png','/works/w5/img2.png','/works/w5/img3.png'], active: 0},
