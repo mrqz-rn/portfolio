@@ -1,3 +1,4 @@
+'use client'
 import Image from 'next/image'
 import Link from 'next/link'
 import { motion } from "framer-motion";
@@ -23,7 +24,15 @@ export default function Side() {
         height: 100,
         backgroundColor: "#9911ff",
         borderRadius: 5,
-    }
+    };
+
+    const downloadResume = () => {
+        const link = document.createElement('a');
+        link.href = '/resume/Resume.pdf';
+        link.download = 'Ron Marquez Resume.pdf';
+        link.click();
+
+    };
     return (
         <>
             <div className="flex flex-col justify-between h-full">
@@ -71,8 +80,8 @@ export default function Side() {
                 <div className='p-6 md:p-2 '>
                     <div className='p-2 mb-1 border border-gray-700 bg-blue-600 rounded-lg cursor-pointer text-center 
                     scale-100  duration-150 ease-in-out
-                    active:scale-95 active:bg-blue-500
-                    '>
+                    active:scale-95 active:bg-blue-500'
+                    onClick={downloadResume}>
                         Download CV
                     </div>
                 </div>
