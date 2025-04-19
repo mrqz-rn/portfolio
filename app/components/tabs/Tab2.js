@@ -3,7 +3,7 @@ import React from "react";
 import Image from "next/image";
 import { motion } from "framer-motion";
 import Modal from "../Modal";
-
+import ImageSlider from "../ImageSlider";
 
 export default function Tab2() {
     const [isModalOpen, setIsModalOpen] = React.useState(false);
@@ -111,7 +111,7 @@ export default function Tab2() {
         tech: ['Android', 'Arduino', 'PHP','MySQL'],
         imagefit: 'contain',
         images: ['/project/quick/img1.jpg','/project/quick/img2.jpg','/project/quick/img3.jpg','/project/quick/img4.jpg',
-          '/project/quick/img5.jpg','/project/quick/img6.jpg','/project/quick/img7.jpg'], active: 0},
+          '/project/quick/img5.jpg','/project/quick/img6.jpg'], active: 0},
 
         {id: 1, name: 'BlueThunder', 
         description: 'An E-commerce website with a CRUD for managging the products. ',
@@ -171,7 +171,7 @@ export default function Tab2() {
           <h3 className="mx-6 md:mx-14 mb-6 text-lg font-bold border-b border-gray-700 py-2">EXPERIENCE</h3>
           <div className="px-6 md:px-20">
             {works.map((work, index) => (
-                <div key={index} onClick={() => openModal(index)}
+                <div key={index} 
                 onMouseOver={() => {
                   if (!intervalRefs.current[index]) { // Prevent multiple intervals
                     intervalRefs.current[index] = setInterval(() => {
@@ -190,26 +190,9 @@ export default function Tab2() {
                 }}
                 className="md:flex border border-gray-700 rounded-lg p-3 mb-6 md:mb-10 cursor-pointer">
                   <div className="md:w-3/9 border border-gray-700 rounded-lg transition-transform duration-300 ease-in-out">
-                    <motion.div
-                      className="pa-10 h-60 relative"
-                      key={activeIndexes[index]}
-                      initial={{ opacity: 0 }}
-                      animate={{ opacity: 1 }}
-                      exit={{ opacity: 0 }}
-                      transition={{ duration: 0.4 }}
-                    >
-                      <div className="absolute inset-0">
-                        <Image
-                          src={work.images[activeIndexes[index]]}
-                          layout="fill"
-                          objectFit={work.imagefit}
-                          alt="Project Image"
-                          className="p-1 cursor-pointer transition-opacity duration-500 "
-                        />
-                      </div>
-                    </motion.div>
+                  <ImageSlider imageArray={work.images} mClass={"min-h-[200px]"}/>
                   </div>
-                  <div className="md:w-6/9 pl-4 md:pt-0 pt-2">
+                  <div className="md:w-6/9 pl-4 md:pt-0 pt-2" onClick={() => openModal(index)}>
                     <p className="font-semibold">{work.name}</p>
                     <p className="py-1 text-justify text-sm">
                       {work.description.length > 180 ? (
@@ -268,7 +251,9 @@ export default function Tab2() {
                 intervalRefs2.current[index] = null; // Reset stored interval
               }}>
                 <div className="md:w-4/9 border border-gray-700 rounded-lg transition-transform duration-300 ease-in-out">
-                  <motion.div
+                 <ImageSlider imageArray={project.images} mClass={"h-40"}/>
+
+                  {/* <motion.div
                     className="pa-10 h-40 relative"
                     key={activeIndexes2[index]}
                     initial={{ opacity: 0 }}
@@ -285,7 +270,7 @@ export default function Tab2() {
                         className="p-1 cursor-pointer transition-opacity duration-500 "
                       />
                     </div>
-                  </motion.div>
+                  </motion.div> */}
                 </div>
                 <div className="md:w-5/9 md:pl-4 pt-2 md:pt-0">
                   <p className="font-semibold">{project.name}</p>

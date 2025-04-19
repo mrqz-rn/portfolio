@@ -1,7 +1,6 @@
 import React from "react";
 import Image from "next/image";
 import Modal from "../Modal";
-import Contact from "../Contact";
 
 
 export default function Tab3() {
