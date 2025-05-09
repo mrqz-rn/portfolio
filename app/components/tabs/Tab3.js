@@ -76,6 +76,7 @@ export default function Tab3() {
             {id: 6, name: "Figma", icon: "figma.png"},
         ]},
         {id: 2, category: "Familiar With", items: [
+            {id: 1, name: "Python", icon: "python.png"},
             {id: 0, name: "Arduino", icon: "arduino.png"},
             {id: 2, name: "C", icon: "c.png"},
             {id: 3, name: "C++", icon: "c+.png"},
