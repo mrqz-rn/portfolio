@@ -123,18 +123,18 @@ export default function Tab3() {
                 </div>
             </Modal>
             <div className="px-6 md:px-14">
-                <h3 className="mb-6 text-lg font-bold border-b border-gray-700 py-2">SERVICE OFFERED</h3>
+                <h3 className="mb-6 text-lg font-bold border-b border-gray-700 py-2 white--text">SERVICE OFFERED</h3>
                 <div className="md:flex md:gap-5">
                 {services.map((service) => (
                   <div key={service.id} className="p-4 border border-gray-700 rounded-lg text-justify mb-6 w-full">
                     <div className="flex justify-between">
-                    <h4 className="text-base font-bold">{service.name}</h4>
+                    <h4 className="text-base font-bold white--text">{service.name}</h4>
                     {/* <span className="mdi mdi-open-in-new text-xl text-blue-500 cursor-pointer scale-100 active:scale-75 transition duration-300 ease-in-out"/> */}
                     </div>
                     <ul className="md:list-disc md:list-inside">
                       {service.jobs.map((job) => (
                         <li key={job.id} className="text-sm py-1">
-                          <span className="">{job.title}</span> 
+                          <span className="white--text">{job.title}</span> 
                           {/* &nbsp; {job.description} */}
                         </li>
                       ))}
@@ -144,11 +144,11 @@ export default function Tab3() {
                 </div>
 
 
-                <h3 className=" mb-6 text-lg font-bold border-b border-gray-700 py-2">SKILLS</h3>
+                <h3 className=" mb-6 text-lg font-bold border-b border-gray-700 py-2 white--text">SKILLS</h3>
                 <div className="px-4 pt-4  border border-gray-700 rounded-lg mb-6"> 
                     {techs.map((tech) => (
                     <div key={tech.id} className="mb-4">
-                        <h4 className="text-base font-bold mb-2">{tech.category}</h4>
+                        <h4 className="text-base font-bold mb-2 white--text">{tech.category}</h4>
                         <div className="w-full flex flex-wrap gap-6  ">
                         {tech.items.map((item) => (
                             <div key={item.id} className="items-center justify-center scale-100 hover:scale-110 transition duration-200 ease-in-out">
@@ -157,7 +157,7 @@ export default function Tab3() {
                                     src={`/tech/${item.icon}`} width={800} height={800} alt="Responsive Image" 
                                     className={`w-9 h-9 cursor-pointer object-contain`}/>
                                 </div>
-                                <p className="text-xs text-center pt-[2px]">{item.name}</p>
+                                <p className="text-xs text-center pt-[2px] white--text">{item.name}</p>
                             </div>
                         ))}
                         </div>
@@ -165,21 +165,21 @@ export default function Tab3() {
                     ))}
                 </div>
 
-                <h3 className=" mb-6 text-lg font-bold border-b border-gray-700 py-2">QUALIFICATIONS</h3>
+                <h3 className=" mb-6 text-lg font-bold border-b border-gray-700 py-2 white--text">QUALIFICATIONS</h3>
                 <div className="px-4 border-gray-700 rounded-lg mb-6">
                     {qualifications.map((qualification) => (
                     <div key={qualification.id} className="mb-4">
-                        <h4 className="text-base font-bold mb-2">{qualification.title}</h4>
+                        <h4 className="text-base font-bold mb-2 white--text">{qualification.title}</h4>
                         <ul className="list-disc list-inside">
                         {qualification.items.map((item) => (
-                            <li key={item.id} className="text-sm">{item.text}</li>
+                            <li key={item.id} className="text-sm white--text">{item.text}</li>
                         ))}
                         </ul>
                     </div>
                     ))}
                 </div>
                 
-                <p className="py-2 mb-4 text-sm text-gray-500 text-center">Skilled. Reliable. Ready to deliver!</p>
+                <p className="py-2 mb-4 text-sm text-gray-500 text-center gray--text">Skilled. Reliable. Ready to deliver!</p>
                 {/* <Contact /> */}
             </div>
         </>

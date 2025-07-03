@@ -20,11 +20,11 @@ export default function Home() {
   return (
     <>
     <div className="md:hidden pt-6">
-      <div className="text-xl font-bold pa-0 text-center py-2 bg-blue-500/70 text-white mb-5"> Personal </div>
+      <div className="text-xl font-bold pa-0 text-center py-2 bg-blue-500/70 text-white mb-5 white--text"> Personal </div>
       <Tab1/>
-      <div className="text-xl font-bold pa-0 text-center py-2 bg-blue-500/70 text-white my-5"> Projects </div>
+      <div className="text-xl font-bold pa-0 text-center py-2 bg-blue-500/70 text-white my-5 white--text"> Projects </div>
       <Tab2/>
-      <div className="text-xl font-bold pa-0 text-center py-2 bg-blue-500/70 text-white my-5"> Others </div>
+      <div className="text-xl font-bold pa-0 text-center py-2 bg-blue-500/70 text-white my-5 white--text"> Others </div>
       <Tab3/>
     </div>
 
@@ -38,8 +38,8 @@ export default function Home() {
                 h-8 text-small rounded-small transition-colors duration-250 ease-in-out
                 ${activeTab === tab.id ? "bg-blue-600 text-white" : "text-slate-600 text-white "}`} 
                 onClick={() => setActiveTab(tab.id)}>
-                  <span className={`${tab.icon} text-lg font-medium px-2`}></span>
-                  <span className=" text-sm font-medium pa-0">{tab.title}</span>
+                  <span className={`${tab.icon} text-lg font-medium px-2 white--text`}></span>
+                  <span className=" text-sm font-medium pa-0 white--text">{tab.title}</span>
                 </div>
               ))}
           </div>

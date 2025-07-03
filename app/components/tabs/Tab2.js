@@ -192,7 +192,7 @@ export default function Tab2() {
         </div>
       </Modal>
 
-      <h3 className="mx-6 md:mx-14 mb-6 text-lg font-bold border-b border-gray-700 py-2">EXPERIENCE</h3>
+      <h3 className="mx-6 md:mx-14 mb-6 text-lg font-bold border-b border-gray-700 py-2 white--text">EXPERIENCE</h3>
       <div className="px-6 md:px-20">
         {works.map((work, index) => (
           <div key={index}
@@ -217,8 +217,8 @@ export default function Tab2() {
               <ImageSlider imageArray={work.images} mClass={"min-h-[200px]"} />
             </div>
             <div className="md:w-6/9 pl-4 md:pt-0 pt-2" onClick={() => openModal(index)}>
-              <p className="font-semibold">{work.name}</p>
-              <p className="py-1 text-justify text-sm">
+              <p className="font-semibold white--text">{work.name}</p>
+              <p className="py-1 text-justify text-sm white--text">
                 {work.description.length > 180 ? (
                   <span>
                     {work.description.slice(0, 180)}...{" "}
@@ -235,14 +235,14 @@ export default function Tab2() {
 
               <div className="w-full flex flex-wrap py-1">
                 {work.tech.map((th, id) => (
-                  <div key={id} className={`bg-blue-900 mx-1 rounded-lg p-1 px-2 text-sm ${th}`}>{th}</div>
+                  <div key={id} className={`bg-blue-900 mx-1 rounded-lg p-1 px-2 text-sm white--text ${th}`}>{th}</div>
                 ))}
               </div>
 
               <p className="text-sm pt-1 font-semibold pb-1">Involvement:</p>
               <div className=" w-full flex flex-wrap ">
                 {work.involvement.map((inv, ind) => (
-                  <div key={ind} className="bg-blue-900 mx-1 max-w-fit rounded-lg p-1 text-sm">{inv}</div>
+                  <div key={ind} className="bg-blue-900 mx-1 max-w-fit rounded-lg p-1 text-sm white--text">{inv}</div>
                 ))}
               </div>
             </div>
@@ -253,7 +253,7 @@ export default function Tab2() {
 
 
 
-      <h3 className="mx-6 md:mx-10 mb-6 text-lg font-bold border-b border-gray-700 py-2">PROJECTS</h3>
+      <h3 className="mx-6 md:mx-10 mb-6 text-lg font-bold border-b border-gray-700 py-2 white--text">PROJECTS</h3>
       <div className="px-6 md:px-20 md:grid md:grid-cols-2 md:gap-6 mb-6">
         {projects.map((project, index) => (
           <div key={index} className="md:flex mb-6 md:mb-0 border border-gray-700 rounded-lg p-3"
@@ -297,13 +297,13 @@ export default function Tab2() {
                   </motion.div> */}
             </div>
             <div className="md:w-5/9 md:pl-4 pt-2 md:pt-0">
-              <p className="font-semibold">{project.name}</p>
-              <p className="py-1 text-justify text-sm">
+              <p className="font-semibold white--text">{project.name}</p>
+              <p className="py-1 text-justify text-sm white--text">
                 {project.description.length > 100 ? (
                   <span>
                     {project.description.slice(0, 100)}...{" "}
                     <span onClick={() => openModal2(index)}
-                      className="text-blue-500 cursor-pointer"
+                      className="text-blue-500 cursor-pointer "
                     >
                       Read more
                     </span>
@@ -315,7 +315,7 @@ export default function Tab2() {
 
               <div className="w-full flex flex-wrap py-1">
                 {project.tech.map((th, id) => (
-                  <div key={id} className={`bg-blue-900 mx-1 rounded-lg p-1 px-2 text-sm ${th}`}>{th}</div>
+                  <div key={id} className={`bg-blue-900 mx-1 rounded-lg p-1 px-2 text-sm white--text ${th}`}>{th}</div>
                 ))}
               </div>
 

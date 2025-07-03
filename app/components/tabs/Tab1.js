@@ -3,7 +3,7 @@
 export default function Tab1() {
     const summary = 'Resourceful and results-driven Junior Developer with hands-on experience in full-stack web development, systems enhancement, and technical support. Proven ability to identify and solve complex bugs, streamline business processes through custom web applications, and collaborate with cross-functional teams to meet user needs. Skilled in agile development, responsive design, and API integration. Strong communicator with the ability to convey technical concepts to both technical and non-technical audiences. Also brings a solid background in hardware troubleshooting and customer service, demonstrating versatility and a problem-solving mindset across various roles.';
     const jobs = [
-        {id: 1, position: 'Junior Programmer', company: 'SL Agritech Corporation', start: 'July 2023', end: 'Present',
+        {id: 1, position: 'Junior - Senior Programmer', company: 'SL Agritech Corporation', start: 'July 2023', end: 'Present',
             details: [
                 'Demonstrated strong problem-solving skills by identifying and fixing bugs in existing system, and implementing enhancements that significantly improve functionality and performance.',
                 'Employed agile methodologies to manage project timelines and deliverables, ensuring successful completion of development projects.',
@@ -68,22 +68,22 @@ export default function Tab1() {
         ];
 return(
     <div className="px-6 md:px-14">
-        <h3 className="text-base font-bold border-b border-gray-700 py-2">CAREER SUMMARY</h3>
+        <h3 className="text-base font-bold border-b border-gray-700 py-2 white--text">CAREER SUMMARY</h3>
         <div className="py-2">
-            <p className="text-sm text-justify">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; {summary}</p>
+            <p className="text-sm text-justify white--text">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; {summary}</p>
         </div>
 
-        <h3 className="text-base font-bold border-b border-gray-700 pb-2 py-4">EXPERIENCE</h3>
+        <h3 className="text-base font-bold border-b border-gray-700 pb-2 py-4 white--text">EXPERIENCE</h3>
         <div className="py-2">
             {jobs.map((job) => (
                 <div key={job.id} className="mb-3">
                     <div>
-                        <p className="text-sm font-semibold">{job.position}</p>
-                        <p className="text-sm">{job.company} &nbsp;|&nbsp; {job.start} - {job.end}</p>
+                        <p className="text-sm font-semibold white--text">{job.position}</p>
+                        <p className="text-sm white--text">{job.company} &nbsp;|&nbsp; {job.start} - {job.end}</p>
                     </div>
                     <div>
                     {job.details.map((detail, idd) => (
-                        <p key={`dt`+idd} className="text-sm italic pt-1 px-6 text-justify">
+                        <p key={`dt`+idd} className="text-sm italic pt-1 px-6 text-justify white--text">
                             • {detail}
                         </p>
 
@@ -94,17 +94,17 @@ return(
             ))}
         </div>
       
-        <h3 className="text-base font-bold border-b border-gray-700 py-2">EDUCATION</h3>
+        <h3 className="text-base font-bold border-b border-gray-700 py-2 white--text">EDUCATION</h3>
         <div className="py-2">
          {education.map((educ) => (
              <div key={educ.id} className="mb-3">
                 <div>
-                    <p className="text-sm font-semibold">{educ.degree}</p>
-                    <p className="text-sm">{educ.school}  |  {educ.start} - {educ.end}</p>
+                    <p className="text-sm font-semibold white--text">{educ.degree}</p>
+                    <p className="text-sm white--text">{educ.school}  |  {educ.start} - {educ.end}</p>
                 </div>
                 <div>
                 {educ.details.map((detail, idd) => (
-                    <p key={`dt`+idd} className="text-sm italic pt-1 px-6 text-justify">
+                    <p key={`dt`+idd} className="text-sm italic pt-1 px-6 text-justify white--text">
                         • {detail}
                     </p>
                 ))}
@@ -114,14 +114,14 @@ return(
          ))}
         </div>
 
-        <h3 className="text-base font-bold border-b border-gray-700 py-2">CERTIFICATIONS</h3>
+        <h3 className="text-base font-bold border-b border-gray-700 py-2 white--text">CERTIFICATIONS</h3>
         <div className="py-2">
          {certs.map((cert) => (
              <div key={cert.id} className="mb-3">
                 <div>
                     <p>
-                        <span className="text-sm font-semibold">{cert.title} </span>
-                        <span className="text-sm">| {cert.issuer} - {cert.issued}</span>
+                        <span className="text-sm font-semibold white--text">{cert.title} </span>
+                        <span className="text-sm white--text">| {cert.issuer} - {cert.issued}</span>
                     </p>
                 </div>
             </div>

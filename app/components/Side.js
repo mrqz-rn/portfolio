@@ -5,7 +5,7 @@ import { motion } from "framer-motion";
 export default function Side() {
     const profile = {
         name: 'RON-RON MARQUEZ',
-        position: 'Junior Programmer',
+        position: 'Senior Programmer',
         image: '/icons/user.jpg'
       };
       const info = [
@@ -45,8 +45,8 @@ export default function Side() {
                             rounded-full p-1 border-3 border-blue-900 shadow-md shadow-sky-300/50 hover:border-blue-700 cursor-pointer`}/>
                         </div>
                         <div className='py-3'>
-                            <p className="text-center text-xl font-semibold text-blue-50">{profile.name}</p>
-                            <p className="text-center text-base font-medium text-gray-300">&lt; {profile.position} /&gt;</p>
+                            <p className="text-center text-xl font-semibold text-blue-50 white--text">{profile.name}</p>
+                            <p className="text-center text-base font-medium text-gray-300 gray--text">&lt; {profile.position} /&gt;</p>
                         </div>
                     </div>
                     
@@ -66,13 +66,13 @@ export default function Side() {
                 </div>
                 <div className='p-6 md:p-2'>
                     <div className='p-2 border-1 rounded-lg border-gray-700 text-base'>
-                        <p className="text-center text-blue-50 font-semibold py-1">Information</p>
+                        <p className="text-center text-blue-50 font-semibold py-1 white--text">Information</p>
                         {info.map((dt) => (
                         <div key={dt.id} className="flex items-center py-1 px-1">
                             <Image src={dt.image} width={38} height={38} alt="Icon"
                             className="p-1 "
                             />
-                            <span className="ml-2 text-sm text-gray-300 break-words md:truncate md:w-[220px]">{dt.data}</span>
+                            <span className="ml-2 text-sm text-gray-300 break-words md:truncate md:w-[220px] gray--text">{dt.data}</span>
                         </div>
                         ))}
                     </div>
@@ -80,7 +80,7 @@ export default function Side() {
                 <div className='p-6 md:p-2 '>
                     <div className='p-2 mb-1 border border-gray-700 bg-blue-600 rounded-lg cursor-pointer text-center 
                     scale-100  duration-150 ease-in-out
-                    active:scale-95 active:bg-blue-500'
+                    active:scale-95 active:bg-blue-500 white--text'
                     onClick={downloadResume}>
                         Download CV
                     </div>

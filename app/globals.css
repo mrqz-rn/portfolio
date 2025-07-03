@@ -146,3 +146,13 @@ body {
   height: 200px;
   /* max-height: 100vh; */
 }
+
+.white--text{
+  color: #fff !important;
+}
+.black--text{
+  color: #000 !important;
+}
+.gray--text{
+  color: #d1d5dc !important;
+}
