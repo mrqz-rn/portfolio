@@ -3,7 +3,7 @@
 export default function Tab1() {
     const summary = 'Resourceful and results-driven Junior Developer with hands-on experience in full-stack web development, systems enhancement, and technical support. Proven ability to identify and solve complex bugs, streamline business processes through custom web applications, and collaborate with cross-functional teams to meet user needs. Skilled in agile development, responsive design, and API integration. Strong communicator with the ability to convey technical concepts to both technical and non-technical audiences. Also brings a solid background in hardware troubleshooting and customer service, demonstrating versatility and a problem-solving mindset across various roles.';
     const jobs = [
-        {id: 1, position: 'Junior - Senior Programmer', company: 'SL Agritech Corporation', start: 'July 2023', end: 'Present',
+        {id: 1, position: 'Junior Programmer', company: 'SL Agritech Corporation', start: 'July 2023', end: 'July 2025',
             details: [
                 'Demonstrated strong problem-solving skills by identifying and fixing bugs in existing system, and implementing enhancements that significantly improve functionality and performance.',
                 'Employed agile methodologies to manage project timelines and deliverables, ensuring successful completion of development projects.',
