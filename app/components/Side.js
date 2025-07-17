@@ -5,7 +5,7 @@ import { motion } from "framer-motion";
 export default function Side() {
     const profile = {
         name: 'RON-RON MARQUEZ',
-        position: 'Senior Programmer',
+        position: 'Junior Programmer',
         image: '/icons/user.jpg'
       };
       const info = [
