@@ -265,7 +265,7 @@ export default function Tab2() {
                 ))}
               </div>
 
-              <p className="text-sm pt-1 font-semibold pb-1">Involvement:</p>
+              <p className="text-sm pt-1 font-semibold pb-1 white--text">Involvement:</p>
               <div className=" w-full flex flex-wrap ">
                 {work.involvement.map((inv, ind) => (
                   <div key={ind} className="bg-blue-900 mx-1 max-w-fit rounded-lg p-1 text-sm white--text">{inv}</div>
