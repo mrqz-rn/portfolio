@@ -60,6 +60,9 @@ export default function Tab1() {
         },
     ];
     const certs = [
+        {id: 0, title: 'Atlassian Agile Project Management Professional Certificate', 
+        issuer: 'Atlassian', issued: '2025', details: ['']   
+        },
         {id: 1, title: 'Technical Support Fundamentals', 
         issuer: 'Coursera', issued: '2022', details: ['']   
         },
