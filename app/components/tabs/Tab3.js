@@ -71,7 +71,7 @@ export default function Tab3() {
             {id: 1, name: "Gitlab", icon: "gitlab.png"},
             {id: 2, name: "Github", icon: "github.png"},
             {id: 3, name: "Postman", icon: "postman.png"},
-            {id: 4, name: "Playwright", icon: "playwright.png"},
+            // {id: 4, name: "Playwright", icon: "playwright.png"},
             {id: 5, name: "Photoshop", icon: "photoshop.png"},
             {id: 6, name: "Figma", icon: "figma.png"},
         ]},
