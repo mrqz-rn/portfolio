@@ -37,7 +37,7 @@ export default function Modal({ isOpen, onClose, mClass, children }) {
         animate={{ opacity: 1 }}
         exit={{ opacity: 0, scale: 0.8 }}
         transition={{ duration: 0.5 }}
-        onClick={closeModal}
+        // onClick={closeModal}
         className="fixed inset-0 z-50 flex items-center justify-center bg-black/60 text-white "
         >
           <AnimatePresence initial={false}>
@@ -60,58 +60,7 @@ export default function Modal({ isOpen, onClose, mClass, children }) {
                   </motion.div>
                 ) : null}
           </AnimatePresence>
-         
         </motion.div>
-
-        {/* <motion.div
-        initial={{ opacity: 0 }}
-        animate={{ opacity: 1 }}
-        // exit={{ opacity: 0, scale: 0.8 }}
-        transition={{ duration: 0.5 }}
-        className="fixed inset-0 z-50 flex items-center justify-center bg-black/60 text-black"
-        >
-        
-
-
-            <motion.div
-            initial={{ scale: 0.8 }}
-            animate={{ scale: 1 }}
-            exit={{ opacity: 0, scale: 0.8 }}
-            transition={{ duration: 0.3 }}
-            className={`bg-white rounded-2xl shadow-xl p-6 relative ${mClass}`}
-            >
-                <button className="absolute top-2 right-3 text-gray-500 hover:text-gray-800 text-3xl cursor-pointer"
-                onClick={closeModal}> &times; </button>
-
-                  <AnimatePresence initial={false}>
-                  {isVisible ? (
-                          <motion.div
-                              initial={{ opacity: 0, scale: 0 }}
-                              animate={{ opacity: 1, scale: 1 }}
-                              exit={{ opacity: 0, scale: 0 }}
-                              style={{width: 100, height: 100,
-                                backgroundColor: "#0cdcf7",
-                                borderRadius: "10px"}}
-                              key="box"
-                          >
-                            test
-                            <button className="right-3 text-gray-500 hover:text-gray-800 text-3xl cursor-pointer"
-                            onClick={() => setIsVisible(false)}> &times; </button>
-
-                          </motion.div>
-                        ) : null}
-                  </AnimatePresence>
-                  <motion.button
-                      style=''
-                      onClick={() => setIsVisible(!isVisible)}
-                      whileTap={{ y: 1 }}
-                  >
-                      {isVisible ? "Hide" : "Show"}
-                  </motion.button>
-                  
-                {children}
-            </motion.div>
-        </motion.div> */}
         </>
     )
 }
