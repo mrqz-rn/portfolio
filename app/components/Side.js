@@ -1,11 +1,14 @@
 'use client'
 import Image from 'next/image'
 import Link from 'next/link'
-import { motion } from "framer-motion";
+import { BorderBeam } from "./lightswind/border-beam"
+import { GradientButton } from './lightswind/gradient-button'
+import { getMyStatus } from '../scripts/app-data'
+
 export default function Side() {
     const profile = {
         name: 'RON-RON MARQUEZ',
-        position: 'Programmer',
+        position: 'System Developer Specialist',
         image: '/icons/user.jpg'
       };
       const info = [
@@ -35,23 +38,45 @@ export default function Side() {
     };
     return (
         <>
+        
             <div className="flex flex-col justify-between h-full">
                 <div className='pb-4 md:pb-0'>
                     <div className=" h-full pt-4">
-                        <div className='flex justify-center'>
+                        <div className='flex justify-center rounded-full relative w-45 h-45 mx-auto'>
                             <Image
                             src={profile.image} width={800} height={800} alt="Responsive Image" 
                             className={` w-45
-                            rounded-full p-1 border-3 border-blue-900 shadow-md shadow-sky-300/50 hover:border-blue-700 cursor-pointer`}/>
+                            rounded-full p-1 border-2 border-green-900 hover:border-green-700 cursor-pointer`}/>
+                               <BorderBeam
+                                size={100}
+                                duration={2}
+                                delay={0}
+                                colorFrom="#006811ff"
+                                colorTo="#00d400ff"
+                                reverse={false}
+                                borderThickness={10}
+                                opacity={1}
+                                glowIntensity={6}
+                                beamBorderRadius={72}
+                                pauseOnHover={false}
+                                speedMultiplier={1}
+                                />
                         </div>
-                        <div className='py-3'>
+                        <div className='py-4'>
                             <p className="text-center text-xl font-semibold text-blue-50 white--text">{profile.name}</p>
                             <p className="text-center text-base font-medium text-gray-300 gray--text">&lt; {profile.position} /&gt;</p>
+                            <p className='white--text text-sm flex justify-center gray--text pt-4'>
+                                <span className="wave text-2xl">👋🏼</span> <span className='content-center'>Open for part-time, service and commision</span>
+                            </p>
+                          
                         </div>
+                     
+                       
+                            
                     </div>
                     
                 </div>
-                
+             
                 <div className='py-4 md:py-0'>
                     <div className="flex p-2 border-y border-gray-700 ">
                         {socials.map((soc) => (
@@ -65,7 +90,8 @@ export default function Side() {
                     </div>
                 </div>
                 <div className='p-6 md:p-2'>
-                    <div className='p-2 border-1 rounded-lg border-gray-700 text-base'>
+                 
+                    <div className='relative p-1 rounded-lg overflow-hidden border-1 border-gray-700 px-2 text-base'>
                         <p className="text-center text-blue-50 font-semibold py-1 white--text">Information</p>
                         {info.map((dt) => (
                         <div key={dt.id} className="flex items-center py-1 px-1">
@@ -77,13 +103,14 @@ export default function Side() {
                         ))}
                     </div>
                 </div>
+            
                 <div className='p-6 md:p-2 '>
-                    <div className='p-2 mb-1 border border-gray-700 bg-blue-600 rounded-lg cursor-pointer text-center 
-                    scale-100  duration-150 ease-in-out
-                    active:scale-95 active:bg-blue-500 white--text'
-                    onClick={downloadResume}>
-                        Download CV
-                    </div>
+                <GradientButton className="hover:scale-102 cursor-pointer duration-150 ease-in-out active:scale-95 w-full" 
+                variant="ghost" size="sm" animationSpeed={2} glowEffect={true} glowSize={4}
+                gradientColors={['#0034dfff', '#0027d3ff', '#000ed6ff', '#0b00a5ff', '#003bddff', '#1222fdff', '#002cbdff']}
+                onClick={downloadResume}>
+                    Download CV
+                </GradientButton>
                 </div>
             </div>
             
