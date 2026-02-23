@@ -5,115 +5,134 @@ import Tab1 from "./components/tabs/Tab1";
 import Tab2 from "./components/tabs/Tab2";
 import Tab3 from "./components/tabs/Tab3";
 
-
 export default function Home() {
   const [activeTab, setActiveTab] = React.useState(1);
   const tabs = [
-    { id: 1, title: "Personal", icon: "mdi mdi-account", },
-    { id: 2, title: "Project", icon: "mdi mdi-code-json", },
-    { id: 3, title: "Others", icon: "mdi mdi-shape-square-plus", },
+    { id: 1, title: "Experience", icon: "mdi mdi-account", label: "01" },
+    { id: 2, title: "Projects", icon: "mdi mdi-code-json", label: "02" },
+    { id: 3, title: "More", icon: "mdi mdi-shape-square-plus", label: "03" },
   ];
-  const [isModalOpen, setIsModalOpen] = React.useState(false);
-
-
 
   return (
     <>
-    <div className="md:hidden pt-6">
-      <div className="text-xl font-bold pa-0 text-center py-2 bg-blue-500/70 text-white mb-5 white--text"> Personal </div>
-      <Tab1/>
-      <div className="text-xl font-bold pa-0 text-center py-2 bg-blue-500/70 text-white my-5 white--text"> Projects </div>
-      <Tab2/>
-      <div className="text-xl font-bold pa-0 text-center py-2 bg-blue-500/70 text-white my-5 white--text"> Others </div>
-      <Tab3/>
-    </div>
-
-
-    <div className="hidden md:block relative">
-      <div className="sticky top-0 backdrop-blur-xs z-50">
-        <div className="px-32 pt-2 pb-3">
-          <div className=" w-full p-1 flex rounded-[20px] bg-zinc-700">
-            {tabs.map((tab) => (
-                <div key={tab.id} className={`z-0 w-full px-3 py-1 flex group relative justify-center items-center cursor-pointer rounded-2xl
-                h-8 text-small rounded-small transition-colors duration-250 ease-in-out
-                ${activeTab === tab.id ? "bg-blue-600 text-white" : "text-slate-600 text-white "}`} 
-                onClick={() => setActiveTab(tab.id)}>
-                  <span className={`${tab.icon} text-lg font-medium px-2 white--text`}></span>
-                  <span className=" text-sm font-medium pa-0 white--text">{tab.title}</span>
-                </div>
-              ))}
-          </div>
+      {/* Mobile Layout */}
+      <div className="md:hidden">
+        <div className="mobile-section-header">
+          <span className="section-label">01</span>
+          Personal
         </div>
-       
-
+        <Tab1 />
+        <div className="mobile-section-header">
+          <span className="section-label">02</span>
+          Projects
+        </div>
+        <Tab2 />
+        <div className="mobile-section-header">
+          <span className="section-label">03</span>
+          Others
+        </div>
+        <Tab3 />
       </div>
-      <AnimatePresence mode="wait">
-          <motion.div
-            key={activeTab} // Triggers animation on change
-            initial={{ opacity: 0, y: -10 }}
-            animate={{ opacity: 1, y: 0 }}
-            exit={{ opacity: 0, y: 10 }}
-            transition={{ duration: 0.3 }}
-            className=""
-          >
-            {activeTab === 1 && (
-              <Tab1/>
-            )}
-            {activeTab === 2 && (
-              <Tab2/>
-            )}
-            {activeTab === 3 && (
-              <Tab3/>
-            )}
 
-          </motion.div>
-        </AnimatePresence>
-    </div>
+      {/* Desktop Layout */}
+      <div className="hidden md:block relative">
+        {/* Sticky Tab Navigation */}
+        <div className="sticky top-0 z-50 nav-sticky-bg">
+          <div className="px-10 pt-4 pb-4">
+            <div className="tab-nav-track flex gap-1 p-1 rounded-2xl w-full max-w-lg">
+              {tabs.map((tab) => (
+                <button
+                  key={tab.id}
+                  onClick={() => setActiveTab(tab.id)}
+                  className={`tab-btn flex-1 flex items-center justify-center gap-2 py-2.5 px-4 rounded-xl text-sm font-semibold tracking-wide transition-all duration-300 ${
+                    activeTab === tab.id ? "tab-btn-active" : "tab-btn-inactive"
+                  }`}
+                >
+                  <span className={`${tab.icon} text-base`} />
+                  <span>{tab.title}</span>
+                  {activeTab === tab.id && (
+                    <span className="tab-indicator-dot" />
+                  )}
+                </button>
+              ))}
+            </div>
+          </div>
+          <div className="nav-divider" />
+        </div>
 
-
-
-    {/* <div className="text-white w-full text-blue-50 font-[montserrat] ">
-       
-     
-     <div className="inline-flex w-full sticky top-0 z-50  backdrop-blur-sm bg-opacity-10 p-3 " >
-          <div className="flex p-1 h-fit gap-2 items-center flex-nowrap  scrollbar-hide bg-default-100 rounded-medium w-full p-1 rounded-[20px] bg-zinc-700">
-          {tabs.map((tab) => (
-              
-              <div key={tab.id} className={`z-0 w-full px-3 py-1 flex group relative justify-center items-center cursor-pointer rounded-2xl
-               h-8 text-small rounded-small transition-colors duration-250 ease-in-out
-              ${activeTab === tab.id ? "bg-blue-600 text-white" : "text-slate-600 text-white "}`} 
-              onClick={() => setActiveTab(tab.id)}>
-                 <span className={`${tab.icon} text-lg font-medium px-2`}></span>
-                 <span className=" text-sm font-medium pa-0">{tab.title}</span>
-              </div>
-            ))}
-          </div>  
-      </div>
-  
-      <div className="">
+        {/* Tab Content */}
         <AnimatePresence mode="wait">
           <motion.div
-            key={activeTab} // Triggers animation on change
-            initial={{ opacity: 0, y: -10 }}
+            key={activeTab}
+            initial={{ opacity: 0, y: 16 }}
             animate={{ opacity: 1, y: 0 }}
-            exit={{ opacity: 0, y: 10 }}
-            transition={{ duration: 0.3 }}
-            className="w-full"
+            exit={{ opacity: 0, y: -8 }}
+            transition={{ duration: 0.25, ease: [0.22, 1, 0.36, 1] }}
           >
-            {activeTab === 1 && (
-              <Tab1/>
-            )}
-            {activeTab === 2 && (
-              <Tab2/>
-            )}
-            {activeTab === 3 && (
-              <Tab3/>
-            )}
-
+            {activeTab === 1 && <Tab1 />}
+            {activeTab === 2 && <Tab2 />}
+            {activeTab === 3 && <Tab3 />}
           </motion.div>
         </AnimatePresence>
       </div>
-    </div> */}
+
+      <style jsx>{`
+        .mobile-section-header {
+          display: flex;
+          align-items: center;
+          gap: 10px;
+          padding: 12px 20px;
+          font-size: 0.75rem;
+          font-weight: 800;
+          letter-spacing: 0.18em;
+          text-transform: uppercase;
+          color: #00e5ff;
+          background: rgba(0, 229, 255, 0.05);
+          border-bottom: 1px solid rgba(0, 229, 255, 0.1);
+          border-top: 1px solid rgba(0, 229, 255, 0.1);
+          margin: 16px 0 8px 0;
+        }
+        .section-label {
+          font-size: 0.65rem;
+          color: rgba(0, 229, 255, 0.5);
+          font-family: 'Courier New', monospace;
+        }
+        .nav-sticky-bg {
+          background: rgba(6, 13, 26, 0.85);
+          backdrop-filter: blur(20px);
+          -webkit-backdrop-filter: blur(20px);
+        }
+        .nav-divider {
+          height: 1px;
+          background: linear-gradient(90deg, transparent, rgba(0, 229, 255, 0.15), rgba(124, 58, 237, 0.1), transparent);
+        }
+        .tab-nav-track {
+          background: rgba(255, 255, 255, 0.03);
+          border: 1px solid rgba(255, 255, 255, 0.07);
+        }
+        .tab-btn {
+          color: rgba(148, 163, 184, 0.7);
+          position: relative;
+        }
+        .tab-btn-active {
+          background: linear-gradient(135deg, rgba(14, 165, 233, 0.15) 0%, rgba(124, 58, 237, 0.12) 100%);
+          color: #fff;
+          border: 1px solid rgba(14, 165, 233, 0.25);
+          box-shadow: 0 0 16px rgba(14, 165, 233, 0.1), inset 0 1px 0 rgba(255,255,255,0.07);
+        }
+        .tab-btn-inactive:hover {
+          color: rgba(226, 232, 240, 0.9);
+          background: rgba(255, 255, 255, 0.04);
+        }
+        .tab-indicator-dot {
+          width: 5px;
+          height: 5px;
+          border-radius: 50%;
+          background: #00e5ff;
+          box-shadow: 0 0 6px #00e5ff;
+          display: inline-block;
+        }
+      `}</style>
     </>
   );
 }
