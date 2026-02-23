@@ -45,7 +45,7 @@ export default function App() {
       <nav className="fixed left-0 top-0 h-full w-20 border-r border-white/5 glass flex flex-col items-center py-8 z-50 max-md:hidden">
         <div className="w-12 h-12 rounded-full overflow-hidden mb-12 border-2 border-nexus-accent/50 neon-glow">
           <img 
-            src="https://picsum.photos/seed/ronron/200/200" 
+            src="icons/user.jpg" 
             alt="Ron-Ron Marquez" 
             className="w-full h-full object-cover"
             referrerPolicy="no-referrer"
