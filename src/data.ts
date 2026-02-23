@@ -302,3 +302,55 @@ export const skills = [
         {id: 2, name: "Firebase", icon: "firebase.png"},
     ]},
 ]
+
+
+export const schedule = [
+    {id: 0, type: "Rest",    day: "Saturday",   
+        start: "10:00:00 AM", end: "02:00:00 PM",
+        free_in: "08:00:00 AM", free_out: "05:00:00 PM"},
+    {id: 1, type: "Regular", day: "Monday",     
+        start: "08:00:00 AM", end: "05:00:00 PM",
+        free_in: "07:00:00 PM", free_out: "09:30:00 PM"},
+    {id: 2, type: "Regular", day: "Tuesday",    
+        start: "08:00:00 AM", end: "05:00:00 PM",
+        free_in: "07:00:00 PM", free_out: "09:30:00 PM"},
+    {id: 3, type: "Regular", day: "Wednesday",  
+        start: "08:00:00 AM", end: "05:00:00 PM",
+        free_in: "07:00:00 PM", free_out: "09:30:00 PM"},
+    {id: 4, type: "Regular", day: "Thursday",   
+        start: "08:00:00 AM", end: "05:00:00 PM",
+        free_in: "07:00:00 PM", free_out: "09:30:00 PM"},
+    {id: 5, type: "Regular", day: "Friday",     
+        start: "08:00:00 AM", end: "05:00:00 PM",
+        free_in: "07:00:00 PM", free_out: "09:30:00 PM"},
+    {id: 6, type: "Rest",    day: "Sunday",     
+        start: "10:00:00 AM", end: "02:00:00 PM",},
+];
+
+export function getMyStatus() {
+    const currentHours = new Date().getHours();
+    const currentDay = new Date().toLocaleString('en-US', { weekday: 'long' });
+
+    if (currentHours >= 23 || currentHours < 6) {
+        return "I'm sleeping";
+    }
+
+    const currentSchedule = schedule.find(s => s.day === currentDay);
+    if (!currentSchedule) return "Status Unknown";
+
+    const startHour = new Date(`1970-01-01T${currentSchedule.start}`).getHours();
+    const endHour = new Date(`1970-01-01T${currentSchedule.end}`).getHours();
+
+    if (currentSchedule.type === "Rest") {
+        return "I'm resting";
+    } else if (startHour <= currentHours && endHour >= currentHours) {
+        return "I'm grinding";
+    } else if (startHour > currentHours) {
+        return "I'm starting my day";
+    } else if (endHour <= currentHours && endHour + 2 > currentHours) {
+        return "I'm waiting to clock out";
+    } else if (endHour <= currentHours) {
+        return "I'm having free time";
+    }
+    return "Status Unknown";
+}

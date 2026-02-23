@@ -26,7 +26,7 @@ export function OverviewSection() {
             Building digital <span className="text-nexus-accent">ecosystems</span> with precision.
           </h2>
           <p className="text-nexus-muted text-lg leading-relaxed max-w-2xl">
-            As a Systems Developer, I bridge the gap between complex business requirements and elegant technical solutions. My focus is on creating scalable internal systems that drive operational efficiency.
+            As a Systems Developer, I bridge the gap between complex business requirements and innovative technical solutions. My focus is on creating scalable internal systems that drive operational efficiency.
           </p>
           <div className="flex flex-wrap gap-4">
             {/* <div className="flex items-center gap-2 px-4 py-2 rounded-full bg-white/5 border border-white/10 text-xs font-mono">

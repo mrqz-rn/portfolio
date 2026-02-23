@@ -7,9 +7,18 @@ import {
   Github, 
   Linkedin, 
   MapPin, 
-  Briefcase
+  Briefcase,
+  Activity,
+  Moon,
+  Coffee,
+  Sunrise,
+  Clock,
+  Smile,
+  Zap,
+  Keyboard
 } from "lucide-react";
 import { useState, useEffect } from "react";
+import { getMyStatus } from "./data";
 
 // UI Components
 import { NavIcon } from "./components/ui/NavIcon";
@@ -27,6 +36,18 @@ export default function App() {
   const [activeTab, setActiveTab] = useState("overview");
   const [time, setTime] = useState(new Date());
   const [selectedItem, setSelectedItem] = useState<any>(null);
+  const status = getMyStatus();
+
+  const getStatusIcon = (statusText: string) => {
+    const s = statusText.toLowerCase();
+    if (s.includes('sleeping')) return <Moon size={28} className="text-indigo-400 animate-pulse" />;
+    if (s.includes('resting')) return <Coffee size={28} className="text-amber-600" />;
+    if (s.includes('grinding')) return <Keyboard size={28} className="text-nexus-accent animate-bounce" />;
+    if (s.includes('starting')) return <Sunrise size={28} className="text-orange-400" />;
+    if (s.includes('waiting')) return <Clock size={28} className="text-nexus-muted" />;
+    if (s.includes('free')) return <Smile size={28} className="text-emerald-400" />;
+    return <Activity size={28} />;
+  };
 
   useEffect(() => {
     const timer = setInterval(() => setTime(new Date()), 1000);
@@ -96,9 +117,22 @@ export default function App() {
             <div className="flex items-center gap-4 text-nexus-muted font-mono text-sm mb-6">
               <span className="flex items-center gap-2"><MapPin size={14} /> Antipolo City, Philippines</span>
             </div>
-            <div className="glass px-6 py-3 rounded-xl inline-flex items-center gap-3 text-sm border-nexus-accent/20">
-              <span className="text-xl">👋</span>
-              <span className="text-nexus-muted">Open for part-time, service & commission</span>
+            <div className="flex flex-wrap items-center gap-4">
+              <div className="glass px-6 py-3 rounded-xl inline-flex items-center gap-3 border-nexus-accent/20">
+                <span className="text-xl">👋</span>
+                <span className="text-nexus-muted">Open for part-time, service & commission</span>
+              </div>
+              
+              <motion.div 
+                whileHover={{ scale: 1.05 }}
+                className="glass px-6 py-3 rounded-xl inline-flex items-center gap-2 text-xs font-mono text-nexus-accent border-nexus-accent/20 cursor-help group relative"
+              >
+                {getStatusIcon(status)}
+                <span className="opacity-50 text-xs"></span> {status.toUpperCase()}
+                {/* <div className="absolute -top-10 left-1/2 -translate-x-1/2 px-3 py-1 bg-nexus-accent text-nexus-bg rounded-lg text-[10px] opacity-0 group-hover:opacity-100 transition-opacity whitespace-nowrap pointer-events-none">
+                  Live Status Update
+                </div> */}
+              </motion.div>
             </div>
           </motion.div>
 
