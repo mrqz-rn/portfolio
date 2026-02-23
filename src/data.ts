@@ -284,6 +284,7 @@ export const skills = [
         {id: 3, name: "Ionic", icon: "ionic.png"},
         {id: 4, name: "TailwindCSS", icon: "tailwind.png"},
         {id: 5, name: "Vuetify", icon: "vuetify.png"},
+        {id: 6, name: "Laravel", icon: "laravel.png"},
         {id: 7, name: "Express", icon: "express.png"},
         {id: 8, name: "CodeIgniter", icon: "codeigniter.png"},
     ]},
