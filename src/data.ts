@@ -59,7 +59,7 @@ export const certs = [
     issuer: 'Atlassian', issued: '2025', details: ['']   
     },
     {id: 1, title: 'Technical Support Fundamentals', 
-    issuer: 'Coursera', issued: '2022', details: ['']   
+    issuer: 'Google/Coursera', issued: '2022', details: ['']   
     },
     {id: 2, title: 'IP Addressing and Subnetting', 
     issuer: 'Udemy', issued: '2022', details: ['']   
