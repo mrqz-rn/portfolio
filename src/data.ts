@@ -327,6 +327,17 @@ export const schedule = [
         start: "10:00:00 AM", end: "02:00:00 PM",},
 ];
 
+function parseHour(timeStr: string): number {
+  const [time, meridiem] = timeStr.split(' ');
+  const [hours] = time.split(':').map(Number);
+  
+  if (meridiem === 'AM') {
+    return hours === 12 ? 0 : hours;
+  } else {
+    return hours === 12 ? 12 : hours + 12;
+  }
+}
+
 export function getMyStatus() {
     const currentHours = new Date().getHours();
     const currentDay = new Date().toLocaleString('en-US', { weekday: 'long' });
@@ -338,8 +349,8 @@ export function getMyStatus() {
     const currentSchedule = schedule.find(s => s.day === currentDay);
     if (!currentSchedule) return "Status Unknown";
 
-    const startHour = new Date(`1970-01-01T${currentSchedule.start}`).getHours();
-    const endHour = new Date(`1970-01-01T${currentSchedule.end}`).getHours();
+    const startHour = parseHour(currentSchedule.start);
+    const endHour = parseHour(currentSchedule.end);
 
     if (currentSchedule.type === "Rest") {
         return "I'm resting";
@@ -352,5 +363,6 @@ export function getMyStatus() {
     } else if (endHour <= currentHours) {
         return "I'm having free time";
     }
+
     return "Status Unknown";
 }
