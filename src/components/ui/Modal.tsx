@@ -198,11 +198,11 @@ export function Modal({ isOpen, onClose, item }: ModalProps) {
             {/* Footer */}
             <div className="p-6 border-t border-white/5 bg-white/5 flex justify-between items-center z-10">
               <div className="flex items-center gap-4">
-                {item.type === 'project' && (
+                {/* {item.type === 'project' && (
                   <a href="#" className="flex items-center gap-2 text-nexus-accent font-mono text-xs hover:underline">
                     VIEW_LIVE_DEMO <ExternalLink size={14} />
                   </a>
-                )}
+                )} */}
               </div>
               <button 
                 onClick={onClose}

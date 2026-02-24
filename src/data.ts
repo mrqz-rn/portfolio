@@ -180,47 +180,47 @@ export const projects = [
       id: 0, name: 'E-Portfolio',
       description: 'A personal website designed to help me showcase my work and achievements in a professional manner online.',
       tech: ['NextJS', 'Tailwind'],
-      images: ['https://picsum.photos/seed/portfolio/800/600', 'https://picsum.photos/seed/portfolio2/800/600']
+      images: ['project/portfolio/img1.png', 'project/portfolio/img2.png']
     },
 
     {
       id: 1, name: 'Juala De Amor',
       description: 'IoT-enabled smart cage system designed for pet bird owners who want to ensure optimal care, safety, and comfort for their avian companions.',
       tech: ['Android', 'Arduino', 'Firebase'],
-      images: ['https://picsum.photos/seed/juala/800/600', 'https://picsum.photos/seed/juala2/600/800']
+      images: ['project/juala/img1.jpg', 'project/juala/img2.jpg', 'project/juala/img3.jpg', 'project/juala/img3.jpg', 'project/juala/img5.jpg']
     },
 
     {
       id: 2, name: 'ReCSys',
       description: 'An automated IoT-based smart drying system designed to help users conveniently dry clothes outdoors while protecting them from unpredictable weather conditions such as sudden rain or intense sunlight.',
       tech: ['Android', 'Arduino', 'Firebase'],
-      images: ['https://picsum.photos/seed/recsys/800/600', 'https://picsum.photos/seed/recsys2/800/600']
+      images: ['project/recsys/img1.jpg', 'project/recsys/img2.jpg', 'project/recsys/img3.jpg', 'project/recsys/img4.jpg', 'project/recsys/img5.jpg']
     },
 
     {
       id: 3, name: 'QuickCharge-Fi',
       description: 'Budget-friendly charging and Wi-Fi solution aimed at students in shared spaces such as libraries, dormitories, study halls, and campus common areas. The system offers rapid device charging ports along with reliable Wi-Fi access, optimized for high user traffic at minimal cost.',
       tech: ['Android', 'Arduino', 'PHP', 'MySQL'],
-      images: ['https://picsum.photos/seed/quickcharge/800/600', 'https://picsum.photos/seed/quickcharge2/600/800']
+      images: ['project/quick/img1.jpg', 'project/quick/img2.jpg', 'project/quick/img3.jpg', 'project/quick/img4.jpg', 'project/quick/img5.jpg','project/quick/img6.jpg','project/quick/img7.jpg']
     },
 
     {
       id: 4, name: 'BlueThunder',
       description: 'An E-commerce website with a CRUD for managging the products. ',
       tech: ['Bootstrap', 'PHP', 'MySQL'],
-      images: ['https://picsum.photos/seed/bluethunder/800/600']
+      images: ['project/bluethunder/img1.jpg', 'project/bluethunder/img2.jpg', 'project/bluethunder/img3.jpg']
     },
     {
       id: 5, name: 'Enrollment System',
       description: 'Simple CRUD application built with Java, featuring a database powered by MS Access. It provides an efficient solution for managing student enrollment data.',
       tech: ['Java', 'MS Access'],
-      images: ['https://picsum.photos/seed/enrollment/800/600']
+      images: ['project/enroll/img1.png','project/enroll/img2.png','project/enroll/img3.png','project/enroll/img4.png']
     },
     {
       id: 6, name: 'EAITH',
       description: "EAITH is an engaging and challenging word-guessing game designed for play directly on your computer. It's a personalized take on the classic Hangman game, offering a fresh and entertaining twist on the traditional experience",
       tech: ['Java', 'MS Access'],
-      images: ['https://picsum.photos/seed/eaith/800/600']
+      images: ['project/eaith/img1.png','project/eaith/img2.png','project/eaith/img3.png']
     },
   ];
 
