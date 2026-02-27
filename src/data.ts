@@ -55,19 +55,22 @@ export const education = [
     },
 ];
 export const certs = [
-    {id: 0, title: 'Atlassian Agile Project Management Professional Certificate', 
+    {id: 0, title: 'AWS Cloud Practitioner Essentials', 
+    issuer: 'AWS', issued: '2026', details: ['']   
+    },
+    {id: 1, title: 'Atlassian Agile Project Management Professional Certificate', 
     issuer: 'Atlassian', issued: '2025', details: ['']   
     },
-    {id: 1, title: 'Technical Support Fundamentals', 
+    {id: 2, title: 'Technical Support Fundamentals', 
     issuer: 'Google/Coursera', issued: '2022', details: ['']   
     },
-    {id: 2, title: 'IP Addressing and Subnetting', 
+    {id: 3, title: 'IP Addressing and Subnetting', 
     issuer: 'Udemy', issued: '2022', details: ['']   
     },
-    {id: 3, title: 'Cisco Networking Foundation: Fundamentals of Cisco Networking', 
+    {id: 4, title: 'Cisco Networking Foundation: Fundamentals of Cisco Networking', 
     issuer: 'LinkedIn', issued: '2022', details: ['']   
     },
-    {id: 4, title: 'Computer System Servicing NC II', 
+    {id: 5, title: 'Computer System Servicing NC II', 
     issuer: 'TESDA', issued: '2019', details: ['']   
     },
 ];
