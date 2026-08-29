@@ -124,7 +124,7 @@ export const certs = [
       title: 'Lean Six Sigma White Belt', 
       issuer: 'Council for Six Sigma Certification', 
       issued: '2026', 
-      icon: '/certs/cssc.svg',
+      icon: '/certs/cssc.png',
       details: ['']   
     },
     {
@@ -132,7 +132,7 @@ export const certs = [
       title: 'Atlassian Agile Project Management Professional Certificate', 
       issuer: 'Atlassian', 
       issued: '2025', 
-      icon: '/certs/atlassian.svg',
+      icon: '/certs/atlassian.png',
       details: ['']   
     },
     {
