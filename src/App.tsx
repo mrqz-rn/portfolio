@@ -24,6 +24,7 @@ import { getMyStatus } from "./data";
 import { NavIcon } from "./components/ui/NavIcon";
 import { SocialIcon } from "./components/ui/SocialIcon";
 import { Modal } from "./components/ui/Modal";
+import { ChatBot } from "./components/chat/ChatBot";
 
 // Section Components
 import { OverviewSection } from "./components/sections/OverviewSection";
@@ -163,6 +164,9 @@ export default function App() {
 
       {/* Modal */}
       <Modal isOpen={!!selectedItem} onClose={closeModal} item={selectedItem} />
+
+      {/* AI Assistant ChatBot */}
+      <ChatBot />
 
       {/* Footer Decoration */}
       <footer className="md:ml-64 p-8 border-t border-zinc-200/80 font-mono text-[10px] text-zinc-400 max-md:pb-24">
