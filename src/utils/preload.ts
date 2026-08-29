@@ -1,4 +1,4 @@
-import { skills, works, certs, jobs } from "../data";
+import { skills, works, certs, jobs, projects } from "../data";
 
 /**
  * Preloads critical images and icons on idle so there is zero delay when viewing sections or opening modals.
@@ -33,6 +33,12 @@ export function preloadAssets() {
   works.forEach((work) => {
     if (work.images && work.images.length > 0) {
       imagesToPreload.push(work.images[0]);
+    }
+  });
+
+  projects.forEach((proj) => {
+    if (proj.images && proj.images.length > 0) {
+      imagesToPreload.push(proj.images[0]);
     }
   });
 

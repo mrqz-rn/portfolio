@@ -323,6 +323,30 @@ export const projects = [
       ],
       images: ['works/wmed/img1.png', 'works/wmed/img2.png']
     },
+    {
+      id: 9,
+      name: 'Nexus-IMS',
+      desc: "Inventory Management System",
+      description: 'An enterprise Inventory Management System developed for Trillion Residence to streamline property asset tracking, multi-warehouse stock movements, automated gatekeeper approval workflows, and real-time inventory valuation analytics.',
+      tech: ['Web', 'Vue', 'Laravel', 'MySQL', 'TailwindCSS', 'REST API'],
+      involvement: ['System Architecture', 'UI/UX Design', 'Full-Stack Development', 'Database Design'],
+      company: "Trillion Residence",
+      details: [
+        "Architected and developed the full-stack Inventory Management System (IMS) for Trillion Residence, centralizing multi-warehouse operations, asset intake, and stock level controls.",
+        "Engineered the Gatekeeper Approval Workflow requiring administrative verification for high-value stock transfers, stock-in provisioning, and stock-out deductions with immutable history logging.",
+        "Built an interactive Dashboard & Analytics module visualizing total valuation, aging stock liabilities, consumption velocity, and automated stock-out risk forecasts with PDF/CSV exports.",
+        "Implemented a Batch Intake Terminal with automatic barcode generation, instant SKU manifest value calculation, and multi-category filtering across facilities and operations.",
+        "Designed role-based access control (RBAC) ensuring secure permissions across warehouse supervisors, site engineers, and administrative auditors."
+      ],
+      images: [
+        'project/ims/img1.png',
+        'project/ims/img2.png',
+        'project/ims/img3.png',
+        'project/ims/img4.png',
+        'project/ims/img5.png',
+        'project/ims/img6.png'
+      ]
+    },
     // {
     //   id: 0, name: 'E-Portfolio',
     //   description: 'A personal website designed to help me showcase my work and achievements in a professional manner online.',

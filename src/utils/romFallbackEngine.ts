@@ -154,6 +154,26 @@ export function getRomFallbackReply(userQuery: string): string {
     );
   }
 
+  // Nexus-IMS (Trillion Residence)
+  if (
+    query.includes("nexus") ||
+    query.includes("ims") ||
+    query.includes("trillion") ||
+    query.includes("inventory management") ||
+    query.includes("inventory system")
+  ) {
+    return (
+      `**Nexus-IMS (Inventory Management System)** is an enterprise multi-warehouse inventory and asset tracking platform built for Trillion Residence:\n\n` +
+      `• **Purpose**: Centralizes property asset tracking, stock movement monitoring, gatekeeper approvals, and real-time inventory valuation.\n` +
+      `• **Ron's Key Contributions**:\n` +
+      `  - Architected and engineered the full-stack Inventory Management System with multi-hub warehouse management.\n` +
+      `  - Built the **Gatekeeper Approval Workflow** for administrative review and confirmation of stock transfers, stock-in provisioning, and stock-out deductions.\n` +
+      `  - Developed the **Batch Intake Terminal** with automated barcode generation and instant SKU manifest valuation.\n` +
+      `  - Built real-time **Analytics & Valuation Dashboards** with aging stock liability calculations, consumption velocity tracking, and PDF/CSV reporting.\n` +
+      `• **Tech Stack**: Vue.js, Laravel, MySQL, Tailwind CSS, REST APIs.`
+    );
+  }
+
   // Contact / Hire / Email
   if (
     query.includes("contact") ||
@@ -233,8 +253,9 @@ export function getRomFallbackReply(userQuery: string): string {
       `5. **SPOTT** (Sterling Paper Online Time Tracker): Mobile & web Daily Time Record (DTR) app (Ionic, Vue.js, CodeIgniter).\n` +
       `6. **ESS-PORTAL** (Employee Self-Service Portal): Centralized timekeeping and HR portal integrated with SPOTT logs (Vue.js, CodeIgniter, MySQL).\n` +
       `7. **OBS** (Onboarding System): Full recruitment and new-hire onboarding platform (Vue.js, CodeIgniter, MySQL).\n` +
-      `8. **Asia CEO Forum**: Modernized Next.js platform for national business event series.\n\n` +
-      `Ask me about any specific project (e.g. *"What is PMCIE LMS?"* or *"Tell me about MobileCare Queuing"*) for more details!`
+      `8. **Nexus-IMS** (Inventory Management System): Multi-warehouse inventory tracking & gatekeeper workflow for Trillion Residence (Vue.js, Laravel, MySQL).\n` +
+      `9. **Asia CEO Forum**: Modernized Next.js platform for national business event series.\n\n` +
+      `Ask me about any specific project (e.g. *"What is Nexus-IMS?"* or *"Tell me about PMCIE LMS"*) for more details!`
     );
   }
 
