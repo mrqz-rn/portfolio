@@ -11,17 +11,17 @@ function formatDuration(start: string, end: string, customDuration?: string): st
 
   const parseDate = (str: string): Date => {
     if (str.toLowerCase() === "present") {
-      return new Date(2026, 7, 29); // August 2026
+      return new Date(); // Dynamically computes current real-time date
     }
     const parts = str.trim().split(/\s+/);
     const monthStr = parts[0] || "jan";
-    const yearStr = parts[1] || "2026";
+    const yearStr = parts[1] || `${new Date().getFullYear()}`;
     const months: Record<string, number> = {
       jan: 0, feb: 1, mar: 2, apr: 3, may: 4, jun: 5,
       jul: 6, aug: 7, sep: 8, oct: 9, nov: 10, dec: 11,
     };
     const month = months[monthStr.toLowerCase().slice(0, 3)] ?? 0;
-    const year = parseInt(yearStr, 10) || 2026;
+    const year = parseInt(yearStr, 10) || new Date().getFullYear();
     return new Date(year, month, 1);
   };
 
@@ -36,10 +36,10 @@ function formatDuration(start: string, end: string, customDuration?: string): st
 
     const parts: string[] = [];
     if (years > 0) {
-      parts.push(`${years} ${years === 1 ? 'year' : 'years'}`);
+      parts.push(`${years} ${years === 1 ? 'yr' : 'yrs'}`);
     }
     if (remainingMonths > 0) {
-      parts.push(`${remainingMonths} ${remainingMonths === 1 ? 'mon' : 'mons'}`);
+      parts.push(`${remainingMonths} ${remainingMonths === 1 ? 'mo' : 'mos'}`);
     }
     return parts.join(' ');
   } catch {
