@@ -8,15 +8,23 @@ interface ProjectsSectionProps {
 
 export function ProjectsSection({ onSelectItem }: ProjectsSectionProps) {
   return (
-    <>
+    <div className="space-y-12 w-full">
+      <div>
+        <h2 className="text-4xl md:text-5xl font-bold tracking-tight text-white mb-4">
+          projects
+        </h2>
+        <p className="text-nexus-muted text-base md:text-lg leading-relaxed max-w-3xl">
+          Featured enterprise platforms, web applications, and digital systems built for production.
+        </p>
+      </div>
     
-    <motion.section 
-      key="projects"
-      initial={{ opacity: 0, x: 20 }}
-      animate={{ opacity: 1, x: 0 }}
-      exit={{ opacity: 0, x: -20 }}
-      className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8"
-    >
+      <motion.section 
+        key="projects-works"
+        initial={{ opacity: 0, x: 20 }}
+        animate={{ opacity: 1, x: 0 }}
+        exit={{ opacity: 0, x: -20 }}
+        className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8"
+      >
       {works.map((project, i) => (
         <motion.div 
           key={project.id}
@@ -99,6 +107,6 @@ export function ProjectsSection({ onSelectItem }: ProjectsSectionProps) {
         </motion.div>
       ))}
     </motion.section>
-    </>
+    </div>
   );
 }

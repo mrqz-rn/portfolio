@@ -26,7 +26,15 @@ export function StackSection() {
                   <div key={typeof skill === 'string' ? skill : skill.name} className="flex flex-col items-center gap-2 group">
                     <div className="w-12 h-12 rounded-xl bg-white/5 flex items-center justify-center group-hover:bg-nexus-accent/10 transition-all border border-white/5 group-hover:border-nexus-accent/30">
                       {/* <Code2 size={20} className="text-nexus-muted group-hover:text-nexus-accent" /> */}
-                      <img src={typeof skill === 'string' ? skill : `/tech/${skill.icon}`} alt={typeof skill === 'string' ? skill : skill.name} className="w-6 h-6" />
+                      <img 
+                        src={typeof skill === 'string' ? skill : `/tech/${skill.icon}`} 
+                        alt={typeof skill === 'string' ? skill : skill.name} 
+                        className="w-6 h-6 object-contain" 
+                        loading="eager"
+                        decoding="async"
+                        width={24}
+                        height={24}
+                      />
                     </div>
                     <span className="text-[10px] font-mono text-nexus-muted group-hover:text-white">
                       {typeof skill === 'string' ? skill : skill.name}

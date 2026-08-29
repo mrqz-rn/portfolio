@@ -32,6 +32,8 @@ import { ProjectsSection } from "./components/sections/ProjectsSection";
 import { StackSection } from "./components/sections/StackSection";
 import { ConnectSection } from "./components/sections/ConnectSection";
 
+import { preloadAssets } from "./utils/preload";
+
 export default function App() {
   const [activeTab, setActiveTab] = useState("overview");
   const [time, setTime] = useState(new Date());
@@ -50,6 +52,7 @@ export default function App() {
   };
 
   useEffect(() => {
+    preloadAssets();
     const timer = setInterval(() => setTime(new Date()), 1000);
     return () => clearInterval(timer);
   }, []);
@@ -66,19 +69,8 @@ export default function App() {
       <aside className="fixed left-0 top-0 h-full w-64 border-r border-white/5 glass flex flex-col justify-between p-6 z-50 max-md:hidden overflow-y-auto custom-scrollbar">
         {/* Top Header */}
         <div>
-          <div className="flex items-center gap-3.5 mb-8">
-            <div className="w-10 h-10 rounded-full overflow-hidden border border-nexus-accent/40 neon-glow flex-shrink-0">
-              <img 
-                src="icons/user.jpg" 
-                alt="Ron-Ron Marquez" 
-                className="w-full h-full object-cover"
-                referrerPolicy="no-referrer"
-              />
-            </div>
-            <div>
-              <h2 className="font-bold text-sm text-white tracking-tight leading-tight">Ron Marquez</h2>
-              <p className="text-nexus-muted font-mono text-[11px]">Systems Developer</p>
-            </div>
+          <div className="mb-8 px-3">
+            <h2 className="font-bold text-base text-white tracking-tight">Ron Marquez</h2>
           </div>
 
           {/* Nav Links */}
@@ -154,62 +146,30 @@ export default function App() {
       </nav>
 
       {/* Main Content Area */}
-      <main className="md:ml-64 min-h-screen p-6 md:p-12 lg:p-16 max-w-6xl">
-        {/* Header - Only visible on Overview tab */}
-        {activeTab === "overview" && (
-          <header className="flex flex-col md:flex-row md:items-end justify-between gap-8 mb-16">
-            <motion.div 
-              initial={{ opacity: 0, y: 20 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.5 }}
-            >
-              <div className="flex items-center gap-3 mb-4">
-                <span className="px-3 py-1 rounded-full bg-nexus-accent/10 text-nexus-accent text-[12px] font-mono tracking-widest uppercase border border-nexus-accent/20 flex items-center gap-2">
-                  <div className="w-2 h-2 rounded-full bg-nexus-accent animate-pulse" />
-                  Systems Developer
-                </span>
-              </div>
-              <h1 className="text-5xl md:text-7xl font-bold tracking-tighter mb-4">
-                RON <span className="text-nexus-muted">MARQUEZ</span>
-              </h1>
-              <div className="flex items-center gap-4 text-nexus-muted font-mono text-sm mb-6">
-                <span className="flex items-center gap-2"><MapPin size={14} /> Antipolo City, Philippines</span>
-              </div>
-              <div className="flex flex-wrap items-center gap-4">
-                <div className="glass px-6 py-3 rounded-xl inline-flex items-center gap-3 border-nexus-accent/20">
-                  <span className="text-xl">👋</span>
-                  <span className="text-nexus-muted">Open for part-time, service & commission</span>
-                </div>
-                
-                <motion.div 
-                  whileHover={{ scale: 1.05 }}
-                  className="glass px-6 py-3 rounded-xl inline-flex items-center gap-2 text-xs font-mono text-nexus-accent border-nexus-accent/20 cursor-help group relative"
-                >
-                  {getStatusIcon(status)}
-                  <span className="opacity-50 text-xs"></span> {status.toUpperCase()}
-                </motion.div>
-              </div>
-            </motion.div>
-          </header>
-        )}
-
-        {/* Content Sections */}
-        <AnimatePresence mode="wait">
-          {activeTab === "overview" && <OverviewSection />}
-          {activeTab === "experience" && <ExperienceSection />}
-          {activeTab === "projects" && <ProjectsSection onSelectItem={setSelectedItem} />}
-          {activeTab === "stack" && <StackSection />}
-          {activeTab === "connect" && <ConnectSection />}
-        </AnimatePresence>
+      <main className="md:ml-64 min-h-screen p-6 md:p-12 lg:p-16 flex flex-col items-center">
+        <div className="w-full max-w-4xl mx-auto">
+          {/* Content Sections */}
+          <AnimatePresence mode="wait">
+            {activeTab === "overview" && (
+              <OverviewSection onNavigate={setActiveTab} onSelectItem={setSelectedItem} />
+            )}
+            {activeTab === "experience" && <ExperienceSection />}
+            {activeTab === "projects" && <ProjectsSection onSelectItem={setSelectedItem} />}
+            {activeTab === "stack" && <StackSection />}
+            {activeTab === "connect" && <ConnectSection />}
+          </AnimatePresence>
+        </div>
       </main>
 
       {/* Modal */}
       <Modal isOpen={!!selectedItem} onClose={closeModal} item={selectedItem} />
 
       {/* Footer Decoration */}
-      <footer className="md:ml-64 p-8 border-t border-white/5 font-mono text-[10px] text-nexus-muted flex justify-between items-center max-md:pb-24">
-        <div>© 2026 RON MARQUEZ - PORTFOLIO</div>
-        <div className="flex gap-4">
+      <footer className="md:ml-64 p-8 border-t border-white/5 font-mono text-[10px] text-nexus-muted max-md:pb-24">
+        <div className="max-w-4xl mx-auto flex justify-between items-center w-full">
+          <div>© 2026 RON MARQUEZ - PORTFOLIO</div>
+          <div className="flex gap-4">
+          </div>
         </div>
       </footer>
     </div>

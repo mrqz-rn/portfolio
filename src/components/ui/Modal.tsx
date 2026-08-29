@@ -11,7 +11,11 @@ interface ModalProps {
 export function Modal({ isOpen, onClose, item }: ModalProps) {
   const [currentIndex, setCurrentIndex] = useState(0);
   const [orientation, setOrientation] = useState<'landscape' | 'portrait'>('landscape');
+  const [imageLoading, setImageLoading] = useState(true);
   const imgRef = useRef<HTMLImageElement>(null);
+
+  const images = item?.images || (item?.image ? [item.image] : []);
+  const hasMultipleImages = images.length > 1;
 
   useEffect(() => {
     if (isOpen) {
@@ -19,15 +23,30 @@ export function Modal({ isOpen, onClose, item }: ModalProps) {
     }
   }, [isOpen, item]);
 
+  useEffect(() => {
+    setImageLoading(true);
+    // Preload next and previous images
+    if (images.length > 1) {
+      const nextIdx = (currentIndex + 1) % images.length;
+      const prevIdx = (currentIndex - 1 + images.length) % images.length;
+      if (images[nextIdx]) {
+        const nextImg = new Image();
+        nextImg.src = images[nextIdx];
+      }
+      if (images[prevIdx]) {
+        const prevImg = new Image();
+        prevImg.src = images[prevIdx];
+      }
+    }
+  }, [currentIndex, images]);
+
   const handleImageLoad = (e: SyntheticEvent<HTMLImageElement>) => {
     const { naturalWidth, naturalHeight } = e.currentTarget;
     setOrientation(naturalWidth > naturalHeight ? 'landscape' : 'portrait');
+    setImageLoading(false);
   };
 
   if (!item) return null;
-
-  const images = item.images || (item.image ? [item.image] : []);
-  const hasMultipleImages = images.length > 1;
 
   const nextImage = () => setCurrentIndex((prev) => (prev + 1) % images.length);
   const prevImage = () => setCurrentIndex((prev) => (prev - 1 + images.length) % images.length);
@@ -131,17 +150,24 @@ export function Modal({ isOpen, onClose, item }: ModalProps) {
               {/* Image Section */}
               <div className={`${orientation === 'portrait' ? 'flex justify-center md:w-1/2 md:h-full bg-black/20' : 'w-full'} relative group`}>
                 {images.length > 0 ? (
-                  <div className={`relative ${orientation === 'portrait' ? 'h-[400px] md:h-full' : 'aspect-video'} overflow-hidden`}>
+                  <div className={`relative ${orientation === 'portrait' ? 'h-[400px] md:h-full' : 'aspect-video'} overflow-hidden flex items-center justify-center bg-white/[0.02]`}>
+                    {imageLoading && (
+                      <div className="absolute inset-0 flex items-center justify-center bg-black/40 z-0">
+                        <div className="w-8 h-8 rounded-full border-2 border-nexus-accent/20 border-t-nexus-accent animate-spin" />
+                      </div>
+                    )}
                     <AnimatePresence mode="wait">
                       <motion.img
                         key={currentIndex}
                         src={images[currentIndex]}
                         alt={`${item.name} ${currentIndex + 1}`}
-                        initial={{ opacity: 0, x: 20 }}
-                        animate={{ opacity: 1, x: 0 }}
-                        exit={{ opacity: 0, x: -20 }}
+                        initial={{ opacity: 0 }}
+                        animate={{ opacity: 1 }}
+                        exit={{ opacity: 0 }}
                         onLoad={handleImageLoad}
-                        className={`${orientation === 'portrait' ? 'h-[65vh]  object-contain' : 'w-full h-full  object-contain'}  `}
+                        loading="eager"
+                        decoding="async"
+                        className={`${orientation === 'portrait' ? 'h-[65vh] object-contain' : 'w-full h-full object-contain'} relative z-10`}
                         referrerPolicy="no-referrer"
                       />
                     </AnimatePresence>

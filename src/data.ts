@@ -111,23 +111,61 @@ export const education = [
     },
 ];
 export const certs = [
-    {id: 0, title: 'AWS Cloud Practitioner Essentials', 
-    issuer: 'AWS', issued: '2026', details: ['']   
+    {
+      id: 0, 
+      title: 'AWS Cloud Practitioner Essentials', 
+      issuer: 'AWS', 
+      issued: '2026', 
+      icon: '/tech/aws.png',
+      details: ['']   
     },
-    {id: 1, title: 'Atlassian Agile Project Management Professional Certificate', 
-    issuer: 'Atlassian', issued: '2025', details: ['']   
+    {
+      id: 1, 
+      title: 'Lean Six Sigma White Belt', 
+      issuer: 'Council for Six Sigma Certification', 
+      issued: '2026', 
+      icon: '/certs/cssc.svg',
+      details: ['']   
     },
-    {id: 2, title: 'Technical Support Fundamentals', 
-    issuer: 'Google/Coursera', issued: '2022', details: ['']   
+    {
+      id: 2, 
+      title: 'Atlassian Agile Project Management Professional Certificate', 
+      issuer: 'Atlassian', 
+      issued: '2025', 
+      icon: '/certs/atlassian.svg',
+      details: ['']   
     },
-    {id: 3, title: 'IP Addressing and Subnetting', 
-    issuer: 'Udemy', issued: '2022', details: ['']   
+    {
+      id: 3, 
+      title: 'Technical Support Fundamentals', 
+      issuer: 'Google/Coursera', 
+      issued: '2022', 
+      icon: '/certs/coursera.svg',
+      details: ['']   
     },
-    {id: 4, title: 'Cisco Networking Foundation: Fundamentals of Cisco Networking', 
-    issuer: 'LinkedIn', issued: '2022', details: ['']   
+    {
+      id: 4, 
+      title: 'IP Addressing and Subnetting', 
+      issuer: 'Udemy', 
+      issued: '2022', 
+      icon: '/certs/udemy.svg',
+      details: ['']   
     },
-    {id: 5, title: 'Computer System Servicing NC II', 
-    issuer: 'TESDA', issued: '2019', details: ['']   
+    {
+      id: 5, 
+      title: 'Cisco Networking Foundation: Fundamentals of Cisco Networking', 
+      issuer: 'LinkedIn', 
+      issued: '2022', 
+      icon: '/certs/linkedin.svg',
+      details: ['']   
+    },
+    {
+      id: 6, 
+      title: 'Computer System Servicing NC II', 
+      issuer: 'TESDA', 
+      issued: '2019', 
+      icon: '/certs/tesda.svg',
+      details: ['']   
     },
 ];
 

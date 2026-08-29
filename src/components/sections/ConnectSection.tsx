@@ -39,7 +39,7 @@ export function ConnectSection() {
       initial={{ opacity: 0, x: 20 }}
       animate={{ opacity: 1, x: 0 }}
       exit={{ opacity: 0, x: -20 }}
-      className="max-w-6xl mx-auto py-20 px-4"
+      className="w-full max-w-4xl mx-auto py-8"
     >
       <div className="text-center mb-16">
         <h2 className="text-5xl font-bold mb-8 tracking-tighter">Let's build something <span className="text-nexus-accent">exceptional</span>.</h2>
