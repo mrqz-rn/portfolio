@@ -205,35 +205,35 @@ export function ChatBot() {
             animate={{ opacity: 1, scale: 1, y: 0 }}
             exit={{ opacity: 0, scale: 0.9, y: 20 }}
             transition={{ duration: 0.2 }}
-            className="w-[90vw] sm:w-[400px] h-[580px] max-h-[85vh] bg-white border border-zinc-200/90 rounded-3xl shadow-2xl flex flex-col overflow-hidden text-zinc-900 relative"
+            className="w-[90vw] sm:w-[400px] h-[580px] max-h-[85vh] bg-white dark:bg-[#101622] border border-zinc-200/90 dark:border-zinc-800 rounded-3xl shadow-2xl flex flex-col overflow-hidden text-zinc-900 dark:text-zinc-100 relative"
           >
             {/* Header */}
-            <div className="p-4 px-5 bg-zinc-50 border-b border-zinc-200/80 flex items-center justify-between">
+            <div className="p-4 px-5 bg-zinc-50 dark:bg-zinc-900 border-b border-zinc-200/80 dark:border-zinc-800 flex items-center justify-between">
               <div className="flex items-center gap-3">
-                <div className="w-9 h-9 rounded-xl bg-zinc-900 text-white flex items-center justify-center shadow-xs relative">
+                <div className="w-9 h-9 rounded-xl bg-zinc-900 dark:bg-zinc-800 text-white flex items-center justify-center shadow-xs relative">
                   <Bot size={18} className="text-blue-400" />
-                  <span className="absolute -bottom-0.5 -right-0.5 w-2.5 h-2.5 bg-emerald-500 rounded-full border-2 border-white" />
+                  <span className="absolute -bottom-0.5 -right-0.5 w-2.5 h-2.5 bg-emerald-500 rounded-full border-2 border-white dark:border-zinc-900" />
                 </div>
                 <div>
                   <div className="flex items-center gap-1.5">
-                    <h3 className="font-bold text-sm text-zinc-900 font-mono">RoM</h3>
-                    <span className="text-[10px] font-mono px-1.5 py-0.2 bg-blue-50 text-blue-700 border border-blue-200/60 rounded">AI</span>
+                    <h3 className="font-bold text-sm text-zinc-900 dark:text-white font-mono">RoM</h3>
+                    <span className="text-[10px] font-mono px-1.5 py-0.2 bg-blue-50 dark:bg-blue-950/60 text-blue-700 dark:text-blue-300 border border-blue-200/60 dark:border-blue-800 rounded">AI</span>
                   </div>
-                  <p className="text-[11px] text-zinc-500 font-mono">Ron&apos;s Assistant · AI</p>
+                  <p className="text-[11px] text-zinc-500 dark:text-zinc-400 font-mono">Ron&apos;s Assistant · AI</p>
                 </div>
               </div>
 
               <div className="flex items-center gap-1">
                 <button
                   onClick={clearChat}
-                  className="p-1.5 text-zinc-400 hover:text-zinc-700 hover:bg-zinc-200/60 rounded-lg transition-colors cursor-pointer"
+                  className="p-1.5 text-zinc-400 hover:text-zinc-700 dark:hover:text-zinc-200 hover:bg-zinc-200/60 dark:hover:bg-zinc-800 rounded-lg transition-colors cursor-pointer"
                   title="Reset conversation"
                 >
                   <RotateCcw size={15} />
                 </button>
                 <button
                   onClick={() => setIsOpen(false)}
-                  className="p-1.5 text-zinc-400 hover:text-zinc-700 hover:bg-zinc-200/60 rounded-lg transition-colors cursor-pointer"
+                  className="p-1.5 text-zinc-400 hover:text-zinc-700 dark:hover:text-zinc-200 hover:bg-zinc-200/60 dark:hover:bg-zinc-800 rounded-lg transition-colors cursor-pointer"
                   title="Close chat"
                 >
                   <X size={18} />
@@ -242,23 +242,23 @@ export function ChatBot() {
             </div>
 
             {/* Message Feed */}
-            <div className="flex-1 p-4 overflow-y-auto space-y-4 custom-scrollbar bg-white">
+            <div className="flex-1 p-4 overflow-y-auto space-y-4 custom-scrollbar bg-white dark:bg-[#0b0f19]">
               {messages.map((msg) => (
                 <div
                   key={msg.id}
                   className={`flex gap-2.5 ${msg.role === "user" ? "justify-end" : "justify-start"}`}
                 >
                   {msg.role === "assistant" && (
-                    <div className="w-7 h-7 rounded-lg bg-zinc-100 border border-zinc-200/80 flex items-center justify-center text-zinc-800 shrink-0 mt-0.5">
-                      <Bot size={14} className="text-blue-600" />
+                    <div className="w-7 h-7 rounded-lg bg-zinc-100 dark:bg-zinc-800 border border-zinc-200/80 dark:border-zinc-700 flex items-center justify-center text-zinc-800 dark:text-zinc-200 shrink-0 mt-0.5">
+                      <Bot size={14} className="text-blue-600 dark:text-blue-400" />
                     </div>
                   )}
 
                   <div
                     className={`max-w-[88%] px-4 py-3 rounded-2xl text-xs leading-relaxed overflow-hidden ${
                       msg.role === "user"
-                        ? "bg-zinc-900 text-white rounded-tr-xs"
-                        : "bg-zinc-50 text-zinc-800 border border-zinc-200/80 rounded-tl-xs shadow-2xs"
+                        ? "bg-zinc-900 dark:bg-blue-600 text-white rounded-tr-xs"
+                        : "bg-zinc-50 dark:bg-zinc-900/90 text-zinc-800 dark:text-zinc-200 border border-zinc-200/80 dark:border-zinc-800 rounded-tl-xs shadow-2xs"
                     }`}
                   >
                     {msg.role === "user" ? (
@@ -267,7 +267,7 @@ export function ChatBot() {
                       </div>
                     ) : (
                       <div 
-                        className="space-y-1 overflow-x-auto custom-scrollbar text-zinc-800"
+                        className="space-y-1 overflow-x-auto custom-scrollbar text-zinc-800 dark:text-zinc-200"
                         dangerouslySetInnerHTML={{ 
                           __html: parseMarkdownToHtml(msg.content) 
                         }} 
@@ -275,7 +275,7 @@ export function ChatBot() {
                     )}
                     <div
                       className={`text-[9px] font-mono mt-1.5 ${
-                        msg.role === "user" ? "text-zinc-300 text-right" : "text-zinc-400"
+                        msg.role === "user" ? "text-zinc-300 dark:text-blue-200 text-right" : "text-zinc-400 dark:text-zinc-500"
                       }`}
                     >
                       {msg.timestamp.toLocaleTimeString([], { hour: "2-digit", minute: "2-digit" })}
@@ -283,7 +283,7 @@ export function ChatBot() {
                   </div>
 
                   {msg.role === "user" && (
-                    <div className="w-7 h-7 rounded-lg bg-zinc-900 text-white flex items-center justify-center shrink-0 mt-0.5">
+                    <div className="w-7 h-7 rounded-lg bg-zinc-900 dark:bg-zinc-800 text-white flex items-center justify-center shrink-0 mt-0.5">
                       <User size={14} />
                     </div>
                   )}
@@ -293,13 +293,13 @@ export function ChatBot() {
               {/* Loading Typing Indicator */}
               {isLoading && (
                 <div className="flex gap-2.5 justify-start items-center">
-                  <div className="w-7 h-7 rounded-lg bg-zinc-100 border border-zinc-200/80 flex items-center justify-center text-zinc-800 shrink-0">
-                    <Bot size={14} className="text-blue-600" />
+                  <div className="w-7 h-7 rounded-lg bg-zinc-100 dark:bg-zinc-800 border border-zinc-200/80 dark:border-zinc-700 flex items-center justify-center text-zinc-800 dark:text-zinc-200 shrink-0">
+                    <Bot size={14} className="text-blue-600 dark:text-blue-400" />
                   </div>
-                  <div className="px-4 py-3 rounded-2xl rounded-tl-xs bg-zinc-50 border border-zinc-200/80 flex items-center gap-1.5">
-                    <span className="w-1.5 h-1.5 rounded-full bg-zinc-400 animate-bounce" style={{ animationDelay: "0ms" }} />
-                    <span className="w-1.5 h-1.5 rounded-full bg-zinc-400 animate-bounce" style={{ animationDelay: "150ms" }} />
-                    <span className="w-1.5 h-1.5 rounded-full bg-zinc-400 animate-bounce" style={{ animationDelay: "300ms" }} />
+                  <div className="px-4 py-3 rounded-2xl rounded-tl-xs bg-zinc-50 dark:bg-zinc-900 border border-zinc-200/80 dark:border-zinc-800 flex items-center gap-1.5">
+                    <span className="w-1.5 h-1.5 rounded-full bg-zinc-400 dark:bg-zinc-500 animate-bounce" style={{ animationDelay: "0ms" }} />
+                    <span className="w-1.5 h-1.5 rounded-full bg-zinc-400 dark:bg-zinc-500 animate-bounce" style={{ animationDelay: "150ms" }} />
+                    <span className="w-1.5 h-1.5 rounded-full bg-zinc-400 dark:bg-zinc-500 animate-bounce" style={{ animationDelay: "300ms" }} />
                   </div>
                 </div>
               )}
@@ -309,15 +309,15 @@ export function ChatBot() {
 
             {/* Quick Starter Suggestions */}
             {messages.length <= 2 && (
-              <div className="px-4 pb-2 pt-1 bg-white border-t border-zinc-100">
-                <div className="text-[10px] font-mono text-zinc-400 uppercase tracking-wider mb-2">Suggested Prompts</div>
+              <div className="px-4 pb-2 pt-1 bg-white dark:bg-[#0b0f19] border-t border-zinc-100 dark:border-zinc-800">
+                <div className="text-[10px] font-mono text-zinc-400 dark:text-zinc-500 uppercase tracking-wider mb-2">Suggested Prompts</div>
                 <div className="flex flex-wrap gap-1.5">
                   {STARTER_PROMPTS.map((prompt) => (
                     <button
                       key={prompt}
                       onClick={() => handleSendMessage(prompt)}
                       disabled={isLoading}
-                      className="text-[11px] px-2.5 py-1 rounded-lg bg-zinc-50 hover:bg-zinc-100 text-zinc-700 border border-zinc-200/80 transition-colors text-left font-mono cursor-pointer disabled:opacity-50"
+                      className="text-[11px] px-2.5 py-1 rounded-lg bg-zinc-50 dark:bg-zinc-900 hover:bg-zinc-100 dark:hover:bg-zinc-800 text-zinc-700 dark:text-zinc-300 border border-zinc-200/80 dark:border-zinc-800 transition-colors text-left font-mono cursor-pointer disabled:opacity-50"
                     >
                       {prompt}
                     </button>
@@ -329,7 +329,7 @@ export function ChatBot() {
             {/* Input Bar */}
             <form
               onSubmit={handleFormSubmit}
-              className="p-3 bg-zinc-50 border-t border-zinc-200 flex items-center gap-2"
+              className="p-3 bg-zinc-50 dark:bg-zinc-900 border-t border-zinc-200 dark:border-zinc-800 flex items-center gap-2"
             >
               <input
                 ref={inputRef}
@@ -338,12 +338,12 @@ export function ChatBot() {
                 onChange={(e) => setInput(e.target.value)}
                 placeholder="Ask RoM anything about Ron..."
                 disabled={isLoading}
-                className="flex-1 px-3.5 py-2.5 bg-white border border-zinc-200 rounded-xl text-xs text-zinc-900 placeholder:text-zinc-400 focus:outline-none focus:border-zinc-900 transition-colors font-mono disabled:opacity-60"
+                className="flex-1 px-3.5 py-2.5 bg-white dark:bg-zinc-800 border border-zinc-200 dark:border-zinc-700 rounded-xl text-xs text-zinc-900 dark:text-white placeholder:text-zinc-400 dark:placeholder:text-zinc-500 focus:outline-none focus:border-zinc-900 dark:focus:border-zinc-400 transition-colors font-mono disabled:opacity-60"
               />
               <button
                 type="submit"
                 disabled={!input.trim() || isLoading}
-                className="p-2.5 bg-zinc-900 text-white rounded-xl hover:bg-black disabled:opacity-40 disabled:cursor-not-allowed transition-all cursor-pointer shadow-xs"
+                className="p-2.5 bg-zinc-900 dark:bg-white text-white dark:text-zinc-900 rounded-xl hover:bg-black dark:hover:bg-zinc-100 disabled:opacity-40 disabled:cursor-not-allowed transition-all cursor-pointer shadow-xs"
                 title="Send Message"
               >
                 <Send size={15} />
