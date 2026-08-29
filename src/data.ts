@@ -177,7 +177,7 @@ export const works = [
   description: 'A web-based Training Monitoring System designed to streamline the scheduling, tracking, and reporting of training activities across teams. Supports role-based access for Trainers, Supervisors, Managers, Admins, and Directors to manage training records, certifications, and performance analytics.',
   tech: ['Web', 'Vue', 'Laravel', 'MariaDB',  'OTRS Integration', ],
   involvement: ['Design', 'Development', 'Testing', 'Deployment', 'Maintenance'],
-  company: "PBSI",
+  company: "Basecamp",
   details: [
     // "As the Main Developer, I owned the project end-to-end — covering system architecture design, full-stack development, technical documentation, staging and production deployment, and ongoing system support.",
     "Built the entire platform with a role-based access control system governing six roles: Trainer, Supervisor, Assistant Supervisor, Manager/Admin, Director, and Guest — each with tailored access to training scheduling, calendar management, documentation, and reporting modules.",
@@ -193,7 +193,7 @@ export const works = [
       description: 'A mobile application that enables employees to accurately track their working hours. Serves as a digital Daily Time Record (DTR), streamlining time logging for improved efficiency and accuracy.',
       tech: ['Mobile', 'Web', 'Ionic', 'Vue', 'Codeigniter', 'MariaDB'],
       involvement: ['Design', 'Development', 'Production', 'Maintenance'],
-      company: "SLAC",
+      company: "Sterling Paper Group of Companies",
       details: [
         "As the Lead Developer for the SPOTT application, I am responsible for overseeing the development and implementation of key system components. I develop separate, robust RESTful APIs dedicated to handling user data and attendance logs (attlogs), ensuring secure and efficient data storage and retrieval.",
         "I have collaborate closely with the Human Resources team to transition from manual attendance tracking to a fully digitalized timekeeping system. Provide continuous support to SPOTT users, actively gathering feedback, addressing concerns, and resolving issues in a timely manner. Coordinate with stakeholders to ensure that any application adjustments align with organizational goals and user expectations."
@@ -206,7 +206,7 @@ export const works = [
       description: 'A modern HRIS and payroll solution built to replace legacy systems. SWFS improves efficiency, accuracy, and user experience in managing employee data, timekeeping, and payroll processes.',
       tech: ['Vue', 'Codeigniter', 'MariaDB'],
       involvement: ['Development', 'Data Migration', 'Production', 'Maintenance'],
-      company: "SLAC",
+      company: "Sterling Paper Group of Companies",
       details: [
         "As a key contributor to the development of the SWFS platform, I led the implementation of several major system modules and optimizations such as Alphalist Generation, BIR Tax Computation, Employee Clearance Processing, Last Pay Computation and more.",
         "Conducted a thorough review and restructuring of data models and business process flows to significantly improve system performance. These enhancements resulted in reduced processing times and improved overall system responsiveness.",
@@ -225,7 +225,7 @@ export const works = [
       description: "The ESS Portal is a proposed replacement for the organization's legacy timekeeping and HR request filing system. Built using modern technologies and designed with user experience in mind, this portal will serve as a centralized, self-service platform for employees and HR teams alike.",
       tech: ['Vue', 'Codeigniter', 'MySQL'],
       involvement: ['Development', 'Production', 'Maintenance'],
-      company: "SLAC",
+      company: "Sterling Paper Group of Companies",
       details: [
         "As part of the E-PORTAL system development, I was tasked with implementing the process integration for employee Daily Time Record (DTR) logs in connection with the SPOTT application.",
         "Designed logic to automatically convert raw attendance logs into formatted DTR records for use in HR, payroll, and compliance reporting."
@@ -242,7 +242,7 @@ export const works = [
       description: 'This application is designed to streamline and manage the entire recruitment and onboarding process for Human Resources (HR) departments. It provides a comprehensive platform that facilitates every stage of hiring, from job posting and application submission, all the way through to onboarding new employees.',
       tech: ['Vue', 'Codeigniter', 'MySQL'],
       involvement: ['Design', 'Development'],
-      company: "SLAC",
+      company: "Sterling Paper Group of Companies",
       details: [
         "Restructured the application's data models to align with the organization's hierarchical structure, ensuring seamless integration with the Human Resource and Human Resource Information System (HHRIS). This included mapping positions, departments, and reporting lines accurately across systems.",
         "Redesigned and streamlined various internal workflows within the system to reduce redundancy, improve efficiency, and enhance user experience for recruiters and HR personnel."

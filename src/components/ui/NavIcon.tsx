@@ -12,18 +12,22 @@ export function NavIcon({ icon, active, onClick, label }: NavIconProps) {
   return (
     <button 
       onClick={onClick}
-      className={`relative group p-3 rounded-xl transition-all duration-300 ${active ? 'bg-nexus-accent/10 text-nexus-accent' : 'text-nexus-muted hover:text-white hover:bg-white/5'}`}
+      className={`relative group p-2.5 rounded-xl transition-all duration-200 ${
+        active 
+          ? 'bg-zinc-100 text-zinc-900 border border-zinc-200' 
+          : 'text-zinc-400 hover:text-zinc-900 hover:bg-zinc-50'
+      }`}
     >
       {icon}
       {label && (
-        <span className="absolute left-full ml-4 px-2 py-1 bg-nexus-card border border-white/10 text-[10px] rounded opacity-0 group-hover:opacity-100 transition-opacity whitespace-nowrap pointer-events-none z-50">
+        <span className="absolute left-full ml-4 px-2 py-1 bg-white border border-zinc-200 text-zinc-800 text-[10px] rounded shadow-sm opacity-0 group-hover:opacity-100 transition-opacity whitespace-nowrap pointer-events-none z-50">
           {label}
         </span>
       )}
       {active && (
         <motion.div 
           layoutId="nav-active"
-          className="absolute left-0 top-0 w-full h-full border border-nexus-accent/30 rounded-xl neon-glow"
+          className="absolute inset-0 border border-zinc-300 rounded-xl"
         />
       )}
     </button>

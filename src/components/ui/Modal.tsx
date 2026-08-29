@@ -1,6 +1,6 @@
 import { motion, AnimatePresence } from "motion/react";
-import { X, ExternalLink, Calendar, MapPin, Briefcase, Layers, ChevronLeft, ChevronRight } from "lucide-react";
-import { useState, useEffect, useRef, SyntheticEvent } from "react";
+import { X, ExternalLink, Calendar, MapPin, ChevronLeft, ChevronRight, Briefcase, Layers } from "lucide-react";
+import { useState, useRef, SyntheticEvent, useEffect } from "react";
 
 interface ModalProps {
   isOpen: boolean;
@@ -60,100 +60,96 @@ export function Modal({ isOpen, onClose, item }: ModalProps) {
             animate={{ opacity: 1 }}
             exit={{ opacity: 0 }}
             onClick={onClose}
-            className="absolute inset-0 bg-black/90 backdrop-blur-xl"
+            className="absolute inset-0 bg-black/60 backdrop-blur-md"
           />
           
           <motion.div 
-            initial={{ opacity: 0, scale: 0.9, y: 20 }}
+            initial={{ opacity: 0, scale: 0.95, y: 20 }}
             animate={{ opacity: 1, scale: 1, y: 0 }}
-            exit={{ opacity: 0, scale: 0.9, y: 20 }}
-            className={`relative w-full ${orientation === 'portrait' ? 'max-w-5xl' : 'max-w-4xl'} max-h-[90vh] glass rounded-3xl overflow-hidden flex flex-col border border-white/10`}
+            exit={{ opacity: 0, scale: 0.95, y: 20 }}
+            className={`relative w-full ${orientation === 'portrait' ? 'max-w-5xl' : 'max-w-4xl'} max-h-[90vh] bg-white rounded-3xl overflow-hidden flex flex-col border border-zinc-200 shadow-2xl`}
           >
             {/* Header */}
-            <div className="p-6 md:p-8 border-b border-white/5 flex justify-between items-center bg-white/5 z-10">
-            <div>
-              <div className="flex items-center gap-4">
-                  <div className="w-12 h-12 rounded-xl bg-nexus-accent/10 flex items-center justify-center text-nexus-accent overflow-hidden">
+            <div className="p-6 md:p-8 border-b border-zinc-200 flex justify-between items-center bg-zinc-50/80 z-10">
+              <div>
+                <div className="flex items-center gap-4">
+                  <div className="w-12 h-12 rounded-2xl bg-zinc-100 border border-zinc-200 flex items-center justify-center text-zinc-900 overflow-hidden shadow-2xs">
                     {item.type === 'job' ? 
-                      (item.icon ? <img src={item.icon} className="w-12 h-12 rounded-xl object-contain p-1" alt="Company Logo" /> : <Briefcase size={24} />)
-                      : <Layers size={24} />
+                      (item.icon ? <img src={item.icon} className="w-12 h-12 rounded-2xl object-contain p-2" alt="Company Logo" /> : <Briefcase size={22} />)
+                      : <Layers size={22} />
                     }
                   </div>
                   <div>
-                    <h3 className="text-2xl font-bold">{item.position || item.name}</h3>
-                    <p className="text-nexus-muted font-mono ">{item.company || item.desc}</p>
+                    <h3 className="text-2xl font-bold text-zinc-900">{item.position || item.name}</h3>
+                    <p className="text-zinc-500 font-mono text-sm">{item.company || item.desc}</p>
                   </div>
                 </div>
-                  {item.type === 'job' ? 
-                <div className="flex flex-wrap items-center gap-x-4 gap-y-2 mt-4">
-                  <div className="flex items-center gap-2 text-sm">
-                    <Calendar size={16} className="text-nexus-muted" />
-                    <span className="text-nexus-muted">{item.start} — {item.end}</span>
+
+                {item.type === 'job' ? (
+                  <div className="flex flex-wrap items-center gap-x-4 gap-y-2 mt-4 font-mono text-xs text-zinc-500">
+                    <div className="flex items-center gap-1.5">
+                      <Calendar size={14} className="text-zinc-400" />
+                      <span>{item.start} — {item.end}</span>
+                    </div>
+                    {item.location && (
+                      <div className="flex items-center gap-1.5">
+                        <MapPin size={14} className="text-zinc-400" />
+                        <span>{item.location}</span>
+                      </div>
+                    )}
+                    {item.employmentType && (
+                      <span className="bg-zinc-100 px-2.5 py-0.5 rounded-md text-zinc-700 border border-zinc-200">
+                        {item.employmentType}
+                      </span>
+                    )}
+                    {item.workSetup && (
+                      <span className="bg-zinc-100 px-2.5 py-0.5 rounded-md text-zinc-800 border border-zinc-200 font-medium">
+                        {item.workSetup}
+                      </span>
+                    )}
+                    {item.link && (
+                      <div className="flex items-center gap-1.5">
+                        <ExternalLink size={14} className="text-zinc-500" />
+                        <a 
+                          href={item.link} 
+                          target="_blank" 
+                          rel="noopener noreferrer" 
+                          className="text-zinc-900 hover:underline font-mono text-xs"
+                        >
+                          {item.link.replace(/^https?:\/\/(www\.)?/, '').replace(/\/$/, '')}
+                        </a>
+                      </div>
+                    )}
                   </div>
-                  {item.location && (
-                    <div className="flex items-center gap-2 text-sm">
-                      <MapPin size={16} className="text-nexus-muted" />
-                      <span className="text-nexus-muted">{item.location}</span>
-                    </div>
-                  )}
-                  {item.employmentType && (
-                    <span className="text-[11px] font-mono bg-white/5 px-2.5 py-0.5 rounded-md text-nexus-muted border border-white/10">
-                      {item.employmentType}
-                    </span>
-                  )}
-                  {item.workSetup && (
-                    <span className="text-[11px] font-mono bg-nexus-accent/10 px-2.5 py-0.5 rounded-md text-nexus-accent border border-nexus-accent/20">
-                      {item.workSetup}
-                    </span>
-                  )}
-                  {item.link && (
-                    <div className="flex items-center gap-2 text-sm">
-                      <ExternalLink size={16} className="text-nexus-accent" />
-                      <a 
-                        href={item.link} 
-                        target="_blank" 
-                        rel="noopener noreferrer" 
-                        className="text-nexus-accent hover:underline font-mono text-xs"
-                      >
-                        {item.link.replace(/^https?:\/\/(www\.)?/, '').replace(/\/$/, '')}
-                      </a>
-                    </div>
-                  )}
-                </div>
-                 : 
-                 <div className="flex flex-wrap gap-2 mt-4">
+                ) : (
+                  <div className="flex flex-wrap gap-2 mt-4">
                     {item.tech?.map((t: string) => (
-                      <span key={t} className="text-[12px] font-mono bg-white/5 px-2 py-1 rounded text-nexus-muted border border-white/5">
+                      <span key={t} className="text-[11px] font-mono bg-zinc-100 px-2.5 py-0.5 rounded-md text-zinc-700 border border-zinc-200">
                         {t}
                       </span>
                     ))}
-                  </div>}
+                  </div>
+                )}
               </div>
-         
 
-              <div className="flex items-center gap-4">
-                {/* <div className="hidden md:flex items-center gap-2 px-3 py-1 rounded-full bg-white/5 border border-white/10 text-[10px] font-mono text-nexus-muted uppercase tracking-widest">
-                  View: {orientation}
-                </div> */}
-                <button 
-                  onClick={onClose}
-                  className="p-2 hover:bg-white/10 rounded-full transition-colors text-nexus-muted hover:text-white"
-                >
-                  <X size={24} />
-                </button>
-              </div>
+              <button 
+                onClick={onClose}
+                className="p-2 hover:bg-zinc-200/80 rounded-full transition-colors text-zinc-500 hover:text-zinc-900 cursor-pointer"
+                title="Close"
+              >
+                <X size={22} />
+              </button>
             </div>
 
             {/* Content */}
             <div className={`flex-1 overflow-y-auto custom-scrollbar ${orientation === 'portrait' ? 'md:flex md:overflow-hidden' : ''}`}>
-              
               {/* Image Section */}
-              <div className={`${orientation === 'portrait' ? 'flex justify-center md:w-1/2 md:h-full bg-black/20' : 'w-full'} relative group`}>
+              <div className={`${orientation === 'portrait' ? 'flex justify-center md:w-1/2 md:h-full bg-zinc-900' : 'w-full'} relative group`}>
                 {images.length > 0 ? (
-                  <div className={`relative ${orientation === 'portrait' ? 'h-[400px] md:h-full' : 'aspect-video'} overflow-hidden flex items-center justify-center bg-white/[0.02]`}>
+                  <div className={`relative ${orientation === 'portrait' ? 'h-[400px] md:h-full' : 'aspect-video bg-zinc-900'} overflow-hidden flex items-center justify-center`}>
                     {imageLoading && (
-                      <div className="absolute inset-0 flex items-center justify-center bg-black/40 z-0">
-                        <div className="w-8 h-8 rounded-full border-2 border-nexus-accent/20 border-t-nexus-accent animate-spin" />
+                      <div className="absolute inset-0 flex items-center justify-center bg-zinc-900/60 z-0">
+                        <div className="w-8 h-8 rounded-full border-2 border-zinc-400 border-t-white animate-spin" />
                       </div>
                     )}
                     <AnimatePresence mode="wait">
@@ -176,21 +172,21 @@ export function Modal({ isOpen, onClose, item }: ModalProps) {
                       <>
                         <button 
                           onClick={(e) => { e.stopPropagation(); prevImage(); }}
-                          className="absolute left-4 top-1/2 -translate-y-1/2 p-2 rounded-full bg-black/50 text-white opacity-0 group-hover:opacity-100 transition-opacity hover:bg-nexus-accent hover:text-nexus-bg"
+                          className="absolute left-4 top-1/2 -translate-y-1/2 p-2 rounded-full bg-black/60 text-white opacity-0 group-hover:opacity-100 transition-opacity hover:bg-black cursor-pointer z-20"
                         >
                           <ChevronLeft size={20} />
                         </button>
                         <button 
                           onClick={(e) => { e.stopPropagation(); nextImage(); }}
-                          className="absolute right-4 top-1/2 -translate-y-1/2 p-2 rounded-full bg-black/50 text-white opacity-0 group-hover:opacity-100 transition-opacity hover:bg-nexus-accent hover:text-nexus-bg"
+                          className="absolute right-4 top-1/2 -translate-y-1/2 p-2 rounded-full bg-black/60 text-white opacity-0 group-hover:opacity-100 transition-opacity hover:bg-black cursor-pointer z-20"
                         >
                           <ChevronRight size={20} />
                         </button>
-                        <div className="absolute bottom-4 left-1/2 -translate-x-1/2 flex gap-2">
+                        <div className="absolute bottom-4 left-1/2 -translate-x-1/2 flex gap-2 z-20">
                           {images.map((_: any, i: number) => (
                             <div 
                               key={i}
-                              className={`w-1.5 h-1.5 rounded-full transition-all ${i === currentIndex ? 'bg-nexus-accent w-4' : 'bg-white/30'}`}
+                              className={`w-1.5 h-1.5 rounded-full transition-all ${i === currentIndex ? 'bg-white w-4' : 'bg-white/40'}`}
                             />
                           ))}
                         </div>
@@ -201,68 +197,62 @@ export function Modal({ isOpen, onClose, item }: ModalProps) {
               </div>
 
               {/* Text Section */}
-              <div className={`p-6 md:p-8 space-y-8 ${orientation === 'portrait' ? 'md:w-1/2 md:overflow-y-auto custom-scrollbar ' : ''}`}>
-                <div className={`grid grid-cols-1 gap-8 `}>
-                  <div className="space-y-6">
+              <div className={`p-6 md:p-8 space-y-8 ${orientation === 'portrait' ? 'md:w-1/2 md:overflow-y-auto custom-scrollbar' : ''}`}>
+                <div className="space-y-6">
+                  <div>
+                    <h4 className="text-zinc-900 font-mono text-[13px] font-bold uppercase tracking-widest mb-3">Overview</h4>
+                    <p className="text-zinc-600 leading-relaxed text-sm">
+                      {item.summary || item.description}
+                    </p>
+                  </div>
+
+                  {item.details && (
                     <div>
-                      <h4 className="text-nexus-accent font-mono text-[14px] uppercase tracking-widest mb-4">Overview</h4>
-                      <p className="text-nexus-muted leading-relaxed ">
-                        {item.summary || item.description}
-                      </p>
+                      <h4 className="text-zinc-900 font-mono text-[13px] font-bold uppercase tracking-widest mb-4">Key Responsibilities & Achievements</h4>
+                      <ul className="space-y-3">
+                        {item.details.map((detail: string, i: number) => (
+                          <li key={i} className="flex gap-3 text-zinc-600 leading-relaxed text-sm">
+                            <span className="text-zinc-900 font-bold font-mono text-xs shrink-0 mt-0.5">0{i + 1}</span>
+                            <span>{detail}</span>
+                          </li>
+                        ))}
+                      </ul>
                     </div>
+                  )}
 
-                    {item.details && (
-                      <div>
-                        <h4 className="text-nexus-accent font-mono text-[14px] uppercase tracking-widest mb-4">Key Responsibilities & Achievements</h4>
-                        <ul className="space-y-4">
-                          {item.details.map((detail: string, i: number) => (
-                            <li key={i} className="flex gap-4 text-nexus-muted leading-relaxed t">
-                              <span className="text-nexus-accent font-bold">0{i + 1}</span>
-                              {detail}
-                            </li>
-                          ))}
-                        </ul>
+                  {item.involvement && (
+                    <div className="p-5 rounded-2xl bg-zinc-50 border border-zinc-200">
+                      <h4 className="text-zinc-900 font-mono text-[13px] font-bold uppercase tracking-widest mb-3">Involvement</h4>
+                      <div className="flex flex-wrap gap-2">
+                        {item.involvement.map((inv: string) => (
+                          <span key={inv} className="text-[11px] font-mono text-zinc-700 bg-white border border-zinc-200 px-2.5 py-1 rounded-md">
+                            {inv}
+                          </span>
+                        ))}
                       </div>
-                    )}
-                  </div>
-
-
-
-                  <div className="space-y-8">
-                    {item.involvement && (
-                      <div className="glass p-6 rounded-2xl border border-white/5">
-                        <h4 className="text-nexus-accent font-mono text-[14px] uppercase tracking-widest mb-4">Involvement</h4>
-                        <div className="flex flex-wrap gap-2">
-                          {item.involvement.map((inv: string) => (
-                            <span key={inv} className="text-[12px] font-mono text-nexus-accent border border-nexus-accent/20 px-2 py-1 rounded">
-                              {inv}
-                            </span>
-                          ))}
-                        </div>
-                      </div>
-                    )}
-                  </div>
+                    </div>
+                  )}
                 </div>
               </div>
             </div>
 
             {/* Footer */}
-            <div className="p-6 border-t border-white/5 bg-white/5 flex justify-between items-center z-10">
+            <div className="p-6 border-t border-zinc-200 bg-zinc-50/80 flex justify-between items-center z-10">
               <div className="flex items-center gap-4">
                 {item.link && (
                   <a 
                     href={item.link} 
                     target="_blank" 
                     rel="noopener noreferrer" 
-                    className="flex items-center gap-2 text-nexus-accent font-mono text-xs hover:underline"
+                    className="flex items-center gap-2 text-zinc-900 font-bold font-mono text-xs hover:underline"
                   >
-                    VISIT_WEBSITE <ExternalLink size={14} />
+                    VISIT WEBSITE <ExternalLink size={14} />
                   </a>
                 )}
               </div>
               <button 
                 onClick={onClose}
-                className="px-6 py-2 rounded-xl font-mono text-xs border border-white/10 hover:bg-white/10 transition-all"
+                className="px-6 py-2.5 rounded-xl font-mono text-xs bg-zinc-900 text-white hover:bg-black transition-all cursor-pointer font-medium"
               >
                 CLOSE WINDOW
               </button>

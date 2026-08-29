@@ -60,23 +60,23 @@ export default function App() {
   const closeModal = () => setSelectedItem(null);
 
   return (
-    <div className="min-h-screen grid-pattern relative overflow-hidden">
+    <div className="min-h-screen bg-white grid-pattern relative overflow-hidden text-zinc-900">
       {/* Background Ambient Glows */}
-      <div className="absolute top-[-10%] left-[-10%] w-[40%] h-[40%] bg-nexus-accent/10 blur-[120px] rounded-full" />
-      <div className="absolute bottom-[-10%] right-[-10%] w-[40%] h-[40%] bg-nexus-secondary/10 blur-[120px] rounded-full" />
+      <div className="absolute top-[-10%] left-[-10%] w-[40%] h-[40%] bg-blue-500/5 blur-[120px] rounded-full pointer-events-none" />
+      <div className="absolute bottom-[-10%] right-[-10%] w-[40%] h-[40%] bg-indigo-500/5 blur-[120px] rounded-full pointer-events-none" />
 
       {/* Extended Sidebar */}
-      <aside className="fixed left-0 top-0 h-full w-64 border-r border-white/5 glass flex flex-col justify-between p-6 z-50 max-md:hidden overflow-y-auto custom-scrollbar">
+      <aside className="fixed left-0 top-0 h-full w-64 border-r border-zinc-200/80 bg-white/90 backdrop-blur-xl flex flex-col justify-between p-6 z-50 max-md:hidden overflow-y-auto custom-scrollbar">
         {/* Top Header */}
         <div>
           <div className="mb-8 px-3">
-            <h2 className="font-bold text-base text-white tracking-tight">Ron Marquez</h2>
+            <h2 className="font-bold text-base text-zinc-900 tracking-tight">Ron Marquez</h2>
           </div>
 
           {/* Nav Links */}
           <div className="space-y-6">
             <div>
-              <div className="text-[10px] font-mono uppercase tracking-widest text-nexus-muted/50 px-3 mb-2">Navigation</div>
+              <div className="text-[10px] font-mono uppercase tracking-widest text-zinc-400 px-3 mb-2">Navigation</div>
               <nav className="space-y-1">
                 {[
                   { id: "overview", label: "Overview", icon: <Terminal size={16} /> },
@@ -92,15 +92,15 @@ export default function App() {
                       onClick={() => setActiveTab(item.id)}
                       className={`w-full flex items-center justify-between px-3 py-2.5 rounded-xl text-xs font-mono transition-all duration-200 ${
                         isActive
-                          ? "bg-nexus-accent/10 text-nexus-accent border border-nexus-accent/20 font-bold"
-                          : "text-nexus-muted hover:text-white hover:bg-white/5"
+                          ? "bg-zinc-100 text-zinc-900 border border-zinc-200/80 font-bold shadow-xs"
+                          : "text-zinc-500 hover:text-zinc-900 hover:bg-zinc-50"
                       }`}
                     >
                       <div className="flex items-center gap-3">
-                        <span className={isActive ? "text-nexus-accent" : "text-nexus-muted"}>{item.icon}</span>
+                        <span className={isActive ? "text-zinc-900" : "text-zinc-400"}>{item.icon}</span>
                         <span>{item.label}</span>
                       </div>
-                      {isActive && <span className="text-nexus-accent text-xs">→</span>}
+                      {isActive && <span className="text-zinc-900 text-xs">→</span>}
                     </button>
                   );
                 })}
@@ -110,26 +110,26 @@ export default function App() {
         </div>
 
         {/* Bottom Section */}
-        <div className="space-y-4 pt-6 border-t border-white/5">
+        <div className="space-y-4 pt-6 border-t border-zinc-200/80">
           {/* Status Card */}
-          <div className="p-3 rounded-xl bg-white/[0.02] border border-white/5">
-            <div className="flex items-center justify-between text-nexus-muted text-[10px] font-mono mb-1">
+          <div className="p-3 rounded-xl bg-zinc-50 border border-zinc-200/70">
+            <div className="flex items-center justify-between text-zinc-500 text-[10px] font-mono mb-1">
               <span className="flex items-center gap-1.5">
-                <span className="w-1.5 h-1.5 rounded-full bg-nexus-accent animate-pulse" />
+                <span className="w-1.5 h-1.5 rounded-full bg-emerald-500 animate-pulse" />
                 STATUS
               </span>
-              <span className="text-nexus-accent text-[10px]">{status.toUpperCase()}</span>
+              <span className="text-emerald-600 font-bold text-[10px]">{status.toUpperCase()}</span>
             </div>
-            <div className="text-nexus-muted text-[11px] font-mono truncate">
+            <div className="text-zinc-600 text-[11px] font-mono truncate font-medium">
               {time.toLocaleTimeString()} PHT
             </div>
           </div>
 
           {/* Social Icons */}
           <div className="flex items-center justify-between px-1">
-            <span className="text-[10px] font-mono text-nexus-muted uppercase tracking-wider">Socials</span>
+            <span className="text-[10px] font-mono text-zinc-400 uppercase tracking-wider">Socials</span>
             <div className="flex items-center gap-1">
-              <SocialIcon icon={<Github size={16} />} href="#" />
+              <SocialIcon icon={<Github size={16} />} href="https://github.com/mrqz-rn" />
               <SocialIcon icon={<Linkedin size={16} />} href="https://www.linkedin.com/in/ronmarquez/" />
             </div>
           </div>
@@ -137,7 +137,7 @@ export default function App() {
       </aside>
 
       {/* Mobile Nav */}
-      <nav className="fixed bottom-0 left-0 w-full h-16 glass border-t border-white/5 flex items-center justify-around z-50 md:hidden px-4">
+      <nav className="fixed bottom-0 left-0 w-full h-16 bg-white/95 backdrop-blur-xl border-t border-zinc-200 flex items-center justify-around z-50 md:hidden px-4">
         <NavIcon icon={<Terminal />} active={activeTab === "overview"} onClick={() => setActiveTab("overview")} />
         <NavIcon icon={<Briefcase />} active={activeTab === "experience"} onClick={() => setActiveTab("experience")} />
         <NavIcon icon={<Layers />} active={activeTab === "projects"} onClick={() => setActiveTab("projects")} />
@@ -165,7 +165,7 @@ export default function App() {
       <Modal isOpen={!!selectedItem} onClose={closeModal} item={selectedItem} />
 
       {/* Footer Decoration */}
-      <footer className="md:ml-64 p-8 border-t border-white/5 font-mono text-[10px] text-nexus-muted max-md:pb-24">
+      <footer className="md:ml-64 p-8 border-t border-zinc-200/80 font-mono text-[10px] text-zinc-400 max-md:pb-24">
         <div className="max-w-4xl mx-auto flex justify-between items-center w-full">
           <div>© 2026 RON MARQUEZ - PORTFOLIO</div>
           <div className="flex gap-4">

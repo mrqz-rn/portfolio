@@ -58,10 +58,10 @@ export function ExperienceSection({}: ExperienceSectionProps) {
     >
       {/* Header */}
       <div>
-        <h2 className="text-4xl md:text-5xl font-bold tracking-tight text-white mb-4">
+        <h2 className="text-4xl md:text-5xl font-bold tracking-tight text-zinc-900 mb-4 font-mono">
           experience
         </h2>
-        <p className="text-nexus-muted text-base md:text-lg leading-relaxed max-w-3xl">
+        <p className="text-zinc-600 text-base md:text-lg leading-relaxed max-w-3xl">
           Over 3+ years building across systems development, software engineering, and website support — from internal enterprise platforms to scalable web solutions.
         </p>
       </div>
@@ -81,7 +81,7 @@ export function ExperienceSection({}: ExperienceSectionProps) {
               {/* Timeline Spine & Avatar */}
               <div className="flex flex-col items-center flex-shrink-0 relative">
                 {/* Avatar / Monogram Box */}
-                <div className="w-12 h-12 md:w-14 md:h-14 rounded-2xl bg-white/[0.04] border border-white/10 flex items-center justify-center text-xs font-mono font-bold text-white shadow-inner relative z-10 overflow-hidden group-hover:border-nexus-accent/40 transition-colors p-2">
+                <div className="w-12 h-12 md:w-14 md:h-14 rounded-2xl bg-white border border-zinc-200/90 flex items-center justify-center text-xs font-mono font-bold text-zinc-900 shadow-xs relative z-10 overflow-hidden group-hover:border-zinc-400 group-hover:shadow-sm transition-all p-2">
                   {exp.icon ? (
                     <img 
                       src={exp.icon} 
@@ -96,7 +96,7 @@ export function ExperienceSection({}: ExperienceSectionProps) {
                     />
                   ) : null}
                   <span 
-                    className={`text-nexus-accent font-bold ${exp.icon ? 'hidden' : 'block'}`}
+                    className={`text-zinc-800 font-bold ${exp.icon ? 'hidden' : 'block'}`}
                   >
                     {exp.monogram || exp.company.slice(0, 2).toUpperCase()}
                   </span>
@@ -104,7 +104,7 @@ export function ExperienceSection({}: ExperienceSectionProps) {
 
                 {/* Vertical connecting line */}
                 {i !== jobs.length - 1 && (
-                  <div className="w-[1px] bg-white/10 flex-grow mt-4" />
+                  <div className="w-[1px] bg-zinc-200 flex-grow mt-4" />
                 )}
               </div>
 
@@ -113,7 +113,7 @@ export function ExperienceSection({}: ExperienceSectionProps) {
                 {/* Company Info */}
                 <div className="space-y-1 mb-4">
                   <div className="flex flex-wrap items-center gap-3">
-                    <h3 className="text-xl md:text-2xl font-bold text-white tracking-tight">
+                    <h3 className="text-xl md:text-2xl font-bold text-zinc-900 tracking-tight">
                       {exp.company}
                     </h3>
                     {exp.link && (
@@ -121,7 +121,7 @@ export function ExperienceSection({}: ExperienceSectionProps) {
                         href={exp.link} 
                         target="_blank" 
                         rel="noopener noreferrer" 
-                        className="text-nexus-muted hover:text-nexus-accent transition-colors"
+                        className="text-zinc-400 hover:text-zinc-900 transition-colors"
                         title={`Visit ${exp.company}`}
                       >
                         <ExternalLink size={16} />
@@ -129,8 +129,8 @@ export function ExperienceSection({}: ExperienceSectionProps) {
                     )}
                   </div>
 
-                  <div className="flex flex-wrap items-center gap-2 text-nexus-muted font-mono text-xs md:text-sm">
-                    {exp.employmentType && <span>{exp.employmentType}</span>}
+                  <div className="flex flex-wrap items-center gap-2 text-zinc-500 font-mono text-xs md:text-sm">
+                    {exp.employmentType && <span className="font-medium text-zinc-700">{exp.employmentType}</span>}
                     {exp.location && (
                       <>
                         <span>·</span>
@@ -147,27 +147,27 @@ export function ExperienceSection({}: ExperienceSectionProps) {
                 </div>
 
                 {/* Sub-node / Role Timeline */}
-                <div className="pl-4 md:pl-6 border-l border-white/10 relative space-y-4 my-6">
+                <div className="pl-4 md:pl-6 border-l border-zinc-200 relative space-y-4 my-6">
                   {/* Node dot */}
-                  <div className="absolute -left-[5px] top-1.5 w-2 h-2 rounded-full border border-white/30 bg-[#0a0f18] group-hover:border-nexus-accent transition-colors" />
+                  <div className="absolute -left-[5px] top-1.5 w-2 h-2 rounded-full border border-zinc-300 bg-white group-hover:border-zinc-900 group-hover:bg-zinc-900 transition-colors" />
 
                   <div>
-                    <h4 className="text-lg md:text-xl font-bold text-white">
+                    <h4 className="text-lg md:text-xl font-bold text-zinc-900">
                       {exp.position}
                     </h4>
-                    <div className="text-nexus-muted font-mono text-xs tracking-wider mt-1 flex flex-wrap items-center gap-2">
-                      <span className="text-nexus-muted/90">{exp.start} — {exp.end}</span>
+                    <div className="text-zinc-500 font-mono text-xs tracking-wider mt-1 flex flex-wrap items-center gap-2">
+                      <span className="text-zinc-600">{exp.start} — {exp.end}</span>
                       {duration && (
                         <>
-                          <span className="text-nexus-muted/40">•</span>
-                          <span className="text-nexus-accent/90">{duration}</span>
+                          <span className="text-zinc-300">•</span>
+                          <span className="text-zinc-900 font-medium">{duration}</span>
                         </>
                       )}
                     </div>
                   </div>
 
                   {/* Summary */}
-                  <p className="text-nexus-muted text-sm md:text-base leading-relaxed">
+                  <p className="text-zinc-600 text-sm md:text-base leading-relaxed">
                     {exp.summary}
                   </p>
 
@@ -175,8 +175,8 @@ export function ExperienceSection({}: ExperienceSectionProps) {
                   {exp.details && exp.details.length > 0 && (
                     <ul className="space-y-2.5 pt-2">
                       {exp.details.map((detail, idx) => (
-                        <li key={idx} className="text-nexus-muted text-sm leading-relaxed flex items-start gap-3">
-                          <span className="text-nexus-accent font-mono text-xs mt-1 shrink-0">•</span>
+                        <li key={idx} className="text-zinc-600 text-sm leading-relaxed flex items-start gap-3">
+                          <span className="text-zinc-400 font-mono text-xs mt-1 shrink-0">•</span>
                           <span>{detail}</span>
                         </li>
                       ))}
@@ -189,7 +189,7 @@ export function ExperienceSection({}: ExperienceSectionProps) {
                       {exp.skills.map((skill) => (
                         <span 
                           key={skill}
-                          className="px-3 py-1 rounded-lg bg-white/[0.03] border border-white/10 text-nexus-muted hover:text-white hover:border-nexus-accent/30 font-mono text-xs transition-colors"
+                          className="px-3 py-1 rounded-lg bg-zinc-50 border border-zinc-200/80 text-zinc-700 hover:text-zinc-950 hover:border-zinc-300 font-mono text-xs transition-colors"
                         >
                           {skill}
                         </span>

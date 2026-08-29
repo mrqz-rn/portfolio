@@ -1,5 +1,5 @@
 import { motion } from "motion/react";
-import { Code2, Cpu } from "lucide-react";
+import { Cpu } from "lucide-react";
 import { skills } from "../../data";
 import { StatCard } from "../ui/StatCard";
 
@@ -13,19 +13,17 @@ export function StackSection() {
       className="grid grid-cols-1 md:grid-cols-2 gap-12"
     >
       <div className="space-y-8">
-        <h2 className="text-3xl font-bold tracking-tight">Technical <span className="text-nexus-accent">Arsenal</span></h2>
-        {/* <p className="text-nexus-muted leading-relaxed">
-          My technical skills are categorized to reflect my proficiency across different domains of software development and system maintenance.
-        </p> */}
+        <h2 className="text-4xl md:text-5xl font-bold tracking-tight text-zinc-900 font-mono">
+          Technical Arsenal
+        </h2>
         <div className="grid grid-cols-1 gap-6">
           {skills.map(cat => (
-            <div key={cat.type} className="glass p-6 rounded-2xl">
-              <div className="text-[10px] font-mono text-nexus-accent mb-4 uppercase tracking-widest">{cat.type}</div>
+            <div key={cat.type} className="bg-white p-6 rounded-2xl border border-zinc-200/80 shadow-xs">
+              <div className="text-[11px] font-mono text-zinc-500 mb-4 uppercase tracking-widest font-semibold">{cat.type}</div>
               <div className="flex flex-wrap gap-3">
                 {cat.items.map(skill => (
                   <div key={typeof skill === 'string' ? skill : skill.name} className="flex flex-col items-center gap-2 group">
-                    <div className="w-12 h-12 rounded-xl bg-white/5 flex items-center justify-center group-hover:bg-nexus-accent/10 transition-all border border-white/5 group-hover:border-nexus-accent/30">
-                      {/* <Code2 size={20} className="text-nexus-muted group-hover:text-nexus-accent" /> */}
+                    <div className="w-12 h-12 rounded-xl bg-zinc-50 flex items-center justify-center group-hover:bg-zinc-100 transition-all border border-zinc-200/80 group-hover:border-zinc-300">
                       <img 
                         src={typeof skill === 'string' ? skill : `/tech/${skill.icon}`} 
                         alt={typeof skill === 'string' ? skill : skill.name} 
@@ -36,7 +34,7 @@ export function StackSection() {
                         height={24}
                       />
                     </div>
-                    <span className="text-[10px] font-mono text-nexus-muted group-hover:text-white">
+                    <span className="text-[10px] font-mono text-zinc-500 group-hover:text-zinc-900 font-medium">
                       {typeof skill === 'string' ? skill : skill.name}
                     </span>
                   </div>
@@ -46,15 +44,15 @@ export function StackSection() {
           ))}
         </div>
       </div>
+
       <div className="space-y-8">
-        <div className="glass rounded-2xl p-8 flex items-center justify-center relative overflow-hidden h-64">
-          <div className="absolute inset-0 bg-nexus-accent/5 animate-pulse" />
+        <div className="bg-white rounded-2xl border border-zinc-200/80 p-8 flex items-center justify-center relative overflow-hidden h-64 shadow-xs">
           <div className="relative z-10 text-center">
-            <div className="w-24 h-24 rounded-full bg-nexus-accent/10 flex items-center justify-center mx-auto mb-6 border border-nexus-accent/20">
-              <Cpu className="text-nexus-accent w-10 h-10" />
+            <div className="w-20 h-20 rounded-2xl bg-zinc-100 flex items-center justify-center mx-auto mb-5 border border-zinc-200">
+              <Cpu className="text-zinc-800 w-9 h-9" />
             </div>
-            <h3 className="text-xl font-bold mb-2">System Development</h3>
-            <p className="text-sm text-nexus-muted max-w-xs mx-auto">
+            <h3 className="text-xl font-bold text-zinc-900 mb-2 font-mono">System Development</h3>
+            <p className="text-sm text-zinc-600 max-w-xs mx-auto leading-relaxed">
               Specializing in internal enterprise solutions and digital transformation.
             </p>
           </div>
