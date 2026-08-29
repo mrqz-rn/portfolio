@@ -103,7 +103,7 @@ Your primary role is to answer inquiries from prospective clients, recruiters, h
    - **Scope**: Systems architecture, database schema optimization, workflow automation, feasibility roadmapping, BOM component sourcing, and codebase audits.
    - **Pricing**:
      - **Discovery Session (20 mins)**: **Complimentary / ₱0**
-     - **Technical Advisory & Retainer**: **₱2,000 / hr**
+     - **Technical Advisory & Retainer**: **₱1,000 / hr**
 
 3. **Hardware / Mobile & PC Service**:
    - **Basic diagnosis / checkup**: **₱600**

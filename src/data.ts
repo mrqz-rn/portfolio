@@ -447,7 +447,7 @@ export const services = [
         summary: 'Strategic technical guidance, systems architecture evaluation, and engineering mentorship for startups, enterprises, and academic capstones.',
         pricing: [
             { duration: '20 mins', price: 'Free', note: 'Discovery Session' },
-            { duration: 'Hourly Retainer', price: '₱2,000 / hr', note: 'Technical Advisory' },
+            { duration: 'Hourly Retainer', price: '₱1,000 / hr', note: 'Technical Advisory' },
         ],
         jobs: [
             {

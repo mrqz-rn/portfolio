@@ -342,7 +342,7 @@ export function getRomFallbackReply(userQuery: string): string {
       `• **Embedded Systems & IoT Firmware** (Arduino, ESP32, multi-sensor telemetry, circuit wiring).\n\n` +
       `🤝 **2. Technical Advisory & Consulting**\n` +
       `• **Discovery Session (20 mins)**: **Complimentary / ₱0**\n` +
-      `• **Technical Advisory & Retainer**: **₱2,000 / hr**\n` +
+      `• **Technical Advisory & Retainer**: **₱1,000 / hr**\n` +
       `• *Covers systems architecture blueprinting, technical feasibility, project roadmapping, BOM sourcing, and PR/codebase audits.*\n\n` +
       `🔧 **3. Hardware / Mobile & PC Service**\n` +
       `• **Basic diagnosis / checkup**: **₱600**\n` +

@@ -98,7 +98,7 @@ Your primary role is to answer inquiries from prospective clients, recruiters, h
    - **Scope**: Systems architecture, database schema optimization, workflow automation, feasibility roadmapping, BOM component sourcing, and codebase audits.
    - **Pricing**:
      - **Discovery Session (20 mins)**: **Complimentary / ₱0**
-     - **Technical Advisory & Retainer**: **₱2,000 / hr**
+     - **Technical Advisory & Retainer**: **₱1,000 / hr**
 
 3. **Hardware / Mobile & PC Service**:
    - **Basic diagnosis / checkup**: **₱600**
@@ -118,7 +118,7 @@ Your primary role is to answer inquiries from prospective clients, recruiters, h
 - Use precise technical terminology when discussing architecture, engineering stacks, diagnostics, hardware repairs, and project roadmaps.
 - **Hardware & Repair Inquiries**: When a visitor or client asks if Ron offers **hardware services, PC/laptop repairs, troubleshooting, cleaning, OS reinstall, parts upgrades, or screen replacement**, ALWAYS confirm that **YES, Ron provides professional hardware diagnostics, PC/laptop repair & maintenance services, and on-site servicing**. Provide the exact rates and on-site dispatch fees.
 - When asked about specific projects like **PMCIE LMS**, **MobileCare Queuing**, **Basecamp TMS**, **Nexus-IMS**, **SWFS**, **SPOTT**, **ESS-PORTAL**, **OBS**, explain their purpose, technologies, and Ron's exact contributions.
-- When asked about services or pricing, provide exact rates clearly (e.g. Free 20m discovery, ₱2k/hr advisory, ₱600 diagnostics, ₱1,200 OS provisioning, ₱800 thermal overhaul, ₱600 hardware install, ₱2.5k–₱8k+ screen replacements, travel tariffs, custom enterprise quotes).
+- When asked about services or pricing, provide exact rates clearly (e.g. Free 20m discovery, ₱1k/hr advisory, ₱600 diagnostics, ₱1,200 OS provisioning, ₱800 thermal overhaul, ₱600 hardware install, ₱2.5k–₱8k+ screen replacements, travel tariffs, custom enterprise quotes).
 - Format responses clearly with markdown formatting (bullet points, bold text, links).
 - When asked about hiring or contacting Ron, provide his email (marquez.ronrons@gmail.com) and LinkedIn link.
 `;
@@ -429,7 +429,7 @@ function generateKnowledgeReply(lastUserMessage: string): string {
       `• **Embedded Systems & IoT Firmware** (Arduino, ESP32, multi-sensor telemetry, circuit wiring).\n\n` +
       `🤝 **2. Technical Advisory & Consulting**\n` +
       `• **Discovery Session (20 mins)**: **Complimentary / ₱0**\n` +
-      `• **Technical Advisory & Retainer**: **₱2,000 / hr**\n` +
+      `• **Technical Advisory & Retainer**: **₱1,000 / hr**\n` +
       `• *Covers systems architecture blueprinting, technical feasibility, project roadmapping, BOM sourcing, and PR/codebase audits.*\n\n` +
       `🔧 **3. Hardware / Mobile & PC Service & Repair**\n` +
       `• **Basic diagnosis / checkup**: **₱600**\n` +
