@@ -107,21 +107,85 @@ Your primary role is to answer inquiries from prospective clients, recruiters, h
    - **Hardware installation (RAM, SSD, GPU, etc.)**: **₱600**
    - **Laptop screen replacement**: **₱2.5k – ₱8k+** (depending on unit model)
 
-4. **On-Site Field Support Logistics (Travel Radius Tariff)**:
-   - **Tier 1 (0 – 5 km)** · Immediate Radius: **₱100 – ₱200**
-   - **Tier 2 (5 – 10 km)** · Urban Perimeter: **₱200 – ₱350**
-   - **Tier 3 (10 – 20 km)** · Extended Perimeter: **₱350 – ₱500**
-   - **Tier 4 (20+ km)** · Custom Dispatch: **₱500+** *(location dependent)*
+### Working Schedule, Routine & Availability:
+- **Timezone**: Asia/Manila (PHT / UTC+8)
+- **Weekly Schedule**:
+  - **Monday to Friday (Regular Workdays)**:
+    - **Core Grinding / Work Hours**: 08:00 AM – 05:00 PM
+    - **Free / Consultation Hours**: 07:00 PM – 09:30 PM (ideal for client discussions, discovery sessions, and technical advisory)
+  - **Saturday (Rest & Maintenance)**:
+    - **Rest Window**: 10:00 AM – 02:00 PM
+    - **Free / Active Window**: 08:00 AM – 05:00 PM
+  - **Sunday (Rest)**:
+    - **Rest Window**: 10:00 AM – 02:00 PM
+- **Routine Statuses**:
+  - **Late Night (11:00 PM – 06:00 AM)**: Sleeping
+  - **Early Morning (06:00 AM – 08:00 AM)**: Starting the day
+  - **Work Hours (08:00 AM – 05:00 PM on weekdays)**: Grinding (actively building/engineering)
+  - **Wrap-up (05:00 PM – 07:00 PM)**: Waiting to clock out / wrapping up
+  - **Free Time (07:00 PM – 09:30 PM on weekdays)**: Having free time / open for client chats
+  - **Weekends**: Resting or working on personal side projects
 
 ### Guidelines for Responses:
 - Speak as **RoM**, Ron's virtual AI assistant. Be courteous, concise, professional, and enthusiastic.
 - Use precise technical terminology when discussing architecture, engineering stacks, diagnostics, hardware repairs, and project roadmaps.
-- **Hardware & Repair Inquiries**: When a visitor or client asks if Ron offers **hardware services, PC/laptop repairs, troubleshooting, cleaning, OS reinstall, parts upgrades, or screen replacement**, ALWAYS confirm that **YES, Ron provides professional hardware diagnostics, PC/laptop repair & maintenance services, and on-site servicing**. Provide the exact rates and on-site dispatch fees.
+- **Schedule & Availability Inquiries**: When asked about Ron's schedule, working hours, availability, or what he is doing right now, explain his weekly routine (Mon–Fri 8am–5pm core engineering, 7pm–9:30pm evening consultation/free time, weekend rest windows) and recommend reaching out via email or booking a discovery session.
+- **Hardware & Repair Inquiries**: When a visitor or client asks if Ron offers **hardware services, PC/laptop repairs, troubleshooting, cleaning, OS reinstall, parts upgrades, or screen replacement**, ALWAYS confirm that **YES, Ron provides professional hardware diagnostics, PC/laptop repair & maintenance services, and on-site servicing**. Provide the exact rates clearly.
 - When asked about specific projects like **PMCIE LMS**, **MobileCare Queuing**, **Basecamp TMS**, **Nexus-IMS**, **SWFS**, **SPOTT**, **ESS-PORTAL**, **OBS**, explain their purpose, technologies, and Ron's exact contributions.
-- When asked about services or pricing, provide exact rates clearly (e.g. Free 20m discovery, ₱1k/hr advisory, ₱600 diagnostics, ₱1,200 OS provisioning, ₱800 thermal overhaul, ₱600 hardware install, ₱2.5k–₱8k+ screen replacements, travel tariffs, custom enterprise quotes).
+- When asked about services or pricing, provide exact rates clearly (e.g. Free 20m discovery, ₱1k/hr advisory, ₱600 diagnostics, ₱1,200 OS provisioning, ₱800 thermal overhaul, ₱600 hardware install, ₱2.5k–₱8k+ screen replacements, custom enterprise quotes).
 - Format responses clearly with markdown formatting (bullet points, bold text, links).
 - When asked about hiring or contacting Ron, provide his email (marquez.ronrons@gmail.com) and LinkedIn link.
 `;
+
+const schedule = [
+  { id: 0, type: "Rest", day: "Saturday", start: "10:00:00 AM", end: "02:00:00 PM", free_in: "08:00:00 AM", free_out: "05:00:00 PM" },
+  { id: 1, type: "Regular", day: "Monday", start: "08:00:00 AM", end: "05:00:00 PM", free_in: "07:00:00 PM", free_out: "09:30:00 PM" },
+  { id: 2, type: "Regular", day: "Tuesday", start: "08:00:00 AM", end: "05:00:00 PM", free_in: "07:00:00 PM", free_out: "09:30:00 PM" },
+  { id: 3, type: "Regular", day: "Wednesday", start: "08:00:00 AM", end: "05:00:00 PM", free_in: "07:00:00 PM", free_out: "09:30:00 PM" },
+  { id: 4, type: "Regular", day: "Thursday", start: "08:00:00 AM", end: "05:00:00 PM", free_in: "07:00:00 PM", free_out: "09:30:00 PM" },
+  { id: 5, type: "Regular", day: "Friday", start: "08:00:00 AM", end: "05:00:00 PM", free_in: "07:00:00 PM", free_out: "09:30:00 PM" },
+  { id: 6, type: "Rest", day: "Sunday", start: "10:00:00 AM", end: "02:00:00 PM" },
+];
+
+function parseHour(timeStr: string): number {
+  const [time, meridiem] = timeStr.split(' ');
+  const [hours] = time.split(':').map(Number);
+  if (meridiem === 'AM') {
+    return hours === 12 ? 0 : hours;
+  } else {
+    return hours === 12 ? 12 : hours + 12;
+  }
+}
+
+function getMyStatus(): string {
+  const now = new Date();
+  const currentHours = now.getHours();
+  const currentDay = now.toLocaleString('en-US', { weekday: 'long' });
+
+  if (currentHours >= 23 || currentHours < 6) {
+    return "I'm sleeping";
+  }
+
+  const currentSchedule = schedule.find(s => s.day === currentDay);
+  if (!currentSchedule) return "Status Unknown";
+
+  const startHour = parseHour(currentSchedule.start);
+  const endHour = parseHour(currentSchedule.end);
+
+  if (currentSchedule.type === "Rest") {
+    return "I'm resting";
+  } else if (startHour <= currentHours && endHour >= currentHours) {
+    return "I'm grinding";
+  } else if (startHour > currentHours) {
+    return "I'm starting my day";
+  } else if (endHour <= currentHours && endHour + 2 > currentHours) {
+    return "I'm waiting to clock out";
+  } else if (endHour <= currentHours) {
+    return "I'm having free time";
+  }
+
+  return "Status Unknown";
+}
 
 function generateKnowledgeReply(lastUserMessage: string): string {
   const query = (lastUserMessage || "").toLowerCase().trim();
@@ -151,12 +215,7 @@ function generateKnowledgeReply(lastUserMessage: string): string {
       `• 🧹 **PC Cleaning / Dust Removal**: **₱800** — Deep interior de-dusting, fan cleaning, and fresh thermal paste reapplication.\n` +
       `• ⚙️ **Hardware Installation & Upgrades**: **₱600** — Installation and testing of RAM, SSD, GPU, power supplies, or internal peripherals.\n` +
       `• 💻 **Laptop Screen Replacement**: **₱2.5k – ₱8k+** *(depending on unit model)* — Display panel replacement and calibration for cracked or damaged screens.\n\n` +
-      `🚗 **On-Site Field Support Logistics (Travel Radius Tariff from Antipolo City)**:\n` +
-      `• **Tier 1 (0 – 5 km)**: **₱100 – ₱200** (Antipolo & Immediate Vicinity)\n` +
-      `• **Tier 2 (5 – 10 km)**: **₱200 – ₱350** (Surrounding Metro Areas)\n` +
-      `• **Tier 3 (10 – 20 km)**: **₱350 – ₱500** (Greater Rizal & Outer Metro)\n` +
-      `• **Tier 4 (20+ km)**: **₱500+** (Assessed per Location & Transit)\n\n` +
-      `To schedule a repair or on-site service, feel free to email Ron directly at [marquez.ronrons@gmail.com](mailto:marquez.ronrons@gmail.com)!`
+      `To schedule a repair or service, feel free to email Ron directly at [marquez.ronrons@gmail.com](mailto:marquez.ronrons@gmail.com)!`
     );
   }
 
@@ -437,12 +496,36 @@ function generateKnowledgeReply(lastUserMessage: string): string {
       `• **PC cleaning / dust removal**: **₱800**\n` +
       `• **Hardware installation (RAM, SSD, GPU, etc.)**: **₱600**\n` +
       `• **Laptop screen replacement**: **₱2.5k – ₱8k+** *(depending on unit model)*\n\n` +
-      `📍 **4. On-Site Field Support Logistics (Travel Radius Tariff from Antipolo City)**\n` +
-      `• **Tier 1 (0 – 5 km)** · Immediate Radius: **₱100 – ₱200**\n` +
-      `• **Tier 2 (5 – 10 km)** · Urban Perimeter: **₱200 – ₱350**\n` +
-      `• **Tier 3 (10 – 20 km)** · Extended Perimeter: **₱350 – ₱500**\n` +
-      `• **Tier 4 (20+ km)** · Custom Dispatch: **₱500+** *(location dependent)*\n\n` +
       `Feel free to reach out directly at [marquez.ronrons@gmail.com](mailto:marquez.ronrons@gmail.com) to book a service or request a quote!`
+    );
+  }
+
+  // Schedule, Status & Availability
+  if (
+    query.includes("schedule") ||
+    query.includes("availab") ||
+    query.includes("status") ||
+    query.includes("working hour") ||
+    query.includes("free time") ||
+    query.includes("what is ron doing") ||
+    query.includes("doing right now") ||
+    query.includes("grinding") ||
+    query.includes("routine") ||
+    query.includes("time")
+  ) {
+    const currentStatus = getMyStatus();
+    return (
+      `📅 **Ron's Current Status & Weekly Schedule**\n\n` +
+      `• ⚡ **Current Live Status**: **"${currentStatus}"**\n\n` +
+      `🕒 **Weekly Working & Availability Routine (Asia/Manila PHT / UTC+8)**:\n` +
+      `• **Monday – Friday (Regular Workdays)**:\n` +
+      `  - **Core Engineering / Grinding**: 08:00 AM – 05:00 PM\n` +
+      `  - **Evening Free Time & Advisory Calls**: 07:00 PM – 09:30 PM\n` +
+      `• **Saturday**:\n` +
+      `  - **Rest**: 10:00 AM – 02:00 PM | **Active / Free Hours**: 08:00 AM – 05:00 PM\n` +
+      `• **Sunday**:\n` +
+      `  - **Rest**: 10:00 AM – 02:00 PM\n\n` +
+      `💡 *The best window for technical consultations and discovery calls is during weekday evenings (7:00 PM – 9:30 PM PHT) or by scheduling ahead via email at [marquez.ronrons@gmail.com](mailto:marquez.ronrons@gmail.com).*`
     );
   }
 

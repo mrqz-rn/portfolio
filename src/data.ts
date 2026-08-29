@@ -520,13 +520,6 @@ export const services = [
     },
 ];
 
-export const homeServiceRates = [
-    { distance: '0 – 5 km', rate: '₱100 – ₱200', label: 'Tier 1 · Immediate Radius', desc: 'Antipolo & Immediate Vicinity' },
-    { distance: '5 – 10 km', rate: '₱200 – ₱350', label: 'Tier 2 · Urban Perimeter', desc: 'Surrounding Metro Areas' },
-    { distance: '10 – 20 km', rate: '₱350 – ₱500', label: 'Tier 3 · Extended Perimeter', desc: 'Greater Rizal & Outer Metro' },
-    { distance: '20+ km', rate: '₱500+', label: 'Tier 4 · Custom Dispatch', desc: 'Assessed per Location & Transit' },
-];
-
 export const skills = [
     {id: 0, type: "Language", color: "#00a516ff", items: [
         {id: 0, name: "HTML", icon: "html.png"},

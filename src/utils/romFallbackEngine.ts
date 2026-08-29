@@ -1,3 +1,5 @@
+import { getMyStatus } from "../data";
+
 /**
  * Intelligent client-side fallback engine for Rom when Claude/Gemini API is offline or out of credits.
  * This guarantees Rom always provides instant, accurate answers about Ron's career.
@@ -284,12 +286,7 @@ export function getRomFallbackReply(userQuery: string): string {
       `• 🧹 **PC Cleaning / Dust Removal**: **₱800** — Deep interior de-dusting, fan cleaning, and fresh thermal paste reapplication.\n` +
       `• ⚙️ **Hardware Installation & Upgrades**: **₱600** — Installation and testing of RAM, SSD, GPU, power supplies, or internal peripherals.\n` +
       `• 💻 **Laptop Screen Replacement**: **₱2.5k – ₱8k+** *(depending on unit model)* — Display panel replacement and calibration for cracked or damaged screens.\n\n` +
-      `🚗 **On-Site Field Support Logistics (Travel Radius Tariff from Antipolo City)**:\n` +
-      `• **Tier 1 (0 – 5 km)**: **₱100 – ₱200** (Antipolo & Immediate Vicinity)\n` +
-      `• **Tier 2 (5 – 10 km)**: **₱200 – ₱350** (Surrounding Metro Areas)\n` +
-      `• **Tier 3 (10 – 20 km)**: **₱350 – ₱500** (Greater Rizal & Outer Metro)\n` +
-      `• **Tier 4 (20+ km)**: **₱500+** (Assessed per Location & Transit)\n\n` +
-      `To schedule a repair or on-site service, feel free to email Ron directly at [marquez.ronrons@gmail.com](mailto:marquez.ronrons@gmail.com)!`
+      `To schedule a repair or service, feel free to email Ron directly at [marquez.ronrons@gmail.com](mailto:marquez.ronrons@gmail.com)!`
     );
   }
 
@@ -350,12 +347,36 @@ export function getRomFallbackReply(userQuery: string): string {
       `• **PC cleaning / dust removal**: **₱800**\n` +
       `• **Hardware installation (RAM, SSD, GPU, etc.)**: **₱600**\n` +
       `• **Laptop screen replacement**: **₱2.5k – ₱8k+** *(depending on unit model)*\n\n` +
-      `📍 **4. On-Site Field Support Logistics (Travel Radius Tariff)**\n` +
-      `• **Tier 1 (0 – 5 km)** · Immediate Radius: **₱100 – ₱200**\n` +
-      `• **Tier 2 (5 – 10 km)** · Urban Perimeter: **₱200 – ₱350**\n` +
-      `• **Tier 3 (10 – 20 km)** · Extended Perimeter: **₱350 – ₱500**\n` +
-      `• **Tier 4 (20+ km)** · Custom Dispatch: **₱500+** *(location dependent)*\n\n` +
       `You can navigate to the **Services** section in the portfolio or reach out directly at [marquez.ronrons@gmail.com](mailto:marquez.ronrons@gmail.com) to schedule an engagement!`
+    );
+  }
+
+  // Schedule, Status & Availability
+  if (
+    query.includes("schedule") ||
+    query.includes("availab") ||
+    query.includes("status") ||
+    query.includes("working hour") ||
+    query.includes("free time") ||
+    query.includes("what is ron doing") ||
+    query.includes("doing right now") ||
+    query.includes("grinding") ||
+    query.includes("routine") ||
+    query.includes("time")
+  ) {
+    const currentStatus = getMyStatus();
+    return (
+      `📅 **Ron's Current Status & Weekly Schedule**\n\n` +
+      `• ⚡ **Current Live Status**: **"${currentStatus}"**\n\n` +
+      `🕒 **Weekly Working & Availability Routine (Asia/Manila PHT / UTC+8)**:\n` +
+      `• **Monday – Friday (Regular Workdays)**:\n` +
+      `  - **Core Engineering / Grinding**: 08:00 AM – 05:00 PM\n` +
+      `  - **Evening Free Time & Advisory Calls**: 07:00 PM – 09:30 PM\n` +
+      `• **Saturday**:\n` +
+      `  - **Rest**: 10:00 AM – 02:00 PM | **Active / Free Hours**: 08:00 AM – 05:00 PM\n` +
+      `• **Sunday**:\n` +
+      `  - **Rest**: 10:00 AM – 02:00 PM\n\n` +
+      `💡 *The best window for technical consultations and discovery calls is during weekday evenings (7:00 PM – 9:30 PM PHT) or by scheduling ahead via email at [marquez.ronrons@gmail.com](mailto:marquez.ronrons@gmail.com).*`
     );
   }
 
