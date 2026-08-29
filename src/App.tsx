@@ -83,7 +83,7 @@ export default function App() {
 
         <div className="flex flex-col gap-4 mt-auto">
           <SocialIcon icon={<Github />} href="#" />
-          <SocialIcon icon={<Linkedin />} href="#" />
+          <SocialIcon icon={<Linkedin />} href="https://www.linkedin.com/in/ronmarquez/" />
         </div>
       </nav>
 

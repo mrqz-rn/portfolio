@@ -1,5 +1,5 @@
 import { motion } from "motion/react";
-import { Mail, Phone, Globe, Wrench, Monitor, Code2, MessageSquare, Zap } from "lucide-react";
+import { Mail, Globe, Wrench, Monitor, Code2, MessageSquare, Zap } from "lucide-react";
 import { services, certs } from "../../data";
 
 export function OverviewSection() {
@@ -55,15 +55,6 @@ export function OverviewSection() {
               <div>
                 <div className="text-[10px] uppercase text-nexus-accent/50">Email</div>
                 marquez.ronrons@gmail.com
-              </div>
-            </div>
-            <div className="flex items-center gap-4 text-nexus-muted">
-              <div className="w-10 h-10 rounded-lg bg-white/5 flex items-center justify-center text-nexus-accent">
-                <Phone size={18} />
-              </div>
-              <div>
-                <div className="text-[10px] uppercase text-nexus-accent/50">Phone</div>
-                +63 9272612719
               </div>
             </div>
           </div>

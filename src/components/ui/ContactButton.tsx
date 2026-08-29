@@ -11,6 +11,8 @@ export function ContactButton({ icon, label, href, primary }: ContactButtonProps
   return (
     <a 
       href={href}
+      target={href.startsWith("http") ? "_blank" : undefined}
+      rel={href.startsWith("http") ? "noopener noreferrer" : undefined}
       className={`flex items-center gap-3 px-8 py-4 rounded-xl font-bold transition-all ${
         primary 
           ? 'bg-nexus-accent text-black hover:shadow-[0_0_30px_rgba(0,255,153,0.3)] hover:scale-105' 

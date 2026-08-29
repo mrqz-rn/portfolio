@@ -1,5 +1,5 @@
 import { motion } from "motion/react";
-import { Mail, Phone, MapPin, Globe, Github, Linkedin } from "lucide-react";
+import { Mail, MapPin, Globe, Github, Linkedin } from "lucide-react";
 import { ContactButton } from "../ui/ContactButton";
 import { useRef, useState, FormEvent } from "react";
 import emailjs from "@emailjs/browser";
@@ -68,15 +68,6 @@ export function ConnectSection() {
               </div>
               <div className="flex items-center gap-4 text-nexus-muted group">
                 <div className="w-12 h-12 rounded-xl bg-white/5 flex items-center justify-center text-nexus-accent group-hover:bg-nexus-accent/10 transition-colors">
-                  <Phone size={20} />
-                </div>
-                <div>
-                  <div className="text-[10px] uppercase text-nexus-accent/50 mb-1">Phone</div>
-                  <a href="tel:+639272612719" className="hover:text-white transition-colors">+639272612719</a>
-                </div>
-              </div>
-              <div className="flex items-center gap-4 text-nexus-muted group">
-                <div className="w-12 h-12 rounded-xl bg-white/5 flex items-center justify-center text-nexus-accent group-hover:bg-nexus-accent/10 transition-colors">
                   <MapPin size={20} />
                 </div>
                 <div>
@@ -87,7 +78,7 @@ export function ConnectSection() {
             </div>
 
             <div className="mt-12 pt-8 border-t border-white/5 flex gap-4">
-              <ContactButton icon={<Linkedin />} label="LinkedIn" href="#" />
+              <ContactButton icon={<Linkedin />} label="LinkedIn" href="https://www.linkedin.com/in/ronmarquez/" />
               <ContactButton icon={<Github />} label="Github" href="#" />
             </div>
           </div>
