@@ -144,7 +144,7 @@ export function ServicesSection({ onNavigate }: ServicesSectionProps) {
               </div>
               <div className="p-2.5 rounded-xl bg-white dark:bg-zinc-800 border border-zinc-200/80 dark:border-zinc-700 text-center">
                 <div className="text-[10px] font-mono text-zinc-400 dark:text-zinc-500 uppercase tracking-wider">Advisory</div>
-                <div className="text-sm font-bold text-zinc-900 dark:text-white font-mono mt-0.5">₱2k / hr</div>
+                <div className="text-sm font-bold text-zinc-900 dark:text-white font-mono mt-0.5">₱1k / hr</div>
               </div>
             </div>
 

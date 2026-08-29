@@ -259,6 +259,40 @@ export function getRomFallbackReply(userQuery: string): string {
     );
   }
 
+  // Hardware / PC & Laptop Repair Services
+  if (
+    query.includes("repair") ||
+    query.includes("hardware") ||
+    query.includes("fix") ||
+    query.includes("screen") ||
+    query.includes("cleaning") ||
+    query.includes("reinstall") ||
+    query.includes("diagnos") ||
+    query.includes("thermal") ||
+    query.includes("ram") ||
+    query.includes("ssd") ||
+    query.includes("laptop") ||
+    query.includes("pc service") ||
+    query.includes("computer repair") ||
+    query.includes("phone repair")
+  ) {
+    return (
+      `**Yes, Ron offers professional PC, Laptop, and Hardware Maintenance & Repair Services!**\n\n` +
+      `Here is the complete service breakdown and rates:\n\n` +
+      `• 🔍 **Basic Diagnosis / Checkup**: **₱600** — Comprehensive hardware diagnostic screening and fault isolation.\n` +
+      `• 💽 **OS Reinstallation**: **₱1,200** — Clean operating system installation, driver setup, and initial configuration.\n` +
+      `• 🧹 **PC Cleaning / Dust Removal**: **₱800** — Deep interior de-dusting, fan cleaning, and fresh thermal paste reapplication.\n` +
+      `• ⚙️ **Hardware Installation & Upgrades**: **₱600** — Installation and testing of RAM, SSD, GPU, power supplies, or internal peripherals.\n` +
+      `• 💻 **Laptop Screen Replacement**: **₱2.5k – ₱8k+** *(depending on unit model)* — Display panel replacement and calibration for cracked or damaged screens.\n\n` +
+      `🚗 **On-Site Field Support Logistics (Travel Radius Tariff from Antipolo City)**:\n` +
+      `• **Tier 1 (0 – 5 km)**: **₱100 – ₱200** (Antipolo & Immediate Vicinity)\n` +
+      `• **Tier 2 (5 – 10 km)**: **₱200 – ₱350** (Surrounding Metro Areas)\n` +
+      `• **Tier 3 (10 – 20 km)**: **₱350 – ₱500** (Greater Rizal & Outer Metro)\n` +
+      `• **Tier 4 (20+ km)**: **₱500+** (Assessed per Location & Transit)\n\n` +
+      `To schedule a repair or on-site service, feel free to email Ron directly at [marquez.ronrons@gmail.com](mailto:marquez.ronrons@gmail.com)!`
+    );
+  }
+
   // Certifications / Certificates / Credentials
   if (
     query.includes("cert") ||

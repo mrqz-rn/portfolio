@@ -59,7 +59,13 @@ Your primary role is to answer inquiries from prospective clients, recruiters, h
    - Streamlines recruitment and onboarding from job posting and applications to new hire onboarding.
    - Tech: Vue.js, CodeIgniter, MySQL.
 
-8. **Asia CEO Forum Website**:
+9. **Nexus-IMS (Inventory Management System)**:
+   - Comprehensive multi-warehouse Inventory Management System developed for Trillion Residence.
+   - Features Gatekeeper Administrative Approval workflow for stock transfers, stock-in provisioning, and stock-out deductions with immutable audit logs.
+   - Includes real-time valuation dashboard, batch intake terminal with automated barcode generation, aging stock liabilities, consumption velocity analytics, and PDF/CSV reporting.
+   - Tech: Vue.js, Laravel, MySQL, Tailwind CSS, REST APIs.
+
+10. **Asia CEO Forum Website**:
    - Modernized website for the premier national business event series in the Philippines.
    - Tech: Next.js, NoSQL.
 
@@ -78,15 +84,101 @@ Your primary role is to answer inquiries from prospective clients, recruiters, h
 - **Cisco Networking Foundation: Fundamentals of Cisco Networking** (LinkedIn, 2022)
 - **Computer System Servicing NC II** (TESDA, 2019)
 
+### Engineering Services & Solutions:
+1. **Software & Systems Engineering (Custom Scope / Full-Cycle Development)**:
+   - **Enterprise Platform Architecture**: CRM, HRIS, Inventory Management (IMS), LMS, and Quality Management (QMS) systems.
+   - **Full-Stack Web & Mobile Engineering**: High-performance responsive web applications and cross-platform mobile apps (Vue.js, React, Next.js, Laravel, Node.js).
+   - **AI Pipeline & Workflow Integration**: LLM implementations, retrieval-augmented generation (RAG), conversational agents, and automated data pipelines.
+   - **Open-Source Customization & Adaptation**: Codebase auditing, module adaptation, and third-party API connectivity.
+   - **Embedded Systems & IoT Firmware**: Low-level microcontroller programming (Arduino, ESP32, AVR), telemetry sensor integration, and motor actuator control.
+   - **Circuit Schematic & Hardware Design**: Electrical circuit topology, power distribution, and functional prototyping.
+   - **Pricing**: Custom milestone-based quote or commission contract.
+
+2. **Technical Advisory & Architectural Consulting**:
+   - **Scope**: Systems architecture, database schema optimization, workflow automation, feasibility roadmapping, BOM component sourcing, and codebase audits.
+   - **Pricing**:
+     - **Discovery Session (20 mins)**: **Complimentary / ₱0**
+     - **Technical Advisory & Retainer**: **₱2,000 / hr**
+
+3. **Hardware / Mobile & PC Service**:
+   - **Basic diagnosis / checkup**: **₱600**
+   - **OS reinstall**: **₱1,200**
+   - **PC cleaning / dust removal**: **₱800**
+   - **Hardware installation (RAM, SSD, GPU, etc.)**: **₱600**
+   - **Laptop screen replacement**: **₱2.5k – ₱8k+** (depending on unit model)
+
+4. **On-Site Field Support Logistics (Travel Radius Tariff)**:
+   - **Tier 1 (0 – 5 km)** · Immediate Radius: **₱100 – ₱200**
+   - **Tier 2 (5 – 10 km)** · Urban Perimeter: **₱200 – ₱350**
+   - **Tier 3 (10 – 20 km)** · Extended Perimeter: **₱350 – ₱500**
+   - **Tier 4 (20+ km)** · Custom Dispatch: **₱500+** *(location dependent)*
+
 ### Guidelines for Responses:
 - Speak as **RoM**, Ron's virtual AI assistant. Be courteous, concise, professional, and enthusiastic.
-- When asked about specific projects like **PMCIE LMS**, **MobileCare Queuing**, **Basecamp TMS**, **SWFS**, **SPOTT**, **ESS-PORTAL**, **OBS**, explain their purpose, technologies, and Ron's exact contributions.
+- Use precise technical terminology when discussing architecture, engineering stacks, diagnostics, hardware repairs, and project roadmaps.
+- **Hardware & Repair Inquiries**: When a visitor or client asks if Ron offers **hardware services, PC/laptop repairs, troubleshooting, cleaning, OS reinstall, parts upgrades, or screen replacement**, ALWAYS confirm that **YES, Ron provides professional hardware diagnostics, PC/laptop repair & maintenance services, and on-site servicing**. Provide the exact rates and on-site dispatch fees.
+- When asked about specific projects like **PMCIE LMS**, **MobileCare Queuing**, **Basecamp TMS**, **Nexus-IMS**, **SWFS**, **SPOTT**, **ESS-PORTAL**, **OBS**, explain their purpose, technologies, and Ron's exact contributions.
+- When asked about services or pricing, provide exact rates clearly (e.g. Free 20m discovery, ₱2k/hr advisory, ₱600 diagnostics, ₱1,200 OS provisioning, ₱800 thermal overhaul, ₱600 hardware install, ₱2.5k–₱8k+ screen replacements, travel tariffs, custom enterprise quotes).
 - Format responses clearly with markdown formatting (bullet points, bold text, links).
 - When asked about hiring or contacting Ron, provide his email (marquez.ronrons@gmail.com) and LinkedIn link.
 `;
 
 function generateKnowledgeReply(lastUserMessage: string): string {
   const query = (lastUserMessage || "").toLowerCase().trim();
+
+  // Hardware / PC & Laptop Repair Services
+  if (
+    query.includes("repair") ||
+    query.includes("hardware") ||
+    query.includes("fix") ||
+    query.includes("screen") ||
+    query.includes("cleaning") ||
+    query.includes("reinstall") ||
+    query.includes("diagnos") ||
+    query.includes("thermal") ||
+    query.includes("ram") ||
+    query.includes("ssd") ||
+    query.includes("laptop") ||
+    query.includes("pc service") ||
+    query.includes("computer repair") ||
+    query.includes("phone repair")
+  ) {
+    return (
+      `**Yes, Ron offers professional PC, Laptop, and Hardware Maintenance & Repair Services!**\n\n` +
+      `Here is the complete service breakdown and rates:\n\n` +
+      `• 🔍 **Basic Diagnosis / Checkup**: **₱600** — Comprehensive hardware diagnostic screening and fault isolation.\n` +
+      `• 💽 **OS Reinstallation**: **₱1,200** — Clean operating system installation, driver setup, and initial configuration.\n` +
+      `• 🧹 **PC Cleaning / Dust Removal**: **₱800** — Deep interior de-dusting, fan cleaning, and fresh thermal paste reapplication.\n` +
+      `• ⚙️ **Hardware Installation & Upgrades**: **₱600** — Installation and testing of RAM, SSD, GPU, power supplies, or internal peripherals.\n` +
+      `• 💻 **Laptop Screen Replacement**: **₱2.5k – ₱8k+** *(depending on unit model)* — Display panel replacement and calibration for cracked or damaged screens.\n\n` +
+      `🚗 **On-Site Field Support Logistics (Travel Radius Tariff from Antipolo City)**:\n` +
+      `• **Tier 1 (0 – 5 km)**: **₱100 – ₱200** (Antipolo & Immediate Vicinity)\n` +
+      `• **Tier 2 (5 – 10 km)**: **₱200 – ₱350** (Surrounding Metro Areas)\n` +
+      `• **Tier 3 (10 – 20 km)**: **₱350 – ₱500** (Greater Rizal & Outer Metro)\n` +
+      `• **Tier 4 (20+ km)**: **₱500+** (Assessed per Location & Transit)\n\n` +
+      `To schedule a repair or on-site service, feel free to email Ron directly at [marquez.ronrons@gmail.com](mailto:marquez.ronrons@gmail.com)!`
+    );
+  }
+
+  // Nexus-IMS (Trillion Residence)
+  if (
+    query.includes("nexus") ||
+    query.includes("ims") ||
+    query.includes("trillion") ||
+    query.includes("inventory management") ||
+    query.includes("inventory system")
+  ) {
+    return (
+      `**Nexus-IMS (Inventory Management System)** is an enterprise multi-warehouse inventory and asset tracking platform built for Trillion Residence:\n\n` +
+      `• **Purpose**: Centralizes property asset tracking, stock movement monitoring, gatekeeper approvals, and real-time inventory valuation.\n` +
+      `• **Ron's Key Contributions**:\n` +
+      `  - Architected and engineered the full-stack Inventory Management System with multi-hub warehouse management.\n` +
+      `  - Built the **Gatekeeper Approval Workflow** for administrative review and confirmation of stock transfers, stock-in provisioning, and stock-out deductions.\n` +
+      `  - Developed the **Batch Intake Terminal** with automated barcode generation and instant SKU manifest valuation.\n` +
+      `  - Built real-time **Analytics & Valuation Dashboards** with aging stock liability calculations, consumption velocity tracking, and PDF/CSV reporting.\n` +
+      `• **Tech Stack**: Vue.js, Laravel, MySQL, Tailwind CSS, REST APIs.`
+    );
+  }
 
   // SWFS
   if (
@@ -312,10 +404,52 @@ function generateKnowledgeReply(lastUserMessage: string): string {
     );
   }
 
+  // Services & Pricing offered
+  if (
+    query.includes("service") ||
+    query.includes("offer") ||
+    query.includes("price") ||
+    query.includes("pricing") ||
+    query.includes("rate") ||
+    query.includes("cost") ||
+    query.includes("fee") ||
+    query.includes("commission") ||
+    query.includes("consult") ||
+    query.includes("advisory") ||
+    query.includes("home service") ||
+    query.includes("home-service")
+  ) {
+    return (
+      `Here is an overview of Ron's engineering and technical services:\n\n` +
+      `💻 **1. Software & Systems Engineering (Custom Scope / Commission)**\n` +
+      `• **Enterprise Platform Architecture**: Custom CRM, HRIS, Inventory (IMS), LMS, and QMS suites.\n` +
+      `• **Full-Stack Web & Mobile Applications** (Vue.js, React, Next.js, Laravel, Node.js, REST/WebSocket APIs).\n` +
+      `• **AI Pipeline & Automated Workflow Integration** (LLM, RAG, smart document automation).\n` +
+      `• **Open-Source System Adaptation & API Bridging**.\n` +
+      `• **Embedded Systems & IoT Firmware** (Arduino, ESP32, multi-sensor telemetry, circuit wiring).\n\n` +
+      `🤝 **2. Technical Advisory & Consulting**\n` +
+      `• **Discovery Session (20 mins)**: **Complimentary / ₱0**\n` +
+      `• **Technical Advisory & Retainer**: **₱2,000 / hr**\n` +
+      `• *Covers systems architecture blueprinting, technical feasibility, project roadmapping, BOM sourcing, and PR/codebase audits.*\n\n` +
+      `🔧 **3. Hardware / Mobile & PC Service & Repair**\n` +
+      `• **Basic diagnosis / checkup**: **₱600**\n` +
+      `• **OS reinstall**: **₱1,200**\n` +
+      `• **PC cleaning / dust removal**: **₱800**\n` +
+      `• **Hardware installation (RAM, SSD, GPU, etc.)**: **₱600**\n` +
+      `• **Laptop screen replacement**: **₱2.5k – ₱8k+** *(depending on unit model)*\n\n` +
+      `📍 **4. On-Site Field Support Logistics (Travel Radius Tariff from Antipolo City)**\n` +
+      `• **Tier 1 (0 – 5 km)** · Immediate Radius: **₱100 – ₱200**\n` +
+      `• **Tier 2 (5 – 10 km)** · Urban Perimeter: **₱200 – ₱350**\n` +
+      `• **Tier 3 (10 – 20 km)** · Extended Perimeter: **₱350 – ₱500**\n` +
+      `• **Tier 4 (20+ km)** · Custom Dispatch: **₱500+** *(location dependent)*\n\n` +
+      `Feel free to reach out directly at [marquez.ronrons@gmail.com](mailto:marquez.ronrons@gmail.com) to book a service or request a quote!`
+    );
+  }
+
   return (
     `**Ron Marquez** is a Systems Developer based in Antipolo City, Philippines.\n\n` +
-    `He specializes in architecting enterprise systems, scalable web applications, and automated digital workflows. With over 3+ years of experience across Power Mac Center, WMedLaw, SL Agritech, and Volenday, he builds software solutions that solve real business problems.\n\n` +
-    `Feel free to ask me about his **experience**, **technical stack**, **projects (like SWFS, Basecamp TMS, SPOTT)**, or how to **get in touch** at [marquez.ronrons@gmail.com](mailto:marquez.ronrons@gmail.com)!`
+    `He specializes in architecting enterprise systems, scalable web applications, automated digital workflows, and professional PC/laptop hardware repair services.\n\n` +
+    `Feel free to ask me about his **experience**, **technical stack**, **projects (like SWFS, Basecamp TMS, Nexus-IMS)**, **hardware repair services & rates**, or how to **get in touch** at [marquez.ronrons@gmail.com](mailto:marquez.ronrons@gmail.com)!`
   );
 }
 
