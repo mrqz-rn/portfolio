@@ -1,37 +1,93 @@
 export const jobs = [
-    {id: 0, position: 'Systems Developer', company: 'Power Mac Center', start: 'Aug 2025', end: 'Present',
-        icon: '/icons/pmc.png', color: '#db0099ff', location: 'Pasig City',
+    {
+        id: 0, 
+        position: 'Systems Developer', 
+        company: 'Power Mac Center', 
+        start: 'Aug 2025', 
+        end: 'Present',
+        icon: '/icons/pmc.png', 
+        monogram: 'PMC',
+        color: '#db0099ff', 
+        location: 'Pasig', 
+        employmentType: 'Full-Time', 
+        workSetup: 'Hybrid',
         summary: "I handle the end-to-end development of internal systems from analysis and coding to implementation and support. I collaborate with teams to build scalable, integrated solutions, maintain databases, and create technical documentation while supporting innovation through research and prototyping.",
         details: [
             "Handled the full system development lifecycle: analysis, design, development, testing, and implementation of internal enterprise applications.",
             "Designed and maintained system databases and ensured seamless integration between internal modules and external systems.",
             "Created system documentation, user manuals, and support materials to guide users and ensure system maintainability.",
             "Collaborated with cross-functional teams to gather requirements and deliver scalable, efficient system solutions.",
-            "Researched and prototyped new technologies to support innovation and process improvements within the organization.",
-        ]   
+            "Researched and prototyped new technologies to support innovation and process improvements within the organization."
+        ],
+        skills: ['Enterprise Systems', 'Database Design', 'System Integration', 'Technical Documentation', 'Full Lifecycle Development']
     },
-    {id: 1, position: 'Programmer', company: 'SL Agritech Corporation', start: 'July 2023', end: 'June 2025',
-        icon: '/icons/Slac.png', color: '#dbd700ff',location: 'Makati City',
+    {
+        id: 1, 
+        position: 'Website Support Specialist', 
+        company: 'WMedLaw', 
+        start: 'July 2026', 
+        end: 'Present',
+        link: 'https://wmedlaw.com/', 
+        icon: '/icons/wmedlaw.png', 
+        monogram: 'WM',
+        color: '#0048feff', 
+        location: 'Houston, Texas', 
+        employmentType: 'Part-Time', 
+        workSetup: 'Remote',
+        summary: "I manage, maintain, and optimize the firm's website and digital assets to ensure peak performance, accessibility, and high security. I perform routine updates, troubleshoot web issues, and collaborate to deliver modern, responsive web experiences.",
+        details: [
+            "Maintain and monitor website health, ensuring fast load speeds, optimal uptime, and seamless responsive design across all devices.",
+            "Diagnose and resolve frontend, CMS, and plugin issues while applying regular security patches and performance optimizations.",
+            "Implement content, layout, and UI/UX updates to align with business objectives and enhance client engagement.",
+            "Collaborate with team members to ensure web compliance, accessibility standards, and SEO best practices.",
+            "Provide technical website support, troubleshooting, and continuous improvement for digital operations."
+        ],
+        skills: ['Website Management', 'WordPress / CMS', 'UI/UX Design', 'Performance Optimization', 'SEO & Analytics']
+    },
+    {
+        id: 2, 
+        position: 'Programmer', 
+        company: 'SL Agritech Corporation', 
+        start: 'July 2023', 
+        end: 'June 2025',
+        link: 'https://www.sterlingpaper.com/',
+        icon: '/icons/Slac.png', 
+        monogram: 'SLA',
+        color: '#dbd700ff',
+        location: 'Makati', 
+        employmentType: 'Full-Time', 
+        workSetup: 'On-Site',
         summary: "I developed and maintained enterprise systems, led new internal application builds, and worked closely with teams like HR and Accounting to deliver optimized digital workflows. I provided technical support and participated in Agile sprints using Scrum and Kanban to ensure timely, high-quality releases.",
         details: [
             'Designed, developed, and maintained enterprise software applications, including enhancements to legacy systems.',
             'Led the end-to-end development of new internal applications to streamline company operations and workflows.',
             'Collaborate with cross-functional teams (HR, Accounting, etc.) to identify system requirements, resolve issues, and optimize user experience.',
             'Delivered technical support and system troubleshooting to ensure business continuity and operational efficiency.',
-            'Actively contributed to Agile development cycles, leveraging Scrum and Kanban methodologies to ensure timely and high-quality delivery.',
-
-        ]    
+            'Actively contributed to Agile development cycles, leveraging Scrum and Kanban methodologies to ensure timely and high-quality delivery.'
+        ],
+        skills: ['Software Development', 'Agile / Scrum', 'Internal Applications', 'System Troubleshooting', 'Cross-Functional Collaboration']
     },
-    {id: 2, position: 'AHAmatic Engineer Intern', company: 'Volenday Philippines Inc.', start: 'Feb 2023', end: 'April 2023',
-        icon: '/icons/Volenday.png', color: '#b80000ff', location: 'Makati City',
+    {
+        id: 3, 
+        position: 'AHAmatic Engineer', 
+        company: 'Volenday Philippines Inc.', 
+        start: 'Feb 2023', 
+        end: 'April 2023',
+        link: 'https://www.volenday.com/',
+        icon: '/icons/Volenday.png', 
+        monogram: 'VP',
+        color: '#b80000ff', 
+        location: 'Makati', 
+        employmentType: 'OJT', 
+        workSetup: 'Remote',
         summary: "I built responsive web applications, integrated APIs for dynamic content, and participated in Agile sprints contributing to development cycles and real-time system improvements.",
         details: [
             'Developed well-structured, responsive web applications optimized for seamless user experience across desktop and mobile devices.',
             'Integrated APIs and database-driven content, enabling efficient data retrieval and real-time updates.',
-            'Actively participated in team meetings and sprint discussions to track progress, provide updates, and contribute to problem-solving and project improvements.',
-        ]    
+            'Actively participated in team meetings and sprint discussions to track progress, provide updates, and contribute to problem-solving and project improvements.'
+        ],
+        skills: ['Web Applications', 'API Integration', 'Responsive Design', 'Agile Sprints', 'Database Driven Content']
     },
-
 ];
 
 export const education = [

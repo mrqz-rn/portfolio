@@ -54,10 +54,10 @@ export function Modal({ isOpen, onClose, item }: ModalProps) {
             <div className="p-6 md:p-8 border-b border-white/5 flex justify-between items-center bg-white/5 z-10">
             <div>
               <div className="flex items-center gap-4">
-                  <div className="w-12 h-12 rounded-xl bg-nexus-accent/10 flex items-center justify-center text-nexus-accent">
+                  <div className="w-12 h-12 rounded-xl bg-nexus-accent/10 flex items-center justify-center text-nexus-accent overflow-hidden">
                     {item.type === 'job' ? 
-                    <img src={item.icon} className="w-12 h-12 rounded-xl" alt="Company Logo" />
-                    : <Layers size={24} />
+                      (item.icon ? <img src={item.icon} className="w-12 h-12 rounded-xl object-contain p-1" alt="Company Logo" /> : <Briefcase size={24} />)
+                      : <Layers size={24} />
                     }
                   </div>
                   <div>
@@ -66,15 +66,40 @@ export function Modal({ isOpen, onClose, item }: ModalProps) {
                   </div>
                 </div>
                   {item.type === 'job' ? 
-                <div className="flex mt-4">
-                  <div className="flex items-center gap-3 text-sm">
+                <div className="flex flex-wrap items-center gap-x-4 gap-y-2 mt-4">
+                  <div className="flex items-center gap-2 text-sm">
                     <Calendar size={16} className="text-nexus-muted" />
                     <span className="text-nexus-muted">{item.start} — {item.end}</span>
                   </div>
-                  <div className="flex items-center gap-3 text-sm mx-6">
-                    <MapPin size={16} className="text-nexus-muted" />
-                    <span className="text-nexus-muted">{item.location}</span>
-                  </div>
+                  {item.location && (
+                    <div className="flex items-center gap-2 text-sm">
+                      <MapPin size={16} className="text-nexus-muted" />
+                      <span className="text-nexus-muted">{item.location}</span>
+                    </div>
+                  )}
+                  {item.employmentType && (
+                    <span className="text-[11px] font-mono bg-white/5 px-2.5 py-0.5 rounded-md text-nexus-muted border border-white/10">
+                      {item.employmentType}
+                    </span>
+                  )}
+                  {item.workSetup && (
+                    <span className="text-[11px] font-mono bg-nexus-accent/10 px-2.5 py-0.5 rounded-md text-nexus-accent border border-nexus-accent/20">
+                      {item.workSetup}
+                    </span>
+                  )}
+                  {item.link && (
+                    <div className="flex items-center gap-2 text-sm">
+                      <ExternalLink size={16} className="text-nexus-accent" />
+                      <a 
+                        href={item.link} 
+                        target="_blank" 
+                        rel="noopener noreferrer" 
+                        className="text-nexus-accent hover:underline font-mono text-xs"
+                      >
+                        {item.link.replace(/^https?:\/\/(www\.)?/, '').replace(/\/$/, '')}
+                      </a>
+                    </div>
+                  )}
                 </div>
                  : 
                  <div className="flex flex-wrap gap-2 mt-4">
@@ -198,11 +223,16 @@ export function Modal({ isOpen, onClose, item }: ModalProps) {
             {/* Footer */}
             <div className="p-6 border-t border-white/5 bg-white/5 flex justify-between items-center z-10">
               <div className="flex items-center gap-4">
-                {/* {item.type === 'project' && (
-                  <a href="#" className="flex items-center gap-2 text-nexus-accent font-mono text-xs hover:underline">
-                    VIEW_LIVE_DEMO <ExternalLink size={14} />
+                {item.link && (
+                  <a 
+                    href={item.link} 
+                    target="_blank" 
+                    rel="noopener noreferrer" 
+                    className="flex items-center gap-2 text-nexus-accent font-mono text-xs hover:underline"
+                  >
+                    VISIT_WEBSITE <ExternalLink size={14} />
                   </a>
-                )} */}
+                )}
               </div>
               <button 
                 onClick={onClose}
