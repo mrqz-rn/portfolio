@@ -1,7 +1,7 @@
-import { skills, works, certs, jobs, projects } from "../data";
+import { skills, certs, jobs } from "../data";
 
 /**
- * Preloads critical images and icons on idle so there is zero delay when viewing sections or opening modals.
+ * Preloads critical icons on idle so there is zero delay when viewing sections.
  */
 export function preloadAssets() {
   const imagesToPreload: string[] = [];
@@ -15,7 +15,7 @@ export function preloadAssets() {
     });
   });
 
-  // Cert icons
+  // Cert icons (SVGs)
   certs.forEach((cert) => {
     if (cert.icon) {
       imagesToPreload.push(cert.icon);
@@ -29,23 +29,10 @@ export function preloadAssets() {
     }
   });
 
-  // Primary project thumbnails
-  works.forEach((work) => {
-    if (work.images && work.images.length > 0) {
-      imagesToPreload.push(work.images[0]);
-    }
-  });
-
-  projects.forEach((proj) => {
-    if (proj.images && proj.images.length > 0) {
-      imagesToPreload.push(proj.images[0]);
-    }
-  });
-
-  // Preload in batches during idle time
+  // Preload in gentle batches during idle time
   const preloadNext = () => {
     if (imagesToPreload.length === 0) return;
-    const batch = imagesToPreload.splice(0, 4);
+    const batch = imagesToPreload.splice(0, 6);
     batch.forEach((src) => {
       const img = new Image();
       img.src = src;
@@ -54,18 +41,22 @@ export function preloadAssets() {
 
     if (imagesToPreload.length > 0) {
       if ("requestIdleCallback" in window) {
-        window.requestIdleCallback(preloadNext, { timeout: 1000 });
+        window.requestIdleCallback(preloadNext, { timeout: 2000 });
       } else {
-        setTimeout(preloadNext, 200);
+        setTimeout(preloadNext, 400);
       }
     }
   };
 
   if (typeof window !== "undefined") {
-    if ("requestIdleCallback" in window) {
-      window.requestIdleCallback(preloadNext, { timeout: 1500 });
+    const win = window as any;
+    if (typeof win.requestIdleCallback === "function") {
+      win.requestIdleCallback(preloadNext, { timeout: 3000 });
     } else {
-      setTimeout(preloadNext, 500);
+      window.addEventListener("load", () => {
+        setTimeout(preloadNext, 1000);
+      });
     }
   }
 }
+

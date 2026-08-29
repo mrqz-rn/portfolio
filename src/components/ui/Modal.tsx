@@ -134,6 +134,7 @@ export function Modal({ isOpen, onClose, item }: ModalProps) {
 
               <button 
                 onClick={onClose}
+                aria-label="Close modal"
                 className="p-2 hover:bg-zinc-200/80 dark:hover:bg-zinc-800 rounded-full transition-colors text-zinc-500 dark:text-zinc-400 hover:text-zinc-900 dark:hover:text-white cursor-pointer"
                 title="Close"
               >
@@ -172,12 +173,14 @@ export function Modal({ isOpen, onClose, item }: ModalProps) {
                       <>
                         <button 
                           onClick={(e) => { e.stopPropagation(); prevImage(); }}
+                          aria-label="Previous image"
                           className="absolute left-4 top-1/2 -translate-y-1/2 p-2 rounded-full bg-black/60 text-white opacity-0 group-hover:opacity-100 transition-opacity hover:bg-black cursor-pointer z-20"
                         >
                           <ChevronLeft size={20} />
                         </button>
                         <button 
                           onClick={(e) => { e.stopPropagation(); nextImage(); }}
+                          aria-label="Next image"
                           className="absolute right-4 top-1/2 -translate-y-1/2 p-2 rounded-full bg-black/60 text-white opacity-0 group-hover:opacity-100 transition-opacity hover:bg-black cursor-pointer z-20"
                         >
                           <ChevronRight size={20} />

@@ -1,0 +1,25 @@
+# Ron Marquez - Systems Developer Portfolio
+
+> Ron Marquez is a Systems Developer specializing in scalable enterprise systems, web & mobile applications, and digital business workflows.
+
+## Profile Summary
+- **Role**: Systems Developer / Software Engineer
+- **Experience**: 3+ years in enterprise applications, database architecture, and full-stack development.
+- **Location**: Antipolo City / Metro Manila, Philippines
+- **Website**: https://www.ronmarquez.tech/
+- **GitHub**: https://github.com/mrqz-rn
+- **LinkedIn**: https://www.linkedin.com/in/ronmarquez/
+- **Email**: marquez.ronrons@gmail.com
+
+## Core Technical Skills
+- **Languages**: TypeScript, JavaScript, PHP, Python, Java, C++, HTML5, CSS3 / Tailwind CSS
+- **Frameworks**: Vue.js, React, Next.js, Laravel, CodeIgniter, Django, Flutter, Ionic, Express
+- **Databases & Tools**: MySQL, MariaDB, Docker, Git, Prometheus, Grafana, Postman, AWS, Firebase
+- **AI Integrations**: Gemini, Claude, OpenAI APIs, automated document processing, smart chatbots
+
+## Key Projects
+- **PMCIE LMS**: Web-based Learning Management System for PMC Institute for Excellence with automated batch scheduling, curriculum tracking, and analytics dashboards.
+- **MobileCare Queuing**: Real-time queue management system for Apple Authorized Service Provider (AASP) featuring kiosk intake, live dispatching, and WebSockets.
+- **Basecamp TMS**: Training Monitoring System streamlining scheduling, evaluation, and role-based training records.
+- **Nexus-IMS**: Enterprise Inventory Management System with multi-warehouse tracking and gatekeeper approval workflows.
+- **SPOTT**: Mobile Daily Time Record (DTR) and attendance tracking application built with Ionic, Vue, and REST APIs.

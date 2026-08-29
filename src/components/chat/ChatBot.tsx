@@ -226,14 +226,16 @@ export function ChatBot() {
               <div className="flex items-center gap-1">
                 <button
                   onClick={clearChat}
-                  className="p-1.5 text-zinc-400 hover:text-zinc-700 dark:hover:text-zinc-200 hover:bg-zinc-200/60 dark:hover:bg-zinc-800 rounded-lg transition-colors cursor-pointer"
+                  aria-label="Reset conversation"
+                  className="p-1.5 text-zinc-500 hover:text-zinc-700 dark:hover:text-zinc-200 hover:bg-zinc-200/60 dark:hover:bg-zinc-800 rounded-lg transition-colors cursor-pointer"
                   title="Reset conversation"
                 >
                   <RotateCcw size={15} />
                 </button>
                 <button
                   onClick={() => setIsOpen(false)}
-                  className="p-1.5 text-zinc-400 hover:text-zinc-700 dark:hover:text-zinc-200 hover:bg-zinc-200/60 dark:hover:bg-zinc-800 rounded-lg transition-colors cursor-pointer"
+                  aria-label="Close chat"
+                  className="p-1.5 text-zinc-500 hover:text-zinc-700 dark:hover:text-zinc-200 hover:bg-zinc-200/60 dark:hover:bg-zinc-800 rounded-lg transition-colors cursor-pointer"
                   title="Close chat"
                 >
                   <X size={18} />
@@ -343,6 +345,7 @@ export function ChatBot() {
               <button
                 type="submit"
                 disabled={!input.trim() || isLoading}
+                aria-label="Send Message"
                 className="p-2.5 bg-zinc-900 dark:bg-white text-white dark:text-zinc-900 rounded-xl hover:bg-black dark:hover:bg-zinc-100 disabled:opacity-40 disabled:cursor-not-allowed transition-all cursor-pointer shadow-xs"
                 title="Send Message"
               >

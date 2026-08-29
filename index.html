@@ -12,6 +12,13 @@
     <meta name="author" content="Ron Marquez" />
     <meta name="robots" content="index, follow" />
     <meta name="theme-color" content="#f5f7ff" />
+    <link rel="canonical" href="https://www.ronmarquez.tech/" />
+
+    <!-- Google Fonts Preconnect & Stylesheet -->
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;500;600&display=swap" />
+
     <script>
       (function() {
         const theme = localStorage.getItem('theme');
@@ -24,11 +31,12 @@
     </script>
 
     <!-- Favicon -->
-    <link rel="icon" type="image/jpeg" href="/icons/siteicon.png" />
+    <link rel="icon" type="image/png" href="/icons/siteicon.png" />
     <link rel="apple-touch-icon" href="/icons/siteicon.png" />
 
     <!-- Open Graph / Facebook / LinkedIn -->
     <meta property="og:type" content="website" />
+    <meta property="og:url" content="https://www.ronmarquez.tech/" />
     <meta property="og:title" content="Ron Marquez | Systems Developer" />
     <meta property="og:description" content="Portfolio of Ron Marquez, a Systems Developer specializing in scalable enterprise systems, web & mobile applications, and digital business workflows." />
     <meta property="og:image" content="/icons/siteicon.png" />
@@ -36,6 +44,7 @@
 
     <!-- Twitter / X -->
     <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:url" content="https://www.ronmarquez.tech/" />
     <meta name="twitter:title" content="Ron Marquez | Systems Developer" />
     <meta name="twitter:description" content="Portfolio of Ron Marquez, a Systems Developer specializing in scalable enterprise systems, web & mobile applications, and digital business workflows." />
     <meta name="twitter:image" content="/icons/siteicon.png" />
@@ -48,7 +57,7 @@
         "name": "Ron Marquez",
         "jobTitle": "Systems Developer",
         "description": "Systems Developer specializing in scalable enterprise systems, web & mobile applications, and digital business workflows.",
-        "url": "https://www.linkedin.com/in/ronmarquez/",
+        "url": "https://www.ronmarquez.tech/",
         "sameAs": [
           "https://www.linkedin.com/in/ronmarquez/",
           "https://github.com/mrqz-rn"
@@ -66,14 +75,27 @@
       }
     </script>
 
-    <!-- Google tag (gtag.js) -->
-    <script async src="https://www.googletagmanager.com/gtag/js?id=G-JFGS34HWG5"></script>
+    <!-- Google tag (gtag.js) - Loaded asynchronously on idle to prevent render blocking -->
     <script>
       window.dataLayer = window.dataLayer || [];
       function gtag(){dataLayer.push(arguments);}
       gtag('js', new Date());
 
-      gtag('config', 'G-JFGS34HWG5');
+      function initGTM() {
+        const script = document.createElement('script');
+        script.async = true;
+        script.src = 'https://www.googletagmanager.com/gtag/js?id=G-JFGS34HWG5';
+        document.head.appendChild(script);
+        gtag('config', 'G-JFGS34HWG5');
+      }
+
+      if (window.requestIdleCallback) {
+        window.requestIdleCallback(initGTM, { timeout: 2000 });
+      } else {
+        window.addEventListener('load', function() {
+          setTimeout(initGTM, 1000);
+        });
+      }
     </script>
   </head>
   <body>

@@ -12,10 +12,12 @@ export function NavIcon({ icon, active, onClick, label }: NavIconProps) {
   return (
     <button 
       onClick={onClick}
+      aria-label={label}
+      title={label}
       className={`relative group p-2.5 rounded-xl transition-all duration-200 cursor-pointer ${
         active 
           ? 'bg-zinc-100 dark:bg-zinc-800 text-zinc-900 dark:text-white border border-zinc-200 dark:border-zinc-700 shadow-xs' 
-          : 'text-zinc-400 dark:text-zinc-500 hover:text-zinc-900 dark:hover:text-white hover:bg-zinc-100/60 dark:hover:bg-zinc-800/60'
+          : 'text-zinc-500 dark:text-zinc-400 hover:text-zinc-900 dark:hover:text-white hover:bg-zinc-100/60 dark:hover:bg-zinc-800/60'
       }`}
     >
       {icon}
@@ -33,3 +35,4 @@ export function NavIcon({ icon, active, onClick, label }: NavIconProps) {
     </button>
   );
 }
+

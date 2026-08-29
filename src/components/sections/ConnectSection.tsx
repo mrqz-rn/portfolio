@@ -102,7 +102,7 @@ export function ConnectSection() {
                     <Mail size={18} />
                   </div>
                   <div>
-                    <div className="text-[10px] uppercase text-zinc-400 dark:text-zinc-500 font-semibold mb-0.5">Direct Email</div>
+                    <div className="text-[10px] uppercase text-zinc-500 dark:text-zinc-400 font-semibold mb-0.5">Direct Email</div>
                     <a 
                       href="mailto:marquez.ronrons@gmail.com" 
                       className="text-zinc-900 dark:text-white hover:text-black dark:hover:text-blue-400 font-semibold transition-colors font-mono text-xs md:text-sm"
@@ -114,6 +114,7 @@ export function ConnectSection() {
                 <button
                   onClick={copyEmail}
                   type="button"
+                  aria-label="Copy email address"
                   className="p-2 rounded-lg bg-white dark:bg-zinc-800 border border-zinc-200 dark:border-zinc-700 hover:bg-zinc-100 dark:hover:bg-zinc-700 text-zinc-600 dark:text-zinc-300 hover:text-zinc-900 dark:hover:text-white transition-all text-xs cursor-pointer"
                   title="Copy email address"
                 >
@@ -126,7 +127,7 @@ export function ConnectSection() {
                   <MapPin size={18} />
                 </div>
                 <div>
-                  <div className="text-[10px] uppercase text-zinc-400 dark:text-zinc-500 font-semibold mb-0.5">Location</div>
+                  <div className="text-[10px] uppercase text-zinc-500 dark:text-zinc-400 font-semibold mb-0.5">Location</div>
                   <div className="text-zinc-900 dark:text-white font-medium text-xs md:text-sm">Antipolo City, Philippines</div>
                 </div>
               </div>
@@ -177,7 +178,7 @@ export function ConnectSection() {
 
           <form ref={form} onSubmit={sendEmail} className="space-y-5">
             <div className="space-y-2">
-              <label className="text-xs font-mono text-zinc-600 dark:text-zinc-400 font-medium">Your Name</label>
+              <label className="text-xs font-mono text-zinc-700 dark:text-zinc-300 font-semibold">Your Name</label>
               <input
                 name="name"
                 value={formData.name}
@@ -189,7 +190,7 @@ export function ConnectSection() {
             </div>
 
             <div className="space-y-2">
-              <label className="text-xs font-mono text-zinc-600 dark:text-zinc-400 font-medium">Email Address</label>
+              <label className="text-xs font-mono text-zinc-700 dark:text-zinc-300 font-semibold">Email Address</label>
               <input
                 name="email"
                 value={formData.email}
@@ -202,7 +203,7 @@ export function ConnectSection() {
             </div>
 
             <div className="space-y-2">
-              <label className="text-xs font-mono text-zinc-600 dark:text-zinc-400 font-medium">Message</label>
+              <label className="text-xs font-mono text-zinc-700 dark:text-zinc-300 font-semibold">Message</label>
               <textarea
                 name="message"
                 value={formData.message}

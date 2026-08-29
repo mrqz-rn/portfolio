@@ -5,7 +5,7 @@ export const jobs = [
         company: 'Power Mac Center', 
         start: 'Aug 2025', 
         end: 'Present',
-        icon: '/icons/pmc.png', 
+        icon: '/icons/pmc.webp', 
         monogram: 'PMC',
         color: '#db0099ff', 
         location: 'Pasig', 
@@ -28,7 +28,7 @@ export const jobs = [
     //     start: 'July 2026', 
     //     end: 'Present',
     //     link: 'https://wmedlaw.com/', 
-    //     icon: '/icons/wmedlaw.png', 
+    //     icon: '/icons/wmedlaw.webp', 
     //     monogram: 'WM',
     //     color: '#0048feff', 
     //     location: 'Houston, Texas', 
@@ -51,7 +51,7 @@ export const jobs = [
         start: 'July 2023', 
         end: 'June 2025',
         link: 'https://www.sterlingpaper.com/',
-        icon: '/icons/Slac.png', 
+        icon: '/icons/Slac.webp', 
         monogram: 'SLA',
         color: '#dbd700ff',
         location: 'Makati', 
@@ -74,7 +74,7 @@ export const jobs = [
         start: 'Feb 2023', 
         end: 'April 2023',
         link: 'https://www.volenday.com/',
-        icon: '/icons/Volenday.png', 
+        icon: '/icons/Volenday.webp', 
         monogram: 'VP',
         color: '#b80000ff', 
         location: 'Makati', 
@@ -92,7 +92,7 @@ export const jobs = [
 
 export const education = [
     {id: 1, degree: 'Bachelor of Science in Computer Engineering', location: "Boni, Mandaluyong City",
-    school: 'Rizal Technological University', start: '2019', end: '2023', icon: '/icons/rtu.png', color: '#0033dbff',
+    school: 'Rizal Technological University', start: '2019', end: '2023', icon: '/icons/rtu.webp', color: '#0033dbff',
         details: [
             "Dean's Lister 4rd Year First Semester", 
             "Dean's Lister 3rd Year Second Semester",
@@ -101,7 +101,7 @@ export const education = [
         ]    
     },
     {id: 2, degree: 'TVL - Computer Programming', location: "Antipolo City",
-    school: 'Antipolo City Senrior High School', start: '2017', end: '2019',  icon: '/icons/acshs.png', color: '#00a838ff',
+    school: 'Antipolo City Senrior High School', start: '2017', end: '2019',  icon: '/icons/acshs.webp', color: '#00a838ff',
         details: [
             'Member of Student Academic Council', 
             'Computer Programming Strand Representative',
@@ -116,7 +116,7 @@ export const certs = [
       title: 'AWS Cloud Practitioner Essentials', 
       issuer: 'AWS', 
       issued: '2026', 
-      icon: '/tech/aws.png',
+      icon: '/tech/aws.webp',
       details: ['']   
     },
     {
@@ -124,7 +124,7 @@ export const certs = [
       title: 'Lean Six Sigma White Belt', 
       issuer: 'Council for Six Sigma Certification', 
       issued: '2026', 
-      icon: '/certs/cssc.png',
+      icon: '/certs/cssc.svg',
       details: ['']   
     },
     {
@@ -132,7 +132,7 @@ export const certs = [
       title: 'Atlassian Agile Project Management Professional', 
       issuer: 'Atlassian', 
       issued: '2025', 
-      icon: '/certs/atlassian.png',
+      icon: '/certs/atlassian.svg',
       details: ['']   
     },
     {
@@ -140,7 +140,7 @@ export const certs = [
       title: 'Technical Support Fundamentals', 
       issuer: 'Google/Coursera', 
       issued: '2022', 
-      icon: '/certs/coursera.png',
+      icon: '/certs/coursera.svg',
       details: ['']   
     },
     {
@@ -148,7 +148,7 @@ export const certs = [
       title: 'IP Addressing and Subnetting', 
       issuer: 'Udemy', 
       issued: '2022', 
-      icon: '/certs/udemy.png',
+      icon: '/certs/udemy.svg',
       details: ['']   
     },
     {
@@ -164,7 +164,7 @@ export const certs = [
       title: 'Computer System Servicing NC II', 
       issuer: 'TESDA', 
       issued: '2019', 
-      icon: '/certs/tesda.png',
+      icon: '/certs/tesda.svg',
       details: ['']   
     },
 ];
@@ -185,7 +185,7 @@ export const works = [
       "Developed integrated calendar scheduling and trainee management modules allowing instructors and admins to manage class sessions, monitor attendance, and trigger automated email notifications.",
       "Designed a granular role-based access control (RBAC) structure ensuring secure permissions for System Administrators, Trainers, Trainees, and Auditors across system maintenance tools."
     ],
-    images: ['works/lms/img1.png', 'works/lms/img2.png']
+    images: ['works/lms/img1.webp', 'works/lms/img2.webp']
   },
   {
     id: 7,
@@ -202,7 +202,7 @@ export const works = [
       "Built a centralized technician and admin management console with role-based access to call next tickets, reassign lanes, record repair intake logs, and monitor average customer wait times.",
       "Designed and optimized database schemas to capture operational metrics, customer throughput, and peak hour trends to assist management in workforce allocation."
     ],
-    images: ['works/queue/img1.png', 'works/queue/img2.png']
+    images: ['works/queue/img1.webp', 'works/queue/img2.webp']
   },
 {
   id: 1,
@@ -219,7 +219,7 @@ export const works = [
     "Designed and built an OTRS integration that automatically transfers customer and client training requests into TMS, allowing Managers to review, approve, and convert them into official training records — eliminating manual re-entry and streamlining the request-to-record workflow.",
     "I also built a reporting and analytics module with PDF, Excel, and CSV exports, integrated Google Drive for training proof submission, and developed a performance and IDP monitoring dashboard for leadership — while maintaining documentation and providing continuous user support throughout."
   ],
-  images: ['works/tms/img1.png','works/tms/img2.png','works/tms/img3.png']
+  images: ['works/tms/img1.webp','works/tms/img2.webp','works/tms/img3.webp']
 },
     {
       id: 0, name: 'SPOTT', desc: "Sterling Paper Online Time Tracker",
@@ -231,7 +231,7 @@ export const works = [
         "As the Lead Developer for the SPOTT application, I am responsible for overseeing the development and implementation of key system components. I develop separate, robust RESTful APIs dedicated to handling user data and attendance logs (attlogs), ensuring secure and efficient data storage and retrieval.",
         "I have collaborate closely with the Human Resources team to transition from manual attendance tracking to a fully digitalized timekeeping system. Provide continuous support to SPOTT users, actively gathering feedback, addressing concerns, and resolving issues in a timely manner. Coordinate with stakeholders to ensure that any application adjustments align with organizational goals and user expectations."
       ],
-      images: ['works/w1/img1.jpg','works/w1/img2.png','works/w1/img3.png','works/w1/img4.png','works/w1/img5.png','works/w1/img6.png']
+      images: ['works/w1/img1.webp','works/w1/img2.webp','works/w1/img3.webp','works/w1/img4.webp','works/w1/img5.webp','works/w1/img6.webp']
     },
 
     {
@@ -246,10 +246,10 @@ export const works = [
         "Led the migration of legacy data from the old payroll system to the newly designed database structure, ensuring data integrity, consistency, and seamless operation with the new system."
       ],
       images: [
-        'works/w3/img1.png',
-        'works/w3/img2.png',
-        'works/w3/img3.png',
-        'works/w3/img4.png',
+        'works/w3/img1.webp',
+        'works/w3/img2.webp',
+        'works/w3/img3.webp',
+        'works/w3/img4.webp',
       ]
     },
 
@@ -264,8 +264,8 @@ export const works = [
         "Designed logic to automatically convert raw attendance logs into formatted DTR records for use in HR, payroll, and compliance reporting."
       ],
       images: [
-        'works/w4/img1.png',
-        'works/w4/img2.png',
+        'works/w4/img1.webp',
+        'works/w4/img2.webp',
      
       ]
     },
@@ -281,9 +281,9 @@ export const works = [
         "Redesigned and streamlined various internal workflows within the system to reduce redundancy, improve efficiency, and enhance user experience for recruiters and HR personnel."
       ],
       images: [
-        'works/w5/img1.png',
-        'works/w5/img2.png',
-        'works/w5/img3.png',
+        'works/w5/img1.webp',
+        'works/w5/img2.webp',
+        'works/w5/img3.webp',
       ]
     },
 
@@ -298,8 +298,8 @@ export const works = [
         "Ensured the original UI layout and design elements were retained to maintain brand consistency, while improving core functionalities for a smoother and more engaging user experience.",
       ],
       images: [
-        'works/w6/img1.png',
-        'works/w6/img2.png',
+        'works/w6/img1.webp',
+        'works/w6/img2.webp',
       ]
     },
   ];
@@ -321,7 +321,7 @@ export const projects = [
         "Applied regular security patches, plugin audits, and database caching optimizations to maintain high platform security and load performance.",
         "Executed technical SEO strategies, structured metadata schemas, and web accessibility standards to increase organic client discovery and domain authority."
       ],
-      images: ['works/wmed/img1.png', 'works/wmed/img2.png']
+      images: ['works/wmed/img1.webp', 'works/wmed/img2.webp']
     },
     {
       id: 9,
@@ -339,59 +339,59 @@ export const projects = [
         "Designed role-based access control (RBAC) ensuring secure permissions across warehouse supervisors, site engineers, and administrative auditors."
       ],
       images: [
-        'project/ims/img1.png',
-        'project/ims/img2.png',
-        'project/ims/img3.png',
-        'project/ims/img4.png',
-        'project/ims/img5.png',
-        'project/ims/img6.png'
+        'project/ims/img1.webp',
+        'project/ims/img2.webp',
+        'project/ims/img3.webp',
+        'project/ims/img4.webp',
+        'project/ims/img5.webp',
+        'project/ims/img6.webp'
       ]
     },
     // {
     //   id: 0, name: 'E-Portfolio',
     //   description: 'A personal website designed to help me showcase my work and achievements in a professional manner online.',
     //   tech: ['NextJS', 'Tailwind'],
-    //   images: ['project/portfolio/img1.png', 'project/portfolio/img2.png']
+    //   images: ['project/portfolio/img1.webp', 'project/portfolio/img2.webp']
     // },
 
     {
       id: 1, name: 'Juala De Amor',
       description: 'IoT-enabled smart cage system designed for pet bird owners who want to ensure optimal care, safety, and comfort for their avian companions.',
       tech: ['Android', 'Arduino', 'Firebase'],
-      images: ['project/juala/img1.jpg', 'project/juala/img2.jpg', 'project/juala/img3.jpg', 'project/juala/img3.jpg', 'project/juala/img5.jpg']
+      images: ['project/juala/img1.webp', 'project/juala/img2.webp', 'project/juala/img3.webp', 'project/juala/img3.webp', 'project/juala/img5.webp']
     },
 
     {
       id: 2, name: 'ReCSys',
       description: 'An automated IoT-based smart drying system designed to help users conveniently dry clothes outdoors while protecting them from unpredictable weather conditions such as sudden rain or intense sunlight.',
       tech: ['Android', 'Arduino', 'Firebase'],
-      images: ['project/recsys/img1.jpg', 'project/recsys/img2.jpg', 'project/recsys/img3.jpg', 'project/recsys/img4.jpg', 'project/recsys/img5.jpg']
+      images: ['project/recsys/img1.webp', 'project/recsys/img2.webp', 'project/recsys/img3.webp', 'project/recsys/img4.webp', 'project/recsys/img5.webp']
     },
 
     {
       id: 3, name: 'QuickCharge-Fi',
       description: 'Budget-friendly charging and Wi-Fi solution aimed at students in shared spaces such as libraries, dormitories, study halls, and campus common areas. The system offers rapid device charging ports along with reliable Wi-Fi access, optimized for high user traffic at minimal cost.',
       tech: ['Android', 'Arduino', 'PHP', 'MySQL'],
-      images: ['project/quick/img1.jpg', 'project/quick/img2.jpg', 'project/quick/img3.jpg', 'project/quick/img4.jpg', 'project/quick/img5.jpg','project/quick/img6.jpg','project/quick/img7.jpg']
+      images: ['project/quick/img1.webp', 'project/quick/img2.webp', 'project/quick/img3.webp', 'project/quick/img4.webp', 'project/quick/img5.webp','project/quick/img6.webp','project/quick/img7.webp']
     },
 
     {
       id: 4, name: 'BlueThunder',
       description: 'An E-commerce website with a CRUD for managging the products. ',
       tech: ['Bootstrap', 'PHP', 'MySQL'],
-      images: ['project/bluethunder/img1.jpg', 'project/bluethunder/img2.jpg', 'project/bluethunder/img3.jpg']
+      images: ['project/bluethunder/img1.webp', 'project/bluethunder/img2.webp', 'project/bluethunder/img3.webp']
     },
     {
       id: 5, name: 'Enrollment System',
       description: 'Simple CRUD application built with Java, featuring a database powered by MS Access. It provides an efficient solution for managing student enrollment data.',
       tech: ['Java', 'MS Access'],
-      images: ['project/enroll/img1.png','project/enroll/img2.png','project/enroll/img3.png','project/enroll/img4.png']
+      images: ['project/enroll/img1.webp','project/enroll/img2.webp','project/enroll/img3.webp','project/enroll/img4.webp']
     },
     {
       id: 6, name: 'EAITH',
       description: "EAITH is an engaging and challenging word-guessing game designed for play directly on your computer. It's a personalized take on the classic Hangman game, offering a fresh and entertaining twist on the traditional experience",
       tech: ['Java', 'MS Access'],
-      images: ['project/eaith/img1.png','project/eaith/img2.png','project/eaith/img3.png']
+      images: ['project/eaith/img1.webp','project/eaith/img2.webp','project/eaith/img3.webp']
     },
   ];
 
@@ -522,44 +522,44 @@ export const services = [
 
 export const skills = [
     {id: 0, type: "Language", color: "#00a516ff", items: [
-        {id: 0, name: "HTML", icon: "html.png"},
-        {id: 1, name: "CSS", icon: "css.png"},
-        {id: 2, name: "Javascript", icon: "javascript.png"},
-        {id: 3, name: "Typescript", icon: "typescript.png"},
-        {id: 4, name: "PHP", icon: "php.png"},
-        {id: 5, name: "Python", icon: "python.png"},
-        {id: 6, name: "Java", icon: "java.png"},
-        {id: 7, name: "C++", icon: "c+.png"},
-        {id: 8, name: "Visual Basic", icon: "vb.png"},
+        {id: 0, name: "HTML", icon: "html.webp"},
+        {id: 1, name: "CSS", icon: "css.webp"},
+        {id: 2, name: "Javascript", icon: "javascript.webp"},
+        {id: 3, name: "Typescript", icon: "typescript.webp"},
+        {id: 4, name: "PHP", icon: "php.webp"},
+        {id: 5, name: "Python", icon: "python.webp"},
+        {id: 6, name: "Java", icon: "java.webp"},
+        {id: 7, name: "C++", icon: "c+.webp"},
+        {id: 8, name: "Visual Basic", icon: "vb.webp"},
     ]},
     {id: 1, type: "Framework", color: "#3b82f6", items: [
-        {id: 0, name: "VueJS", icon: "vue.png"},
-        {id: 1, name: "React", icon: "react.png"},
-        {id: 2, name: "NextJS", icon: "next.png"},
-        {id: 3, name: "Laravel", icon: "laravel.png"},
-        {id: 4, name: "Django", icon: "django.png"},
-        {id: 5, name: "Flutter", icon: "flutter.png"},
-        {id: 6, name: "Ionic", icon: "ionic.png"},
-        {id: 7, name: "TailwindCSS", icon: "tailwind.png"},
-        {id: 8, name: "Vuetify", icon: "vuetify.png"},
-        {id: 9, name: "Express", icon: "express.png"},
-        {id: 10, name: "CodeIgniter", icon: "codeigniter.png"},
+        {id: 0, name: "VueJS", icon: "vue.webp"},
+        {id: 1, name: "React", icon: "react.webp"},
+        {id: 2, name: "NextJS", icon: "next.webp"},
+        {id: 3, name: "Laravel", icon: "laravel.webp"},
+        {id: 4, name: "Django", icon: "django.webp"},
+        {id: 5, name: "Flutter", icon: "flutter.webp"},
+        {id: 6, name: "Ionic", icon: "ionic.webp"},
+        {id: 7, name: "TailwindCSS", icon: "tailwind.webp"},
+        {id: 8, name: "Vuetify", icon: "vuetify.webp"},
+        {id: 9, name: "Express", icon: "express.webp"},
+        {id: 10, name: "CodeIgniter", icon: "codeigniter.webp"},
     ]},
     {id: 3, type: "Tools", color: "#ad00cfff", items: [
-        {id: 0, name: "Git", icon: "git.png"},
-        {id: 1, name: "Gitlab", icon: "gitlab.png"},
-        {id: 2, name: "Github", icon: "github.png"},
-        {id: 3, name: "Docker", icon: "docker.png"},
-        {id: 4, name: "Prometheus", icon: "prometheus.png"},
-        {id: 5, name: "Grafana", icon: "grafana.png"},
-        {id: 6, name: "Postman", icon: "postman.png"},
-        {id: 7, name: "Photoshop", icon: "photoshop.png"},
-        {id: 8, name: "Figma", icon: "figma.png"},
+        {id: 0, name: "Git", icon: "git.webp"},
+        {id: 1, name: "Gitlab", icon: "gitlab.webp"},
+        {id: 2, name: "Github", icon: "github.webp"},
+        {id: 3, name: "Docker", icon: "docker.webp"},
+        {id: 4, name: "Prometheus", icon: "prometheus.webp"},
+        {id: 5, name: "Grafana", icon: "grafana.webp"},
+        {id: 6, name: "Postman", icon: "postman.webp"},
+        {id: 7, name: "Photoshop", icon: "photoshop.webp"},
+        {id: 8, name: "Figma", icon: "figma.webp"},
     ]},
     {id: 2, type: "Other Technologies / Platform", color: "#da6900ff", items: [
-        {id: 0, name: "MySQL", icon: "mysql.png"},
-        {id: 1, name: "AWS", icon: "aws.png"},
-        {id: 2, name: "Firebase", icon: "firebase.png"},
+        {id: 0, name: "MySQL", icon: "mysql.webp"},
+        {id: 1, name: "AWS", icon: "aws.webp"},
+        {id: 2, name: "Firebase", icon: "firebase.webp"},
         {id: 3, name: "WordPress", icon: "wordpress.svg"},
         {id: 4, name: "Gemini", icon: "gemini.svg"},
         {id: 5, name: "Claude", icon: "claude.svg"},

@@ -131,7 +131,7 @@ export function ProjectsSection({ onSelectItem }: ProjectsSectionProps) {
                   >
                     {project.company || (project.projectCategory === "enterprise" ? "Enterprise" : "Side Project")}
                   </span>
-                  <ArrowUpRight size={16} className="text-zinc-400 dark:text-zinc-500 group-hover:text-zinc-900 dark:group-hover:text-white transition-colors" />
+                  <ArrowUpRight size={16} className="text-zinc-500 dark:text-zinc-400 group-hover:text-zinc-900 dark:group-hover:text-white transition-colors" />
                 </div>
 
                 {/* Project Title */}

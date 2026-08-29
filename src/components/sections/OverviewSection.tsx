@@ -37,7 +37,17 @@ export function OverviewSection({ onNavigate, onSelectItem }: OverviewSectionPro
 
   const getCertIcon = (cert: typeof certs[0]) => {
     if (cert.icon) {
-      return <img src={cert.icon} alt={cert.issuer} className="w-8 h-8 object-contain" />;
+      return (
+        <img 
+          src={cert.icon} 
+          alt={cert.issuer} 
+          className="w-8 h-8 object-contain" 
+          width={32} 
+          height={32} 
+          loading="lazy" 
+          decoding="async" 
+        />
+      );
     }
     return <Award className="w-8 h-8 text-zinc-800 dark:text-zinc-200" />;
   };
@@ -56,8 +66,12 @@ export function OverviewSection({ onNavigate, onSelectItem }: OverviewSectionPro
           {/* Stylized Profile Avatar */}
           <div className="w-36 h-36 md:w-44 md:h-44 rounded-3xl overflow-hidden bg-white dark:bg-zinc-900 border border-zinc-200/90 dark:border-zinc-800 shadow-md flex-shrink-0 relative group">
             <img 
-              src="icons/user.jpg" 
+              src="icons/user.webp" 
               alt="Ron Marquez" 
+              width={176}
+              height={176}
+              loading="eager"
+              decoding="async"
               className="w-full h-full object-cover grayscale contrast-110 group-hover:grayscale-0 transition-all duration-500"
               referrerPolicy="no-referrer"
             />
@@ -84,6 +98,7 @@ export function OverviewSection({ onNavigate, onSelectItem }: OverviewSectionPro
                 href="https://github.com/mrqz-rn" 
                 target="_blank" 
                 rel="noopener noreferrer" 
+                aria-label="GitHub Profile"
                 className="text-zinc-600 dark:text-zinc-400 hover:text-zinc-950 dark:hover:text-white flex items-center gap-1.5 transition-colors group font-medium"
               >
                 <span>github</span>
@@ -94,6 +109,7 @@ export function OverviewSection({ onNavigate, onSelectItem }: OverviewSectionPro
                 href="https://www.linkedin.com/in/ronmarquez/" 
                 target="_blank" 
                 rel="noopener noreferrer" 
+                aria-label="LinkedIn Profile"
                 className="text-zinc-600 dark:text-zinc-400 hover:text-zinc-950 dark:hover:text-white flex items-center gap-1.5 transition-colors group font-medium"
               >
                 <span>linkedin</span>
@@ -102,6 +118,7 @@ export function OverviewSection({ onNavigate, onSelectItem }: OverviewSectionPro
 
               <a 
                 href="mailto:marquez.ronrons@gmail.com" 
+                aria-label="Send email to Ron Marquez"
                 className="text-zinc-600 dark:text-zinc-400 hover:text-zinc-950 dark:hover:text-white flex items-center gap-1.5 transition-colors group font-medium"
               >
                 <span>email</span>
@@ -115,9 +132,9 @@ export function OverviewSection({ onNavigate, onSelectItem }: OverviewSectionPro
         <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-5 gap-y-4 border-y border-zinc-200 dark:border-zinc-800 py-6">
           <div className="px-4 py-2 border-r border-zinc-200 dark:border-zinc-800">
             <div className="text-2xl font-bold text-zinc-900 dark:text-white flex items-center gap-1 font-mono">
-              3+ yrs <ArrowUpRight size={14} className="text-zinc-400 dark:text-zinc-500 text-xs" />
+              3+ yrs <ArrowUpRight size={14} className="text-zinc-500 dark:text-zinc-400 text-xs" />
             </div>
-            <div className="text-[10px] font-mono uppercase tracking-widest text-zinc-500 dark:text-zinc-400 mt-1">Experience</div>
+            <div className="text-[10px] font-mono uppercase tracking-widest text-zinc-600 dark:text-zinc-400 mt-1 font-semibold">Experience</div>
           </div>
 
           <div className="px-4 py-2 sm:border-r border-zinc-200 dark:border-zinc-800">
@@ -125,9 +142,9 @@ export function OverviewSection({ onNavigate, onSelectItem }: OverviewSectionPro
               onClick={() => onNavigate?.("projects")}
               className="text-2xl font-bold text-zinc-900 dark:text-white flex items-center gap-1 font-mono cursor-pointer hover:text-black dark:hover:text-blue-400 transition-colors"
             >
-              16+ <ArrowUpRight size={14} className="text-zinc-400 dark:text-zinc-500 text-xs" />
+              16+ <ArrowUpRight size={14} className="text-zinc-500 dark:text-zinc-400 text-xs" />
             </div>
-            <div className="text-[10px] font-mono uppercase tracking-widest text-zinc-500 dark:text-zinc-400 mt-1">Projects</div>
+            <div className="text-[10px] font-mono uppercase tracking-widest text-zinc-600 dark:text-zinc-400 mt-1 font-semibold">Projects</div>
           </div>
 
           <div className="px-4 py-2 border-r border-zinc-200 dark:border-zinc-800">
@@ -138,16 +155,16 @@ export function OverviewSection({ onNavigate, onSelectItem }: OverviewSectionPro
               }}
               className="text-2xl font-bold text-zinc-900 dark:text-white flex items-center gap-1 font-mono cursor-pointer hover:text-black dark:hover:text-blue-400 transition-colors"
             >
-              7+ <ArrowUpRight size={14} className="text-zinc-400 dark:text-zinc-500 text-xs" />
+              7+ <ArrowUpRight size={14} className="text-zinc-500 dark:text-zinc-400 text-xs" />
             </div>
-            <div className="text-[10px] font-mono uppercase tracking-widest text-zinc-500 dark:text-zinc-400 mt-1">Certifications</div>
+            <div className="text-[10px] font-mono uppercase tracking-widest text-zinc-600 dark:text-zinc-400 mt-1 font-semibold">Certifications</div>
           </div>
 
           <div className="px-4 py-2 sm:border-r border-zinc-200 dark:border-zinc-800">
             <div className="text-2xl font-bold text-zinc-900 dark:text-white flex items-center gap-1 font-mono">
-              4+ <ArrowUpRight size={14} className="text-zinc-400 dark:text-zinc-500 text-xs" />
+              4+ <ArrowUpRight size={14} className="text-zinc-500 dark:text-zinc-400 text-xs" />
             </div>
-            <div className="text-[10px] font-mono uppercase tracking-widest text-zinc-500 dark:text-zinc-400 mt-1">Companies</div>
+            <div className="text-[10px] font-mono uppercase tracking-widest text-zinc-600 dark:text-zinc-400 mt-1 font-semibold">Companies</div>
           </div>
 
           <div className="px-4 py-2">
@@ -155,9 +172,9 @@ export function OverviewSection({ onNavigate, onSelectItem }: OverviewSectionPro
               onClick={() => onNavigate?.("stack")}
               className="text-2xl font-bold text-zinc-900 dark:text-white flex items-center gap-1 font-mono cursor-pointer hover:text-black dark:hover:text-blue-400 transition-colors"
             >
-              20+ <ArrowUpRight size={14} className="text-zinc-400 dark:text-zinc-500 text-xs" />
+              20+ <ArrowUpRight size={14} className="text-zinc-500 dark:text-zinc-400 text-xs" />
             </div>
-            <div className="text-[10px] font-mono uppercase tracking-widest text-zinc-500 dark:text-zinc-400 mt-1">Tech Stack</div>
+            <div className="text-[10px] font-mono uppercase tracking-widest text-zinc-600 dark:text-zinc-400 mt-1 font-semibold">Tech Stack</div>
           </div>
         </div>
       </div>
@@ -165,9 +182,9 @@ export function OverviewSection({ onNavigate, onSelectItem }: OverviewSectionPro
       {/* 02 — PROJECTS SECTION */}
       <div className="space-y-8">
         <div className="flex items-center justify-between border-b border-zinc-200 dark:border-zinc-800 pb-4">
-          <span className="font-mono text-xs uppercase tracking-widest text-zinc-500 dark:text-zinc-400">
+          <h2 className="font-mono text-xs uppercase tracking-widest text-zinc-600 dark:text-zinc-400 font-semibold">
             02 — projects
-          </span>
+          </h2>
           <button 
             onClick={() => onNavigate?.("projects")}
             className="font-mono text-xs uppercase tracking-widest text-zinc-600 dark:text-zinc-400 hover:text-zinc-950 dark:hover:text-white flex items-center gap-1.5 transition-colors font-medium cursor-pointer"
@@ -199,7 +216,7 @@ export function OverviewSection({ onNavigate, onSelectItem }: OverviewSectionPro
                   <span className="text-[10px] font-mono uppercase tracking-wider px-2.5 py-1 rounded-md bg-zinc-100 dark:bg-zinc-800/90 text-zinc-700 dark:text-zinc-200 border border-zinc-200/80 dark:border-zinc-700 font-medium">
                     {project.company || "Project"}
                   </span>
-                  <ArrowUpRight size={16} className="text-zinc-400 dark:text-zinc-500 group-hover:text-zinc-900 dark:group-hover:text-white transition-colors" />
+                  <ArrowUpRight size={16} className="text-zinc-500 dark:text-zinc-400 group-hover:text-zinc-900 dark:group-hover:text-white transition-colors" />
                 </div>
                 
                 <h3 className="text-lg font-bold text-zinc-900 dark:text-white group-hover:text-black dark:group-hover:text-blue-400 transition-colors mb-2">
@@ -218,7 +235,7 @@ export function OverviewSection({ onNavigate, onSelectItem }: OverviewSectionPro
                   </span>
                 ))}
                 {project.tech && project.tech.length > 3 && (
-                  <span className="text-[10px] font-mono text-zinc-400 dark:text-zinc-500 self-center">
+                  <span className="text-[10px] font-mono text-zinc-600 dark:text-zinc-400 font-semibold self-center">
                     +{project.tech.length - 3}
                   </span>
                 )}
@@ -231,9 +248,9 @@ export function OverviewSection({ onNavigate, onSelectItem }: OverviewSectionPro
       {/* 03 — EXPERIENCE SECTION */}
       <div className="space-y-8">
         <div className="flex items-center justify-between border-b border-zinc-200 dark:border-zinc-800 pb-4">
-          <span className="font-mono text-xs uppercase tracking-widest text-zinc-500 dark:text-zinc-400">
+          <h2 className="font-mono text-xs uppercase tracking-widest text-zinc-600 dark:text-zinc-400 font-semibold">
             03 — experience
-          </span>
+          </h2>
           <button 
             onClick={() => onNavigate?.("experience")}
             className="font-mono text-xs uppercase tracking-widest text-zinc-600 dark:text-zinc-400 hover:text-zinc-950 dark:hover:text-white flex items-center gap-1.5 transition-colors font-medium cursor-pointer"
@@ -252,15 +269,15 @@ export function OverviewSection({ onNavigate, onSelectItem }: OverviewSectionPro
               className="flex flex-col md:flex-row md:items-center justify-between py-4 px-4 rounded-xl hover:bg-white/80 dark:hover:bg-zinc-800/50 transition-colors cursor-pointer group"
             >
               <div className="flex items-center gap-6">
-                <span className="font-mono text-xs text-zinc-400 dark:text-zinc-500 w-16">
+                <span className="font-mono text-xs text-zinc-600 dark:text-zinc-400 font-medium w-16">
                   {job.start.split(/\s+/)[1] || job.start}
                 </span>
                 <span className="font-bold text-zinc-900 dark:text-white group-hover:text-black dark:group-hover:text-blue-400 transition-colors">
                   {job.position}
                 </span>
               </div>
-              <div className="text-zinc-500 dark:text-zinc-400 font-mono text-xs mt-1 md:mt-0 flex items-center gap-2">
-                <span className="font-medium text-zinc-700 dark:text-zinc-300">{job.company}</span>
+              <div className="text-zinc-600 dark:text-zinc-400 font-mono text-xs mt-1 md:mt-0 flex items-center gap-2">
+                <span className="font-medium text-zinc-800 dark:text-zinc-200">{job.company}</span>
                 {job.location && (
                   <>
                     <span>·</span>
@@ -275,9 +292,9 @@ export function OverviewSection({ onNavigate, onSelectItem }: OverviewSectionPro
         {/* STACK CHIPS */}
         <div className="pt-6 border-t border-zinc-200 dark:border-zinc-800 space-y-4">
           <div className="flex items-center justify-between">
-            <span className="font-mono text-xs uppercase tracking-widest text-zinc-500 dark:text-zinc-400">
+            <h3 className="font-mono text-xs uppercase tracking-widest text-zinc-600 dark:text-zinc-400 font-semibold">
               STACK
-            </span>
+            </h3>
             <button 
               onClick={() => onNavigate?.("stack")}
               className="font-mono text-xs uppercase tracking-widest text-zinc-600 dark:text-zinc-400 hover:text-zinc-950 dark:hover:text-white flex items-center gap-1.5 transition-colors font-medium cursor-pointer"
@@ -298,7 +315,7 @@ export function OverviewSection({ onNavigate, onSelectItem }: OverviewSectionPro
             ))}
             <button 
               onClick={() => onNavigate?.("stack")}
-              className="px-3.5 py-1.5 rounded-xl border border-dashed border-zinc-300 dark:border-zinc-700 text-zinc-500 dark:text-zinc-400 hover:text-zinc-900 dark:hover:text-white font-mono text-xs transition-colors cursor-pointer"
+              className="px-3.5 py-1.5 rounded-xl border border-dashed border-zinc-300 dark:border-zinc-700 text-zinc-600 dark:text-zinc-400 hover:text-zinc-900 dark:hover:text-white font-mono text-xs transition-colors cursor-pointer"
             >
               + more
             </button>
@@ -309,10 +326,10 @@ export function OverviewSection({ onNavigate, onSelectItem }: OverviewSectionPro
       {/* 04 — CERTIFICATIONS */}
       <div id="certifications-section" className="space-y-8 scroll-mt-8">
         <div className="flex items-center justify-between border-b border-zinc-200 dark:border-zinc-800 pb-4">
-          <span className="font-mono text-xs uppercase tracking-widest text-zinc-500 dark:text-zinc-400">
+          <h2 className="font-mono text-xs uppercase tracking-widest text-zinc-600 dark:text-zinc-400 font-semibold">
             04 — certifications
-          </span>
-          <span className="font-mono text-xs uppercase tracking-widest text-zinc-400 dark:text-zinc-500 font-medium">
+          </h2>
+          <span className="font-mono text-xs uppercase tracking-widest text-zinc-600 dark:text-zinc-400 font-medium">
             7 Official Certifications
           </span>
         </div>
@@ -335,10 +352,10 @@ export function OverviewSection({ onNavigate, onSelectItem }: OverviewSectionPro
                 <h3 className="text-base font-bold text-zinc-900 dark:text-white group-hover:text-black dark:group-hover:text-blue-400 transition-colors leading-snug">
                   {cert.title}
                 </h3>
-                <div className="text-[11px] font-mono text-zinc-500 dark:text-zinc-400 uppercase tracking-wider">
+                <div className="text-[11px] font-mono text-zinc-600 dark:text-zinc-400 uppercase tracking-wider font-medium">
                   {cert.issuer}
                 </div>
-                <div className="text-[10px] font-mono text-zinc-400 dark:text-zinc-500">
+                <div className="text-[10px] font-mono text-zinc-600 dark:text-zinc-400 font-semibold">
                   {cert.issued}
                 </div>
               </div>
@@ -350,9 +367,9 @@ export function OverviewSection({ onNavigate, onSelectItem }: OverviewSectionPro
       {/* 05 — SERVICES / HIGHLIGHTS */}
       <div className="space-y-8">
         <div className="flex items-center justify-between border-b border-zinc-200 dark:border-zinc-800 pb-4">
-          <span className="font-mono text-xs uppercase tracking-widest text-zinc-500 dark:text-zinc-400">
+          <h2 className="font-mono text-xs uppercase tracking-widest text-zinc-600 dark:text-zinc-400 font-semibold">
             05 — services
-          </span>
+          </h2>
           <div className="flex items-center gap-4">
             <button 
               onClick={() => onNavigate?.("services")}
@@ -384,7 +401,7 @@ export function OverviewSection({ onNavigate, onSelectItem }: OverviewSectionPro
                 <ul className="space-y-2 mb-6">
                   {service.jobs.map(job => (
                     <li key={job.title} className="text-xs text-zinc-600 dark:text-zinc-300 leading-relaxed flex items-start gap-2">
-                      <span className="text-zinc-400 dark:text-zinc-500">•</span>
+                      <span className="text-zinc-500 dark:text-zinc-400">•</span>
                       <span>{job.title}</span>
                     </li>
                   ))}
@@ -397,3 +414,4 @@ export function OverviewSection({ onNavigate, onSelectItem }: OverviewSectionPro
     </motion.section>
   );
 }
+

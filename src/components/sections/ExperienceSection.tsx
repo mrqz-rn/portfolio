@@ -121,7 +121,8 @@ export function ExperienceSection({}: ExperienceSectionProps) {
                         href={exp.link} 
                         target="_blank" 
                         rel="noopener noreferrer" 
-                        className="text-zinc-400 dark:text-zinc-500 hover:text-zinc-900 dark:hover:text-white transition-colors"
+                        aria-label={`Visit ${exp.company} website`}
+                        className="text-zinc-500 dark:text-zinc-400 hover:text-zinc-900 dark:hover:text-white transition-colors"
                         title={`Visit ${exp.company}`}
                       >
                         <ExternalLink size={16} />

@@ -188,24 +188,24 @@ export default function App() {
 
           {/* Status Card */}
           <div className="p-3 rounded-xl bg-zinc-50 dark:bg-zinc-900 border border-zinc-200/70 dark:border-zinc-800">
-            <div className="flex items-center justify-between text-zinc-500 dark:text-zinc-400 text-[10px] font-mono mb-1">
+            <div className="flex items-center justify-between text-zinc-600 dark:text-zinc-400 text-[10px] font-mono mb-1">
               <span className="flex items-center gap-1.5">
                 <span className="w-1.5 h-1.5 rounded-full bg-emerald-500 animate-pulse" />
                 STATUS
               </span>
-              <span className="text-emerald-600 dark:text-emerald-400 font-bold text-[10px]">{status.toUpperCase()}</span>
+              <span className="text-emerald-700 dark:text-emerald-400 font-bold text-[10px]">{status.toUpperCase()}</span>
             </div>
-            <div className="text-zinc-600 dark:text-zinc-300 text-[11px] font-mono truncate font-medium">
+            <div className="text-zinc-700 dark:text-zinc-300 text-[11px] font-mono truncate font-medium">
               {time.toLocaleTimeString()} PHT
             </div>
           </div>
 
           {/* Social Icons */}
           <div className="flex items-center justify-between px-1">
-            <span className="text-[10px] font-mono text-zinc-400 dark:text-zinc-500 uppercase tracking-wider">Socials</span>
+            <span className="text-[10px] font-mono text-zinc-500 dark:text-zinc-400 uppercase tracking-wider font-medium">Socials</span>
             <div className="flex items-center gap-1">
-              <SocialIcon icon={<Github size={16} />} href="https://github.com/mrqz-rn" />
-              <SocialIcon icon={<Linkedin size={16} />} href="https://www.linkedin.com/in/ronmarquez/" />
+              <SocialIcon icon={<Github size={16} />} href="https://github.com/mrqz-rn" label="GitHub Profile" />
+              <SocialIcon icon={<Linkedin size={16} />} href="https://www.linkedin.com/in/ronmarquez/" label="LinkedIn Profile" />
             </div>
           </div>
         </div>
@@ -213,12 +213,12 @@ export default function App() {
 
       {/* Mobile Nav */}
       <nav className="fixed bottom-0 left-0 w-full h-16 bg-white/95 dark:bg-[#0f1422]/95 backdrop-blur-xl border-t border-zinc-200 dark:border-zinc-800 flex items-center justify-around z-50 md:hidden px-4">
-        <NavIcon icon={<Terminal />} active={activeTab === "overview"} onClick={() => setActiveTab("overview")} />
-        <NavIcon icon={<Briefcase />} active={activeTab === "experience"} onClick={() => setActiveTab("experience")} />
-        <NavIcon icon={<Layers />} active={activeTab === "projects"} onClick={() => setActiveTab("projects")} />
-        <NavIcon icon={<Cpu />} active={activeTab === "stack"} onClick={() => setActiveTab("stack")} />
-        <NavIcon icon={<Wrench />} active={activeTab === "services"} onClick={() => setActiveTab("services")} />
-        <NavIcon icon={<Globe />} active={activeTab === "connect"} onClick={() => setActiveTab("connect")} />
+        <NavIcon icon={<Terminal />} label="Overview" active={activeTab === "overview"} onClick={() => setActiveTab("overview")} />
+        <NavIcon icon={<Briefcase />} label="Experience" active={activeTab === "experience"} onClick={() => setActiveTab("experience")} />
+        <NavIcon icon={<Layers />} label="Projects" active={activeTab === "projects"} onClick={() => setActiveTab("projects")} />
+        <NavIcon icon={<Cpu />} label="Stack" active={activeTab === "stack"} onClick={() => setActiveTab("stack")} />
+        <NavIcon icon={<Wrench />} label="Services" active={activeTab === "services"} onClick={() => setActiveTab("services")} />
+        <NavIcon icon={<Globe />} label="Connect" active={activeTab === "connect"} onClick={() => setActiveTab("connect")} />
       </nav>
 
       {/* Main Content Area */}
@@ -245,7 +245,7 @@ export default function App() {
       <ChatBot />
 
       {/* Footer Decoration */}
-      <footer className="md:ml-64 p-8 border-t border-zinc-200/80 dark:border-zinc-800/80 font-mono text-[10px] text-zinc-400 dark:text-zinc-500 max-md:pb-24">
+      <footer className="md:ml-64 p-8 border-t border-zinc-200/80 dark:border-zinc-800/80 font-mono text-[10px] text-zinc-500 dark:text-zinc-400 max-md:pb-24">
         <div className="max-w-4xl mx-auto flex justify-between items-center w-full">
           <div>© 2026 RON MARQUEZ - PORTFOLIO</div>
           <div className="flex gap-4">

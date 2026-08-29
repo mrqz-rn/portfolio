@@ -13,6 +13,8 @@ export function ContactButton({ icon, label, href, primary }: ContactButtonProps
       href={href}
       target={href.startsWith("http") ? "_blank" : undefined}
       rel={href.startsWith("http") ? "noopener noreferrer" : undefined}
+      aria-label={label}
+      title={label}
       className={`flex items-center gap-2.5 px-5 py-2.5 rounded-xl font-mono text-xs font-semibold transition-all ${
         primary 
           ? 'bg-zinc-900 dark:bg-white text-white dark:text-zinc-900 hover:bg-black dark:hover:bg-zinc-100 shadow-xs hover:scale-102' 
