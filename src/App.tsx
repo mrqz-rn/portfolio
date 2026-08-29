@@ -37,6 +37,7 @@ import { ServicesSection } from "./components/sections/ServicesSection";
 import { ConnectSection } from "./components/sections/ConnectSection";
 
 import { preloadAssets } from "./utils/preload";
+import { Analytics } from "@vercel/analytics/react";
 
 export default function App() {
   const [activeTab, setActiveTab] = useState("overview");
@@ -252,6 +253,9 @@ export default function App() {
           </div>
         </div>
       </footer>
+
+      {/* Vercel Web Analytics */}
+      <Analytics />
     </div>
   );
 }
