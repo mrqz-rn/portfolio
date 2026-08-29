@@ -19,17 +19,20 @@ export function OverviewSection({ onNavigate, onSelectItem }: OverviewSectionPro
   const featuredProjects = works.slice(0, 3);
   const stackPills = [
     "TypeScript", "Vue.js", "React", "Next.js", "Node.js", 
-    "PHP", "CodeIgniter", "Laravel", "MySQL", "MariaDB", 
-    "Ionic", "Tailwind CSS", "Git", "AWS"
+    "PHP", "CodeIgniter", "Laravel", "Django", "Flutter",
+    "MySQL", "MariaDB", "Docker", "Prometheus", "Grafana",
+    "Gemini", "Claude", "WordPress", "Ionic", 
+    "Tailwind CSS", "Git", "AWS"
   ];
 
   const getServiceIcon = (name: string) => {
-    switch (name) {
-      case "Mobile & PC Service": return <Monitor className="w-5 h-5 text-zinc-800" />;
-      case "Software and Development": return <Code2 className="w-5 h-5 text-zinc-800" />;
-      case "Free Consultation & Student Support": return <MessageSquare className="w-5 h-5 text-zinc-800" />;
-      default: return <Wrench className="w-5 h-5 text-zinc-800" />;
+    if (name.includes("Hardware") || name.includes("Mobile & PC") || name.includes("Maintenance")) {
+      return <Monitor className="w-5 h-5 text-zinc-800" />;
     }
+    if (name.includes("Software") || name.includes("Systems Engineering")) {
+      return <Code2 className="w-5 h-5 text-zinc-800" />;
+    }
+    return <Wrench className="w-5 h-5 text-zinc-800" />;
   };
 
   const getCertIcon = (cert: typeof certs[0]) => {
@@ -109,12 +112,22 @@ export function OverviewSection({ onNavigate, onSelectItem }: OverviewSectionPro
         </div>
 
         {/* Metric / Stats Strip (From Reference Image 3) */}
-        <div className="grid grid-cols-3 border-y border-zinc-200 py-6">
+        <div className="grid grid-cols-2 md:grid-cols-4 gap-y-4 border-y border-zinc-200 py-6">
           <div className="px-4 py-2 border-r border-zinc-200">
             <div className="text-2xl font-bold text-zinc-900 flex items-center gap-1 font-mono">
               3+ yrs <ArrowUpRight size={14} className="text-zinc-400 text-xs" />
             </div>
             <div className="text-[10px] font-mono uppercase tracking-widest text-zinc-500 mt-1">Experience</div>
+          </div>
+
+          <div className="px-4 py-2 md:border-r border-zinc-200">
+            <div 
+              onClick={() => onNavigate?.("projects")}
+              className="text-2xl font-bold text-zinc-900 flex items-center gap-1 font-mono cursor-pointer hover:text-black transition-colors"
+            >
+              15+ <ArrowUpRight size={14} className="text-zinc-400 text-xs" />
+            </div>
+            <div className="text-[10px] font-mono uppercase tracking-widest text-zinc-500 mt-1">Projects</div>
           </div>
 
           <div className="px-4 py-2 border-r border-zinc-200">
@@ -125,7 +138,10 @@ export function OverviewSection({ onNavigate, onSelectItem }: OverviewSectionPro
           </div>
 
           <div className="px-4 py-2">
-            <div className="text-2xl font-bold text-zinc-900 flex items-center gap-1 font-mono">
+            <div 
+              onClick={() => onNavigate?.("stack")}
+              className="text-2xl font-bold text-zinc-900 flex items-center gap-1 font-mono cursor-pointer hover:text-black transition-colors"
+            >
               20+ <ArrowUpRight size={14} className="text-zinc-400 text-xs" />
             </div>
             <div className="text-[10px] font-mono uppercase tracking-widest text-zinc-500 mt-1">Tech Stack</div>
@@ -324,13 +340,15 @@ export function OverviewSection({ onNavigate, onSelectItem }: OverviewSectionPro
           <span className="font-mono text-xs uppercase tracking-widest text-zinc-500">
             05 — services
           </span>
-          <button 
-            onClick={() => onNavigate?.("connect")}
-            className="font-mono text-xs uppercase tracking-widest text-zinc-600 hover:text-zinc-950 flex items-center gap-1.5 transition-colors font-medium cursor-pointer"
-          >
-            <span>GET IN TOUCH</span>
-            <ArrowRight size={14} />
-          </button>
+          <div className="flex items-center gap-4">
+            <button 
+              onClick={() => onNavigate?.("services")}
+              className="font-mono text-xs uppercase tracking-widest text-zinc-600 hover:text-zinc-950 flex items-center gap-1.5 transition-colors font-medium cursor-pointer"
+            >
+              <span>ALL SERVICES</span>
+              <ArrowRight size={14} />
+            </button>
+          </div>
         </div>
 
         <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
@@ -340,7 +358,8 @@ export function OverviewSection({ onNavigate, onSelectItem }: OverviewSectionPro
               initial={{ opacity: 0, y: 15 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ delay: idx * 0.1 }}
-              className="bg-white p-6 rounded-2xl border border-zinc-200/80 shadow-xs hover:border-zinc-400 hover:shadow-md transition-all flex flex-col justify-between group"
+              onClick={() => onNavigate?.("services")}
+              className="bg-white p-6 rounded-2xl border border-zinc-200/80 shadow-xs hover:border-zinc-400 hover:shadow-md transition-all flex flex-col justify-between group cursor-pointer"
             >
               <div>
                 <div className="w-12 h-12 rounded-xl bg-zinc-100 flex items-center justify-center mb-4 text-zinc-800">

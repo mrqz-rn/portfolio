@@ -59,7 +59,7 @@ export function ExperienceSection({}: ExperienceSectionProps) {
       {/* Header */}
       <div>
         <h2 className="text-4xl md:text-5xl font-bold tracking-tight text-zinc-900 mb-4 font-mono">
-          experience
+          Experience
         </h2>
         <p className="text-zinc-600 text-base md:text-lg leading-relaxed max-w-3xl">
           Over 3+ years building across systems development, software engineering, and website support — from internal enterprise platforms to scalable web solutions.

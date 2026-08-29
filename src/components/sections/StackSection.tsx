@@ -59,9 +59,9 @@ export function StackSection() {
         </div>
         <div className="grid grid-cols-2 gap-4">
           <StatCard label="Languages" value="9+" />
-          <StatCard label="Frameworks" value="8+" />
-          <StatCard label="Tools" value="6+" />
-          <StatCard label="Platforms" value="3+" />
+          <StatCard label="Frameworks" value="11+" />
+          <StatCard label="Tools" value="9+" />
+          <StatCard label="Platforms" value="6+" />
         </div>
       </div>
     </motion.section>

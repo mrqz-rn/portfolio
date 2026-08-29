@@ -21,29 +21,29 @@ export const jobs = [
         ],
         skills: ['Enterprise Systems', 'Database Design', 'System Integration', 'Technical Documentation', 'Full Lifecycle Development']
     },
-    {
-        id: 1, 
-        position: 'Website Support Specialist', 
-        company: 'WMedLaw', 
-        start: 'July 2026', 
-        end: 'Present',
-        link: 'https://wmedlaw.com/', 
-        icon: '/icons/wmedlaw.png', 
-        monogram: 'WM',
-        color: '#0048feff', 
-        location: 'Houston, Texas', 
-        employmentType: 'Part-Time', 
-        workSetup: 'Remote',
-        summary: "I manage, maintain, and optimize the firm's website and digital assets to ensure peak performance, accessibility, and high security. I perform routine updates, troubleshoot web issues, and collaborate to deliver modern, responsive web experiences.",
-        details: [
-            "Maintain and monitor website health, ensuring fast load speeds, optimal uptime, and seamless responsive design across all devices.",
-            "Diagnose and resolve frontend, CMS, and plugin issues while applying regular security patches and performance optimizations.",
-            "Implement content, layout, and UI/UX updates to align with business objectives and enhance client engagement.",
-            "Collaborate with team members to ensure web compliance, accessibility standards, and SEO best practices.",
-            "Provide technical website support, troubleshooting, and continuous improvement for digital operations."
-        ],
-        skills: ['Website Management', 'WordPress / CMS', 'UI/UX Design', 'Performance Optimization', 'SEO & Analytics']
-    },
+    // {
+    //     id: 1, 
+    //     position: 'Website Support Specialist', 
+    //     company: 'WMedLaw', 
+    //     start: 'July 2026', 
+    //     end: 'Present',
+    //     link: 'https://wmedlaw.com/', 
+    //     icon: '/icons/wmedlaw.png', 
+    //     monogram: 'WM',
+    //     color: '#0048feff', 
+    //     location: 'Houston, Texas', 
+    //     employmentType: 'Part-Time', 
+    //     workSetup: 'Remote',
+    //     summary: "I manage, maintain, and optimize the firm's website and digital assets to ensure peak performance, accessibility, and high security. I perform routine updates, troubleshoot web issues, and collaborate to deliver modern, responsive web experiences.",
+    //     details: [
+    //         "Maintain and monitor website health, ensuring fast load speeds, optimal uptime, and seamless responsive design across all devices.",
+    //         "Diagnose and resolve frontend, CMS, and plugin issues while applying regular security patches and performance optimizations.",
+    //         "Implement content, layout, and UI/UX updates to align with business objectives and enhance client engagement.",
+    //         "Collaborate with team members to ensure web compliance, accessibility standards, and SEO best practices.",
+    //         "Provide technical website support, troubleshooting, and continuous improvement for digital operations."
+    //     ],
+    //     skills: ['Website Management', 'WordPress / CMS', 'UI/UX Design', 'Performance Optimization', 'SEO & Analytics']
+    // },
     {
         id: 2, 
         position: 'Programmer', 
@@ -129,7 +129,7 @@ export const certs = [
     },
     {
       id: 2, 
-      title: 'Atlassian Agile Project Management Professional Certificate', 
+      title: 'Atlassian Agile Project Management Professional', 
       issuer: 'Atlassian', 
       issued: '2025', 
       icon: '/certs/atlassian.png',
@@ -170,6 +170,40 @@ export const certs = [
 ];
 
 export const works = [
+  {
+    id: 6,
+    name: 'PMCIE LMS',
+    desc: "Learning Management System",
+    description: 'A web-based Learning Management System designed for the PMC Institute for Excellence (PMCIE) to streamline course administration, batch scheduling, trainee progress tracking, and training analytics across specialized organizational training programs.',
+    tech: ['Web', 'Vue', 'Laravel', 'MariaDB', 'REST API'],
+    involvement: ['Design', 'Development', 'Testing', 'Deployment', 'Maintenance'],
+    company: "Power Mac Center",
+    details: [
+      "Architected and developed the end-to-end Learning Management System (LMS) for PMC Institute for Excellence (PMCIE), streamlining batch administration, module enrollment, and certification workflows.",
+      "Built an interactive Training Analytics Overview dashboard with dynamic filtering by date ranges and training categories, visualizing key KPIs including total batches, trainee headcounts, training hours, and feedback scores.",
+      "Implemented batch management and curriculum tracking for specialized tracks such as Apple Ecosystem Mastery, Customer Experience, Onboarding, START (New Hire), and Systems & Operations Compliance.",
+      "Developed integrated calendar scheduling and trainee management modules allowing instructors and admins to manage class sessions, monitor attendance, and trigger automated email notifications.",
+      "Designed a granular role-based access control (RBAC) structure ensuring secure permissions for System Administrators, Trainers, Trainees, and Auditors across system maintenance tools."
+    ],
+    images: ['works/lms/img1.png', 'works/lms/img2.png']
+  },
+  {
+    id: 7,
+    name: 'MobileCare Queuing',
+    desc: "Queuing System",
+    description: 'A real-time customer queue management system built for MobileCare, an Apple Authorized Service Provider (AASP). Streamlines customer intake, ticket dispensing, lane dispatching, and waiting area status displays via interactive kiosk stations and live boards.',
+    tech: ['Web', 'Vue', 'Laravel', 'MariaDB', 'WebSocket', 'Queue'],
+    involvement: ['Design', 'Development', 'Testing', 'Deployment', 'Maintenance'],
+    company: "MpbileCare",
+    details: [
+      "Engineered a full-stack real-time queue management system for MobileCare service centers to automate customer check-ins, service counter routing, and ticketing workflows.",
+      "Developed an intuitive tablet/kiosk self-service check-in interface enabling customers to register arrivals, view information guides, and select specialized service paths including Courtesy Lane.",
+      "Integrated WebSockets and asynchronous queue workers to enable instantaneous live queue number broadcasts and display updates across service counter screens with zero latency.",
+      "Built a centralized technician and admin management console with role-based access to call next tickets, reassign lanes, record repair intake logs, and monitor average customer wait times.",
+      "Designed and optimized database schemas to capture operational metrics, customer throughput, and peak hour trends to assist management in workforce allocation."
+    ],
+    images: ['works/queue/img1.png', 'works/queue/img2.png']
+  },
 {
   id: 1,
   name: 'Basecamp TMS',
@@ -183,7 +217,6 @@ export const works = [
     "Built the entire platform with a role-based access control system governing six roles: Trainer, Supervisor, Assistant Supervisor, Manager/Admin, Director, and Guest — each with tailored access to training scheduling, calendar management, documentation, and reporting modules.",
     "Developed a Calendar View module giving each user a role-aware view of their training events, with support for Meetings and Leave entries, team-wide visibility for Supervisors and Managers, and training details displayed directly on each calendar entry.",
     "Designed and built an OTRS integration that automatically transfers customer and client training requests into TMS, allowing Managers to review, approve, and convert them into official training records — eliminating manual re-entry and streamlining the request-to-record workflow.",
-    "Key features I developed include a real-time notification engine, an automated Planned → On-Going status transition system, and a trainer qualification engine that validates certifications and availability before allowing assignments.",
     "I also built a reporting and analytics module with PDF, Excel, and CSV exports, integrated Google Drive for training proof submission, and developed a performance and IDP monitoring dashboard for leadership — while maintaining documentation and providing continuous user support throughout."
   ],
   images: ['works/tms/img1.png','works/tms/img2.png','works/tms/img3.png']
@@ -274,11 +307,28 @@ export const works = [
 
 export const projects = [
     {
-      id: 0, name: 'E-Portfolio',
-      description: 'A personal website designed to help me showcase my work and achievements in a professional manner online.',
-      tech: ['NextJS', 'Tailwind'],
-      images: ['project/portfolio/img1.png', 'project/portfolio/img2.png']
+      id: 8,
+      name: 'WMedLaw',
+      desc: "Law Firm Web Platform",
+      description: 'The official digital web platform and client management portal for WMedLaw, a Texas-based legal firm. Built for high performance, accessibility, SEO visibility, and seamless client inquiry intake.',
+      tech: ['Web', 'WordPress', 'PHP', 'JavaScript', 'SEO', 'UI/UX'],
+      involvement: ['Frontend Architecture', 'CMS Development', 'Performance Optimization', 'SEO', 'Maintenance'],
+      company: "WMedLaw",
+      link: "https://wmedlaw.com/",
+      details: [
+        "Engineered and maintained the firm's core web platform, ensuring 99.9% uptime, rapid page speeds, and flawless responsive layouts across desktop and mobile devices.",
+        "Designed and integrated responsive client intake workflows, contact funnels, and legal service directories to optimize prospective client conversion.",
+        "Applied regular security patches, plugin audits, and database caching optimizations to maintain high platform security and load performance.",
+        "Executed technical SEO strategies, structured metadata schemas, and web accessibility standards to increase organic client discovery and domain authority."
+      ],
+      images: ['works/wmed/img1.png', 'works/wmed/img2.png']
     },
+    // {
+    //   id: 0, name: 'E-Portfolio',
+    //   description: 'A personal website designed to help me showcase my work and achievements in a professional manner online.',
+    //   tech: ['NextJS', 'Tailwind'],
+    //   images: ['project/portfolio/img1.png', 'project/portfolio/img2.png']
+    // },
 
     {
       id: 1, name: 'Juala De Amor',
@@ -322,45 +372,136 @@ export const projects = [
   ];
 
 export const services = [
-        {id: 1, name: 'Software and Development', color: "#2500caff",
-            jobs: [
-                {id: 0, title: 'Commission-Based Projects',
-                description: 'Development of software solutions tailored to specific client needs.'},
-                {id: 1, title: 'Web & Mobile Applications',
-                description: 'Design and development of user-friendly, responsive web and mobile apps using modern technologies.'},
-                {id: 2, title: 'Microcontroller Programming',
-                description: 'Development and deployment using Arduino and other microcontrollers, including sensor integration, motor control, and wireless communication.'},
-                {id: 3, title: 'Circuit and Wiring Design',
-                description: 'Designing and planning electrical circuits and wiring systems for functional and safe electronic devices.'},
-            ]
-        },
-           {id: 3, name: 'Consultation & Support', color: "#eff300ff",
-            jobs: [
-                {id: 0, title: 'Project Planning & Guidance',
-                description: 'Helping students refine their ideas into practical, structured, and achievable project plans.'},
-                {id: 1, title: 'Technical Consultation',
-                description: 'Providing insight into the tools, technologies, and approaches best suited for the desired outcome.'},
-                {id: 2, title: 'Material Recommendations',
-                description: "Assisting with the selection of appropriate components, development platforms, and resources tailored to the project's requirements."},
-                {id: 3, title: 'Hands-on Support',
-                description: 'Offering advice and support throughout the development cycle—from concept design and prototyping to final testing and deployment.'},
-            ]
-        },
-        {id: 2, name: 'Mobile & PC Service', color: "#00a516ff",
-            jobs: [
-                {id: 0, title: 'Hardware Diagnostics and Repair',
-                description: 'Identifying and resolving physical issues with desktops and laptops including hard drives, RAM, motherboards, power supplies, and other components.'},
-                {id: 1, title: 'Software Troubleshooting',
-                description: 'Detection and resolution of system errors, application malfunctions, and operating system issues.'},
-                {id: 2, title: 'OS Installation & Configuration',
-                description: '  Fresh installation or reinstallation of operating system, along with driver setup and updates.'},
-                {id: 3, title: 'Component Replacement & Upgrades',
-                description: 'Replacement or upgrading of internal components such as SSDs, GPUs, CPUs, RAM, and cooling systems to optimize performance.'},
-            ]
-        },
-        
-     
-    ];
+    {
+        id: 1, 
+        name: 'Software & Systems Engineering', 
+        color: "#2500caff",
+        tagline: 'Enterprise Applications & Embedded Systems',
+        priceBadge: 'Custom Scope / Commission',
+        iconType: 'code',
+        summary: 'End-to-end engineering of scalable enterprise software architectures, reactive web and mobile platforms, and embedded microcontroller systems.',
+        jobs: [
+            {
+                id: 0, 
+                title: 'Custom Business Systems (CRM, HRIS, LMS)',
+                description: 'End-to-end development of management systems such as CRM, HRIS, Inventory (IMS), LMS, and Quality Management (QMS) suites.',
+                badge: 'CRM · HRIS · Inventory · LMS · QMS'
+            },
+            {
+                id: 1, 
+                title: 'Web & Mobile App Development',
+                description: 'Fast, responsive web applications and mobile apps (iOS & Android) built with modern frameworks and reliable APIs.'
+            },
+            {
+                id: 2, 
+                title: 'AI Integrations & Smart Automation',
+                description: 'Adding AI chatbots, automated document processing, and smart automated workflows to boost business productivity.'
+            },
+            {
+                id: 3, 
+                title: 'Open-Source System Customization',
+                description: 'Installing, modifying, and customizing open-source software and tools to perfectly match your team’s workflow.'
+            },
+            {
+                id: 4, 
+                title: 'IoT & Smart Device Programming',
+                description: 'Writing firmware and code for microcontrollers (Arduino, ESP32), sensor monitoring, automated relays, and motors.'
+            },
+            {
+                id: 5, 
+                title: 'Circuit & Hardware Prototype Design',
+                description: 'Designing electronic schematics, circuit board layouts, and assembling working hardware prototypes.'
+            },
+        ]
+    },
+    {
+        id: 3, 
+        name: 'Technical Advisory & Consulting', 
+        color: "#eff300ff",
+        tagline: 'Architecture, Feasibility & Workflow Optimization',
+        iconType: 'consulting',
+        summary: 'Strategic technical guidance, systems architecture evaluation, and engineering mentorship for startups, enterprises, and academic capstones.',
+        pricing: [
+            { duration: '20 mins', price: 'Free', note: 'Discovery Session' },
+            { duration: 'Hourly Retainer', price: '₱2,000 / hr', note: 'Technical Advisory' },
+        ],
+        jobs: [
+            {
+                id: 0, 
+                title: 'System Design & Tech Stack Selection',
+                description: 'Helping you choose the best technologies, database architecture, and frameworks tailored to your application.'
+            },
+            {
+                id: 1, 
+                title: 'Project Planning & Feasibility Roadmap',
+                description: 'Breaking down requirements into realistic development milestones, timeline estimates, and budget planning.'
+            },
+            {
+                id: 2, 
+                title: 'Workflow Automation & App Integrations',
+                description: 'Connecting third-party APIs, CRM/ERP tools, webhook automations, and streamlining repetitive manual tasks.'
+            },
+            {
+                id: 3, 
+                title: 'Hardware Parts & Component Sourcing',
+                description: 'Advising on the right microcontrollers (Arduino/ESP32), sensors, power supplies, and electronic components.'
+            },
+            {
+                id: 4, 
+                title: 'Code Review & Developer Guidance',
+                description: 'Hands-on codebase auditing, debugging assistance, architecture reviews, and engineering mentorship.'
+            },
+        ]
+    },
+    {
+        id: 2, 
+        name: 'Hardware / Mobile & PC Service', 
+        color: "#00a516ff",
+        tagline: 'Diagnostics, Maintenance & Repairs',
+        iconType: 'hardware',
+        summary: 'Professional hardware diagnostics, clean OS installation, deep cleaning, component upgrades, and screen repairs for workstations and laptops.',
+        jobs: [
+            {
+                id: 0, 
+                title: 'Basic diagnosis / checkup',
+                price: '₱600',
+                description: 'Comprehensive hardware diagnostic screening and fault isolation.'
+            },
+            {
+                id: 1, 
+                title: 'OS reinstall',
+                price: '₱1,200',
+                description: 'Clean operating system installation, driver setup, and initial configuration.'
+            },
+            {
+                id: 2, 
+                title: 'PC cleaning / dust removal',
+                price: '₱800',
+                description: 'Deep interior de-dusting, fan cleaning, and thermal paste reapplication.'
+            },
+            {
+                id: 3, 
+                title: 'Hardware installation (RAM, SSD, GPU, etc.)',
+                price: '₱600',
+                description: 'Installation and testing of RAM, SSD, GPU, power supplies, or internal peripherals.'
+            },
+            {
+                id: 4, 
+                title: 'Laptop screen replacement',
+                price: '₱2.5k – ₱8k+',
+                priceNote: 'depending on unit model',
+                description: 'Display panel replacement and calibration for cracked or damaged laptop screens.'
+            },
+        ]
+    },
+];
+
+export const homeServiceRates = [
+    { distance: '0 – 5 km', rate: '₱100 – ₱200', label: 'Tier 1 · Immediate Radius', desc: 'Antipolo & Immediate Vicinity' },
+    { distance: '5 – 10 km', rate: '₱200 – ₱350', label: 'Tier 2 · Urban Perimeter', desc: 'Surrounding Metro Areas' },
+    { distance: '10 – 20 km', rate: '₱350 – ₱500', label: 'Tier 3 · Extended Perimeter', desc: 'Greater Rizal & Outer Metro' },
+    { distance: '20+ km', rate: '₱500+', label: 'Tier 4 · Custom Dispatch', desc: 'Assessed per Location & Transit' },
+];
 
 export const skills = [
     {id: 0, type: "Language", color: "#00a516ff", items: [
@@ -378,25 +519,33 @@ export const skills = [
         {id: 0, name: "VueJS", icon: "vue.png"},
         {id: 1, name: "React", icon: "react.png"},
         {id: 2, name: "NextJS", icon: "next.png"},
-        {id: 3, name: "Ionic", icon: "ionic.png"},
-        {id: 4, name: "TailwindCSS", icon: "tailwind.png"},
-        {id: 5, name: "Vuetify", icon: "vuetify.png"},
-        {id: 6, name: "Laravel", icon: "laravel.png"},
-        {id: 7, name: "Express", icon: "express.png"},
-        {id: 8, name: "CodeIgniter", icon: "codeigniter.png"},
+        {id: 3, name: "Laravel", icon: "laravel.png"},
+        {id: 4, name: "Django", icon: "django.png"},
+        {id: 5, name: "Flutter", icon: "flutter.png"},
+        {id: 6, name: "Ionic", icon: "ionic.png"},
+        {id: 7, name: "TailwindCSS", icon: "tailwind.png"},
+        {id: 8, name: "Vuetify", icon: "vuetify.png"},
+        {id: 9, name: "Express", icon: "express.png"},
+        {id: 10, name: "CodeIgniter", icon: "codeigniter.png"},
     ]},
     {id: 3, type: "Tools", color: "#ad00cfff", items: [
         {id: 0, name: "Git", icon: "git.png"},
         {id: 1, name: "Gitlab", icon: "gitlab.png"},
         {id: 2, name: "Github", icon: "github.png"},
-        {id: 3, name: "Postman", icon: "postman.png"},
-        {id: 5, name: "Photoshop", icon: "photoshop.png"},
-        {id: 6, name: "Figma", icon: "figma.png"},
+        {id: 3, name: "Docker", icon: "docker.png"},
+        {id: 4, name: "Prometheus", icon: "prometheus.png"},
+        {id: 5, name: "Grafana", icon: "grafana.png"},
+        {id: 6, name: "Postman", icon: "postman.png"},
+        {id: 7, name: "Photoshop", icon: "photoshop.png"},
+        {id: 8, name: "Figma", icon: "figma.png"},
     ]},
     {id: 2, type: "Other Technologies / Platform", color: "#da6900ff", items: [
         {id: 0, name: "MySQL", icon: "mysql.png"},
         {id: 1, name: "AWS", icon: "aws.png"},
         {id: 2, name: "Firebase", icon: "firebase.png"},
+        {id: 3, name: "WordPress", icon: "wordpress.svg"},
+        {id: 4, name: "Gemini", icon: "gemini.svg"},
+        {id: 5, name: "Claude", icon: "claude.svg"},
     ]},
 ]
 

@@ -1,4 +1,4 @@
-const ROM_SYSTEM_PROMPT = `You are Rom, an intelligent, helpful, and friendly AI assistant embedded in the personal portfolio website of Ron Marquez.
+const ROM_SYSTEM_PROMPT = `You are RoM, an intelligent, helpful, and friendly AI assistant embedded in the personal portfolio website of Ron Marquez.
 Your primary role is to answer inquiries from prospective clients, recruiters, hiring managers, and visitors about Ron's professional background, skills, work history, projects, certifications, and availability.
 
 ### About Ron Marquez:
@@ -25,39 +25,49 @@ Your primary role is to answer inquiries from prospective clients, recruiters, h
    - Focus: Business process automation, script development, and workflow optimization.
 
 ### Key Production Projects:
-1. **Basecamp TMS (Training Monitoring System)**:
+1. **PMCIE LMS (Learning Management System)**:
+   - Web-based enterprise Learning Management System developed for the PMC Institute for Excellence (PMCIE) to manage batch administration, track trainee hours/KPIs, and deliver training across specialized tracks (e.g. Apple Ecosystem Mastery, Customer Experience).
+   - Features real-time training analytics dashboard, calendar scheduling, trainee management, and robust role-based access control.
+   - Tech: Vue.js, Laravel, MariaDB, REST APIs.
+
+2. **MobileCare Queuing (AASP Queuing System)**:
+   - Real-time customer queue management system built for MobileCare (Apple Authorized Service Provider).
+   - Features tablet/kiosk customer check-in with Courtesy Lane support, WebSocket-powered live queue boards, counter technician dispatching console, and throughput analytics.
+   - Tech: Vue.js, Laravel, MariaDB, WebSockets, Queue.
+
+3. **Basecamp TMS (Training Monitoring System)**:
    - Web-based enterprise platform streamlining the scheduling, tracking, and reporting of training activities across teams.
    - Built with role-based access control (Trainer, Supervisor, Assistant Supervisor, Manager, Director, Guest), calendar view, and custom OTRS integration to convert training requests into records.
    - Tech: Vue.js, Laravel, MariaDB, OTRS Integration, Tailwind CSS.
 
-2. **SWFS (Sterling Workforce System)**:
+4. **SWFS (Sterling Workforce System)**:
    - A modern enterprise HRIS and payroll solution built for Sterling Paper Group of Companies to replace legacy systems.
    - Ron led the implementation of major system modules including BIR Tax Computation, Alphalist Generation, Employee Clearance Processing, and Last Pay Computation.
    - Restructured data models to boost system performance and led legacy database migration.
    - Tech: Vue.js, PHP (CodeIgniter), MariaDB.
 
-3. **SPOTT (Sterling Paper Online Time Tracker)**:
+5. **SPOTT (Sterling Paper Online Time Tracker)**:
    - Mobile and web application serving as a digital Daily Time Record (DTR) for employees to track work hours accurately.
    - Ron served as Lead Developer, building RESTful APIs for user attendance logs (attlogs) and transition from manual to digital timekeeping.
    - Tech: Ionic, Vue.js, CodeIgniter, MariaDB.
 
-4. **ESS-PORTAL (Employee Self-Service Portal)**:
+6. **ESS-PORTAL (Employee Self-Service Portal)**:
    - Centralized self-service portal for employees and HR teams for timekeeping and request filing, integrated with SPOTT attendance logs.
    - Tech: Vue.js, CodeIgniter, MySQL.
 
-5. **OBS (Onboarding System)**:
+7. **OBS (Onboarding System)**:
    - Streamlines recruitment and onboarding from job posting and applications to new hire onboarding.
    - Tech: Vue.js, CodeIgniter, MySQL.
 
-6. **Asia CEO Forum Website**:
+8. **Asia CEO Forum Website**:
    - Modernized website for the premier national business event series in the Philippines.
    - Tech: Next.js, NoSQL.
 
 ### Technical Arsenal:
 - **Languages**: PHP, TypeScript, JavaScript, SQL, HTML5, CSS3, Python, C#
-- **Frameworks & Libraries**: Vue.js, React, Next.js, Node.js, Laravel, CodeIgniter, Express, Ionic, Tailwind CSS
-- **Databases**: MySQL, MariaDB, SQLite, PostgreSQL
-- **Cloud & DevOps**: AWS (EC2, S3, RDS), Git, Linux, Docker, CI/CD, Vercel
+- **Frameworks & Libraries**: Vue.js, React, Next.js, Node.js, Laravel, Django, Flutter, CodeIgniter, Express, Ionic, Tailwind CSS
+- **AI & Platforms**: Google Gemini, Anthropic Claude, MySQL, MariaDB, SQLite, PostgreSQL, Firebase, WordPress
+- **Cloud, DevOps & Monitoring**: AWS (EC2, S3, RDS), Docker, Prometheus, Grafana, Git, GitLab, GitHub, Postman, Linux, CI/CD, Vercel
 
 ### Official Certifications:
 - **AWS Cloud Practitioner Essentials** (AWS, 2026)
@@ -69,8 +79,8 @@ Your primary role is to answer inquiries from prospective clients, recruiters, h
 - **Computer System Servicing NC II** (TESDA, 2019)
 
 ### Guidelines for Responses:
-- Speak as **Rom**, Ron's virtual AI assistant. Be courteous, concise, professional, and enthusiastic.
-- When asked about specific projects like **SWFS**, **SPOTT**, **Basecamp TMS**, **ESS-PORTAL**, **OBS**, explain their purpose, technologies, and Ron's exact contributions.
+- Speak as **RoM**, Ron's virtual AI assistant. Be courteous, concise, professional, and enthusiastic.
+- When asked about specific projects like **PMCIE LMS**, **MobileCare Queuing**, **Basecamp TMS**, **SWFS**, **SPOTT**, **ESS-PORTAL**, **OBS**, explain their purpose, technologies, and Ron's exact contributions.
 - Format responses clearly with markdown formatting (bullet points, bold text, links).
 - When asked about hiring or contacting Ron, provide his email (marquez.ronrons@gmail.com) and LinkedIn link.
 `;
@@ -142,6 +152,43 @@ function generateKnowledgeReply(lastUserMessage: string): string {
     );
   }
 
+  // PMCIE LMS (Learning Management System)
+  if (
+    query.includes("pmcie") ||
+    query.includes("lms") ||
+    query.includes("learning management")
+  ) {
+    return (
+      `**PMCIE LMS (Learning Management System)** is an enterprise learning management platform built for the PMC Institute for Excellence:\n\n` +
+      `• **Purpose**: Centralizes course delivery, batch scheduling, trainee progress tracking, and training analytics across specialized organizational training programs.\n` +
+      `• **Ron's Key Contributions**:\n` +
+      `  - Architected and engineered the end-to-end LMS platform with role-based access control.\n` +
+      `  - Built an interactive Training Analytics Overview dashboard with dynamic filtering for batch counts, training hours, and feedback scores.\n` +
+      `  - Implemented batch management for tracks like Apple Ecosystem Mastery, Customer Experience, and Technical Training.\n` +
+      `  - Developed calendar scheduling and automated email notification tools for sessions.\n` +
+      `• **Tech Stack**: Vue.js, Laravel, MariaDB, REST API.`
+    );
+  }
+
+  // MobileCare Queuing (Queuing System)
+  if (
+    query.includes("mobilecare") ||
+    query.includes("queuing") ||
+    query.includes("queue") ||
+    query.includes("aasp")
+  ) {
+    return (
+      `**MobileCare Queuing** is a real-time queue management system developed for MobileCare (Apple Authorized Service Provider):\n\n` +
+      `• **Purpose**: Automates customer walk-in check-in, ticket dispensing, service desk dispatching, and waiting area displays.\n` +
+      `• **Ron's Key Contributions**:\n` +
+      `  - Engineered the full-stack queuing platform and self-service tablet/kiosk interface with Courtesy Lane support.\n` +
+      `  - Integrated WebSockets and asynchronous queue workers for zero-latency live ticket calling and status updates.\n` +
+      `  - Built the technician & admin management console for ticket handling and wait time monitoring.\n` +
+      `  - Optimized database schemas for tracking customer throughput and peak hour metrics.\n` +
+      `• **Tech Stack**: Vue.js, Laravel, MariaDB, WebSockets, Queue.`
+    );
+  }
+
   // Basecamp TMS
   if (
     query.includes("tms") ||
@@ -192,10 +239,10 @@ function generateKnowledgeReply(lastUserMessage: string): string {
   ) {
     return (
       `Here is a summary of Ron's **Technical Arsenal**:\n\n` +
-      `• **Frontend**: Vue.js, React, Next.js, TypeScript, JavaScript, Tailwind CSS, Bootstrap, Ionic\n` +
-      `• **Backend & APIs**: PHP (Laravel, CodeIgniter), Node.js, Express, Python, C#\n` +
-      `• **Databases**: MySQL, MariaDB, SQLite, PostgreSQL\n` +
-      `• **Cloud & Tools**: AWS (EC2, S3, RDS), Git, Docker, Linux, CI/CD, Vite, Vercel\n\n` +
+      `• **Frontend & Mobile**: Vue.js, React, Next.js, Flutter, TypeScript, JavaScript, Tailwind CSS, Bootstrap, Ionic\n` +
+      `• **Backend & APIs**: PHP (Laravel, CodeIgniter), Python (Django), Node.js, Express, C#\n` +
+      `• **AI & Platforms**: Google Gemini, Anthropic Claude, MySQL, MariaDB, SQLite, PostgreSQL, Firebase, WordPress\n` +
+      `• **Cloud, DevOps & Monitoring**: AWS (EC2, S3, RDS), Docker, Prometheus, Grafana, Git, GitLab, GitHub, Postman, Linux, CI/CD, Vite, Vercel\n\n` +
       `He specializes in architecting clean, maintainable systems with automated business workflows.`
     );
   }
@@ -232,12 +279,14 @@ function generateKnowledgeReply(lastUserMessage: string): string {
   ) {
     return (
       `Here are Ron's primary enterprise production platforms:\n\n` +
-      `1. **Basecamp TMS** (Training Monitoring System): Training management and scheduling with OTRS integration (Vue.js, Laravel, MariaDB).\n` +
-      `2. **SWFS** (Sterling Workforce System): Comprehensive HRIS & payroll solution with BIR Tax, Alphalist, and Last Pay computation (Vue.js, CodeIgniter, MariaDB).\n` +
-      `3. **SPOTT** (Sterling Paper Online Time Tracker): Mobile & web Daily Time Record (DTR) app (Ionic, Vue.js, CodeIgniter).\n` +
-      `4. **ESS-PORTAL** (Employee Self-Service Portal): Centralized timekeeping and HR portal integrated with SPOTT logs (Vue.js, CodeIgniter, MySQL).\n` +
-      `5. **OBS** (Onboarding System): Full recruitment and new-hire onboarding platform (Vue.js, CodeIgniter, MySQL).\n` +
-      `6. **Asia CEO Forum**: Modernized Next.js platform for national business event series.\n\n` +
+      `1. **PMCIE LMS** (Learning Management System): Training batch administration, module tracking, and analytics dashboard (Vue.js, Laravel, MariaDB).\n` +
+      `2. **MobileCare Queuing** (AASP Queuing System): Real-time customer check-in kiosk and live ticket calling platform (Vue.js, Laravel, MariaDB, WebSockets).\n` +
+      `3. **Basecamp TMS** (Training Monitoring System): Training management and scheduling with OTRS integration (Vue.js, Laravel, MariaDB).\n` +
+      `4. **SWFS** (Sterling Workforce System): Comprehensive HRIS & payroll solution with BIR Tax, Alphalist, and Last Pay computation (Vue.js, CodeIgniter, MariaDB).\n` +
+      `5. **SPOTT** (Sterling Paper Online Time Tracker): Mobile & web Daily Time Record (DTR) app (Ionic, Vue.js, CodeIgniter).\n` +
+      `6. **ESS-PORTAL** (Employee Self-Service Portal): Centralized timekeeping and HR portal integrated with SPOTT logs (Vue.js, CodeIgniter, MySQL).\n` +
+      `7. **OBS** (Onboarding System): Full recruitment and new-hire onboarding platform (Vue.js, CodeIgniter, MySQL).\n` +
+      `8. **Asia CEO Forum**: Modernized Next.js platform for national business event series.\n\n` +
       `Ask me about any specific project (e.g. *"What is SWFS?"* or *"Tell me about SPOTT"*) for more details!`
     );
   }

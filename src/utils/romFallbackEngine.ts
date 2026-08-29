@@ -69,6 +69,43 @@ export function getRomFallbackReply(userQuery: string): string {
     );
   }
 
+  // PMCIE LMS (Learning Management System)
+  if (
+    query.includes("pmcie") ||
+    query.includes("lms") ||
+    query.includes("learning management")
+  ) {
+    return (
+      `**PMCIE LMS (Learning Management System)** is an enterprise learning management platform built for the PMC Institute for Excellence:\n\n` +
+      `• **Purpose**: Centralizes course delivery, batch scheduling, trainee progress tracking, and training analytics across specialized organizational training programs.\n` +
+      `• **Ron's Key Contributions**:\n` +
+      `  - Architected and engineered the end-to-end LMS platform with role-based access control.\n` +
+      `  - Built an interactive Training Analytics Overview dashboard with dynamic filtering for batch counts, training hours, and feedback scores.\n` +
+      `  - Implemented batch management for tracks like Apple Ecosystem Mastery, Customer Experience, and Technical Training.\n` +
+      `  - Developed calendar scheduling and automated email notification tools for sessions.\n` +
+      `• **Tech Stack**: Vue.js, Laravel, MariaDB, REST API.`
+    );
+  }
+
+  // MobileCare Queuing (Queuing System)
+  if (
+    query.includes("mobilecare") ||
+    query.includes("queuing") ||
+    query.includes("queue") ||
+    query.includes("aasp")
+  ) {
+    return (
+      `**MobileCare Queuing** is a real-time queue management system developed for MobileCare (Apple Authorized Service Provider):\n\n` +
+      `• **Purpose**: Automates customer walk-in check-in, ticket dispensing, service desk dispatching, and waiting area displays.\n` +
+      `• **Ron's Key Contributions**:\n` +
+      `  - Engineered the full-stack queuing platform and self-service tablet/kiosk interface with Courtesy Lane support.\n` +
+      `  - Integrated WebSockets and asynchronous queue workers for zero-latency live ticket calling and status updates.\n` +
+      `  - Built the technician & admin management console for ticket handling and wait time monitoring.\n` +
+      `  - Optimized database schemas for tracking customer throughput and peak hour metrics.\n` +
+      `• **Tech Stack**: Vue.js, Laravel, MariaDB, WebSockets, Queue.`
+    );
+  }
+
   // Basecamp TMS / Training Monitoring System
   if (
     query.includes("tms") ||
@@ -97,6 +134,23 @@ export function getRomFallbackReply(userQuery: string): string {
       `**Asia CEO Forum** is the website for the premier business event series and annual CEO Awards in the Philippines:\n\n` +
       `• **Ron's Contributions**: Participated in the full migration and revamp to the Next.js framework, improving SEO, load performance, and modern UI responsiveness.\n` +
       `• **Tech Stack**: Next.js, NoSQL.`
+    );
+  }
+
+  // WMedLaw
+  if (
+    query.includes("wmedlaw") ||
+    query.includes("wmed") ||
+    query.includes("law firm")
+  ) {
+    return (
+      `**WMedLaw** is the digital web platform and client management portal for a Houston-based legal firm:\n\n` +
+      `• **Purpose**: Serves as the central digital face for the law firm with high availability, SEO optimization, and streamlined client intake.\n` +
+      `• **Ron's Key Contributions**:\n` +
+      `  - Engineered responsive layouts, legal service directories, and client intake workflows.\n` +
+      `  - Implemented database caching optimizations and security hardening.\n` +
+      `  - Executed technical SEO strategies to increase organic search discovery.\n` +
+      `• **Tech Stack**: WordPress, PHP, JavaScript, SEO, UI/UX.`
     );
   }
 
@@ -133,10 +187,10 @@ export function getRomFallbackReply(userQuery: string): string {
   ) {
     return (
       `Here is a summary of Ron's **Technical Arsenal**:\n\n` +
-      `• **Frontend**: Vue.js, React, Next.js, TypeScript, JavaScript, Tailwind CSS, Bootstrap, Ionic\n` +
-      `• **Backend & APIs**: PHP (Laravel, CodeIgniter), Node.js, Express, Python, C#\n` +
-      `• **Databases**: MySQL, MariaDB, SQLite, PostgreSQL\n` +
-      `• **Cloud & Tools**: AWS (EC2, S3, RDS), Git, Docker, Linux, CI/CD, Vite, Vercel\n\n` +
+      `• **Frontend & Mobile**: Vue.js, React, Next.js, Flutter, TypeScript, JavaScript, Tailwind CSS, Bootstrap, Ionic\n` +
+      `• **Backend & APIs**: PHP (Laravel, CodeIgniter), Python (Django), Node.js, Express, C#\n` +
+      `• **AI & Platforms**: Google Gemini, Anthropic Claude, MySQL, MariaDB, SQLite, PostgreSQL, Firebase, WordPress\n` +
+      `• **Cloud, DevOps & Monitoring**: AWS (EC2, S3, RDS), Docker, Prometheus, Grafana, Git, GitLab, GitHub, Postman, Linux, CI/CD, Vite, Vercel\n\n` +
       `He specializes in architecting clean, maintainable systems with automated business workflows.`
     );
   }
@@ -172,13 +226,15 @@ export function getRomFallbackReply(userQuery: string): string {
   ) {
     return (
       `Here are Ron's primary enterprise production platforms:\n\n` +
-      `1. **Basecamp TMS** (Training Monitoring System): Training management and scheduling with OTRS integration (Vue.js, Laravel, MariaDB).\n` +
-      `2. **SWFS** (Sterling Workforce System): Comprehensive HRIS & payroll solution with BIR Tax, Alphalist, and Last Pay computation (Vue.js, CodeIgniter, MariaDB).\n` +
-      `3. **SPOTT** (Sterling Paper Online Time Tracker): Mobile & web Daily Time Record (DTR) app (Ionic, Vue.js, CodeIgniter).\n` +
-      `4. **ESS-PORTAL** (Employee Self-Service Portal): Centralized timekeeping and HR portal integrated with SPOTT logs (Vue.js, CodeIgniter, MySQL).\n` +
-      `5. **OBS** (Onboarding System): Full recruitment and new-hire onboarding platform (Vue.js, CodeIgniter, MySQL).\n` +
-      `6. **Asia CEO Forum**: Modernized Next.js platform for national business event series.\n\n` +
-      `Ask me about any specific project (e.g. *"What is SWFS?"* or *"Tell me about SPOTT"*) for more details!`
+      `1. **PMCIE LMS** (Learning Management System): Training batch administration, module tracking, and analytics dashboard (Vue.js, Laravel, MariaDB).\n` +
+      `2. **MobileCare Queuing** (AASP Queuing System): Real-time customer check-in kiosk and live ticket calling platform (Vue.js, Laravel, MariaDB, WebSockets).\n` +
+      `3. **Basecamp TMS** (Training Monitoring System): Training management and scheduling with OTRS integration (Vue.js, Laravel, MariaDB).\n` +
+      `4. **SWFS** (Sterling Workforce System): Comprehensive HRIS & payroll solution with BIR Tax, Alphalist, and Last Pay computation (Vue.js, CodeIgniter, MariaDB).\n` +
+      `5. **SPOTT** (Sterling Paper Online Time Tracker): Mobile & web Daily Time Record (DTR) app (Ionic, Vue.js, CodeIgniter).\n` +
+      `6. **ESS-PORTAL** (Employee Self-Service Portal): Centralized timekeeping and HR portal integrated with SPOTT logs (Vue.js, CodeIgniter, MySQL).\n` +
+      `7. **OBS** (Onboarding System): Full recruitment and new-hire onboarding platform (Vue.js, CodeIgniter, MySQL).\n` +
+      `8. **Asia CEO Forum**: Modernized Next.js platform for national business event series.\n\n` +
+      `Ask me about any specific project (e.g. *"What is PMCIE LMS?"* or *"Tell me about MobileCare Queuing"*) for more details!`
     );
   }
 
@@ -200,6 +256,51 @@ export function getRomFallbackReply(userQuery: string): string {
       `• **IP Addressing and Subnetting** (Udemy, 2022)\n` +
       `• **Cisco Networking Foundation** (LinkedIn, 2022)\n` +
       `• **Computer System Servicing NC II** (TESDA, 2019)`
+    );
+  }
+
+  // Services & Pricing offered
+  if (
+    query.includes("service") ||
+    query.includes("offer") ||
+    query.includes("price") ||
+    query.includes("pricing") ||
+    query.includes("rate") ||
+    query.includes("cost") ||
+    query.includes("fee") ||
+    query.includes("commission") ||
+    query.includes("repair") ||
+    query.includes("consult") ||
+    query.includes("reinstall") ||
+    query.includes("cleaning") ||
+    query.includes("home service") ||
+    query.includes("home-service") ||
+    query.includes("screen")
+  ) {
+    return (
+      `Here is a technical overview of Ron's engineering services and fee schedules:\n\n` +
+      `💻 **1. Software & Systems Engineering (Custom Scope)**\n` +
+      `• **Enterprise Platform Architecture**: Custom CRM, HRIS, Inventory (IMS), LMS, and QMS suites.\n` +
+      `• **Full-Stack Web & Mobile Applications** (Vue.js, React, Next.js, Laravel, Node.js, REST/WebSocket APIs).\n` +
+      `• **AI Pipeline & Automated Workflow Integration** (LLM, RAG, smart document automation).\n` +
+      `• **Open-Source System Adaptation & API Bridging**.\n` +
+      `• **Embedded Systems & IoT Firmware** (Arduino, ESP32, multi-sensor telemetry, circuit wiring).\n\n` +
+      `🤝 **2. Technical Advisory & Consulting**\n` +
+      `• **Discovery Session (20 mins)**: **Complimentary / ₱0**\n` +
+      `• **Technical Advisory & Retainer**: **₱2,000 / hr**\n` +
+      `• *Covers systems architecture blueprinting, technical feasibility, project roadmapping, BOM sourcing, and PR/codebase audits.*\n\n` +
+      `🔧 **3. Hardware / Mobile & PC Service**\n` +
+      `• **Basic diagnosis / checkup**: **₱600**\n` +
+      `• **OS reinstall**: **₱1,200**\n` +
+      `• **PC cleaning / dust removal**: **₱800**\n` +
+      `• **Hardware installation (RAM, SSD, GPU, etc.)**: **₱600**\n` +
+      `• **Laptop screen replacement**: **₱2.5k – ₱8k+** *(depending on unit model)*\n\n` +
+      `📍 **4. On-Site Field Support Logistics (Travel Radius Tariff)**\n` +
+      `• **Tier 1 (0 – 5 km)** · Immediate Radius: **₱100 – ₱200**\n` +
+      `• **Tier 2 (5 – 10 km)** · Urban Perimeter: **₱200 – ₱350**\n` +
+      `• **Tier 3 (10 – 20 km)** · Extended Perimeter: **₱350 – ₱500**\n` +
+      `• **Tier 4 (20+ km)** · Custom Dispatch: **₱500+** *(location dependent)*\n\n` +
+      `You can navigate to the **Services** section in the portfolio or reach out directly at [marquez.ronrons@gmail.com](mailto:marquez.ronrons@gmail.com) to schedule an engagement!`
     );
   }
 

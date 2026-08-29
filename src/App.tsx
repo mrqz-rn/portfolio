@@ -15,7 +15,8 @@ import {
   Clock,
   Smile,
   Zap,
-  Keyboard
+  Keyboard,
+  Wrench
 } from "lucide-react";
 import { useState, useEffect } from "react";
 import { getMyStatus } from "./data";
@@ -31,6 +32,7 @@ import { OverviewSection } from "./components/sections/OverviewSection";
 import { ExperienceSection } from "./components/sections/ExperienceSection";
 import { ProjectsSection } from "./components/sections/ProjectsSection";
 import { StackSection } from "./components/sections/StackSection";
+import { ServicesSection } from "./components/sections/ServicesSection";
 import { ConnectSection } from "./components/sections/ConnectSection";
 
 import { preloadAssets } from "./utils/preload";
@@ -84,6 +86,7 @@ export default function App() {
                   { id: "experience", label: "Experience", icon: <Briefcase size={16} /> },
                   { id: "projects", label: "Projects", icon: <Layers size={16} /> },
                   { id: "stack", label: "Stack", icon: <Cpu size={16} /> },
+                  { id: "services", label: "Services", icon: <Wrench size={16} /> },
                   { id: "connect", label: "Connect", icon: <Globe size={16} /> },
                 ].map((item) => {
                   const isActive = activeTab === item.id;
@@ -143,6 +146,7 @@ export default function App() {
         <NavIcon icon={<Briefcase />} active={activeTab === "experience"} onClick={() => setActiveTab("experience")} />
         <NavIcon icon={<Layers />} active={activeTab === "projects"} onClick={() => setActiveTab("projects")} />
         <NavIcon icon={<Cpu />} active={activeTab === "stack"} onClick={() => setActiveTab("stack")} />
+        <NavIcon icon={<Wrench />} active={activeTab === "services"} onClick={() => setActiveTab("services")} />
         <NavIcon icon={<Globe />} active={activeTab === "connect"} onClick={() => setActiveTab("connect")} />
       </nav>
 
@@ -157,6 +161,7 @@ export default function App() {
             {activeTab === "experience" && <ExperienceSection />}
             {activeTab === "projects" && <ProjectsSection onSelectItem={setSelectedItem} />}
             {activeTab === "stack" && <StackSection />}
+            {activeTab === "services" && <ServicesSection onNavigate={setActiveTab} onSelectItem={setSelectedItem} />}
             {activeTab === "connect" && <ConnectSection />}
           </AnimatePresence>
         </div>

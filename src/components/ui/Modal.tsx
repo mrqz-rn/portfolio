@@ -81,7 +81,7 @@ export function Modal({ isOpen, onClose, item }: ModalProps) {
                   </div>
                   <div>
                     <h3 className="text-2xl font-bold text-zinc-900">{item.position || item.name}</h3>
-                    <p className="text-zinc-500 font-mono text-sm">{item.company || item.desc}</p>
+                    <p className="text-zinc-500 font-mono text-sm">{item.company || item.desc || (item.projectCategory === 'side' ? 'Side Project / IoT Prototype' : 'Project')}</p>
                   </div>
                 </div>
 

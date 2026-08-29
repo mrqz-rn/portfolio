@@ -36,7 +36,7 @@ export function ChatBot() {
     {
       id: "welcome",
       role: "assistant",
-      content: "Hi! I'm **Rom**, Ron's virtual AI assistant. Ask me anything about Ron's work history, tech stack, enterprise projects, or how to get in touch!",
+      content: "Hi! I'm **RoM**, Ron's virtual AI assistant. Ask me anything about Ron's work history, tech stack, enterprise projects, or how to get in touch!",
       timestamp: new Date()
     }
   ]);
@@ -177,14 +177,14 @@ export function ChatBot() {
             exit={{ scale: 0.8, opacity: 0 }}
             onClick={() => setIsOpen(true)}
             className="group relative flex items-center gap-3 px-4 py-3 bg-zinc-900 text-white rounded-full shadow-2xl hover:bg-black hover:scale-105 active:scale-95 transition-all duration-200 cursor-pointer border border-zinc-700/50"
-            aria-label="Open AI Assistant Rom"
+            aria-label="Open AI Assistant RoM"
           >
             <div className="relative">
               <Bot className="w-5 h-5 text-blue-400 group-hover:rotate-12 transition-transform" />
               <span className="absolute -top-1 -right-1 w-2.5 h-2.5 bg-emerald-500 rounded-full border-2 border-zinc-900 animate-pulse" />
             </div>
             <div className="flex items-center gap-1.5 font-mono text-xs font-semibold tracking-wide">
-              <span>Ask Rom</span>
+              <span>Ask RoM</span>
               <Sparkles size={13} className="text-yellow-400" />
             </div>
 
@@ -216,7 +216,7 @@ export function ChatBot() {
                 </div>
                 <div>
                   <div className="flex items-center gap-1.5">
-                    <h3 className="font-bold text-sm text-zinc-900 font-mono">Rom</h3>
+                    <h3 className="font-bold text-sm text-zinc-900 font-mono">RoM</h3>
                     <span className="text-[10px] font-mono px-1.5 py-0.2 bg-blue-50 text-blue-700 border border-blue-200/60 rounded">AI</span>
                   </div>
                   <p className="text-[11px] text-zinc-500 font-mono">Ron&apos;s Assistant · AI</p>
@@ -336,7 +336,7 @@ export function ChatBot() {
                 type="text"
                 value={input}
                 onChange={(e) => setInput(e.target.value)}
-                placeholder="Ask Rom anything about Ron..."
+                placeholder="Ask RoM anything about Ron..."
                 disabled={isLoading}
                 className="flex-1 px-3.5 py-2.5 bg-white border border-zinc-200 rounded-xl text-xs text-zinc-900 placeholder:text-zinc-400 focus:outline-none focus:border-zinc-900 transition-colors font-mono disabled:opacity-60"
               />
