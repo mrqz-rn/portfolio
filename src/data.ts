@@ -140,7 +140,7 @@ export const certs = [
       title: 'Technical Support Fundamentals', 
       issuer: 'Google/Coursera', 
       issued: '2022', 
-      icon: '/certs/coursera.svg',
+      icon: '/certs/coursera.png',
       details: ['']   
     },
     {
@@ -148,7 +148,7 @@ export const certs = [
       title: 'IP Addressing and Subnetting', 
       issuer: 'Udemy', 
       issued: '2022', 
-      icon: '/certs/udemy.svg',
+      icon: '/certs/udemy.png',
       details: ['']   
     },
     {
@@ -164,7 +164,7 @@ export const certs = [
       title: 'Computer System Servicing NC II', 
       issuer: 'TESDA', 
       issued: '2019', 
-      icon: '/certs/tesda.svg',
+      icon: '/certs/tesda.png',
       details: ['']   
     },
 ];
