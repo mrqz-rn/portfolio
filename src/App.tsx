@@ -31,6 +31,7 @@ import { SocialIcon } from "./components/ui/SocialIcon";
 import { Modal } from "./components/ui/Modal";
 import { ChatBot } from "./components/chat/ChatBot";
 import { AuthModal } from "./components/auth/AuthModal";
+import { BlogAnnouncementModal } from "./components/ui/BlogAnnouncementModal";
 
 // Contexts
 import { AuthProvider, useAuth } from "./contexts/AuthContext";
@@ -329,6 +330,9 @@ function PortfolioApp() {
 
       {/* User Auth Modal */}
       <AuthModal />
+
+      {/* Blog Launch Countdown Announcement Overlay */}
+      <BlogAnnouncementModal onNavigateToBlog={() => setActiveTab("blog")} />
 
       {/* AI Assistant ChatBot */}
       <ChatBot />

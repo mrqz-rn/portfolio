@@ -1,5 +1,5 @@
-import React, { createContext, useContext, useEffect, useState, ReactNode } from "react";
-import { User, Session } from "@supabase/supabase-js";
+import { createContext, useContext, useEffect, useState, ReactNode } from "react";
+import { User } from "@supabase/supabase-js";
 import { supabase, isSupabaseConfigured, Profile } from "../lib/supabase";
 
 interface AuthContextType {
@@ -19,7 +19,15 @@ interface AuthContextType {
 
 const AuthContext = createContext<AuthContextType | undefined>(undefined);
 
-const ADMIN_EMAIL = import.meta.env.VITE_ADMIN_EMAIL || "marquez.ronrons@gmail.com";
+const ADMIN_EMAILS = [
+  (import.meta.env.VITE_ADMIN_EMAIL || "marquez.ronrons@gmail.com").toLowerCase(),
+  "marquez.ronrons@gmail.com"
+];
+
+const checkIsAdminEmail = (email?: string | null) => {
+  if (!email) return false;
+  return ADMIN_EMAILS.includes(email.toLowerCase());
+};
 
 export function AuthProvider({ children }: { children: ReactNode }) {
   const [user, setUser] = useState<User | null>(null);
@@ -39,8 +47,8 @@ export function AuthProvider({ children }: { children: ReactNode }) {
 
   // Fetch or construct profile
   const fetchProfile = async (currentUser: User) => {
+    const isUserAdmin = checkIsAdminEmail(currentUser.email);
     if (!isSupabaseConfigured) {
-      const isUserAdmin = currentUser.email?.toLowerCase() === ADMIN_EMAIL.toLowerCase();
       const mockProfile: Profile = {
         id: currentUser.id,
         email: currentUser.email || "",
@@ -61,10 +69,14 @@ export function AuthProvider({ children }: { children: ReactNode }) {
         .single();
 
       if (data) {
-        setProfile(data as Profile);
+        // If user is admin by email, ensure role is reflected
+        const updatedProfile = {
+          ...data,
+          role: isUserAdmin ? "admin" : (data.role || "user")
+        } as Profile;
+        setProfile(updatedProfile);
       } else if (error) {
         // Create profile if missing
-        const isUserAdmin = currentUser.email?.toLowerCase() === ADMIN_EMAIL.toLowerCase();
         const newProfile: Profile = {
           id: currentUser.id,
           email: currentUser.email || "",
@@ -82,6 +94,13 @@ export function AuthProvider({ children }: { children: ReactNode }) {
   };
 
   useEffect(() => {
+    // Clean up OAuth hash fragment from URL if present
+    if (window.location.hash.includes("access_token")) {
+      setTimeout(() => {
+        window.history.replaceState({}, document.title, window.location.pathname);
+      }, 500);
+    }
+
     if (!isSupabaseConfigured) {
       // Check local storage mock session if any
       const savedUser = localStorage.getItem("demo_auth_user");
@@ -127,12 +146,11 @@ export function AuthProvider({ children }: { children: ReactNode }) {
 
   const signInWithGoogle = async () => {
     if (!isSupabaseConfigured) {
-      // Mock Google sign-in in demo mode
       const mockGoogleUser = {
         id: "demo-google-user-" + Date.now(),
-        email: "visitor@gmail.com",
+        email: "ronmrqz13@gmail.com",
         user_metadata: {
-          full_name: "Google Visitor",
+          full_name: "Ron Marquez",
           avatar_url: "https://images.unsplash.com/photo-1535713875002-d1d0cf377fde?auto=format&fit=crop&w=150&q=80"
         }
       } as unknown as User;
@@ -153,8 +171,8 @@ export function AuthProvider({ children }: { children: ReactNode }) {
   };
 
   const signInWithEmail = async (email: string, password: string) => {
+    const isUserAdmin = checkIsAdminEmail(email);
     if (!isSupabaseConfigured) {
-      const isUserAdmin = email.toLowerCase() === ADMIN_EMAIL.toLowerCase();
       const mockUser = {
         id: isUserAdmin ? "admin-user" : "demo-user-" + Date.now(),
         email,
@@ -181,8 +199,8 @@ export function AuthProvider({ children }: { children: ReactNode }) {
   };
 
   const signUpWithEmail = async (email: string, password: string, fullName: string) => {
+    const isUserAdmin = checkIsAdminEmail(email);
     if (!isSupabaseConfigured) {
-      const isUserAdmin = email.toLowerCase() === ADMIN_EMAIL.toLowerCase();
       const mockUser = {
         id: isUserAdmin ? "admin-user" : "demo-user-" + Date.now(),
         email,
@@ -228,7 +246,7 @@ export function AuthProvider({ children }: { children: ReactNode }) {
 
   const isAdmin = Boolean(
     profile?.role === "admin" ||
-    (user?.email && user.email.toLowerCase() === ADMIN_EMAIL.toLowerCase())
+    checkIsAdminEmail(user?.email)
   );
 
   return (
