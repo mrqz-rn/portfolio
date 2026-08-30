@@ -25,7 +25,7 @@ interface Message {
 
 const STARTER_PROMPTS = [
   "What are Ron's core technical skills?",
-  "Tell me about the Basecamp TMS project",
+  "What are Ron's projects?",
   "What is Ron's work experience?",
   "How can I get in touch with Ron?"
 ];
@@ -257,7 +257,7 @@ export function ChatBot() {
                   )}
 
                   <div
-                    className={`max-w-[88%] px-4 py-3 rounded-2xl text-xs leading-relaxed overflow-hidden ${
+                    className={`max-w-[92%] sm:max-w-[88%] px-4 py-3 rounded-2xl text-xs leading-relaxed overflow-hidden ${
                       msg.role === "user"
                         ? "bg-zinc-900 dark:bg-blue-600 text-white rounded-tr-xs"
                         : "bg-zinc-50 dark:bg-zinc-900/90 text-zinc-800 dark:text-zinc-200 border border-zinc-200/80 dark:border-zinc-800 rounded-tl-xs shadow-2xs"
@@ -269,7 +269,7 @@ export function ChatBot() {
                       </div>
                     ) : (
                       <div 
-                        className="space-y-1 overflow-x-auto custom-scrollbar text-zinc-800 dark:text-zinc-200"
+                        className="space-y-1 text-zinc-800 dark:text-zinc-200 break-words"
                         dangerouslySetInnerHTML={{ 
                           __html: parseMarkdownToHtml(msg.content) 
                         }} 

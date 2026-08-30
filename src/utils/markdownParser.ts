@@ -154,16 +154,21 @@ export function parseMarkdownToHtml(markdown: string): string {
       if (!inTable) {
         inTable = true;
         tableHeaderParsed = false;
-        htmlLines.push('<div class="overflow-x-auto my-3"><table class="w-full text-[11px] border border-zinc-200/90 rounded-xl overflow-hidden border-collapse bg-white shadow-2xs">');
-        htmlLines.push('<thead class="bg-zinc-100/90"><tr>');
-        rawCells.forEach(cell => {
-          htmlLines.push(`<th class="border border-zinc-200 px-3 py-2 text-left font-bold text-zinc-900 font-mono">${formatInline(cell)}</th>`);
+        htmlLines.push('<div class="overflow-x-auto my-3 rounded-xl border border-zinc-200/90 dark:border-zinc-800 bg-white dark:bg-[#121826] shadow-2xs overscroll-x-contain custom-scrollbar">');
+        htmlLines.push('<table class="min-w-[460px] w-full text-[11px] border-collapse text-left">');
+        htmlLines.push('<thead class="bg-zinc-100/90 dark:bg-zinc-800/90 border-b border-zinc-200/90 dark:border-zinc-800"><tr>');
+        rawCells.forEach((cell, cellIdx) => {
+          const isFirstCol = cellIdx === 0;
+          htmlLines.push(`<th class="px-3 py-2 text-left font-bold text-zinc-900 dark:text-zinc-100 font-mono text-[11px] ${isFirstCol ? 'w-10 whitespace-nowrap' : 'whitespace-nowrap'}">${formatInline(cell)}</th>`);
         });
-        htmlLines.push('</tr></thead><tbody>');
+        htmlLines.push('</tr></thead><tbody class="divide-y divide-zinc-200/70 dark:divide-zinc-800">');
       } else {
-        htmlLines.push('<tr class="hover:bg-zinc-50/80 transition-colors">');
-        rawCells.forEach(cell => {
-          htmlLines.push(`<td class="border border-zinc-200 px-3 py-2 text-zinc-700 leading-relaxed">${formatInline(cell)}</td>`);
+        htmlLines.push('<tr class="hover:bg-zinc-50/80 dark:hover:bg-zinc-800/50 transition-colors">');
+        rawCells.forEach((cell, cellIdx) => {
+          const isFirstCol = cellIdx === 0;
+          htmlLines.push(
+            `<td class="px-3 py-2 text-zinc-700 dark:text-zinc-300 leading-relaxed align-top ${isFirstCol ? 'font-mono whitespace-nowrap text-zinc-500 dark:text-zinc-400 font-semibold' : ''}">${formatInline(cell)}</td>`
+          );
         });
         htmlLines.push('</tr>');
       }
