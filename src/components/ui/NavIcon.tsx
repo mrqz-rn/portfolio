@@ -22,7 +22,7 @@ export function NavIcon({ icon, active, onClick, label }: NavIconProps) {
     >
       {icon}
       {label && (
-        <span className="absolute left-full ml-4 px-2 py-1 bg-white dark:bg-zinc-800 border border-zinc-200 dark:border-zinc-700 text-zinc-800 dark:text-zinc-200 text-[10px] rounded shadow-sm opacity-0 group-hover:opacity-100 transition-opacity whitespace-nowrap pointer-events-none z-50">
+        <span className="max-md:hidden absolute left-full ml-4 px-2 py-1 bg-white dark:bg-zinc-800 border border-zinc-200 dark:border-zinc-700 text-zinc-800 dark:text-zinc-200 text-[10px] rounded shadow-sm opacity-0 group-hover:opacity-100 transition-opacity whitespace-nowrap pointer-events-none z-50">
           {label}
         </span>
       )}

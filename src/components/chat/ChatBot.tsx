@@ -167,7 +167,7 @@ export function ChatBot() {
   };
 
   return (
-    <div className="fixed bottom-6 right-6 z-50 font-sans">
+    <div className="fixed bottom-20 right-4 md:bottom-6 md:right-6 z-40 md:z-50 font-sans">
       {/* Floating Trigger Button */}
       <AnimatePresence>
         {!isOpen && (
@@ -176,11 +176,11 @@ export function ChatBot() {
             animate={{ scale: 1, opacity: 1 }}
             exit={{ scale: 0.8, opacity: 0 }}
             onClick={() => setIsOpen(true)}
-            className="group relative flex items-center gap-3 px-4 py-3 bg-zinc-900 text-white rounded-full shadow-2xl hover:bg-black hover:scale-105 active:scale-95 transition-all duration-200 cursor-pointer border border-zinc-700/50"
+            className="group relative flex items-center gap-2.5 sm:gap-3 px-3.5 sm:px-4 py-2.5 sm:py-3 bg-zinc-900 text-white rounded-full shadow-2xl hover:bg-black hover:scale-105 active:scale-95 transition-all duration-200 cursor-pointer border border-zinc-700/50"
             aria-label="Open AI Assistant RoM"
           >
             <div className="relative">
-              <Bot className="w-5 h-5 text-blue-400 group-hover:rotate-12 transition-transform" />
+              <Bot className="w-4 h-4 sm:w-5 sm:h-5 text-blue-400 group-hover:rotate-12 transition-transform" />
               <span className="absolute -top-1 -right-1 w-2.5 h-2.5 bg-emerald-500 rounded-full border-2 border-zinc-900 animate-pulse" />
             </div>
             <div className="flex items-center gap-1.5 font-mono text-xs font-semibold tracking-wide">
@@ -205,7 +205,7 @@ export function ChatBot() {
             animate={{ opacity: 1, scale: 1, y: 0 }}
             exit={{ opacity: 0, scale: 0.9, y: 20 }}
             transition={{ duration: 0.2 }}
-            className="w-[90vw] sm:w-[400px] h-[580px] max-h-[85vh] bg-white dark:bg-[#101622] border border-zinc-200/90 dark:border-zinc-800 rounded-3xl shadow-2xl flex flex-col overflow-hidden text-zinc-900 dark:text-zinc-100 relative"
+            className="w-[calc(100vw-2rem)] max-w-[400px] sm:w-[400px] h-[560px] max-h-[calc(100dvh-6.5rem)] bg-white dark:bg-[#101622] border border-zinc-200/90 dark:border-zinc-800 rounded-3xl shadow-2xl flex flex-col overflow-hidden text-zinc-900 dark:text-zinc-100 relative"
           >
             {/* Header */}
             <div className="p-4 px-5 bg-zinc-50 dark:bg-zinc-900 border-b border-zinc-200/80 dark:border-zinc-800 flex items-center justify-between">
