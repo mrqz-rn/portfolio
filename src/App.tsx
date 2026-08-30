@@ -42,7 +42,7 @@ import { ProjectsSection } from "./components/sections/ProjectsSection";
 import { StackSection } from "./components/sections/StackSection";
 import { ServicesSection } from "./components/sections/ServicesSection";
 import { ConnectSection } from "./components/sections/ConnectSection";
-import { BlogSection } from "./components/blog/BlogSection";
+import { BlogPlaceholder } from "./components/blog/BlogPlaceholder";
 
 import { preloadAssets } from "./utils/preload";
 
@@ -311,7 +311,7 @@ function PortfolioApp() {
             )}
             {activeTab === "experience" && <ExperienceSection />}
             {activeTab === "projects" && <ProjectsSection onSelectItem={setSelectedItem} />}
-            {activeTab === "blog" && <BlogSection />}
+            {activeTab === "blog" && <BlogPlaceholder />}
             {activeTab === "stack" && <StackSection />}
             {activeTab === "services" && <ServicesSection onNavigate={setActiveTab} onSelectItem={setSelectedItem} />}
             {activeTab === "connect" && <ConnectSection />}
