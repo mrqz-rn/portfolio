@@ -61,6 +61,7 @@ function PortfolioApp() {
 
   const { user, profile, isAdmin, openAuthModal, signOut } = useAuth();
   const status = getMyStatus();
+  const ENABLE_AUTH = import.meta.env.VITE_ENABLE_AUTH === "true"; // Disabled until Blog launch
 
   useEffect(() => {
     const root = document.documentElement;
@@ -101,30 +102,32 @@ function PortfolioApp() {
         <div className="font-bold text-sm text-zinc-900 dark:text-white font-mono">Ron Marquez</div>
         
         <div className="flex items-center gap-2">
-          {/* Mobile User Profile / Login Button */}
-          {user ? (
-            <div className="flex items-center gap-1.5 p-1 px-2.5 rounded-xl bg-white dark:bg-zinc-800 border border-zinc-200 dark:border-zinc-700 text-xs font-mono">
-              <span className="w-2 h-2 rounded-full bg-emerald-500" />
-              <span className="truncate max-w-[90px] text-zinc-800 dark:text-zinc-200 font-medium">
-                {profile?.full_name?.split(" ")[0] || "User"}
-              </span>
+          {/* Mobile User Profile / Login Button (Disabled until Blog Launch) */}
+          {ENABLE_AUTH && (
+            user ? (
+              <div className="flex items-center gap-1.5 p-1 px-2.5 rounded-xl bg-white dark:bg-zinc-800 border border-zinc-200 dark:border-zinc-700 text-xs font-mono">
+                <span className="w-2 h-2 rounded-full bg-emerald-500" />
+                <span className="truncate max-w-[90px] text-zinc-800 dark:text-zinc-200 font-medium">
+                  {profile?.full_name?.split(" ")[0] || "User"}
+                </span>
+                <button
+                  onClick={signOut}
+                  aria-label="Sign Out"
+                  title="Sign Out"
+                  className="text-zinc-400 hover:text-red-500 p-0.5"
+                >
+                  <LogOut size={12} />
+                </button>
+              </div>
+            ) : (
               <button
-                onClick={signOut}
-                aria-label="Sign Out"
-                title="Sign Out"
-                className="text-zinc-400 hover:text-red-500 p-0.5"
+                onClick={() => openAuthModal("signin")}
+                className="flex items-center gap-1.5 px-2.5 py-1.5 rounded-xl bg-zinc-900 dark:bg-white text-white dark:text-zinc-900 text-xs font-mono font-bold shadow-xs active:scale-95 transition-all"
               >
-                <LogOut size={12} />
+                <LogIn size={12} />
+                <span>Sign In</span>
               </button>
-            </div>
-          ) : (
-            <button
-              onClick={() => openAuthModal("signin")}
-              className="flex items-center gap-1.5 px-2.5 py-1.5 rounded-xl bg-zinc-900 dark:bg-white text-white dark:text-zinc-900 text-xs font-mono font-bold shadow-xs active:scale-95 transition-all"
-            >
-              <LogIn size={12} />
-              <span>Sign In</span>
-            </button>
+            )
           )}
 
           {/* Mobile Theme Toggle */}
@@ -182,59 +185,61 @@ function PortfolioApp() {
 
         {/* Bottom Section */}
         <div className="space-y-4 pt-4 border-t border-zinc-200/80 dark:border-zinc-800/80">
-          {/* User Profile / Auth Status Widget */}
-          <div className="p-3 rounded-2xl bg-zinc-50 dark:bg-zinc-900 border border-zinc-200/80 dark:border-zinc-800">
-            {user ? (
-              <div className="space-y-2">
-                <div className="flex items-center justify-between">
-                  <div className="flex items-center gap-2.5 overflow-hidden">
-                    <div className="w-7 h-7 rounded-full bg-zinc-900 dark:bg-zinc-800 text-white flex items-center justify-center font-bold text-xs shrink-0 overflow-hidden">
-                      {profile?.avatar_url ? (
-                        <img src={profile.avatar_url} alt="User Avatar" className="w-full h-full object-cover" />
-                      ) : (
-                        <UserIcon size={13} />
-                      )}
-                    </div>
-                    <div className="truncate">
-                      <div className="text-xs font-bold font-mono text-zinc-900 dark:text-white truncate">
-                        {profile?.full_name || user.email?.split("@")[0]}
+          {/* User Profile / Auth Status Widget (Disabled until Blog Launch) */}
+          {ENABLE_AUTH && (
+            <div className="p-3 rounded-2xl bg-zinc-50 dark:bg-zinc-900 border border-zinc-200/80 dark:border-zinc-800">
+              {user ? (
+                <div className="space-y-2">
+                  <div className="flex items-center justify-between">
+                    <div className="flex items-center gap-2.5 overflow-hidden">
+                      <div className="w-7 h-7 rounded-full bg-zinc-900 dark:bg-zinc-800 text-white flex items-center justify-center font-bold text-xs shrink-0 overflow-hidden">
+                        {profile?.avatar_url ? (
+                          <img src={profile.avatar_url} alt="User Avatar" className="w-full h-full object-cover" />
+                        ) : (
+                          <UserIcon size={13} />
+                        )}
                       </div>
-                      <div className="text-[10px] font-mono text-zinc-400 truncate">
-                        {user.email}
+                      <div className="truncate">
+                        <div className="text-xs font-bold font-mono text-zinc-900 dark:text-white truncate">
+                          {profile?.full_name || user.email?.split("@")[0]}
+                        </div>
+                        <div className="text-[10px] font-mono text-zinc-400 truncate">
+                          {user.email}
+                        </div>
                       </div>
                     </div>
+
+                    {isAdmin && (
+                      <span className="px-1.5 py-0.5 rounded bg-blue-50 dark:bg-blue-950/70 text-blue-700 dark:text-blue-300 font-mono text-[9px] font-bold border border-blue-200 dark:border-blue-800">
+                        ADMIN
+                      </span>
+                    )}
                   </div>
 
-                  {isAdmin && (
-                    <span className="px-1.5 py-0.5 rounded bg-blue-50 dark:bg-blue-950/70 text-blue-700 dark:text-blue-300 font-mono text-[9px] font-bold border border-blue-200 dark:border-blue-800">
-                      ADMIN
-                    </span>
-                  )}
+                  <button
+                    onClick={signOut}
+                    className="w-full flex items-center justify-center gap-1.5 py-1.5 rounded-lg bg-zinc-100 dark:bg-zinc-800 hover:bg-red-50 dark:hover:bg-red-950/40 text-zinc-600 hover:text-red-600 dark:text-zinc-400 dark:hover:text-red-300 font-mono text-[10px] font-semibold transition-colors cursor-pointer"
+                  >
+                    <LogOut size={11} />
+                    <span>Sign Out</span>
+                  </button>
                 </div>
-
-                <button
-                  onClick={signOut}
-                  className="w-full flex items-center justify-center gap-1.5 py-1.5 rounded-lg bg-zinc-100 dark:bg-zinc-800 hover:bg-red-50 dark:hover:bg-red-950/40 text-zinc-600 hover:text-red-600 dark:text-zinc-400 dark:hover:text-red-300 font-mono text-[10px] font-semibold transition-colors cursor-pointer"
-                >
-                  <LogOut size={11} />
-                  <span>Sign Out</span>
-                </button>
-              </div>
-            ) : (
-              <div className="text-center space-y-2">
-                <div className="text-[10px] font-mono text-zinc-500 dark:text-zinc-400">
-                  Join discussion & like posts
+              ) : (
+                <div className="text-center space-y-2">
+                  <div className="text-[10px] font-mono text-zinc-500 dark:text-zinc-400">
+                    Join discussion & like posts
+                  </div>
+                  <button
+                    onClick={() => openAuthModal("signin")}
+                    className="w-full flex items-center justify-center gap-1.5 py-2 rounded-xl bg-zinc-900 dark:bg-white text-white dark:text-zinc-900 font-mono text-xs font-bold hover:bg-black dark:hover:bg-zinc-100 transition-all cursor-pointer shadow-xs active:scale-95"
+                  >
+                    <LogIn size={13} />
+                    <span>Sign In / Register</span>
+                  </button>
                 </div>
-                <button
-                  onClick={() => openAuthModal("signin")}
-                  className="w-full flex items-center justify-center gap-1.5 py-2 rounded-xl bg-zinc-900 dark:bg-white text-white dark:text-zinc-900 font-mono text-xs font-bold hover:bg-black dark:hover:bg-zinc-100 transition-all cursor-pointer shadow-xs active:scale-95"
-                >
-                  <LogIn size={13} />
-                  <span>Sign In / Register</span>
-                </button>
-              </div>
-            )}
-          </div>
+              )}
+            </div>
+          )}
 
           {/* Side Nav Theme Toggle */}
           <div className="space-y-1.5">
