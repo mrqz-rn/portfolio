@@ -21,8 +21,7 @@ const AuthContext = createContext<AuthContextType | undefined>(undefined);
 
 const ADMIN_EMAILS = [
   (import.meta.env.VITE_ADMIN_EMAIL || "marquez.ronrons@gmail.com").toLowerCase(),
-  "marquez.ronrons@gmail.com",
-  "ronmrqz13@gmail.com"
+  "marquez.ronrons@gmail.com"
 ];
 
 const checkIsAdminEmail = (email?: string | null) => {
