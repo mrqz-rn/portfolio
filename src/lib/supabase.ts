@@ -1,22 +1,13 @@
 import { createClient } from "@supabase/supabase-js";
 
-const getSupabaseUrl = () => {
-  const raw = (import.meta.env.VITE_SUPABASE_URL || "").trim();
-  const cleaned = raw.replace(/\/rest\/v1\/?$/, "").replace(/\/+$/, "");
-  
-  if (typeof window !== "undefined" && window.location.hostname.endsWith("ronmarquez.tech")) {
-    return window.location.origin;
-  }
-  return cleaned || "https://vgnfvkycjdckedpifcyl.supabase.co";
-};
-
-const supabaseUrl = getSupabaseUrl();
+const rawUrl = (import.meta.env.VITE_SUPABASE_URL || "").trim();
+const supabaseUrl = rawUrl.replace(/\/rest\/v1\/?$/, "").replace(/\/+$/, "") || "https://vgnfvkycjdckedpifcyl.supabase.co";
 const supabaseAnonKey = (import.meta.env.VITE_SUPABASE_ANON_KEY || "").trim();
 
 export const isSupabaseConfigured = Boolean(
   supabaseUrl && 
   supabaseAnonKey && 
-  supabaseUrl.startsWith("http") &&
+  supabaseUrl.startsWith("https://") &&
   !supabaseUrl.includes("your-project-id") &&
   !supabaseAnonKey.includes("your-anon-public-key") &&
   supabaseAnonKey.length > 20
