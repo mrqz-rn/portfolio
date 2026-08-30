@@ -6,7 +6,6 @@ import {
   Layers, 
   Github, 
   Linkedin, 
-  MapPin, 
   Briefcase,
   Activity,
   Moon,
@@ -15,9 +14,13 @@ import {
   Sunrise,
   Clock,
   Smile,
-  Zap,
   Keyboard,
-  Wrench
+  Wrench,
+  BookOpen,
+  LogIn,
+  LogOut,
+  User as UserIcon,
+  Sparkles
 } from "lucide-react";
 import { useState, useEffect } from "react";
 import { getMyStatus } from "./data";
@@ -27,6 +30,10 @@ import { NavIcon } from "./components/ui/NavIcon";
 import { SocialIcon } from "./components/ui/SocialIcon";
 import { Modal } from "./components/ui/Modal";
 import { ChatBot } from "./components/chat/ChatBot";
+import { AuthModal } from "./components/auth/AuthModal";
+
+// Contexts
+import { AuthProvider, useAuth } from "./contexts/AuthContext";
 
 // Section Components
 import { OverviewSection } from "./components/sections/OverviewSection";
@@ -35,10 +42,11 @@ import { ProjectsSection } from "./components/sections/ProjectsSection";
 import { StackSection } from "./components/sections/StackSection";
 import { ServicesSection } from "./components/sections/ServicesSection";
 import { ConnectSection } from "./components/sections/ConnectSection";
+import { BlogSection } from "./components/blog/BlogSection";
 
 import { preloadAssets } from "./utils/preload";
 
-export default function App() {
+function PortfolioApp() {
   const [activeTab, setActiveTab] = useState("overview");
   const [time, setTime] = useState(new Date());
   const [selectedItem, setSelectedItem] = useState<any>(null);
@@ -51,6 +59,7 @@ export default function App() {
     return "light";
   });
 
+  const { user, profile, isAdmin, openAuthModal, signOut } = useAuth();
   const status = getMyStatus();
 
   useEffect(() => {
@@ -63,17 +72,6 @@ export default function App() {
     localStorage.setItem("theme", theme);
   }, [theme]);
 
-  const getStatusIcon = (statusText: string) => {
-    const s = statusText.toLowerCase();
-    if (s.includes('sleeping')) return <Moon size={28} className="text-indigo-400 animate-pulse" />;
-    if (s.includes('resting')) return <Coffee size={28} className="text-amber-600" />;
-    if (s.includes('grinding')) return <Keyboard size={28} className="text-nexus-accent animate-bounce" />;
-    if (s.includes('starting')) return <Sunrise size={28} className="text-orange-400" />;
-    if (s.includes('waiting')) return <Clock size={28} className="text-nexus-muted" />;
-    if (s.includes('free')) return <Smile size={28} className="text-emerald-400" />;
-    return <Activity size={28} />;
-  };
-
   useEffect(() => {
     preloadAssets();
     const timer = setInterval(() => setTime(new Date()), 1000);
@@ -82,6 +80,16 @@ export default function App() {
 
   const closeModal = () => setSelectedItem(null);
 
+  const navItems = [
+    { id: "overview", label: "Overview", icon: <Terminal size={16} /> },
+    { id: "experience", label: "Experience", icon: <Briefcase size={16} /> },
+    { id: "projects", label: "Projects", icon: <Layers size={16} /> },
+    { id: "blog", label: "Blog", icon: <BookOpen size={16} /> },
+    { id: "stack", label: "Stack", icon: <Cpu size={16} /> },
+    { id: "services", label: "Services", icon: <Wrench size={16} /> },
+    { id: "connect", label: "Connect", icon: <Globe size={16} /> },
+  ];
+
   return (
     <div className="min-h-screen bg-[#f5f7ff] dark:bg-[#090d16] grid-pattern relative overflow-hidden text-zinc-900 dark:text-zinc-100 transition-colors duration-300">
       {/* Background Ambient Glows */}
@@ -89,32 +97,56 @@ export default function App() {
       <div className="absolute bottom-[-10%] right-[-10%] w-[40%] h-[40%] bg-indigo-500/5 dark:bg-indigo-600/10 blur-[120px] rounded-full pointer-events-none" />
 
       {/* Mobile Top Header */}
-      <header className="w-full md:hidden flex items-center justify-between px-6 py-4 border-b border-zinc-200 dark:border-zinc-800 bg-[#f5f7ff]/90 dark:bg-[#090d16]/90 backdrop-blur-xl sticky top-0 z-40">
+      <header className="w-full md:hidden flex items-center justify-between px-5 py-3.5 border-b border-zinc-200 dark:border-zinc-800 bg-[#f5f7ff]/90 dark:bg-[#090d16]/90 backdrop-blur-xl sticky top-0 z-40">
         <div className="font-bold text-sm text-zinc-900 dark:text-white font-mono">Ron Marquez</div>
-        <button
-          onClick={() => setTheme(theme === "light" ? "dark" : "light")}
-          className="flex items-center gap-2 px-3 py-1.5 rounded-xl bg-white dark:bg-zinc-800 border border-zinc-200 dark:border-zinc-700 text-xs font-mono text-zinc-700 dark:text-zinc-200 shadow-xs cursor-pointer active:scale-95 transition-all"
-          aria-label="Toggle theme"
-        >
-          {theme === "light" ? (
-            <>
-              <Sun size={13} className="text-amber-500" />
-              <span>Light</span>
-            </>
+        
+        <div className="flex items-center gap-2">
+          {/* Mobile User Profile / Login Button */}
+          {user ? (
+            <div className="flex items-center gap-1.5 p-1 px-2.5 rounded-xl bg-white dark:bg-zinc-800 border border-zinc-200 dark:border-zinc-700 text-xs font-mono">
+              <span className="w-2 h-2 rounded-full bg-emerald-500" />
+              <span className="truncate max-w-[90px] text-zinc-800 dark:text-zinc-200 font-medium">
+                {profile?.full_name?.split(" ")[0] || "User"}
+              </span>
+              <button
+                onClick={signOut}
+                aria-label="Sign Out"
+                title="Sign Out"
+                className="text-zinc-400 hover:text-red-500 p-0.5"
+              >
+                <LogOut size={12} />
+              </button>
+            </div>
           ) : (
-            <>
-              <Moon size={13} className="text-blue-400" />
-              <span>Dark</span>
-            </>
+            <button
+              onClick={() => openAuthModal("signin")}
+              className="flex items-center gap-1.5 px-2.5 py-1.5 rounded-xl bg-zinc-900 dark:bg-white text-white dark:text-zinc-900 text-xs font-mono font-bold shadow-xs active:scale-95 transition-all"
+            >
+              <LogIn size={12} />
+              <span>Sign In</span>
+            </button>
           )}
-        </button>
+
+          {/* Mobile Theme Toggle */}
+          <button
+            onClick={() => setTheme(theme === "light" ? "dark" : "light")}
+            className="flex items-center gap-1.5 p-2 rounded-xl bg-white dark:bg-zinc-800 border border-zinc-200 dark:border-zinc-700 text-xs font-mono text-zinc-700 dark:text-zinc-200 shadow-xs cursor-pointer active:scale-95 transition-all"
+            aria-label="Toggle theme"
+          >
+            {theme === "light" ? (
+              <Sun size={13} className="text-amber-500" />
+            ) : (
+              <Moon size={13} className="text-blue-400" />
+            )}
+          </button>
+        </div>
       </header>
 
       {/* Extended Sidebar */}
       <aside className="fixed left-0 top-0 h-full w-64 border-r border-zinc-200/80 dark:border-zinc-800/80 bg-white/90 dark:bg-[#0f1422]/90 backdrop-blur-xl flex flex-col justify-between p-6 z-50 max-md:hidden overflow-y-auto custom-scrollbar">
         {/* Top Header */}
         <div>
-          <div className="mb-8 px-3">
+          <div className="mb-6 px-3">
             <h2 className="font-bold text-base text-zinc-900 dark:text-white tracking-tight">Ron Marquez</h2>
           </div>
 
@@ -123,14 +155,7 @@ export default function App() {
             <div>
               <div className="text-[10px] font-mono uppercase tracking-widest text-zinc-400 dark:text-zinc-500 px-3 mb-2">Navigation</div>
               <nav className="space-y-1">
-                {[
-                  { id: "overview", label: "Overview", icon: <Terminal size={16} /> },
-                  { id: "experience", label: "Experience", icon: <Briefcase size={16} /> },
-                  { id: "projects", label: "Projects", icon: <Layers size={16} /> },
-                  { id: "stack", label: "Stack", icon: <Cpu size={16} /> },
-                  { id: "services", label: "Services", icon: <Wrench size={16} /> },
-                  { id: "connect", label: "Connect", icon: <Globe size={16} /> },
-                ].map((item) => {
+                {navItems.map((item) => {
                   const isActive = activeTab === item.id;
                   return (
                     <button
@@ -156,7 +181,61 @@ export default function App() {
         </div>
 
         {/* Bottom Section */}
-        <div className="space-y-4 pt-6 border-t border-zinc-200/80 dark:border-zinc-800/80">
+        <div className="space-y-4 pt-4 border-t border-zinc-200/80 dark:border-zinc-800/80">
+          {/* User Profile / Auth Status Widget */}
+          <div className="p-3 rounded-2xl bg-zinc-50 dark:bg-zinc-900 border border-zinc-200/80 dark:border-zinc-800">
+            {user ? (
+              <div className="space-y-2">
+                <div className="flex items-center justify-between">
+                  <div className="flex items-center gap-2.5 overflow-hidden">
+                    <div className="w-7 h-7 rounded-full bg-zinc-900 dark:bg-zinc-800 text-white flex items-center justify-center font-bold text-xs shrink-0 overflow-hidden">
+                      {profile?.avatar_url ? (
+                        <img src={profile.avatar_url} alt="User Avatar" className="w-full h-full object-cover" />
+                      ) : (
+                        <UserIcon size={13} />
+                      )}
+                    </div>
+                    <div className="truncate">
+                      <div className="text-xs font-bold font-mono text-zinc-900 dark:text-white truncate">
+                        {profile?.full_name || user.email?.split("@")[0]}
+                      </div>
+                      <div className="text-[10px] font-mono text-zinc-400 truncate">
+                        {user.email}
+                      </div>
+                    </div>
+                  </div>
+
+                  {isAdmin && (
+                    <span className="px-1.5 py-0.5 rounded bg-blue-50 dark:bg-blue-950/70 text-blue-700 dark:text-blue-300 font-mono text-[9px] font-bold border border-blue-200 dark:border-blue-800">
+                      ADMIN
+                    </span>
+                  )}
+                </div>
+
+                <button
+                  onClick={signOut}
+                  className="w-full flex items-center justify-center gap-1.5 py-1.5 rounded-lg bg-zinc-100 dark:bg-zinc-800 hover:bg-red-50 dark:hover:bg-red-950/40 text-zinc-600 hover:text-red-600 dark:text-zinc-400 dark:hover:text-red-300 font-mono text-[10px] font-semibold transition-colors cursor-pointer"
+                >
+                  <LogOut size={11} />
+                  <span>Sign Out</span>
+                </button>
+              </div>
+            ) : (
+              <div className="text-center space-y-2">
+                <div className="text-[10px] font-mono text-zinc-500 dark:text-zinc-400">
+                  Join discussion & like posts
+                </div>
+                <button
+                  onClick={() => openAuthModal("signin")}
+                  className="w-full flex items-center justify-center gap-1.5 py-2 rounded-xl bg-zinc-900 dark:bg-white text-white dark:text-zinc-900 font-mono text-xs font-bold hover:bg-black dark:hover:bg-zinc-100 transition-all cursor-pointer shadow-xs active:scale-95"
+                >
+                  <LogIn size={13} />
+                  <span>Sign In / Register</span>
+                </button>
+              </div>
+            )}
+          </div>
+
           {/* Side Nav Theme Toggle */}
           <div className="space-y-1.5">
             <div className="text-[10px] font-mono uppercase tracking-widest text-zinc-400 dark:text-zinc-500 px-3">Theme</div>
@@ -211,14 +290,15 @@ export default function App() {
         </div>
       </aside>
 
-      {/* Mobile Nav */}
-      <nav className="fixed bottom-0 left-0 w-full h-16 bg-white/95 dark:bg-[#0f1422]/95 backdrop-blur-xl border-t border-zinc-200 dark:border-zinc-800 flex items-center justify-around z-50 md:hidden px-4">
-        <NavIcon icon={<Terminal />} label="Overview" active={activeTab === "overview"} onClick={() => setActiveTab("overview")} />
-        <NavIcon icon={<Briefcase />} label="Experience" active={activeTab === "experience"} onClick={() => setActiveTab("experience")} />
-        <NavIcon icon={<Layers />} label="Projects" active={activeTab === "projects"} onClick={() => setActiveTab("projects")} />
-        <NavIcon icon={<Cpu />} label="Stack" active={activeTab === "stack"} onClick={() => setActiveTab("stack")} />
-        <NavIcon icon={<Wrench />} label="Services" active={activeTab === "services"} onClick={() => setActiveTab("services")} />
-        <NavIcon icon={<Globe />} label="Connect" active={activeTab === "connect"} onClick={() => setActiveTab("connect")} />
+      {/* Mobile Bottom Navigation Dock */}
+      <nav className="fixed bottom-0 left-0 w-full h-16 bg-white/95 dark:bg-[#0f1422]/95 backdrop-blur-xl border-t border-zinc-200 dark:border-zinc-800 flex items-center justify-around z-50 md:hidden px-2">
+        <NavIcon icon={<Terminal size={18} />} label="Overview" active={activeTab === "overview"} onClick={() => setActiveTab("overview")} />
+        <NavIcon icon={<Briefcase size={18} />} label="Experience" active={activeTab === "experience"} onClick={() => setActiveTab("experience")} />
+        <NavIcon icon={<Layers size={18} />} label="Projects" active={activeTab === "projects"} onClick={() => setActiveTab("projects")} />
+        <NavIcon icon={<BookOpen size={18} />} label="Blog" active={activeTab === "blog"} onClick={() => setActiveTab("blog")} />
+        <NavIcon icon={<Cpu size={18} />} label="Stack" active={activeTab === "stack"} onClick={() => setActiveTab("stack")} />
+        <NavIcon icon={<Wrench size={18} />} label="Services" active={activeTab === "services"} onClick={() => setActiveTab("services")} />
+        <NavIcon icon={<Globe size={18} />} label="Connect" active={activeTab === "connect"} onClick={() => setActiveTab("connect")} />
       </nav>
 
       {/* Main Content Area */}
@@ -231,6 +311,7 @@ export default function App() {
             )}
             {activeTab === "experience" && <ExperienceSection />}
             {activeTab === "projects" && <ProjectsSection onSelectItem={setSelectedItem} />}
+            {activeTab === "blog" && <BlogSection />}
             {activeTab === "stack" && <StackSection />}
             {activeTab === "services" && <ServicesSection onNavigate={setActiveTab} onSelectItem={setSelectedItem} />}
             {activeTab === "connect" && <ConnectSection />}
@@ -238,8 +319,11 @@ export default function App() {
         </div>
       </main>
 
-      {/* Modal */}
+      {/* Item Modal (Projects/Experience) */}
       <Modal isOpen={!!selectedItem} onClose={closeModal} item={selectedItem} />
+
+      {/* User Auth Modal */}
+      <AuthModal />
 
       {/* AI Assistant ChatBot */}
       <ChatBot />
@@ -255,3 +339,12 @@ export default function App() {
     </div>
   );
 }
+
+export default function App() {
+  return (
+    <AuthProvider>
+      <PortfolioApp />
+    </AuthProvider>
+  );
+}
+
