@@ -10,6 +10,7 @@ interface ModalProps {
 
 export function Modal({ isOpen, onClose, item }: ModalProps) {
   const [currentIndex, setCurrentIndex] = useState(0);
+  const [direction, setDirection] = useState(0);
   const [orientation, setOrientation] = useState<'landscape' | 'portrait'>('landscape');
   const [imageLoading, setImageLoading] = useState(true);
   const imgRef = useRef<HTMLImageElement>(null);
@@ -20,8 +21,34 @@ export function Modal({ isOpen, onClose, item }: ModalProps) {
   useEffect(() => {
     if (isOpen) {
       setCurrentIndex(0);
+      setDirection(0);
     }
   }, [isOpen, item]);
+
+  const nextImage = () => {
+    setDirection(1);
+    setCurrentIndex((prev) => (prev + 1) % images.length);
+  };
+
+  const prevImage = () => {
+    setDirection(-1);
+    setCurrentIndex((prev) => (prev - 1 + images.length) % images.length);
+  };
+
+  const goToImage = (index: number) => {
+    setDirection(index > currentIndex ? 1 : -1);
+    setCurrentIndex(index);
+  };
+
+  useEffect(() => {
+    if (!isOpen || !hasMultipleImages) return;
+    const handleKeyDown = (e: KeyboardEvent) => {
+      if (e.key === "ArrowRight") nextImage();
+      if (e.key === "ArrowLeft") prevImage();
+    };
+    window.addEventListener("keydown", handleKeyDown);
+    return () => window.removeEventListener("keydown", handleKeyDown);
+  }, [isOpen, hasMultipleImages, images.length]);
 
   useEffect(() => {
     setImageLoading(true);
@@ -48,8 +75,20 @@ export function Modal({ isOpen, onClose, item }: ModalProps) {
 
   if (!item) return null;
 
-  const nextImage = () => setCurrentIndex((prev) => (prev + 1) % images.length);
-  const prevImage = () => setCurrentIndex((prev) => (prev - 1 + images.length) % images.length);
+  const slideVariants = {
+    enter: (dir: number) => ({
+      x: dir > 0 ? "100%" : dir < 0 ? "-100%" : 0,
+      opacity: 0,
+    }),
+    center: {
+      x: 0,
+      opacity: 1,
+    },
+    exit: (dir: number) => ({
+      x: dir > 0 ? "-100%" : dir < 0 ? "100%" : 0,
+      opacity: 0,
+    }),
+  };
 
   return (
     <AnimatePresence>
@@ -147,26 +186,48 @@ export function Modal({ isOpen, onClose, item }: ModalProps) {
               {/* Image Section */}
               <div className={`${orientation === 'portrait' ? 'flex justify-center md:w-1/2 md:h-full bg-zinc-900 dark:bg-black' : 'w-full'} relative group`}>
                 {images.length > 0 ? (
-                  <div className={`relative ${orientation === 'portrait' ? 'h-[400px] md:h-full' : 'aspect-video bg-zinc-900 dark:bg-black'} overflow-hidden flex items-center justify-center`}>
+                  <div className={`relative ${orientation === 'portrait' ? 'h-[400px] md:h-full' : 'aspect-video bg-zinc-900 dark:bg-black'} overflow-hidden flex items-center justify-center select-none`}>
                     {imageLoading && (
-                      <div className="absolute inset-0 flex items-center justify-center bg-zinc-900/60 z-0">
+                      <div className="absolute inset-0 flex items-center justify-center bg-zinc-900/60 z-0 pointer-events-none">
                         <div className="w-8 h-8 rounded-full border-2 border-zinc-400 border-t-white animate-spin" />
                       </div>
                     )}
-                    <AnimatePresence mode="wait">
-                      <motion.img
+                    <AnimatePresence initial={false} custom={direction} mode="popLayout">
+                      <motion.div
                         key={currentIndex}
-                        src={images[currentIndex]}
-                        alt={`${item.name} ${currentIndex + 1}`}
-                        initial={{ opacity: 0 }}
-                        animate={{ opacity: 1 }}
-                        exit={{ opacity: 0 }}
-                        onLoad={handleImageLoad}
-                        loading="eager"
-                        decoding="async"
-                        className={`${orientation === 'portrait' ? 'h-[65vh] object-contain' : 'w-full h-full object-contain'} relative z-10`}
-                        referrerPolicy="no-referrer"
-                      />
+                        custom={direction}
+                        variants={slideVariants}
+                        initial="enter"
+                        animate="center"
+                        exit="exit"
+                        transition={{
+                          x: { type: "spring", stiffness: 300, damping: 30 },
+                          opacity: { duration: 0.2 }
+                        }}
+                        drag={hasMultipleImages ? "x" : false}
+                        dragConstraints={{ left: 0, right: 0 }}
+                        dragElastic={0.3}
+                        onDragEnd={(_, { offset, velocity }) => {
+                          const swipeThreshold = 50;
+                          if (offset.x < -swipeThreshold || velocity.x < -400) {
+                            nextImage();
+                          } else if (offset.x > swipeThreshold || velocity.x > 400) {
+                            prevImage();
+                          }
+                        }}
+                        className="w-full h-full flex items-center justify-center touch-pan-y cursor-grab active:cursor-grabbing"
+                      >
+                        <img
+                          src={images[currentIndex]}
+                          alt={`${item.name} ${currentIndex + 1}`}
+                          onLoad={handleImageLoad}
+                          loading="eager"
+                          decoding="async"
+                          draggable={false}
+                          className={`${orientation === 'portrait' ? 'h-[65vh] object-contain' : 'w-full h-full object-contain'} pointer-events-none select-none relative z-10`}
+                          referrerPolicy="no-referrer"
+                        />
+                      </motion.div>
                     </AnimatePresence>
 
                     {hasMultipleImages && (
@@ -174,23 +235,43 @@ export function Modal({ isOpen, onClose, item }: ModalProps) {
                         <button 
                           onClick={(e) => { e.stopPropagation(); prevImage(); }}
                           aria-label="Previous image"
-                          className="absolute left-4 top-1/2 -translate-y-1/2 p-2 rounded-full bg-black/60 text-white opacity-0 group-hover:opacity-100 transition-opacity hover:bg-black cursor-pointer z-20"
+                          className="absolute left-3 top-1/2 -translate-y-1/2 p-2 sm:p-2.5 rounded-full bg-black/60 hover:bg-black text-white opacity-90 md:opacity-0 md:group-hover:opacity-100 transition-all hover:scale-105 active:scale-95 cursor-pointer z-20 shadow-md"
                         >
                           <ChevronLeft size={20} />
                         </button>
                         <button 
                           onClick={(e) => { e.stopPropagation(); nextImage(); }}
                           aria-label="Next image"
-                          className="absolute right-4 top-1/2 -translate-y-1/2 p-2 rounded-full bg-black/60 text-white opacity-0 group-hover:opacity-100 transition-opacity hover:bg-black cursor-pointer z-20"
+                          className="absolute right-3 top-1/2 -translate-y-1/2 p-2 sm:p-2.5 rounded-full bg-black/60 hover:bg-black text-white opacity-90 md:opacity-0 md:group-hover:opacity-100 transition-all hover:scale-105 active:scale-95 cursor-pointer z-20 shadow-md"
                         >
                           <ChevronRight size={20} />
                         </button>
-                        <div className="absolute bottom-4 left-1/2 -translate-x-1/2 flex gap-2 z-20">
+                        
+                        {/* Counter Badge */}
+                        <div className="absolute top-3 right-3 px-2.5 py-1 bg-black/60 backdrop-blur-md text-white text-[11px] font-mono rounded-full z-20 flex items-center gap-1 shadow-sm select-none pointer-events-none">
+                          <span className="font-bold">{currentIndex + 1}</span>
+                          <span className="text-zinc-400">/</span>
+                          <span>{images.length}</span>
+                        </div>
+
+                        {/* Interactive Dots */}
+                        <div className="absolute bottom-3 left-1/2 -translate-x-1/2 flex items-center gap-1 px-2.5 py-1 bg-black/50 backdrop-blur-md rounded-full z-20 shadow-sm">
                           {images.map((_: any, i: number) => (
-                            <div 
+                            <button
                               key={i}
-                              className={`w-1.5 h-1.5 rounded-full transition-all ${i === currentIndex ? 'bg-white w-4' : 'bg-white/40'}`}
-                            />
+                              onClick={(e) => {
+                                e.stopPropagation();
+                                goToImage(i);
+                              }}
+                              aria-label={`Go to slide ${i + 1}`}
+                              className="p-1 cursor-pointer flex items-center justify-center focus:outline-none"
+                            >
+                              <span 
+                                className={`block h-1.5 rounded-full transition-all duration-300 ${
+                                  i === currentIndex ? 'bg-white w-4 shadow-xs' : 'bg-white/40 w-1.5 hover:bg-white/75'
+                                }`}
+                              />
+                            </button>
                           ))}
                         </div>
                       </>

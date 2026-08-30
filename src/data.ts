@@ -124,7 +124,7 @@ export const certs = [
       title: 'Lean Six Sigma White Belt', 
       issuer: 'Council for Six Sigma Certification', 
       issued: '2026', 
-      icon: '/certs/cssc.svg',
+      icon: '/certs/cssc.webp',
       details: ['']   
     },
     {
@@ -132,7 +132,7 @@ export const certs = [
       title: 'Atlassian Agile Project Management Professional', 
       issuer: 'Atlassian', 
       issued: '2025', 
-      icon: '/certs/atlassian.svg',
+      icon: '/certs/atlassian.webp',
       details: ['']   
     },
     {
@@ -140,7 +140,7 @@ export const certs = [
       title: 'Technical Support Fundamentals', 
       issuer: 'Google/Coursera', 
       issued: '2022', 
-      icon: '/certs/coursera.svg',
+      icon: '/certs/coursera.webp',
       details: ['']   
     },
     {
@@ -148,7 +148,7 @@ export const certs = [
       title: 'IP Addressing and Subnetting', 
       issuer: 'Udemy', 
       issued: '2022', 
-      icon: '/certs/udemy.svg',
+      icon: '/certs/udemy.webp',
       details: ['']   
     },
     {
@@ -164,7 +164,7 @@ export const certs = [
       title: 'Computer System Servicing NC II', 
       issuer: 'TESDA', 
       issued: '2019', 
-      icon: '/certs/tesda.svg',
+      icon: '/certs/tesda.webp',
       details: ['']   
     },
 ];
