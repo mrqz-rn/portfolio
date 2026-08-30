@@ -76,7 +76,7 @@ export function BlogPlaceholder() {
             <div className="flex flex-wrap items-center gap-3 pt-2">
               <div className="flex items-center gap-2 px-4 py-2 rounded-xl bg-zinc-100 dark:bg-zinc-800/80 border border-zinc-200/80 dark:border-zinc-700 font-mono text-xs text-zinc-800 dark:text-zinc-200 font-semibold shadow-xs">
                 <Calendar size={14} className="text-blue-500" />
-                <span>Target Go-Live: <strong>September 13, 2026</strong></span>
+                <span>Target Go-Live: <strong>September 20, 2026</strong></span>
               </div>
               <div className="flex items-center gap-2 px-4 py-2 rounded-xl bg-emerald-50 dark:bg-emerald-950/50 border border-emerald-200 dark:border-emerald-800 font-mono text-xs text-emerald-700 dark:text-emerald-300 font-semibold shadow-xs">
                 <Sparkles size={14} />
