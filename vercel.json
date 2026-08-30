@@ -1,4 +1,22 @@
 {
+  "rewrites": [
+    {
+      "source": "/auth/v1/:path*",
+      "destination": "https://vgnfvkycjdckedpifcyl.supabase.co/auth/v1/:path*"
+    },
+    {
+      "source": "/rest/v1/:path*",
+      "destination": "https://vgnfvkycjdckedpifcyl.supabase.co/rest/v1/:path*"
+    },
+    {
+      "source": "/storage/v1/:path*",
+      "destination": "https://vgnfvkycjdckedpifcyl.supabase.co/storage/v1/:path*"
+    },
+    {
+      "source": "/functions/v1/:path*",
+      "destination": "https://vgnfvkycjdckedpifcyl.supabase.co/functions/v1/:path*"
+    }
+  ],
   "headers": [
     {
       "source": "/(.*)",
