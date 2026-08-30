@@ -2,19 +2,19 @@
   "rewrites": [
     {
       "source": "/auth/v1/:path*",
-      "destination": "https://vgnfvkycjdckedpifcyl.supabase.co/auth/v1/:path*"
+      "destination": "/api/supabase"
     },
     {
       "source": "/rest/v1/:path*",
-      "destination": "https://vgnfvkycjdckedpifcyl.supabase.co/rest/v1/:path*"
+      "destination": "/api/supabase"
     },
     {
       "source": "/storage/v1/:path*",
-      "destination": "https://vgnfvkycjdckedpifcyl.supabase.co/storage/v1/:path*"
+      "destination": "/api/supabase"
     },
     {
       "source": "/functions/v1/:path*",
-      "destination": "https://vgnfvkycjdckedpifcyl.supabase.co/functions/v1/:path*"
+      "destination": "/api/supabase"
     }
   ],
   "headers": [
