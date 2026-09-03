@@ -538,8 +538,123 @@ Stay tuned for more deep dives on hardware-software integration!
   }
 ];
 
+// ---------------------------------------------------------------------------
+// Blog Post Persistence & Deletion Tracking
+// ---------------------------------------------------------------------------
+
+const DELETED_POSTS_STORAGE_KEY = "rom_deleted_blog_post_ids";
+
+export function getDeletedPostIdentifiers(): string[] {
+  if (typeof window === "undefined") return [];
+  try {
+    const raw = localStorage.getItem(DELETED_POSTS_STORAGE_KEY);
+    return raw ? JSON.parse(raw) : [];
+  } catch (e) {
+    return [];
+  }
+}
+
+export function isPostDeleted(identifier?: string | null): boolean {
+  if (!identifier) return false;
+  const deleted = getDeletedPostIdentifiers();
+  const lower = identifier.toLowerCase().trim();
+  return deleted.some(item => item.toLowerCase() === lower);
+}
+
+export function markPostAsDeleted(id: string, slug?: string): void {
+  if (typeof window === "undefined") return;
+  try {
+    const deleted = getDeletedPostIdentifiers();
+    const toAdd = [id];
+    if (slug) toAdd.push(slug);
+    const updated = Array.from(new Set([...deleted, ...toAdd]));
+    localStorage.setItem(DELETED_POSTS_STORAGE_KEY, JSON.stringify(updated));
+  } catch (e) {
+    // ignore
+  }
+}
+
+export function unmarkPostAsDeleted(id: string, slug?: string): void {
+  if (typeof window === "undefined") return;
+  try {
+    const deleted = getDeletedPostIdentifiers();
+    const idLower = id.toLowerCase();
+    const slugLower = slug?.toLowerCase();
+    const updated = deleted.filter(item => {
+      const l = item.toLowerCase();
+      return l !== idLower && l !== slugLower;
+    });
+    localStorage.setItem(DELETED_POSTS_STORAGE_KEY, JSON.stringify(updated));
+  } catch (e) {
+    // ignore
+  }
+}
+
+export function getActiveDemoPosts(): BlogPost[] {
+  const deleted = getDeletedPostIdentifiers().map(d => d.toLowerCase());
+  return INITIAL_DEMO_POSTS.filter(
+    p => !deleted.includes(p.id.toLowerCase()) && !deleted.includes(p.slug.toLowerCase())
+  );
+}
+
+/**
+ * Permanently deletes a blog post:
+ * 1. Records ID and slug in persistent deleted storage so page refresh NEVER restores it
+ * 2. Cascades deletion to Supabase posts, likes, and comments
+ * 3. Removes from any local cache
+ */
+export async function deleteBlogPost(postId: string, slug?: string): Promise<{ success: boolean; error?: any }> {
+  // 1. Immediately persist to deleted records
+  markPostAsDeleted(postId, slug);
+
+  // 2. Remove from local custom posts if stored
+  if (typeof window !== "undefined") {
+    try {
+      const localCustom = localStorage.getItem("rom_custom_blog_posts");
+      if (localCustom) {
+        const posts: BlogPost[] = JSON.parse(localCustom);
+        const filtered = posts.filter(p => p.id !== postId && p.slug !== slug);
+        localStorage.setItem("rom_custom_blog_posts", JSON.stringify(filtered));
+      }
+    } catch (e) {
+      // ignore
+    }
+  }
+
+  // 3. Delete from Supabase cloud database if configured
+  if (isSupabaseConfigured) {
+    try {
+      // Delete dependent likes and comments first
+      await Promise.allSettled([
+        supabase.from("likes").delete().eq("post_id", postId),
+        supabase.from("comments").delete().eq("post_id", postId)
+      ]);
+
+      const { error } = await supabase
+        .from("posts")
+        .delete()
+        .eq("id", postId);
+
+      if (error) {
+        console.warn("Supabase post deletion warning:", error);
+        return { success: false, error };
+      }
+    } catch (err) {
+      console.warn("deleteBlogPost Supabase error:", err);
+      return { success: false, error: err };
+    }
+  }
+
+  return { success: true };
+}
+
 export async function fetchPostBySlug(slug: string): Promise<BlogPost | null> {
   const normalizedSlug = slug.trim().toLowerCase();
+
+  // If this post was deleted by an admin, never return it
+  if (isPostDeleted(normalizedSlug)) {
+    return null;
+  }
 
   if (isSupabaseConfigured) {
     try {
@@ -550,6 +665,11 @@ export async function fetchPostBySlug(slug: string): Promise<BlogPost | null> {
         .maybeSingle();
 
       if (!error && data) {
+        // If the database record id was marked deleted, skip it
+        if (isPostDeleted(data.id)) {
+          return null;
+        }
+
         const [{ count: likesCount }, { count: commentsCount }] = await Promise.all([
           supabase.from("likes").select("*", { count: "exact", head: true }).eq("post_id", data.id),
           supabase.from("comments").select("*", { count: "exact", head: true }).eq("post_id", data.id)
@@ -566,8 +686,8 @@ export async function fetchPostBySlug(slug: string): Promise<BlogPost | null> {
     }
   }
 
-  // Fallback to local demo posts
-  const found = INITIAL_DEMO_POSTS.find(
+  // Fallback to active demo posts (excluding any deleted ones)
+  const found = getActiveDemoPosts().find(
     p => p.slug.toLowerCase() === normalizedSlug ||
          (normalizedSlug === "architecting-enterprise-hris-payroll-systems" && p.slug === "enterprise-hris-payroll")
   );

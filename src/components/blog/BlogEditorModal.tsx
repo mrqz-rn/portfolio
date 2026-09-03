@@ -1,7 +1,7 @@
 import { useState, useEffect } from "react";
 import { motion, AnimatePresence } from "motion/react";
 import { X, Save, Eye, Edit3, Trash2, Image, Tag, AlertCircle, Loader2, Sparkles, Link as LinkIcon, Check, Copy } from "lucide-react";
-import { BlogPost, isSupabaseConfigured, supabase } from "../../lib/supabase";
+import { BlogPost, isSupabaseConfigured, supabase, deleteBlogPost, unmarkPostAsDeleted } from "../../lib/supabase";
 import { useAuth } from "../../contexts/AuthContext";
 import { MarkdownRenderer } from "../ui/MarkdownRenderer";
 
@@ -127,6 +127,7 @@ export function BlogEditorModal({
             .single();
 
           if (error) throw error;
+          unmarkPostAsDeleted(data.id, data.slug);
           onSaveSuccess(data as BlogPost, true);
         }
       } else {
@@ -146,6 +147,7 @@ export function BlogEditorModal({
           likes_count: isEditing && postToEdit ? (postToEdit.likes_count || 0) : 0,
           comments_count: isEditing && postToEdit ? (postToEdit.comments_count || 0) : 0
         };
+        unmarkPostAsDeleted(savedPost.id, savedPost.slug);
         onSaveSuccess(savedPost, !isEditing);
       }
       onClose();
@@ -165,13 +167,9 @@ export function BlogEditorModal({
     setErrorMsg("");
 
     try {
-      if (isSupabaseConfigured) {
-        const { error } = await supabase
-          .from("posts")
-          .delete()
-          .eq("id", postToEdit.id);
-
-        if (error) throw error;
+      const result = await deleteBlogPost(postToEdit.id, postToEdit.slug);
+      if (!result.success && result.error) {
+        throw result.error;
       }
       if (onDeleteSuccess) {
         onDeleteSuccess(postToEdit.id);
