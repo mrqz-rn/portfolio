@@ -17,6 +17,7 @@ export async function renderMermaidDiagrams(container: HTMLElement) {
   if (elements.length === 0) return;
 
   const isDark = document.documentElement.classList.contains("dark");
+  const currentTheme = isDark ? "dark" : "light";
   const unhandledElements: HTMLElement[] = [];
 
   // 1. Process instant pre-rendered diagrams (0ms latency, zero dependencies)
@@ -28,6 +29,9 @@ export async function renderMermaidDiagrams(container: HTMLElement) {
     const preRendered = getPreRenderedDiagram(code, isDark);
 
     if (preRendered) {
+      if (el.getAttribute("data-rendered-theme") === currentTheme) {
+        continue;
+      }
       const target = el.querySelector(".mermaid-svg-target");
       if (target) {
         target.innerHTML = preRendered;
@@ -38,13 +42,16 @@ export async function renderMermaidDiagrams(container: HTMLElement) {
           svgEl.style.display = "block";
           svgEl.style.margin = "0 auto";
         }
+        el.setAttribute("data-rendered-theme", currentTheme);
       }
     } else {
-      unhandledElements.push(el);
+      if (el.getAttribute("data-rendered-theme") !== currentTheme) {
+        unhandledElements.push(el);
+      }
     }
   }
 
-  // If all diagrams were pre-rendered, return immediately!
+  // If all diagrams were pre-rendered or already rendered, return immediately!
   if (unhandledElements.length === 0) {
     return;
   }
@@ -96,6 +103,7 @@ export async function renderMermaidDiagrams(container: HTMLElement) {
             svgEl.style.display = "block";
             svgEl.style.margin = "0 auto";
           }
+          el.setAttribute("data-rendered-theme", currentTheme);
         }
       } catch (renderError) {
         console.warn("Mermaid render error:", renderError);
@@ -108,6 +116,7 @@ export async function renderMermaidDiagrams(container: HTMLElement) {
             <div class="text-[11px] font-mono font-bold text-zinc-500 uppercase tracking-wider mb-2">Diagram Source Code</div>
             <pre class="font-mono text-xs text-zinc-700 dark:text-zinc-300">${code.replace(/</g, "&lt;").replace(/>/g, "&gt;")}</pre>
           </div>`;
+          el.setAttribute("data-rendered-theme", currentTheme);
         }
       }
     }

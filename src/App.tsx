@@ -74,11 +74,25 @@ function parseRoute(pathname: string): { tab: string; blogSlug: string | null } 
   return { tab: "overview", blogSlug: null };
 }
 
+function LocalTimeDisplay() {
+  const [time, setTime] = useState(() => new Date());
+
+  useEffect(() => {
+    const timer = setInterval(() => setTime(new Date()), 1000);
+    return () => clearInterval(timer);
+  }, []);
+
+  return (
+    <div className="text-zinc-700 dark:text-zinc-300 text-[11px] font-mono truncate font-medium">
+      {time.toLocaleTimeString()} PHT
+    </div>
+  );
+}
+
 function PortfolioApp() {
   const initialRoute = typeof window !== "undefined" ? parseRoute(window.location.pathname) : { tab: "overview", blogSlug: null };
   const [activeTab, setActiveTab] = useState<string>(initialRoute.tab);
   const [blogSlug, setBlogSlug] = useState<string | null>(initialRoute.blogSlug);
-  const [time, setTime] = useState(new Date());
   const [selectedItem, setSelectedItem] = useState<any>(null);
   const [theme, setTheme] = useState<"light" | "dark">(() => {
     if (typeof window !== "undefined") {
@@ -104,8 +118,6 @@ function PortfolioApp() {
 
   useEffect(() => {
     preloadAssets();
-    const timer = setInterval(() => setTime(new Date()), 1000);
-    return () => clearInterval(timer);
   }, []);
 
   useEffect(() => {
@@ -344,9 +356,7 @@ function PortfolioApp() {
               </span>
               <span className="text-emerald-700 dark:text-emerald-400 font-bold text-[10px]">{status.toUpperCase()}</span>
             </div>
-            <div className="text-zinc-700 dark:text-zinc-300 text-[11px] font-mono truncate font-medium">
-              {time.toLocaleTimeString()} PHT
-            </div>
+            <LocalTimeDisplay />
           </div>
 
           {/* Social Icons */}

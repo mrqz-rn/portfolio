@@ -1,4 +1,4 @@
-import { useEffect, useRef } from "react";
+import { useEffect, useRef, useMemo, memo } from "react";
 import { parseMarkdownToHtml } from "../../utils/markdownParser";
 import { renderMermaidDiagrams } from "../../utils/mermaidRenderer";
 
@@ -7,9 +7,13 @@ interface MarkdownRendererProps {
   className?: string;
 }
 
-export function MarkdownRenderer({ content, className = "" }: MarkdownRendererProps) {
+export const MarkdownRenderer = memo(function MarkdownRenderer({
+  content,
+  className = ""
+}: MarkdownRendererProps) {
   const containerRef = useRef<HTMLDivElement>(null);
-  const html = parseMarkdownToHtml(content);
+  const html = useMemo(() => parseMarkdownToHtml(content), [content]);
+  const innerHtml = useMemo(() => ({ __html: html }), [html]);
 
   useEffect(() => {
     if (!containerRef.current) return;
@@ -43,7 +47,7 @@ export function MarkdownRenderer({ content, className = "" }: MarkdownRendererPr
     <div
       ref={containerRef}
       className={className}
-      dangerouslySetInnerHTML={{ __html: html }}
+      dangerouslySetInnerHTML={innerHtml}
     />
   );
-}
+});
