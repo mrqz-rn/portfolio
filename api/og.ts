@@ -1,12 +1,12 @@
 const DEMO_POSTS_MAP: Record<string, { title: string; excerpt: string; cover_image: string }> = {
   "enterprise-hris-payroll": {
     title: "Enterprise HRIS & Payroll Architecture: Designing High-Throughput, Fault-Tolerant Workflows",
-    excerpt: "Insights into building scalable internal enterprise architectures, database restructuring, BIR tax computation engines, and seamless legacy migration.",
+    excerpt: "Designing high-throughput payroll computation for 5,000 to 10,000+ employees with chunked queue workers, deterministic pure engines, and transport-level field security.",
     cover_image: "https://images.unsplash.com/photo-1551288049-bebda4e38f71?auto=format&fit=crop&w=1200&q=80"
   },
   "architecting-enterprise-hris-payroll-systems": {
     title: "Enterprise HRIS & Payroll Architecture: Designing High-Throughput, Fault-Tolerant Workflows",
-    excerpt: "Insights into building scalable internal enterprise architectures, database restructuring, BIR tax computation engines, and seamless legacy migration.",
+    excerpt: "Designing high-throughput payroll computation for 5,000 to 10,000+ employees with chunked queue workers, deterministic pure engines, and transport-level field security.",
     cover_image: "https://images.unsplash.com/photo-1551288049-bebda4e38f71?auto=format&fit=crop&w=1200&q=80"
   },
   "real-time-queuing-systems-websockets-laravel": {

@@ -18,7 +18,7 @@ import {
 } from "lucide-react";
 import { BlogPost, PostComment, isSupabaseConfigured, supabase } from "../../lib/supabase";
 import { useAuth } from "../../contexts/AuthContext";
-import { parseMarkdownToHtml } from "../../utils/markdownParser";
+import { MarkdownRenderer } from "../ui/MarkdownRenderer";
 
 interface BlogPostViewProps {
   post: BlogPost;
@@ -426,12 +426,10 @@ export function BlogPostView({
         )}
       </header>
 
-      {/* Article Content (Rendered Markdown) */}
-      <div 
+      {/* Article Content (Rendered Markdown with Mermaid Diagrams) */}
+      <MarkdownRenderer
+        content={post.content}
         className="space-y-4 text-zinc-800 dark:text-zinc-200 leading-relaxed text-base prose dark:prose-invert max-w-none pt-4 border-t border-zinc-100 dark:border-zinc-800"
-        dangerouslySetInnerHTML={{
-          __html: parseMarkdownToHtml(post.content)
-        }}
       />
 
       {/* Like & Interaction Bar */}

@@ -3,7 +3,7 @@ import { motion, AnimatePresence } from "motion/react";
 import { X, Save, Eye, Edit3, Trash2, Image, Tag, AlertCircle, Loader2, Sparkles, Link as LinkIcon, Check, Copy } from "lucide-react";
 import { BlogPost, isSupabaseConfigured, supabase } from "../../lib/supabase";
 import { useAuth } from "../../contexts/AuthContext";
-import { parseMarkdownToHtml } from "../../utils/markdownParser";
+import { MarkdownRenderer } from "../ui/MarkdownRenderer";
 
 interface BlogEditorModalProps {
   isOpen: boolean;
@@ -398,11 +398,9 @@ export function BlogEditorModal({
                   className="w-full p-4 bg-zinc-50 dark:bg-zinc-900 border border-zinc-200 dark:border-zinc-700 rounded-2xl text-zinc-900 dark:text-white placeholder:text-zinc-400 focus:outline-none focus:border-zinc-900 dark:focus:border-white font-mono text-xs leading-relaxed custom-scrollbar"
                 />
               ) : (
-                <div 
+                <MarkdownRenderer
+                  content={content || "*No content entered yet. Switch back to Write mode to type.*"}
                   className="min-h-[300px] max-h-[400px] overflow-y-auto p-5 rounded-2xl bg-zinc-50 dark:bg-zinc-900 border border-zinc-200 dark:border-zinc-700 leading-relaxed text-sm prose dark:prose-invert max-w-none custom-scrollbar"
-                  dangerouslySetInnerHTML={{
-                    __html: parseMarkdownToHtml(content || "*No content entered yet. Switch back to Write mode to type.*")
-                  }}
                 />
               )}
             </div>
