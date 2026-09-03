@@ -20,7 +20,8 @@ import {
   LogIn,
   LogOut,
   User as UserIcon,
-  Sparkles
+  Sparkles,
+  ShieldAlert
 } from "lucide-react";
 import { useState, useEffect } from "react";
 import { getMyStatus } from "./data";
@@ -43,11 +44,12 @@ import { StackSection } from "./components/sections/StackSection";
 import { ServicesSection } from "./components/sections/ServicesSection";
 import { ConnectSection } from "./components/sections/ConnectSection";
 import { BlogSection } from "./components/blog/BlogSection";
+import { AuditSection } from "./components/admin/AuditSection";
 import { BlogPost } from "./lib/supabase";
 
 import { preloadAssets } from "./utils/preload";
 
-const KNOWN_TABS = ["overview", "experience", "projects", "blog", "stack", "services", "connect"];
+const KNOWN_TABS = ["overview", "experience", "projects", "blog", "stack", "services", "connect", "audit"];
 
 function parseRoute(pathname: string): { tab: string; blogSlug: string | null } {
   const clean = pathname.replace(/^\/+|\/+$/g, "");
@@ -151,6 +153,7 @@ function PortfolioApp() {
     { id: "stack", label: "Stack", icon: <Cpu size={16} /> },
     { id: "services", label: "Services", icon: <Wrench size={16} /> },
     { id: "connect", label: "Connect", icon: <Globe size={16} /> },
+    ...(isAdmin ? [{ id: "audit", label: "Audit Logs", icon: <ShieldAlert size={16} /> }] : []),
   ];
 
   return (
@@ -269,9 +272,13 @@ function PortfolioApp() {
                   </div>
 
                   {isAdmin && (
-                    <span className="px-1.5 py-0.5 rounded bg-blue-50 dark:bg-blue-950/70 text-blue-700 dark:text-blue-300 font-mono text-[9px] font-bold border border-blue-200 dark:border-blue-800">
-                      ADMIN
-                    </span>
+                    <button
+                      onClick={() => handleNavigateTab("audit")}
+                      className="px-2 py-0.5 rounded-md bg-blue-50 dark:bg-blue-950/70 text-blue-700 dark:text-blue-300 font-mono text-[9px] font-bold border border-blue-200 dark:border-blue-800 hover:bg-blue-100 dark:hover:bg-blue-900/60 transition-all cursor-pointer"
+                      title="Open Chatbot Audit Logs"
+                    >
+                      AUDIT
+                    </button>
                   )}
                 </div>
 
@@ -362,6 +369,9 @@ function PortfolioApp() {
         <NavIcon icon={<Cpu size={18} />} label="Stack" active={activeTab === "stack"} onClick={() => handleNavigateTab("stack")} />
         <NavIcon icon={<Wrench size={18} />} label="Services" active={activeTab === "services"} onClick={() => handleNavigateTab("services")} />
         <NavIcon icon={<Globe size={18} />} label="Connect" active={activeTab === "connect"} onClick={() => handleNavigateTab("connect")} />
+        {isAdmin && (
+          <NavIcon icon={<ShieldAlert size={18} />} label="Audit" active={activeTab === "audit"} onClick={() => handleNavigateTab("audit")} />
+        )}
       </nav>
 
       {/* Main Content Area */}
@@ -380,6 +390,7 @@ function PortfolioApp() {
             {activeTab === "stack" && <StackSection />}
             {activeTab === "services" && <ServicesSection onNavigate={handleNavigateTab} onSelectItem={setSelectedItem} />}
             {activeTab === "connect" && <ConnectSection />}
+            {activeTab === "audit" && <AuditSection />}
           </AnimatePresence>
         </div>
       </main>

@@ -19,14 +19,16 @@ function chatDevServerPlugin(env: Record<string, string>): Plugin {
               process.env.ANTHROPIC_API_KEY = env.ANTHROPIC_API_KEY || process.env.ANTHROPIC_API_KEY;
               process.env.CLAUDE_API_KEY = env.CLAUDE_API_KEY || process.env.CLAUDE_API_KEY;
 
-              const { messages } = JSON.parse(body || '{}');
+              const parsedBody = JSON.parse(body || '{}');
               const { default: handler } = await import('./api/chat');
               
               const mockReq = { 
                 method: 'POST', 
-                body: { messages }, 
+                body: parsedBody,
+                socket: req.socket,
                 headers: {
                   ...req.headers,
+                  'x-forwarded-for': req.headers['x-forwarded-for'] || req.socket?.remoteAddress || '127.0.0.1',
                   'x-groq-key': env.GROQ_API_KEY || process.env.GROQ_API_KEY,
                   'x-gemini-key': env.GEMINI_API_KEY || process.env.GEMINI_API_KEY,
                   'x-api-key': env.ANTHROPIC_API_KEY || process.env.ANTHROPIC_API_KEY

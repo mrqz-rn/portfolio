@@ -574,3 +574,222 @@ export async function fetchPostBySlug(slug: string): Promise<BlogPost | null> {
 
   return found || null;
 }
+
+// ---------------------------------------------------------------------------
+// Chatbot Audit Logging & Analytics
+// ---------------------------------------------------------------------------
+
+export interface ChatbotLog {
+  id: string;
+  session_id: string;
+  user_id?: string | null;
+  user_email?: string | null;
+  user_name?: string | null;
+  user_message: string;
+  bot_response: string;
+  device: string;
+  user_agent: string;
+  ip_address: string;
+  provider?: string;
+  created_at: string;
+}
+
+export const CHATBOT_LOGS_SQL_SCHEMA = `-- 1. Create table for chatbot visitor & client audit logs
+CREATE TABLE IF NOT EXISTS public.chatbot_logs (
+    id UUID PRIMARY KEY DEFAULT gen_random_uuid(),
+    session_id TEXT NOT NULL,
+    user_id UUID REFERENCES auth.users(id) ON DELETE SET NULL,
+    user_email TEXT,
+    user_name TEXT,
+    user_message TEXT NOT NULL,
+    bot_response TEXT,
+    device TEXT,
+    user_agent TEXT,
+    ip_address TEXT,
+    provider TEXT DEFAULT 'ai',
+    created_at TIMESTAMPTZ DEFAULT now()
+);
+
+-- 2. Enable Row Level Security (RLS)
+ALTER TABLE public.chatbot_logs ENABLE ROW LEVEL SECURITY;
+
+-- 3. Allow public visitors to insert logs
+CREATE POLICY "Allow public insert to chatbot_logs" 
+ON public.chatbot_logs 
+FOR INSERT 
+TO anon, authenticated 
+WITH CHECK (true);
+
+-- 4. Allow Admin to view all audit logs
+CREATE POLICY "Allow admin read chatbot_logs" 
+ON public.chatbot_logs 
+FOR SELECT 
+TO authenticated 
+USING (
+    EXISTS (
+        SELECT 1 FROM public.profiles 
+        WHERE profiles.id = auth.uid() 
+        AND (profiles.role = 'admin' OR profiles.email IN ('marquez.ronrons@gmail.com'))
+    )
+    OR auth.jwt() ->> 'email' = 'marquez.ronrons@gmail.com'
+);
+
+-- 5. Allow Admin to delete audit logs
+CREATE POLICY "Allow admin delete chatbot_logs" 
+ON public.chatbot_logs 
+FOR DELETE 
+TO authenticated 
+USING (
+    EXISTS (
+        SELECT 1 FROM public.profiles 
+        WHERE profiles.id = auth.uid() 
+        AND (profiles.role = 'admin' OR profiles.email IN ('marquez.ronrons@gmail.com'))
+    )
+    OR auth.jwt() ->> 'email' = 'marquez.ronrons@gmail.com'
+);
+
+-- 6. High-performance composite index on created_at
+CREATE INDEX IF NOT EXISTS idx_chatbot_logs_created_at ON public.chatbot_logs (created_at DESC);
+CREATE INDEX IF NOT EXISTS idx_chatbot_logs_session_id ON public.chatbot_logs (session_id);
+`;
+
+const LOCAL_AUDIT_LOGS_KEY = "rom_chatbot_local_audit_logs";
+
+function getLocalAuditLogs(): ChatbotLog[] {
+  if (typeof window === "undefined") return [];
+  try {
+    const raw = localStorage.getItem(LOCAL_AUDIT_LOGS_KEY);
+    return raw ? JSON.parse(raw) : [];
+  } catch (e) {
+    return [];
+  }
+}
+
+function saveLocalAuditLog(log: ChatbotLog) {
+  if (typeof window === "undefined") return;
+  try {
+    const logs = getLocalAuditLogs();
+    const updated = [log, ...logs.filter(l => l.id !== log.id)].slice(0, 500);
+    localStorage.setItem(LOCAL_AUDIT_LOGS_KEY, JSON.stringify(updated));
+  } catch (e) {
+    // ignore
+  }
+}
+
+/**
+ * Log a chat message pair (User message + Bot response + Client metadata) to Supabase.
+ * Also persists to local storage cache so logs are never lost.
+ */
+export async function logChatMessage(entry: Omit<ChatbotLog, "id" | "created_at">): Promise<ChatbotLog> {
+  const localRecord: ChatbotLog = {
+    ...entry,
+    id: "log_" + Date.now().toString(36) + "_" + Math.random().toString(36).substring(2, 7),
+    created_at: new Date().toISOString()
+  };
+
+  // Always save locally first for instantaneous availability
+  saveLocalAuditLog(localRecord);
+
+  if (isSupabaseConfigured) {
+    try {
+      const { data, error } = await supabase
+        .from("chatbot_logs")
+        .insert([{
+          session_id: entry.session_id,
+          user_id: entry.user_id || null,
+          user_email: entry.user_email || null,
+          user_name: entry.user_name || null,
+          user_message: entry.user_message,
+          bot_response: entry.bot_response,
+          device: entry.device,
+          user_agent: entry.user_agent,
+          ip_address: entry.ip_address,
+          provider: entry.provider || "ai"
+        }])
+        .select()
+        .maybeSingle();
+
+      if (!error && data) {
+        saveLocalAuditLog(data as ChatbotLog);
+        return data as ChatbotLog;
+      }
+    } catch (err) {
+      console.warn("Supabase logChatMessage warning:", err);
+    }
+  }
+
+  return localRecord;
+}
+
+/**
+ * Fetch audit logs for Admin Audit Module.
+ * Merges Supabase records with any locally captured logs.
+ */
+export async function fetchChatbotLogs(): Promise<{ logs: ChatbotLog[]; fromSupabase: boolean }> {
+  let supabaseLogs: ChatbotLog[] = [];
+  let fromSupabase = false;
+
+  if (isSupabaseConfigured) {
+    try {
+      const { data, error } = await supabase
+        .from("chatbot_logs")
+        .select("*")
+        .order("created_at", { ascending: false })
+        .limit(300);
+
+      if (!error && data) {
+        supabaseLogs = data as ChatbotLog[];
+        fromSupabase = true;
+      }
+    } catch (err) {
+      console.warn("fetchChatbotLogs Supabase error:", err);
+    }
+  }
+
+  const localLogs = getLocalAuditLogs();
+  const seenIds = new Set<string>();
+  const merged: ChatbotLog[] = [];
+
+  for (const log of [...supabaseLogs, ...localLogs]) {
+    if (!seenIds.has(log.id)) {
+      seenIds.add(log.id);
+      merged.push(log);
+    }
+  }
+
+  // Sort descending by created_at
+  merged.sort((a, b) => new Date(b.created_at).getTime() - new Date(a.created_at).getTime());
+
+  return { logs: merged, fromSupabase };
+}
+
+/**
+ * Delete a single audit log entry
+ */
+export async function deleteChatbotLog(id: string): Promise<boolean> {
+  // Remove from localStorage
+  if (typeof window !== "undefined") {
+    const logs = getLocalAuditLogs().filter(l => l.id !== id);
+    localStorage.setItem(LOCAL_AUDIT_LOGS_KEY, JSON.stringify(logs));
+  }
+
+  if (isSupabaseConfigured) {
+    try {
+      await supabase.from("chatbot_logs").delete().eq("id", id);
+      return true;
+    } catch (e) {
+      console.warn("deleteChatbotLog Supabase error:", e);
+    }
+  }
+  return true;
+}
+
+/**
+ * Clear all local audit logs
+ */
+export function clearLocalChatbotLogs(): void {
+  if (typeof window !== "undefined") {
+    localStorage.removeItem(LOCAL_AUDIT_LOGS_KEY);
+  }
+}
+

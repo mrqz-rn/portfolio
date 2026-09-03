@@ -15,6 +15,9 @@ import {
 import { getRomFallbackReply } from "../../utils/romFallbackEngine";
 import { ROM_SYSTEM_PROMPT } from "../../utils/romKnowledge";
 import { parseMarkdownToHtml } from "../../utils/markdownParser";
+import { detectDeviceInfo, getChatSessionId, getClientIpFallback } from "../../utils/deviceDetector";
+import { logChatMessage } from "../../lib/supabase";
+import { useAuth } from "../../contexts/AuthContext";
 
 interface Message {
   id: string;
@@ -31,6 +34,7 @@ const STARTER_PROMPTS = [
 ];
 
 export function ChatBot() {
+  const { user, profile } = useAuth();
   const [isOpen, setIsOpen] = useState(false);
   const [messages, setMessages] = useState<Message[]>([
     {
@@ -62,6 +66,9 @@ export function ChatBot() {
     const query = (textToSend || input).trim();
     if (!query || isLoading) return;
 
+    const deviceInfo = detectDeviceInfo();
+    const sessionId = getChatSessionId();
+
     const userMessage: Message = {
       id: Date.now().toString(),
       role: "user",
@@ -75,6 +82,8 @@ export function ChatBot() {
     setIsLoading(true);
 
     let replyContent = "";
+    let providerName = "fallback";
+    let detectedIp = "";
 
     // 1. Try serverless backend endpoint (/api/chat)
     try {
@@ -85,16 +94,25 @@ export function ChatBot() {
           messages: newMessages.map(m => ({
             role: m.role,
             content: m.content
-          }))
+          })),
+          sessionId,
+          deviceInfo,
+          userInfo: user ? {
+            id: user.id,
+            email: user.email,
+            name: profile?.full_name || user.email?.split("@")[0]
+          } : null
         })
       });
 
       if (response.ok) {
         const data = await response.json();
-        if (data.reply && data.provider !== "knowledge_engine") {
+        if (data.reply) {
           replyContent = data.reply;
-        } else if (data.reply) {
-          replyContent = data.reply;
+          providerName = data.provider || "ai";
+        }
+        if (data.clientIp) {
+          detectedIp = data.clientIp;
         }
       }
     } catch (err) {
@@ -127,6 +145,7 @@ export function ChatBot() {
         if (groqRes.ok) {
           const groqData = await groqRes.json();
           replyContent = groqData.choices?.[0]?.message?.content || "";
+          providerName = "groq-direct";
         }
       } catch (groqErr) {
         console.warn("Direct Groq invocation error:", groqErr);
@@ -136,7 +155,27 @@ export function ChatBot() {
     // 3. Fallback to smart knowledge engine
     if (!replyContent) {
       replyContent = getRomFallbackReply(query);
+      providerName = "knowledge-engine";
     }
+
+    // Resolve IP address fallback if not returned by server
+    if (!detectedIp) {
+      detectedIp = await getClientIpFallback();
+    }
+
+    // 4. Save audit log to Supabase & Local Cache
+    logChatMessage({
+      session_id: sessionId,
+      user_id: user?.id || null,
+      user_email: user?.email || null,
+      user_name: profile?.full_name || (user ? user.email?.split("@")[0] : "Anonymous Visitor"),
+      user_message: query,
+      bot_response: replyContent,
+      device: deviceInfo.summary,
+      user_agent: navigator.userAgent || "Browser",
+      ip_address: detectedIp || "127.0.0.1",
+      provider: providerName
+    }).catch(logErr => console.warn("Audit log save warning:", logErr));
 
     const assistantMessage: Message = {
       id: (Date.now() + 1).toString(),

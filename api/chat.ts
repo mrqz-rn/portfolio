@@ -549,7 +549,15 @@ export default async function handler(req: any, res: any) {
     return res.status(405).json({ error: "Method not allowed" });
   }
 
-  const { messages } = req.body || {};
+  const rawIp = 
+    (req.headers["x-forwarded-for"] as string) || 
+    (req.headers["x-real-ip"] as string) || 
+    req.socket?.remoteAddress || 
+    "127.0.0.1";
+  const clientIp = rawIp.split(",")[0].trim();
+  const userAgent = (req.headers["user-agent"] as string) || "Unknown User-Agent";
+
+  const { messages, sessionId, deviceInfo, userInfo } = req.body || {};
   const lastUserMessage = Array.isArray(messages) && messages.length > 0 
     ? (messages[messages.length - 1]?.content || "") 
     : "";
@@ -557,6 +565,38 @@ export default async function handler(req: any, res: any) {
   const groqKey = process.env.GROQ_API_KEY || req.headers["x-groq-key"];
   const geminiKey = process.env.GEMINI_API_KEY || req.headers["x-gemini-key"];
   const claudeKey = process.env.ANTHROPIC_API_KEY || process.env.CLAUDE_API_KEY || req.headers["x-api-key"];
+
+  const sendResponseAndLog = async (reply: string, provider: string) => {
+    // Background server-side logging if Supabase endpoint is available
+    const supabaseUrl = process.env.VITE_SUPABASE_URL || process.env.SUPABASE_URL || "https://vgnfvkycjdckedpifcyl.supabase.co";
+    const supabaseKey = process.env.VITE_SUPABASE_ANON_KEY || process.env.SUPABASE_ANON_KEY || process.env.SUPABASE_SERVICE_ROLE_KEY;
+
+    if (supabaseUrl && supabaseKey && lastUserMessage) {
+      fetch(`${supabaseUrl.replace(/\/+$/, "")}/rest/v1/chatbot_logs`, {
+        method: "POST",
+        headers: {
+          "apikey": supabaseKey,
+          "Authorization": `Bearer ${supabaseKey}`,
+          "Content-Type": "application/json",
+          "Prefer": "return=minimal"
+        },
+        body: JSON.stringify({
+          session_id: sessionId || "sess_auto_" + Date.now().toString(36),
+          user_id: userInfo?.id || null,
+          user_email: userInfo?.email || null,
+          user_name: userInfo?.name || null,
+          user_message: lastUserMessage,
+          bot_response: reply,
+          device: deviceInfo?.summary || "Desktop • Browser",
+          user_agent: userAgent,
+          ip_address: clientIp,
+          provider: provider || "ai"
+        })
+      }).catch(err => console.warn("Background server chat log warning:", err));
+    }
+
+    return res.status(200).json({ reply, provider, clientIp });
+  };
 
   // Option 1: Groq API (Blazing Fast Inference)
   if (groqKey) {
@@ -584,7 +624,7 @@ export default async function handler(req: any, res: any) {
         const groqData = await groqRes.json();
         const reply = groqData.choices?.[0]?.message?.content;
         if (reply) {
-          return res.status(200).json({ reply, provider: "groq" });
+          return await sendResponseAndLog(reply, "groq");
         }
       } else {
         const err = await groqRes.text();
@@ -619,7 +659,7 @@ export default async function handler(req: any, res: any) {
         const geminiData = await geminiRes.json();
         const geminiReply = geminiData.candidates?.[0]?.content?.parts?.[0]?.text;
         if (geminiReply) {
-          return res.status(200).json({ reply: geminiReply, provider: "gemini" });
+          return await sendResponseAndLog(geminiReply, "gemini");
         }
       }
     } catch (e) {
@@ -652,7 +692,7 @@ export default async function handler(req: any, res: any) {
         const data = await response.json();
         const reply = data.content?.[0]?.text;
         if (reply) {
-          return res.status(200).json({ reply, provider: "claude" });
+          return await sendResponseAndLog(reply, "claude");
         }
       }
     } catch (error: any) {
@@ -662,5 +702,5 @@ export default async function handler(req: any, res: any) {
 
   // Fallback: Built-in Knowledge Engine
   const fallback = generateKnowledgeReply(lastUserMessage);
-  return res.status(200).json({ reply: fallback, provider: "knowledge_engine" });
+  return await sendResponseAndLog(fallback, "knowledge_engine");
 }
