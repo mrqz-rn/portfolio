@@ -13,19 +13,30 @@ import {
   Sparkles,
   Loader2
 } from "lucide-react";
-import { BlogPost, isSupabaseConfigured, supabase, INITIAL_DEMO_POSTS } from "../../lib/supabase";
+import { BlogPost, isSupabaseConfigured, supabase, INITIAL_DEMO_POSTS, fetchPostBySlug } from "../../lib/supabase";
 import { useAuth } from "../../contexts/AuthContext";
 import { BlogPostView } from "./BlogPostView";
 import { BlogEditorModal } from "./BlogEditorModal";
 
-export function BlogSection() {
+interface BlogSectionProps {
+  initialSlug?: string | null;
+  onPostSelect?: (post: BlogPost | null) => void;
+}
+
+export function BlogSection({ initialSlug, onPostSelect }: BlogSectionProps = {}) {
   const { isAdmin } = useAuth();
 
   const [posts, setPosts] = useState<BlogPost[]>(INITIAL_DEMO_POSTS);
   const [loading, setLoading] = useState(true);
   const [searchQuery, setSearchQuery] = useState("");
   const [selectedTag, setSelectedTag] = useState<string>("all");
-  const [selectedPost, setSelectedPost] = useState<BlogPost | null>(null);
+  const [selectedPost, setSelectedPost] = useState<BlogPost | null>(() => {
+    if (!initialSlug) return null;
+    return INITIAL_DEMO_POSTS.find(p => p.slug.toLowerCase() === initialSlug.toLowerCase()) || null;
+  });
+  const [loadingSlugPost, setLoadingSlugPost] = useState<boolean>(() => {
+    return Boolean(initialSlug && !INITIAL_DEMO_POSTS.some(p => p.slug.toLowerCase() === initialSlug.toLowerCase()));
+  });
 
   // Editor Modal states
   const [isEditorOpen, setIsEditorOpen] = useState(false);
@@ -72,6 +83,51 @@ export function BlogSection() {
 
     loadPosts();
   }, []);
+
+  // Synchronize post selection when initialSlug changes (e.g. direct URL navigation)
+  useEffect(() => {
+    if (!initialSlug) {
+      setSelectedPost(null);
+      setLoadingSlugPost(false);
+      return;
+    }
+
+    if (selectedPost && selectedPost.slug.toLowerCase() === initialSlug.toLowerCase()) {
+      setLoadingSlugPost(false);
+      return;
+    }
+
+    const foundInPosts = posts.find((p) => p.slug.toLowerCase() === initialSlug.toLowerCase());
+    if (foundInPosts) {
+      setSelectedPost(foundInPosts);
+      setLoadingSlugPost(false);
+      return;
+    }
+
+    let isMounted = true;
+    setLoadingSlugPost(true);
+
+    fetchPostBySlug(initialSlug).then((fetched) => {
+      if (!isMounted) return;
+      if (fetched) {
+        setSelectedPost(fetched);
+        setPosts((prev) => {
+          if (prev.some((p) => p.id === fetched.id)) return prev;
+          return [fetched, ...prev];
+        });
+      }
+      setLoadingSlugPost(false);
+    });
+
+    return () => {
+      isMounted = false;
+    };
+  }, [initialSlug, posts]);
+
+  const handleSelectPost = (post: BlogPost | null) => {
+    setSelectedPost(post);
+    onPostSelect?.(post);
+  };
 
   // Collect all unique tags
   const allTags = Array.from(
@@ -120,9 +176,18 @@ export function BlogSection() {
   const handleDeleteSuccess = (postId: string) => {
     setPosts((prev) => prev.filter((p) => p.id !== postId));
     if (selectedPost && selectedPost.id === postId) {
-      setSelectedPost(null);
+      handleSelectPost(null);
     }
   };
+
+  if (loadingSlugPost) {
+    return (
+      <div className="w-full max-w-4xl py-24 flex flex-col items-center justify-center gap-3 text-zinc-400 font-mono text-xs">
+        <Loader2 size={24} className="animate-spin text-blue-500" />
+        <span>Loading article...</span>
+      </div>
+    );
+  }
 
   // If a single post is active, render the dedicated post view
   if (selectedPost) {
@@ -130,7 +195,7 @@ export function BlogSection() {
       <>
         <BlogPostView
           post={selectedPost}
-          onBack={() => setSelectedPost(null)}
+          onBack={() => handleSelectPost(null)}
           onEditPost={handleOpenEditModal}
           onDeletePost={handleDeleteSuccess}
         />
@@ -255,7 +320,7 @@ export function BlogSection() {
                 initial={{ opacity: 0, y: 15 }}
                 animate={{ opacity: 1, y: 0 }}
                 transition={{ delay: idx * 0.05 }}
-                onClick={() => setSelectedPost(post)}
+                onClick={() => handleSelectPost(post)}
                 className="bg-white dark:bg-[#121826] rounded-3xl border border-zinc-200/80 dark:border-zinc-800 shadow-xs hover:border-zinc-400 dark:hover:border-zinc-600 hover:shadow-md transition-all flex flex-col justify-between overflow-hidden group cursor-pointer"
               >
                 <div>

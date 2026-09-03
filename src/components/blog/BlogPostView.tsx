@@ -13,7 +13,8 @@ import {
   Share2, 
   Check, 
   Loader2,
-  LogIn
+  LogIn,
+  Link as LinkIcon
 } from "lucide-react";
 import { BlogPost, PostComment, isSupabaseConfigured, supabase } from "../../lib/supabase";
 import { useAuth } from "../../contexts/AuthContext";
@@ -43,6 +44,39 @@ export function BlogPostView({
   const [commentInput, setCommentInput] = useState("");
   const [submittingComment, setSubmittingComment] = useState(false);
   const [copied, setCopied] = useState(false);
+
+  // Synchronize document title and description with the post for dynamic navigation
+  useEffect(() => {
+    const originalTitle = document.title;
+    document.title = `${post.title} | Ron Marquez`;
+
+    const descMeta = document.querySelector('meta[name="description"]');
+    const ogTitleMeta = document.querySelector('meta[property="og:title"]');
+    const ogDescMeta = document.querySelector('meta[property="og:description"]');
+    const ogUrlMeta = document.querySelector('meta[property="og:url"]');
+
+    const originalDesc = descMeta?.getAttribute("content") || "";
+    const originalOgTitle = ogTitleMeta?.getAttribute("content") || "";
+    const originalOgDesc = ogDescMeta?.getAttribute("content") || "";
+    const originalOgUrl = ogUrlMeta?.getAttribute("content") || "";
+
+    const postUrl = typeof window !== "undefined"
+      ? `${window.location.origin}/${post.slug}`
+      : `https://ronmarquez.tech/${post.slug}`;
+
+    if (descMeta && post.excerpt) descMeta.setAttribute("content", post.excerpt);
+    if (ogTitleMeta) ogTitleMeta.setAttribute("content", `${post.title} | Ron Marquez`);
+    if (ogDescMeta && post.excerpt) ogDescMeta.setAttribute("content", post.excerpt);
+    if (ogUrlMeta) ogUrlMeta.setAttribute("content", postUrl);
+
+    return () => {
+      document.title = originalTitle;
+      if (descMeta) descMeta.setAttribute("content", originalDesc);
+      if (ogTitleMeta) ogTitleMeta.setAttribute("content", originalOgTitle);
+      if (ogDescMeta) ogDescMeta.setAttribute("content", originalOgDesc);
+      if (ogUrlMeta) ogUrlMeta.setAttribute("content", originalOgUrl);
+    };
+  }, [post.title, post.excerpt, post.slug]);
 
   // Calculate estimated reading time
   const wordCount = post.content ? post.content.split(/\s+/).length : 0;
@@ -254,9 +288,26 @@ export function BlogPostView({
     }
   };
 
-  const handleShare = () => {
+  const postUrl = typeof window !== "undefined"
+    ? `${window.location.origin}/${post.slug}`
+    : `https://ronmarquez.tech/${post.slug}`;
+
+  const handleShare = async () => {
+    if (typeof navigator !== "undefined" && navigator.share && /mobile|android|iphone|ipad/i.test(navigator.userAgent)) {
+      try {
+        await navigator.share({
+          title: post.title,
+          text: post.excerpt || post.title,
+          url: postUrl
+        });
+        return;
+      } catch (err) {
+        // Fallback to clipboard
+      }
+    }
+
     if (navigator.clipboard) {
-      navigator.clipboard.writeText(window.location.href);
+      await navigator.clipboard.writeText(postUrl);
       setCopied(true);
       setTimeout(() => setCopied(false), 2000);
     }
@@ -280,6 +331,17 @@ export function BlogPostView({
         </button>
 
         <div className="flex items-center gap-2">
+          {/* Direct Link Pill */}
+          <button
+            onClick={handleShare}
+            title={`Copy direct link: ${postUrl}`}
+            className="hidden sm:inline-flex items-center gap-1.5 px-3 py-1.5 rounded-xl bg-zinc-100 dark:bg-zinc-800/80 hover:bg-zinc-200 dark:hover:bg-zinc-700 text-zinc-600 dark:text-zinc-300 font-mono text-xs font-semibold border border-zinc-200/70 dark:border-zinc-700/70 transition-all cursor-pointer group"
+          >
+            <LinkIcon size={12} className="text-zinc-400 group-hover:text-blue-500 transition-colors" />
+            <span className="text-zinc-400 font-normal select-none">/</span>
+            <span className="truncate max-w-[140px] md:max-w-[200px]">{post.slug}</span>
+          </button>
+
           {isAdmin && onEditPost && (
             <button
               onClick={() => onEditPost(post)}

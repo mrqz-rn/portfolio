@@ -43,11 +43,39 @@ import { StackSection } from "./components/sections/StackSection";
 import { ServicesSection } from "./components/sections/ServicesSection";
 import { ConnectSection } from "./components/sections/ConnectSection";
 import { BlogSection } from "./components/blog/BlogSection";
+import { BlogPost } from "./lib/supabase";
 
 import { preloadAssets } from "./utils/preload";
 
+const KNOWN_TABS = ["overview", "experience", "projects", "blog", "stack", "services", "connect"];
+
+function parseRoute(pathname: string): { tab: string; blogSlug: string | null } {
+  const clean = pathname.replace(/^\/+|\/+$/g, "");
+  if (!clean || clean === "overview") {
+    return { tab: "overview", blogSlug: null };
+  }
+
+  if (clean.startsWith("blog/")) {
+    const slug = clean.slice(5).trim();
+    return { tab: "blog", blogSlug: slug || null };
+  }
+
+  if (KNOWN_TABS.includes(clean)) {
+    return { tab: clean, blogSlug: null };
+  }
+
+  // Any non-tab path without dot (not static file or api) is a direct blog slug:
+  if (!clean.includes(".") && !clean.startsWith("api/")) {
+    return { tab: "blog", blogSlug: clean };
+  }
+
+  return { tab: "overview", blogSlug: null };
+}
+
 function PortfolioApp() {
-  const [activeTab, setActiveTab] = useState("overview");
+  const initialRoute = typeof window !== "undefined" ? parseRoute(window.location.pathname) : { tab: "overview", blogSlug: null };
+  const [activeTab, setActiveTab] = useState<string>(initialRoute.tab);
+  const [blogSlug, setBlogSlug] = useState<string | null>(initialRoute.blogSlug);
   const [time, setTime] = useState(new Date());
   const [selectedItem, setSelectedItem] = useState<any>(null);
   const [theme, setTheme] = useState<"light" | "dark">(() => {
@@ -77,6 +105,41 @@ function PortfolioApp() {
     const timer = setInterval(() => setTime(new Date()), 1000);
     return () => clearInterval(timer);
   }, []);
+
+  useEffect(() => {
+    const handlePopState = () => {
+      const { tab, blogSlug: slug } = parseRoute(window.location.pathname);
+      setActiveTab(tab);
+      setBlogSlug(slug);
+    };
+
+    window.addEventListener("popstate", handlePopState);
+    return () => window.removeEventListener("popstate", handlePopState);
+  }, []);
+
+  const handleNavigateTab = (tabId: string) => {
+    setActiveTab(tabId);
+    setBlogSlug(null);
+    const targetPath = tabId === "overview" ? "/" : `/${tabId}`;
+    if (window.location.pathname !== targetPath) {
+      window.history.pushState({ tab: tabId, slug: null }, "", targetPath);
+    }
+  };
+
+  const handleBlogPostSelect = (post: BlogPost | null) => {
+    if (post) {
+      setBlogSlug(post.slug);
+      const targetPath = `/${post.slug}`;
+      if (window.location.pathname !== targetPath) {
+        window.history.pushState({ tab: "blog", slug: post.slug }, "", targetPath);
+      }
+    } else {
+      setBlogSlug(null);
+      if (window.location.pathname !== "/blog") {
+        window.history.pushState({ tab: "blog", slug: null }, "", "/blog");
+      }
+    }
+  };
 
   const closeModal = () => setSelectedItem(null);
 
@@ -160,7 +223,7 @@ function PortfolioApp() {
                   return (
                     <button
                       key={item.id}
-                      onClick={() => setActiveTab(item.id)}
+                      onClick={() => handleNavigateTab(item.id)}
                       className={`w-full flex items-center justify-between px-3 py-2.5 rounded-xl text-xs font-mono transition-all duration-200 cursor-pointer ${
                         isActive
                           ? "bg-zinc-100 dark:bg-zinc-800/90 text-zinc-900 dark:text-white border border-zinc-200/80 dark:border-zinc-700 font-bold shadow-xs"
@@ -292,13 +355,13 @@ function PortfolioApp() {
 
       {/* Mobile Bottom Navigation Dock */}
       <nav className="fixed bottom-0 left-0 w-full h-16 bg-white/95 dark:bg-[#0f1422]/95 backdrop-blur-xl border-t border-zinc-200 dark:border-zinc-800 flex items-center justify-around z-50 md:hidden px-2">
-        <NavIcon icon={<Terminal size={18} />} label="Overview" active={activeTab === "overview"} onClick={() => setActiveTab("overview")} />
-        <NavIcon icon={<Briefcase size={18} />} label="Experience" active={activeTab === "experience"} onClick={() => setActiveTab("experience")} />
-        <NavIcon icon={<Layers size={18} />} label="Projects" active={activeTab === "projects"} onClick={() => setActiveTab("projects")} />
-        <NavIcon icon={<BookOpen size={18} />} label="Blog" active={activeTab === "blog"} onClick={() => setActiveTab("blog")} />
-        <NavIcon icon={<Cpu size={18} />} label="Stack" active={activeTab === "stack"} onClick={() => setActiveTab("stack")} />
-        <NavIcon icon={<Wrench size={18} />} label="Services" active={activeTab === "services"} onClick={() => setActiveTab("services")} />
-        <NavIcon icon={<Globe size={18} />} label="Connect" active={activeTab === "connect"} onClick={() => setActiveTab("connect")} />
+        <NavIcon icon={<Terminal size={18} />} label="Overview" active={activeTab === "overview"} onClick={() => handleNavigateTab("overview")} />
+        <NavIcon icon={<Briefcase size={18} />} label="Experience" active={activeTab === "experience"} onClick={() => handleNavigateTab("experience")} />
+        <NavIcon icon={<Layers size={18} />} label="Projects" active={activeTab === "projects"} onClick={() => handleNavigateTab("projects")} />
+        <NavIcon icon={<BookOpen size={18} />} label="Blog" active={activeTab === "blog"} onClick={() => handleNavigateTab("blog")} />
+        <NavIcon icon={<Cpu size={18} />} label="Stack" active={activeTab === "stack"} onClick={() => handleNavigateTab("stack")} />
+        <NavIcon icon={<Wrench size={18} />} label="Services" active={activeTab === "services"} onClick={() => handleNavigateTab("services")} />
+        <NavIcon icon={<Globe size={18} />} label="Connect" active={activeTab === "connect"} onClick={() => handleNavigateTab("connect")} />
       </nav>
 
       {/* Main Content Area */}
@@ -307,13 +370,15 @@ function PortfolioApp() {
           {/* Content Sections */}
           <AnimatePresence mode="wait">
             {activeTab === "overview" && (
-              <OverviewSection onNavigate={setActiveTab} onSelectItem={setSelectedItem} />
+              <OverviewSection onNavigate={handleNavigateTab} onSelectItem={setSelectedItem} />
             )}
             {activeTab === "experience" && <ExperienceSection />}
             {activeTab === "projects" && <ProjectsSection onSelectItem={setSelectedItem} />}
-            {activeTab === "blog" && <BlogSection />}
+            {activeTab === "blog" && (
+              <BlogSection initialSlug={blogSlug} onPostSelect={handleBlogPostSelect} />
+            )}
             {activeTab === "stack" && <StackSection />}
-            {activeTab === "services" && <ServicesSection onNavigate={setActiveTab} onSelectItem={setSelectedItem} />}
+            {activeTab === "services" && <ServicesSection onNavigate={handleNavigateTab} onSelectItem={setSelectedItem} />}
             {activeTab === "connect" && <ConnectSection />}
           </AnimatePresence>
         </div>

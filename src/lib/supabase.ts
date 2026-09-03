@@ -1,8 +1,10 @@
 import { createClient } from "@supabase/supabase-js";
 
-const rawUrl = (import.meta.env.VITE_SUPABASE_URL || "").trim();
+const envUrl = (typeof import.meta !== "undefined" && import.meta.env?.VITE_SUPABASE_URL) || (typeof process !== "undefined" && process.env?.VITE_SUPABASE_URL) || "";
+const rawUrl = envUrl.trim();
 const supabaseUrl = rawUrl.replace(/\/rest\/v1\/?$/, "").replace(/\/+$/, "") || "https://vgnfvkycjdckedpifcyl.supabase.co";
-const supabaseAnonKey = (import.meta.env.VITE_SUPABASE_ANON_KEY || "").trim();
+const envKey = (typeof import.meta !== "undefined" && import.meta.env?.VITE_SUPABASE_ANON_KEY) || (typeof process !== "undefined" && process.env?.VITE_SUPABASE_ANON_KEY) || "";
+const supabaseAnonKey = envKey.trim();
 
 export const isSupabaseConfigured = Boolean(
   supabaseUrl && 
@@ -74,10 +76,10 @@ export interface PostLike {
 export const INITIAL_DEMO_POSTS: BlogPost[] = [
   {
     id: "demo-post-1",
-    title: "Architecting Enterprise HRIS & Payroll Systems with Vue.js, Laravel & MariaDB",
-    slug: "architecting-enterprise-hris-payroll-systems",
+    title: "Enterprise HRIS & Payroll Architecture: Designing High-Throughput, Fault-Tolerant Workflows",
+    slug: "enterprise-hris-payroll",
     excerpt: "Insights into building scalable internal enterprise architectures, database restructuring, BIR tax computation engines, and seamless legacy migration.",
-    tags: ["Systems Architecture", "Vue.js", "Laravel", "Database Design", "Enterprise"],
+    tags: ["Engineering", "Systems", "Vue.js", "Laravel", "Enterprise"],
     published: true,
     cover_image: "https://images.unsplash.com/photo-1551288049-bebda4e38f71?auto=format&fit=crop&w=1200&q=80",
     created_at: new Date(Date.now() - 86400000 * 3).toISOString(),
@@ -192,3 +194,40 @@ Stay tuned for more deep dives on hardware-software integration!
 `
   }
 ];
+
+export async function fetchPostBySlug(slug: string): Promise<BlogPost | null> {
+  const normalizedSlug = slug.trim().toLowerCase();
+
+  if (isSupabaseConfigured) {
+    try {
+      const { data, error } = await supabase
+        .from("posts")
+        .select("*, author:profiles(*)")
+        .eq("slug", normalizedSlug)
+        .maybeSingle();
+
+      if (!error && data) {
+        const [{ count: likesCount }, { count: commentsCount }] = await Promise.all([
+          supabase.from("likes").select("*", { count: "exact", head: true }).eq("post_id", data.id),
+          supabase.from("comments").select("*", { count: "exact", head: true }).eq("post_id", data.id)
+        ]);
+
+        return {
+          ...data,
+          likes_count: likesCount || 0,
+          comments_count: commentsCount || 0
+        } as BlogPost;
+      }
+    } catch (err) {
+      console.warn("fetchPostBySlug Supabase error:", err);
+    }
+  }
+
+  // Fallback to local demo posts
+  const found = INITIAL_DEMO_POSTS.find(
+    p => p.slug.toLowerCase() === normalizedSlug ||
+         (normalizedSlug === "architecting-enterprise-hris-payroll-systems" && p.slug === "enterprise-hris-payroll")
+  );
+
+  return found || null;
+}

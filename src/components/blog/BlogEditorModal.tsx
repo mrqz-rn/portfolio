@@ -1,6 +1,6 @@
 import { useState, useEffect } from "react";
 import { motion, AnimatePresence } from "motion/react";
-import { X, Save, Eye, Edit3, Trash2, Image, Tag, AlertCircle, Loader2, Sparkles } from "lucide-react";
+import { X, Save, Eye, Edit3, Trash2, Image, Tag, AlertCircle, Loader2, Sparkles, Link as LinkIcon, Check, Copy } from "lucide-react";
 import { BlogPost, isSupabaseConfigured, supabase } from "../../lib/supabase";
 import { useAuth } from "../../contexts/AuthContext";
 import { parseMarkdownToHtml } from "../../utils/markdownParser";
@@ -35,6 +35,7 @@ export function BlogEditorModal({
   const [loading, setLoading] = useState(false);
   const [deleting, setDeleting] = useState(false);
   const [errorMsg, setErrorMsg] = useState("");
+  const [copiedLink, setCopiedLink] = useState(false);
 
   useEffect(() => {
     if (postToEdit) {
@@ -276,9 +277,34 @@ export function BlogEditorModal({
                   required
                   value={slug}
                   onChange={(e) => setSlug(e.target.value)}
-                  placeholder="architecting-scalable-erp"
+                  placeholder="enterprise-hris-payroll"
                   className="w-full px-4 py-2.5 bg-zinc-50 dark:bg-zinc-900 border border-zinc-200 dark:border-zinc-700 rounded-xl text-zinc-900 dark:text-white placeholder:text-zinc-400 focus:outline-none focus:border-zinc-900 dark:focus:border-white font-mono text-xs"
                 />
+                <div className="flex items-center justify-between gap-1 text-[10px] font-mono text-zinc-500 dark:text-zinc-400 pt-0.5">
+                  <span className="truncate">
+                    ronmarquez.tech/<span className="text-blue-600 dark:text-blue-400 font-semibold">{slug.trim() || "slug"}</span>
+                  </span>
+                  {slug.trim() && (
+                    <button
+                      type="button"
+                      onClick={() => {
+                        const directUrl = typeof window !== "undefined"
+                          ? `${window.location.origin}/${slug.trim()}`
+                          : `https://ronmarquez.tech/${slug.trim()}`;
+                        if (navigator.clipboard) {
+                          navigator.clipboard.writeText(directUrl);
+                          setCopiedLink(true);
+                          setTimeout(() => setCopiedLink(false), 2000);
+                        }
+                      }}
+                      className="inline-flex items-center gap-1 text-zinc-500 hover:text-blue-600 dark:hover:text-blue-400 transition-colors cursor-pointer shrink-0"
+                      title="Copy link"
+                    >
+                      {copiedLink ? <Check size={11} className="text-emerald-500" /> : <Copy size={11} />}
+                      <span>{copiedLink ? "Copied" : "Copy"}</span>
+                    </button>
+                  )}
+                </div>
               </div>
             </div>
 

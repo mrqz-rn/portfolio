@@ -47,6 +47,23 @@
         }
       ]
     }
+  ],
+  "rewrites": [
+    {
+      "source": "/:path((?!api/|assets/|icons/|tech/|certs/|works/|project/|resume/|favicon|robots\\.txt|sitemap\\.xml).*)",
+      "has": [
+        {
+          "type": "header",
+          "key": "user-agent",
+          "value": ".*(facebookexternalhit|FacebookExternalHit|Twitterbot|twitterbot|LinkedInBot|linkedinbot|Slackbot|slackbot|Discordbot|discordbot|TelegramBot|telegrambot|WhatsApp|whatsapp).*"
+        }
+      ],
+      "destination": "/api/og?slug=:path"
+    },
+    {
+      "source": "/((?!api/).*)",
+      "destination": "/index.html"
+    }
   ]
 }
 
