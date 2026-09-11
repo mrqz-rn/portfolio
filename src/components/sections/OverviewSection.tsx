@@ -142,7 +142,7 @@ export function OverviewSection({ onNavigate, onSelectItem }: OverviewSectionPro
               onClick={() => onNavigate?.("projects")}
               className="text-2xl font-bold text-zinc-900 dark:text-white flex items-center gap-1 font-mono cursor-pointer hover:text-black dark:hover:text-blue-400 transition-colors"
             >
-              16+ <ArrowUpRight size={14} className="text-zinc-500 dark:text-zinc-400 text-xs" />
+              13+ <ArrowUpRight size={14} className="text-zinc-500 dark:text-zinc-400 text-xs" />
             </div>
             <div className="text-[10px] font-mono uppercase tracking-widest text-zinc-600 dark:text-zinc-400 mt-1 font-semibold">Projects</div>
           </div>
