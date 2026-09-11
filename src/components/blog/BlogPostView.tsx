@@ -13,8 +13,7 @@ import {
   Share2, 
   Check, 
   Loader2,
-  LogIn,
-  Link as LinkIcon
+  LogIn
 } from "lucide-react";
 import { BlogPost, PostComment, isSupabaseConfigured, supabase } from "../../lib/supabase";
 import { useAuth } from "../../contexts/AuthContext";
@@ -331,16 +330,6 @@ export function BlogPostView({
         </button>
 
         <div className="flex items-center gap-2">
-          {/* Direct Link Pill */}
-          <button
-            onClick={handleShare}
-            title={`Copy direct link: ${postUrl}`}
-            className="hidden sm:inline-flex items-center gap-1.5 px-3 py-1.5 rounded-xl bg-zinc-100 dark:bg-zinc-800/80 hover:bg-zinc-200 dark:hover:bg-zinc-700 text-zinc-600 dark:text-zinc-300 font-mono text-xs font-semibold border border-zinc-200/70 dark:border-zinc-700/70 transition-all cursor-pointer group"
-          >
-            <LinkIcon size={12} className="text-zinc-400 group-hover:text-blue-500 transition-colors" />
-            <span className="text-zinc-400 font-normal select-none">/</span>
-            <span className="truncate max-w-[140px] md:max-w-[200px]">{post.slug}</span>
-          </button>
 
           {isAdmin && onEditPost && (
             <button
