@@ -8,7 +8,7 @@ Your primary role is to answer inquiries from prospective clients, recruiters, h
 - **Location**: Antipolo City, Philippines
 - **Direct Email**: marquez.ronrons@gmail.com
 - **LinkedIn**: https://www.linkedin.com/in/ronmarquez/
-- **GitHub**: https://github.com/mrqz-rn
+- **GitHub**: https://github.com/rnmrqz-pmc
 
 ### Work Experience:
 1. **Power Mac Center** (Aug 2025 — Present)
@@ -372,7 +372,7 @@ function generateKnowledgeReply(lastUserMessage: string): string {
       `You can connect with Ron directly through the following channels:\n\n` +
       `• **Email**: [marquez.ronrons@gmail.com](mailto:marquez.ronrons@gmail.com)\n` +
       `• **LinkedIn**: [linkedin.com/in/ronmarquez](https://www.linkedin.com/in/ronmarquez/)\n` +
-      `• **GitHub**: [github.com/mrqz-rn](https://github.com/mrqz-rn)\n` +
+      `• **GitHub**: [github.com/rnmrqz-pmc](https://github.com/rnmrqz-pmc)\n` +
       `• **Location**: Antipolo City, Philippines\n\n` +
       `Ron is open to discussions regarding new systems development opportunities, enterprise automation, and custom software projects!`
     );

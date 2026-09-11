@@ -7,7 +7,7 @@
 - **Experience**: 3+ years in enterprise applications, database architecture, and full-stack development.
 - **Location**: Antipolo City / Metro Manila, Philippines
 - **Website**: https://www.ronmarquez.tech/
-- **GitHub**: https://github.com/mrqz-rn
+- **GitHub**: https://github.com/rnmrqz-pmc
 - **LinkedIn**: https://www.linkedin.com/in/ronmarquez/
 - **Email**: marquez.ronrons@gmail.com
 

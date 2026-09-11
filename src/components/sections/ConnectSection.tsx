@@ -62,9 +62,9 @@ export function ConnectSection() {
   };
 
   const openMailtoFallback = () => {
-    const subject = encodeURIComponent(`Project Inquiry from ${formData.name || "Client"}`);
+    const subject = encodeURIComponent(`Message from ${formData.name || "a visitor"}`);
     const body = encodeURIComponent(
-      `Hi Ron,\n\n${formData.message || "I would like to discuss a potential project."}\n\nBest regards,\n${formData.name}\n${formData.email}`
+      `Hi Ron,\n\n${formData.message || "Just wanted to say hello and connect!"}\n\nBest regards,\n${formData.name}\n${formData.email}`
     );
     window.location.href = `mailto:marquez.ronrons@gmail.com?subject=${subject}&body=${body}`;
   };
@@ -79,10 +79,10 @@ export function ConnectSection() {
     >
       <div className="text-center mb-16">
         <h2 className="text-4xl md:text-5xl font-bold mb-6 tracking-tight text-zinc-900 dark:text-white font-mono">
-          Let&apos;s build something exceptional.
+          Let&apos;s connect.
         </h2>
         <p className="text-zinc-600 dark:text-zinc-300 text-base md:text-lg max-w-2xl mx-auto leading-relaxed">
-          I&apos;m always open to discussing new projects, technical challenges, or potential opportunities. Send a message below or email me directly.
+          Whether you&apos;d like to talk tech, exchange ideas, explore opportunities, or just say hello — my inbox is always open. Drop a message below or reach out directly.
         </p>
       </div>
 
@@ -135,7 +135,7 @@ export function ConnectSection() {
 
             <div className="pt-6 border-t border-zinc-100 dark:border-zinc-800 flex flex-wrap gap-3">
               <ContactButton icon={<Linkedin size={18} />} label="LinkedIn" href="https://www.linkedin.com/in/ronmarquez/" />
-              <ContactButton icon={<Github size={18} />} label="GitHub" href="https://github.com/mrqz-rn" />
+              <ContactButton icon={<Github size={18} />} label="GitHub" href="https://github.com/rnmrqz-pmc" />
             </div>
           </div>
         </div>
@@ -208,7 +208,7 @@ export function ConnectSection() {
                 name="message"
                 value={formData.message}
                 onChange={handleInputChange}
-                placeholder="Tell me about your project or inquiry..."
+                placeholder="Say hello, share an idea, or drop a message..."
                 rows={4}
                 className="w-full px-4 py-3 rounded-xl bg-zinc-50 dark:bg-zinc-900 border border-zinc-200 dark:border-zinc-700 text-zinc-900 dark:text-white placeholder:text-zinc-400 dark:placeholder:text-zinc-500 focus:border-zinc-900 dark:focus:border-zinc-400 focus:bg-white dark:focus:bg-zinc-800 focus:outline-none transition-colors text-sm font-mono resize-none"
                 required

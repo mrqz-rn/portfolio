@@ -78,7 +78,7 @@ export const jobs = [
         monogram: 'VP',
         color: '#b80000ff', 
         location: 'Makati', 
-        employmentType: 'OJT', 
+        employmentType: 'Intership', 
         workSetup: 'Remote',
         summary: "I built responsive web applications, integrated APIs for dynamic content, and participated in Agile sprints contributing to development cycles and real-time system improvements.",
         details: [
@@ -375,24 +375,24 @@ export const projects = [
       images: ['project/quick/img1.webp', 'project/quick/img2.webp', 'project/quick/img3.webp', 'project/quick/img4.webp', 'project/quick/img5.webp','project/quick/img6.webp','project/quick/img7.webp']
     },
 
-    {
-      id: 4, name: 'BlueThunder',
-      description: 'An E-commerce website with a CRUD for managging the products. ',
-      tech: ['Bootstrap', 'PHP', 'MySQL'],
-      images: ['project/bluethunder/img1.webp', 'project/bluethunder/img2.webp', 'project/bluethunder/img3.webp']
-    },
-    {
-      id: 5, name: 'Enrollment System',
-      description: 'Simple CRUD application built with Java, featuring a database powered by MS Access. It provides an efficient solution for managing student enrollment data.',
-      tech: ['Java', 'MS Access'],
-      images: ['project/enroll/img1.webp','project/enroll/img2.webp','project/enroll/img3.webp','project/enroll/img4.webp']
-    },
-    {
-      id: 6, name: 'EAITH',
-      description: "EAITH is an engaging and challenging word-guessing game designed for play directly on your computer. It's a personalized take on the classic Hangman game, offering a fresh and entertaining twist on the traditional experience",
-      tech: ['Java', 'MS Access'],
-      images: ['project/eaith/img1.webp','project/eaith/img2.webp','project/eaith/img3.webp']
-    },
+    // {
+    //   id: 4, name: 'BlueThunder',
+    //   description: 'An E-commerce website with a CRUD for managging the products. ',
+    //   tech: ['Bootstrap', 'PHP', 'MySQL'],
+    //   images: ['project/bluethunder/img1.webp', 'project/bluethunder/img2.webp', 'project/bluethunder/img3.webp']
+    // },
+    // {
+    //   id: 5, name: 'Enrollment System',
+    //   description: 'Simple CRUD application built with Java, featuring a database powered by MS Access. It provides an efficient solution for managing student enrollment data.',
+    //   tech: ['Java', 'MS Access'],
+    //   images: ['project/enroll/img1.webp','project/enroll/img2.webp','project/enroll/img3.webp','project/enroll/img4.webp']
+    // },
+    // {
+    //   id: 6, name: 'EAITH',
+    //   description: "EAITH is an engaging and challenging word-guessing game designed for play directly on your computer. It's a personalized take on the classic Hangman game, offering a fresh and entertaining twist on the traditional experience",
+    //   tech: ['Java', 'MS Access'],
+    //   images: ['project/eaith/img1.webp','project/eaith/img2.webp','project/eaith/img3.webp']
+    // },
   ];
 
 export const services = [

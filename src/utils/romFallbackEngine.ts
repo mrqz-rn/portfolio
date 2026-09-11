@@ -191,7 +191,7 @@ export function getRomFallbackReply(userQuery: string): string {
       `You can connect with Ron directly through the following channels:\n\n` +
       `• **Email**: [marquez.ronrons@gmail.com](mailto:marquez.ronrons@gmail.com)\n` +
       `• **LinkedIn**: [linkedin.com/in/ronmarquez](https://www.linkedin.com/in/ronmarquez/)\n` +
-      `• **GitHub**: [github.com/mrqz-rn](https://github.com/mrqz-rn)\n` +
+      `• **GitHub**: [github.com/rnmrqz-pmc](https://github.com/rnmrqz-pmc)\n` +
       `• **Location**: Antipolo City, Philippines\n\n` +
       `Ron is open to discussions regarding new systems development opportunities, enterprise automation, and custom software projects!`
     );
@@ -260,35 +260,7 @@ export function getRomFallbackReply(userQuery: string): string {
       `Ask me about any specific project (e.g. *"What is Nexus-IMS?"* or *"Tell me about PMCIE LMS"*) for more details!`
     );
   }
-
-  // Hardware / PC & Laptop Repair Services
-  if (
-    query.includes("repair") ||
-    query.includes("hardware") ||
-    query.includes("fix") ||
-    query.includes("screen") ||
-    query.includes("cleaning") ||
-    query.includes("reinstall") ||
-    query.includes("diagnos") ||
-    query.includes("thermal") ||
-    query.includes("ram") ||
-    query.includes("ssd") ||
-    query.includes("laptop") ||
-    query.includes("pc service") ||
-    query.includes("computer repair") ||
-    query.includes("phone repair")
-  ) {
-    return (
-      `**Yes, Ron offers professional PC, Laptop, and Hardware Maintenance & Repair Services!**\n\n` +
-      `Here is the complete service breakdown and rates:\n\n` +
-      `• 🔍 **Basic Diagnosis / Checkup**: **₱600** — Comprehensive hardware diagnostic screening and fault isolation.\n` +
-      `• 💽 **OS Reinstallation**: **₱1,200** — Clean operating system installation, driver setup, and initial configuration.\n` +
-      `• 🧹 **PC Cleaning / Dust Removal**: **₱800** — Deep interior de-dusting, fan cleaning, and fresh thermal paste reapplication.\n` +
-      `• ⚙️ **Hardware Installation & Upgrades**: **₱600** — Installation and testing of RAM, SSD, GPU, power supplies, or internal peripherals.\n` +
-      `• 💻 **Laptop Screen Replacement**: **₱2.5k – ₱8k+** *(depending on unit model)* — Display panel replacement and calibration for cracked or damaged screens.\n\n` +
-      `To schedule a repair or service, feel free to email Ron directly at [marquez.ronrons@gmail.com](mailto:marquez.ronrons@gmail.com)!`
-    );
-  }
+ 
 
   // Certifications / Certificates / Credentials
   if (
@@ -308,46 +280,6 @@ export function getRomFallbackReply(userQuery: string): string {
       `• **IP Addressing and Subnetting** (Udemy, 2022)\n` +
       `• **Cisco Networking Foundation** (LinkedIn, 2022)\n` +
       `• **Computer System Servicing NC II** (TESDA, 2019)`
-    );
-  }
-
-  // Services & Pricing offered
-  if (
-    query.includes("service") ||
-    query.includes("offer") ||
-    query.includes("price") ||
-    query.includes("pricing") ||
-    query.includes("rate") ||
-    query.includes("cost") ||
-    query.includes("fee") ||
-    query.includes("commission") ||
-    query.includes("repair") ||
-    query.includes("consult") ||
-    query.includes("reinstall") ||
-    query.includes("cleaning") ||
-    query.includes("home service") ||
-    query.includes("home-service") ||
-    query.includes("screen")
-  ) {
-    return (
-      `Here is a technical overview of Ron's engineering services and fee schedules:\n\n` +
-      `💻 **1. Software & Systems Engineering (Custom Scope)**\n` +
-      `• **Enterprise Platform Architecture**: Custom CRM, HRIS, Inventory (IMS), LMS, and QMS suites.\n` +
-      `• **Full-Stack Web & Mobile Applications** (Vue.js, React, Next.js, Laravel, Node.js, REST/WebSocket APIs).\n` +
-      `• **AI Pipeline & Automated Workflow Integration** (LLM, RAG, smart document automation).\n` +
-      `• **Open-Source System Adaptation & API Bridging**.\n` +
-      `• **Embedded Systems & IoT Firmware** (Arduino, ESP32, multi-sensor telemetry, circuit wiring).\n\n` +
-      `🤝 **2. Technical Advisory & Consulting**\n` +
-      `• **Discovery Session (20 mins)**: **Complimentary / ₱0**\n` +
-      `• **Technical Advisory & Retainer**: **₱1,000 / hr**\n` +
-      `• *Covers systems architecture blueprinting, technical feasibility, project roadmapping, BOM sourcing, and PR/codebase audits.*\n\n` +
-      `🔧 **3. Hardware / Mobile & PC Service**\n` +
-      `• **Basic diagnosis / checkup**: **₱600**\n` +
-      `• **OS reinstall**: **₱1,200**\n` +
-      `• **PC cleaning / dust removal**: **₱800**\n` +
-      `• **Hardware installation (RAM, SSD, GPU, etc.)**: **₱600**\n` +
-      `• **Laptop screen replacement**: **₱2.5k – ₱8k+** *(depending on unit model)*\n\n` +
-      `You can navigate to the **Services** section in the portfolio or reach out directly at [marquez.ronrons@gmail.com](mailto:marquez.ronrons@gmail.com) to schedule an engagement!`
     );
   }
 

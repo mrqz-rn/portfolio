@@ -49,7 +49,7 @@ import { BlogPost } from "./lib/supabase";
 
 import { preloadAssets } from "./utils/preload";
 
-const KNOWN_TABS = ["overview", "experience", "projects", "blog", "stack", "services", "connect", "audit"];
+const KNOWN_TABS = ["overview", "experience", "projects", "blog", "stack", /* "services", */ "connect", "audit"];
 
 function parseRoute(pathname: string): { tab: string; blogSlug: string | null } {
   const clean = pathname.replace(/^\/+|\/+$/g, "");
@@ -163,7 +163,7 @@ function PortfolioApp() {
     { id: "projects", label: "Projects", icon: <Layers size={16} /> },
     { id: "blog", label: "Blog", icon: <BookOpen size={16} /> },
     { id: "stack", label: "Stack", icon: <Cpu size={16} /> },
-    { id: "services", label: "Services", icon: <Wrench size={16} /> },
+    // { id: "services", label: "Services", icon: <Wrench size={16} /> },
     { id: "connect", label: "Connect", icon: <Globe size={16} /> },
     ...(isAdmin ? [{ id: "audit", label: "Audit Logs", icon: <ShieldAlert size={16} /> }] : []),
   ];
@@ -363,7 +363,7 @@ function PortfolioApp() {
           <div className="flex items-center justify-between px-1">
             <span className="text-[10px] font-mono text-zinc-500 dark:text-zinc-400 uppercase tracking-wider font-medium">Socials</span>
             <div className="flex items-center gap-1">
-              <SocialIcon icon={<Github size={16} />} href="https://github.com/mrqz-rn" label="GitHub Profile" />
+              <SocialIcon icon={<Github size={16} />} href="https://github.com/rnmrqz-pmc" label="GitHub Profile" />
               <SocialIcon icon={<Linkedin size={16} />} href="https://www.linkedin.com/in/ronmarquez/" label="LinkedIn Profile" />
             </div>
           </div>
@@ -377,7 +377,7 @@ function PortfolioApp() {
         <NavIcon icon={<Layers size={18} />} label="Projects" active={activeTab === "projects"} onClick={() => handleNavigateTab("projects")} />
         <NavIcon icon={<BookOpen size={18} />} label="Blog" active={activeTab === "blog"} onClick={() => handleNavigateTab("blog")} />
         <NavIcon icon={<Cpu size={18} />} label="Stack" active={activeTab === "stack"} onClick={() => handleNavigateTab("stack")} />
-        <NavIcon icon={<Wrench size={18} />} label="Services" active={activeTab === "services"} onClick={() => handleNavigateTab("services")} />
+        {/* <NavIcon icon={<Wrench size={18} />} label="Services" active={activeTab === "services"} onClick={() => handleNavigateTab("services")} /> */}
         <NavIcon icon={<Globe size={18} />} label="Connect" active={activeTab === "connect"} onClick={() => handleNavigateTab("connect")} />
         {isAdmin && (
           <NavIcon icon={<ShieldAlert size={18} />} label="Audit" active={activeTab === "audit"} onClick={() => handleNavigateTab("audit")} />
@@ -398,7 +398,7 @@ function PortfolioApp() {
               <BlogSection initialSlug={blogSlug} onPostSelect={handleBlogPostSelect} />
             )}
             {activeTab === "stack" && <StackSection />}
-            {activeTab === "services" && <ServicesSection onNavigate={handleNavigateTab} onSelectItem={setSelectedItem} />}
+            {/* {activeTab === "services" && <ServicesSection onNavigate={handleNavigateTab} onSelectItem={setSelectedItem} />} */}
             {activeTab === "connect" && <ConnectSection />}
             {activeTab === "audit" && <AuditSection />}
           </AnimatePresence>
