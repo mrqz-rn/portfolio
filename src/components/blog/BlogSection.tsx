@@ -11,21 +11,44 @@ import {
   MessageSquare, 
   ArrowUpRight, 
   Sparkles,
-  Loader2
+  Loader2,
+  Edit3,
+  Trash2
 } from "lucide-react";
-import { BlogPost, isSupabaseConfigured, supabase, INITIAL_DEMO_POSTS } from "../../lib/supabase";
+import { 
+  BlogPost, 
+  isSupabaseConfigured, 
+  supabase, 
+  getActiveDemoPosts, 
+  isPostDeleted, 
+  deleteBlogPost, 
+  unmarkPostAsDeleted, 
+  fetchPostBySlug 
+} from "../../lib/supabase";
 import { useAuth } from "../../contexts/AuthContext";
 import { BlogPostView } from "./BlogPostView";
 import { BlogEditorModal } from "./BlogEditorModal";
 
-export function BlogSection() {
+interface BlogSectionProps {
+  initialSlug?: string | null;
+  onPostSelect?: (post: BlogPost | null) => void;
+}
+
+export function BlogSection({ initialSlug, onPostSelect }: BlogSectionProps = {}) {
   const { isAdmin } = useAuth();
 
-  const [posts, setPosts] = useState<BlogPost[]>(INITIAL_DEMO_POSTS);
+  const [posts, setPosts] = useState<BlogPost[]>(() => getActiveDemoPosts());
   const [loading, setLoading] = useState(true);
   const [searchQuery, setSearchQuery] = useState("");
   const [selectedTag, setSelectedTag] = useState<string>("all");
-  const [selectedPost, setSelectedPost] = useState<BlogPost | null>(null);
+  const [selectedPost, setSelectedPost] = useState<BlogPost | null>(() => {
+    if (!initialSlug || isPostDeleted(initialSlug)) return null;
+    return getActiveDemoPosts().find(p => p.slug.toLowerCase() === initialSlug.toLowerCase()) || null;
+  });
+  const [loadingSlugPost, setLoadingSlugPost] = useState<boolean>(() => {
+    if (!initialSlug || isPostDeleted(initialSlug)) return false;
+    return !getActiveDemoPosts().some(p => p.slug.toLowerCase() === initialSlug.toLowerCase());
+  });
 
   // Editor Modal states
   const [isEditorOpen, setIsEditorOpen] = useState(false);
@@ -35,6 +58,7 @@ export function BlogSection() {
   useEffect(() => {
     async function loadPosts() {
       if (!isSupabaseConfigured) {
+        setPosts(getActiveDemoPosts());
         setLoading(false);
         return;
       }
@@ -46,25 +70,34 @@ export function BlogSection() {
           .order("created_at", { ascending: false });
 
         if (error) throw error;
-        if (data && data.length > 0) {
-          // Also fetch counts for likes and comments
-          const postsWithCounts = await Promise.all(
-            data.map(async (post) => {
-              const [{ count: likesCount }, { count: commentsCount }] = await Promise.all([
-                supabase.from("likes").select("*", { count: "exact", head: true }).eq("post_id", post.id),
-                supabase.from("comments").select("*", { count: "exact", head: true }).eq("post_id", post.id)
-              ]);
-              return {
-                ...post,
-                likes_count: likesCount || 0,
-                comments_count: commentsCount || 0
-              };
-            })
+        if (data) {
+          const activePosts = data.filter(
+            (p) => !isPostDeleted(p.id) && !isPostDeleted(p.slug)
           );
-          setPosts(postsWithCounts as BlogPost[]);
+
+          if (activePosts.length > 0) {
+            // Also fetch counts for likes and comments
+            const postsWithCounts = await Promise.all(
+              activePosts.map(async (post) => {
+                const [{ count: likesCount }, { count: commentsCount }] = await Promise.all([
+                  supabase.from("likes").select("*", { count: "exact", head: true }).eq("post_id", post.id),
+                  supabase.from("comments").select("*", { count: "exact", head: true }).eq("post_id", post.id)
+                ]);
+                return {
+                  ...post,
+                  likes_count: likesCount || 0,
+                  comments_count: commentsCount || 0
+                };
+              })
+            );
+            setPosts(postsWithCounts as BlogPost[]);
+          } else {
+            setPosts(getActiveDemoPosts());
+          }
         }
       } catch (err) {
         console.warn("Supabase posts load warning:", err);
+        setPosts(getActiveDemoPosts());
       } finally {
         setLoading(false);
       }
@@ -72,6 +105,53 @@ export function BlogSection() {
 
     loadPosts();
   }, []);
+
+  // Synchronize post selection when initialSlug changes (e.g. direct URL navigation)
+  useEffect(() => {
+    if (!initialSlug || isPostDeleted(initialSlug)) {
+      setSelectedPost(null);
+      setLoadingSlugPost(false);
+      return;
+    }
+
+    if (selectedPost && selectedPost.slug.toLowerCase() === initialSlug.toLowerCase()) {
+      setLoadingSlugPost(false);
+      return;
+    }
+
+    const foundInPosts = posts.find((p) => p.slug.toLowerCase() === initialSlug.toLowerCase());
+    if (foundInPosts) {
+      setSelectedPost(foundInPosts);
+      setLoadingSlugPost(false);
+      return;
+    }
+
+    let isMounted = true;
+    setLoadingSlugPost(true);
+
+    fetchPostBySlug(initialSlug).then((fetched) => {
+      if (!isMounted) return;
+      if (fetched) {
+        setSelectedPost(fetched);
+        setPosts((prev) => {
+          if (prev.some((p) => p.id === fetched.id)) return prev;
+          return [fetched, ...prev];
+        });
+      } else {
+        setSelectedPost(null);
+      }
+      setLoadingSlugPost(false);
+    });
+
+    return () => {
+      isMounted = false;
+    };
+  }, [initialSlug, posts]);
+
+  const handleSelectPost = (post: BlogPost | null) => {
+    setSelectedPost(post);
+    onPostSelect?.(post);
+  };
 
   // Collect all unique tags
   const allTags = Array.from(
@@ -107,6 +187,7 @@ export function BlogSection() {
   };
 
   const handleSaveSuccess = (savedPost: BlogPost, isNew: boolean) => {
+    unmarkPostAsDeleted(savedPost.id, savedPost.slug);
     if (isNew) {
       setPosts((prev) => [savedPost, ...prev]);
     } else {
@@ -117,12 +198,46 @@ export function BlogSection() {
     }
   };
 
+  const handleDeletePost = async (postId: string) => {
+    const postToDelete = posts.find((p) => p.id === postId) || (selectedPost?.id === postId ? selectedPost : null);
+    if (!window.confirm(`Are you sure you want to permanently delete "${postToDelete?.title || 'this article'}"? This action cannot be undone.`)) {
+      return;
+    }
+
+    try {
+      await deleteBlogPost(postId, postToDelete?.slug);
+    } catch (err) {
+      console.warn("deleteBlogPost warning:", err);
+    }
+
+    setPosts((prev) => prev.filter((p) => p.id !== postId && p.slug !== postToDelete?.slug));
+
+    if (selectedPost && (selectedPost.id === postId || selectedPost.slug === postToDelete?.slug)) {
+      handleSelectPost(null);
+      if (typeof window !== "undefined" && window.location.pathname !== "/blog") {
+        window.history.pushState(null, "", "/blog");
+      }
+    }
+  };
+
   const handleDeleteSuccess = (postId: string) => {
     setPosts((prev) => prev.filter((p) => p.id !== postId));
     if (selectedPost && selectedPost.id === postId) {
-      setSelectedPost(null);
+      handleSelectPost(null);
+      if (typeof window !== "undefined" && window.location.pathname !== "/blog") {
+        window.history.pushState(null, "", "/blog");
+      }
     }
   };
+
+  if (loadingSlugPost) {
+    return (
+      <div className="w-full max-w-4xl py-24 flex flex-col items-center justify-center gap-3 text-zinc-400 font-mono text-xs">
+        <Loader2 size={24} className="animate-spin text-blue-500" />
+        <span>Loading article...</span>
+      </div>
+    );
+  }
 
   // If a single post is active, render the dedicated post view
   if (selectedPost) {
@@ -130,9 +245,9 @@ export function BlogSection() {
       <>
         <BlogPostView
           post={selectedPost}
-          onBack={() => setSelectedPost(null)}
+          onBack={() => handleSelectPost(null)}
           onEditPost={handleOpenEditModal}
-          onDeletePost={handleDeleteSuccess}
+          onDeletePost={handleDeletePost}
         />
 
         <BlogEditorModal
@@ -255,7 +370,7 @@ export function BlogSection() {
                 initial={{ opacity: 0, y: 15 }}
                 animate={{ opacity: 1, y: 0 }}
                 transition={{ delay: idx * 0.05 }}
-                onClick={() => setSelectedPost(post)}
+                onClick={() => handleSelectPost(post)}
                 className="bg-white dark:bg-[#121826] rounded-3xl border border-zinc-200/80 dark:border-zinc-800 shadow-xs hover:border-zinc-400 dark:hover:border-zinc-600 hover:shadow-md transition-all flex flex-col justify-between overflow-hidden group cursor-pointer"
               >
                 <div>
@@ -318,6 +433,30 @@ export function BlogSection() {
                   </div>
 
                   <div className="flex items-center gap-3">
+                    {isAdmin && (
+                      <div className="flex items-center gap-1 border-r border-zinc-200 dark:border-zinc-700 pr-2 mr-0.5" onClick={(e) => e.stopPropagation()}>
+                        <button
+                          onClick={(e) => {
+                            e.stopPropagation();
+                            handleOpenEditModal(post);
+                          }}
+                          className="p-1 text-zinc-400 hover:text-blue-600 dark:hover:text-blue-400 rounded transition-colors cursor-pointer"
+                          title="Edit post"
+                        >
+                          <Edit3 size={13} />
+                        </button>
+                        <button
+                          onClick={(e) => {
+                            e.stopPropagation();
+                            handleDeletePost(post.id);
+                          }}
+                          className="p-1 text-zinc-400 hover:text-red-600 dark:hover:text-red-400 rounded transition-colors cursor-pointer"
+                          title="Delete post"
+                        >
+                          <Trash2 size={13} />
+                        </button>
+                      </div>
+                    )}
                     <span className="flex items-center gap-1 text-zinc-600 dark:text-zinc-300">
                       <Heart size={13} className="text-rose-500" />
                       <span>{post.likes_count || 0}</span>

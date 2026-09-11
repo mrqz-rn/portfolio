@@ -95,7 +95,7 @@ export function OverviewSection({ onNavigate, onSelectItem }: OverviewSectionPro
             {/* Social Text Links with Arrows */}
             <div className="flex flex-wrap items-center gap-6 pt-2 font-mono text-sm">
               <a 
-                href="https://github.com/mrqz-rn" 
+                href="https://github.com/rnmrqz-pmc" 
                 target="_blank" 
                 rel="noopener noreferrer" 
                 aria-label="GitHub Profile"
@@ -364,7 +364,7 @@ export function OverviewSection({ onNavigate, onSelectItem }: OverviewSectionPro
         </div>
       </div>
 
-      {/* 05 — SERVICES / HIGHLIGHTS */}
+      {/* 05 — SERVICES / HIGHLIGHTS (Commented out)
       <div className="space-y-8">
         <div className="flex items-center justify-between border-b border-zinc-200 dark:border-zinc-800 pb-4">
           <h2 className="font-mono text-xs uppercase tracking-widest text-zinc-600 dark:text-zinc-400 font-semibold">
@@ -411,6 +411,7 @@ export function OverviewSection({ onNavigate, onSelectItem }: OverviewSectionPro
           ))}
         </div>
       </div>
+      */}
     </motion.section>
   );
 }

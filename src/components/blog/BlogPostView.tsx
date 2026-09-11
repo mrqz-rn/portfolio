@@ -17,7 +17,7 @@ import {
 } from "lucide-react";
 import { BlogPost, PostComment, isSupabaseConfigured, supabase } from "../../lib/supabase";
 import { useAuth } from "../../contexts/AuthContext";
-import { parseMarkdownToHtml } from "../../utils/markdownParser";
+import { MarkdownRenderer } from "../ui/MarkdownRenderer";
 
 interface BlogPostViewProps {
   post: BlogPost;
@@ -43,6 +43,39 @@ export function BlogPostView({
   const [commentInput, setCommentInput] = useState("");
   const [submittingComment, setSubmittingComment] = useState(false);
   const [copied, setCopied] = useState(false);
+
+  // Synchronize document title and description with the post for dynamic navigation
+  useEffect(() => {
+    const originalTitle = document.title;
+    document.title = `${post.title} | Ron Marquez`;
+
+    const descMeta = document.querySelector('meta[name="description"]');
+    const ogTitleMeta = document.querySelector('meta[property="og:title"]');
+    const ogDescMeta = document.querySelector('meta[property="og:description"]');
+    const ogUrlMeta = document.querySelector('meta[property="og:url"]');
+
+    const originalDesc = descMeta?.getAttribute("content") || "";
+    const originalOgTitle = ogTitleMeta?.getAttribute("content") || "";
+    const originalOgDesc = ogDescMeta?.getAttribute("content") || "";
+    const originalOgUrl = ogUrlMeta?.getAttribute("content") || "";
+
+    const postUrl = typeof window !== "undefined"
+      ? `${window.location.origin}/${post.slug}`
+      : `https://ronmarquez.tech/${post.slug}`;
+
+    if (descMeta && post.excerpt) descMeta.setAttribute("content", post.excerpt);
+    if (ogTitleMeta) ogTitleMeta.setAttribute("content", `${post.title} | Ron Marquez`);
+    if (ogDescMeta && post.excerpt) ogDescMeta.setAttribute("content", post.excerpt);
+    if (ogUrlMeta) ogUrlMeta.setAttribute("content", postUrl);
+
+    return () => {
+      document.title = originalTitle;
+      if (descMeta) descMeta.setAttribute("content", originalDesc);
+      if (ogTitleMeta) ogTitleMeta.setAttribute("content", originalOgTitle);
+      if (ogDescMeta) ogDescMeta.setAttribute("content", originalOgDesc);
+      if (ogUrlMeta) ogUrlMeta.setAttribute("content", originalOgUrl);
+    };
+  }, [post.title, post.excerpt, post.slug]);
 
   // Calculate estimated reading time
   const wordCount = post.content ? post.content.split(/\s+/).length : 0;
@@ -254,9 +287,26 @@ export function BlogPostView({
     }
   };
 
-  const handleShare = () => {
+  const postUrl = typeof window !== "undefined"
+    ? `${window.location.origin}/${post.slug}`
+    : `https://ronmarquez.tech/${post.slug}`;
+
+  const handleShare = async () => {
+    if (typeof navigator !== "undefined" && navigator.share && /mobile|android|iphone|ipad/i.test(navigator.userAgent)) {
+      try {
+        await navigator.share({
+          title: post.title,
+          text: post.excerpt || post.title,
+          url: postUrl
+        });
+        return;
+      } catch (err) {
+        // Fallback to clipboard
+      }
+    }
+
     if (navigator.clipboard) {
-      navigator.clipboard.writeText(window.location.href);
+      await navigator.clipboard.writeText(postUrl);
       setCopied(true);
       setTimeout(() => setCopied(false), 2000);
     }
@@ -280,6 +330,7 @@ export function BlogPostView({
         </button>
 
         <div className="flex items-center gap-2">
+
           {isAdmin && onEditPost && (
             <button
               onClick={() => onEditPost(post)}
@@ -364,12 +415,10 @@ export function BlogPostView({
         )}
       </header>
 
-      {/* Article Content (Rendered Markdown) */}
-      <div 
+      {/* Article Content (Rendered Markdown with Mermaid Diagrams) */}
+      <MarkdownRenderer
+        content={post.content}
         className="space-y-4 text-zinc-800 dark:text-zinc-200 leading-relaxed text-base prose dark:prose-invert max-w-none pt-4 border-t border-zinc-100 dark:border-zinc-800"
-        dangerouslySetInnerHTML={{
-          __html: parseMarkdownToHtml(post.content)
-        }}
       />
 
       {/* Like & Interaction Bar */}

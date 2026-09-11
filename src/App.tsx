@@ -20,7 +20,8 @@ import {
   LogIn,
   LogOut,
   User as UserIcon,
-  Sparkles
+  Sparkles,
+  ShieldAlert
 } from "lucide-react";
 import { useState, useEffect } from "react";
 import { getMyStatus } from "./data";
@@ -31,7 +32,6 @@ import { SocialIcon } from "./components/ui/SocialIcon";
 import { Modal } from "./components/ui/Modal";
 import { ChatBot } from "./components/chat/ChatBot";
 import { AuthModal } from "./components/auth/AuthModal";
-import { BlogAnnouncementModal } from "./components/ui/BlogAnnouncementModal";
 
 // Contexts
 import { AuthProvider, useAuth } from "./contexts/AuthContext";
@@ -43,13 +43,56 @@ import { ProjectsSection } from "./components/sections/ProjectsSection";
 import { StackSection } from "./components/sections/StackSection";
 import { ServicesSection } from "./components/sections/ServicesSection";
 import { ConnectSection } from "./components/sections/ConnectSection";
-import { BlogPlaceholder } from "./components/blog/BlogPlaceholder";
+import { BlogSection } from "./components/blog/BlogSection";
+import { AuditSection } from "./components/admin/AuditSection";
+import { BlogPost } from "./lib/supabase";
 
 import { preloadAssets } from "./utils/preload";
 
+const KNOWN_TABS = ["overview", "experience", "projects", "blog", "stack", /* "services", */ "connect", "audit"];
+
+function parseRoute(pathname: string): { tab: string; blogSlug: string | null } {
+  const clean = pathname.replace(/^\/+|\/+$/g, "");
+  if (!clean || clean === "overview") {
+    return { tab: "overview", blogSlug: null };
+  }
+
+  if (clean.startsWith("blog/")) {
+    const slug = clean.slice(5).trim();
+    return { tab: "blog", blogSlug: slug || null };
+  }
+
+  if (KNOWN_TABS.includes(clean)) {
+    return { tab: clean, blogSlug: null };
+  }
+
+  // Any non-tab path without dot (not static file or api) is a direct blog slug:
+  if (!clean.includes(".") && !clean.startsWith("api/")) {
+    return { tab: "blog", blogSlug: clean };
+  }
+
+  return { tab: "overview", blogSlug: null };
+}
+
+function LocalTimeDisplay() {
+  const [time, setTime] = useState(() => new Date());
+
+  useEffect(() => {
+    const timer = setInterval(() => setTime(new Date()), 1000);
+    return () => clearInterval(timer);
+  }, []);
+
+  return (
+    <div className="text-zinc-700 dark:text-zinc-300 text-[11px] font-mono truncate font-medium">
+      {time.toLocaleTimeString()} PHT
+    </div>
+  );
+}
+
 function PortfolioApp() {
-  const [activeTab, setActiveTab] = useState("overview");
-  const [time, setTime] = useState(new Date());
+  const initialRoute = typeof window !== "undefined" ? parseRoute(window.location.pathname) : { tab: "overview", blogSlug: null };
+  const [activeTab, setActiveTab] = useState<string>(initialRoute.tab);
+  const [blogSlug, setBlogSlug] = useState<string | null>(initialRoute.blogSlug);
   const [selectedItem, setSelectedItem] = useState<any>(null);
   const [theme, setTheme] = useState<"light" | "dark">(() => {
     if (typeof window !== "undefined") {
@@ -76,9 +119,42 @@ function PortfolioApp() {
 
   useEffect(() => {
     preloadAssets();
-    const timer = setInterval(() => setTime(new Date()), 1000);
-    return () => clearInterval(timer);
   }, []);
+
+  useEffect(() => {
+    const handlePopState = () => {
+      const { tab, blogSlug: slug } = parseRoute(window.location.pathname);
+      setActiveTab(tab);
+      setBlogSlug(slug);
+    };
+
+    window.addEventListener("popstate", handlePopState);
+    return () => window.removeEventListener("popstate", handlePopState);
+  }, []);
+
+  const handleNavigateTab = (tabId: string) => {
+    setActiveTab(tabId);
+    setBlogSlug(null);
+    const targetPath = tabId === "overview" ? "/" : `/${tabId}`;
+    if (window.location.pathname !== targetPath) {
+      window.history.pushState({ tab: tabId, slug: null }, "", targetPath);
+    }
+  };
+
+  const handleBlogPostSelect = (post: BlogPost | null) => {
+    if (post) {
+      setBlogSlug(post.slug);
+      const targetPath = `/${post.slug}`;
+      if (window.location.pathname !== targetPath) {
+        window.history.pushState({ tab: "blog", slug: post.slug }, "", targetPath);
+      }
+    } else {
+      setBlogSlug(null);
+      if (window.location.pathname !== "/blog") {
+        window.history.pushState({ tab: "blog", slug: null }, "", "/blog");
+      }
+    }
+  };
 
   const closeModal = () => setSelectedItem(null);
 
@@ -88,8 +164,9 @@ function PortfolioApp() {
     { id: "projects", label: "Projects", icon: <Layers size={16} /> },
     { id: "blog", label: "Blog", icon: <BookOpen size={16} /> },
     { id: "stack", label: "Stack", icon: <Cpu size={16} /> },
-    { id: "services", label: "Services", icon: <Wrench size={16} /> },
+    // { id: "services", label: "Services", icon: <Wrench size={16} /> },
     { id: "connect", label: "Connect", icon: <Globe size={16} /> },
+    ...(isAdmin ? [{ id: "audit", label: "Audit Logs", icon: <ShieldAlert size={16} /> }] : []),
   ];
 
   return (
@@ -164,7 +241,7 @@ function PortfolioApp() {
                   return (
                     <button
                       key={item.id}
-                      onClick={() => setActiveTab(item.id)}
+                      onClick={() => handleNavigateTab(item.id)}
                       className={`w-full flex items-center justify-between px-3 py-2.5 rounded-xl text-xs font-mono transition-all duration-200 cursor-pointer ${
                         isActive
                           ? "bg-zinc-100 dark:bg-zinc-800/90 text-zinc-900 dark:text-white border border-zinc-200/80 dark:border-zinc-700 font-bold shadow-xs"
@@ -217,13 +294,15 @@ function PortfolioApp() {
                     )}
                   </div>
 
-                  <button
-                    onClick={signOut}
-                    className="w-full flex items-center justify-center gap-1.5 py-1.5 rounded-lg bg-zinc-100 dark:bg-zinc-800 hover:bg-red-50 dark:hover:bg-red-950/40 text-zinc-600 hover:text-red-600 dark:text-zinc-400 dark:hover:text-red-300 font-mono text-[10px] font-semibold transition-colors cursor-pointer"
-                  >
-                    <LogOut size={11} />
-                    <span>Sign Out</span>
-                  </button>
+                  {isAdmin && (
+                    <button
+                      onClick={() => handleNavigateTab("audit")}
+                      className="px-2 py-0.5 rounded-md bg-blue-50 dark:bg-blue-950/70 text-blue-700 dark:text-blue-300 font-mono text-[9px] font-bold border border-blue-200 dark:border-blue-800 hover:bg-blue-100 dark:hover:bg-blue-900/60 transition-all cursor-pointer"
+                      title="Open Chatbot Audit Logs"
+                    >
+                      AUDIT
+                    </button>
+                  )}
                 </div>
               ) : (
                 <div className="text-center space-y-2">
@@ -280,16 +359,14 @@ function PortfolioApp() {
               </span>
               <span className="text-emerald-700 dark:text-emerald-400 font-bold text-[10px]">{status.toUpperCase()}</span>
             </div>
-            <div className="text-zinc-700 dark:text-zinc-300 text-[11px] font-mono truncate font-medium">
-              {time.toLocaleTimeString()} PHT
-            </div>
+            <LocalTimeDisplay />
           </div>
 
           {/* Social Icons */}
           <div className="flex items-center justify-between px-1">
             <span className="text-[10px] font-mono text-zinc-500 dark:text-zinc-400 uppercase tracking-wider font-medium">Socials</span>
             <div className="flex items-center gap-1">
-              <SocialIcon icon={<Github size={16} />} href="https://github.com/mrqz-rn" label="GitHub Profile" />
+              <SocialIcon icon={<Github size={16} />} href="https://github.com/rnmrqz-pmc" label="GitHub Profile" />
               <SocialIcon icon={<Linkedin size={16} />} href="https://www.linkedin.com/in/ronmarquez/" label="LinkedIn Profile" />
             </div>
           </div>
@@ -298,13 +375,16 @@ function PortfolioApp() {
 
       {/* Mobile Bottom Navigation Dock */}
       <nav className="fixed bottom-0 left-0 w-full h-16 bg-white/95 dark:bg-[#0f1422]/95 backdrop-blur-xl border-t border-zinc-200 dark:border-zinc-800 flex items-center justify-around z-50 md:hidden px-2">
-        <NavIcon icon={<Terminal size={18} />} label="Overview" active={activeTab === "overview"} onClick={() => setActiveTab("overview")} />
-        <NavIcon icon={<Briefcase size={18} />} label="Experience" active={activeTab === "experience"} onClick={() => setActiveTab("experience")} />
-        <NavIcon icon={<Layers size={18} />} label="Projects" active={activeTab === "projects"} onClick={() => setActiveTab("projects")} />
-        <NavIcon icon={<BookOpen size={18} />} label="Blog" active={activeTab === "blog"} onClick={() => setActiveTab("blog")} />
-        <NavIcon icon={<Cpu size={18} />} label="Stack" active={activeTab === "stack"} onClick={() => setActiveTab("stack")} />
-        <NavIcon icon={<Wrench size={18} />} label="Services" active={activeTab === "services"} onClick={() => setActiveTab("services")} />
-        <NavIcon icon={<Globe size={18} />} label="Connect" active={activeTab === "connect"} onClick={() => setActiveTab("connect")} />
+        <NavIcon icon={<Terminal size={18} />} label="Overview" active={activeTab === "overview"} onClick={() => handleNavigateTab("overview")} />
+        <NavIcon icon={<Briefcase size={18} />} label="Experience" active={activeTab === "experience"} onClick={() => handleNavigateTab("experience")} />
+        <NavIcon icon={<Layers size={18} />} label="Projects" active={activeTab === "projects"} onClick={() => handleNavigateTab("projects")} />
+        <NavIcon icon={<BookOpen size={18} />} label="Blog" active={activeTab === "blog"} onClick={() => handleNavigateTab("blog")} />
+        <NavIcon icon={<Cpu size={18} />} label="Stack" active={activeTab === "stack"} onClick={() => handleNavigateTab("stack")} />
+        {/* <NavIcon icon={<Wrench size={18} />} label="Services" active={activeTab === "services"} onClick={() => handleNavigateTab("services")} /> */}
+        <NavIcon icon={<Globe size={18} />} label="Connect" active={activeTab === "connect"} onClick={() => handleNavigateTab("connect")} />
+        {isAdmin && (
+          <NavIcon icon={<ShieldAlert size={18} />} label="Audit" active={activeTab === "audit"} onClick={() => handleNavigateTab("audit")} />
+        )}
       </nav>
 
       {/* Main Content Area */}
@@ -313,14 +393,17 @@ function PortfolioApp() {
           {/* Content Sections */}
           <AnimatePresence mode="wait">
             {activeTab === "overview" && (
-              <OverviewSection onNavigate={setActiveTab} onSelectItem={setSelectedItem} />
+              <OverviewSection onNavigate={handleNavigateTab} onSelectItem={setSelectedItem} />
             )}
             {activeTab === "experience" && <ExperienceSection />}
             {activeTab === "projects" && <ProjectsSection onSelectItem={setSelectedItem} />}
-            {activeTab === "blog" && <BlogPlaceholder />}
+            {activeTab === "blog" && (
+              <BlogSection initialSlug={blogSlug} onPostSelect={handleBlogPostSelect} />
+            )}
             {activeTab === "stack" && <StackSection />}
-            {activeTab === "services" && <ServicesSection onNavigate={setActiveTab} onSelectItem={setSelectedItem} />}
+            {/* {activeTab === "services" && <ServicesSection onNavigate={handleNavigateTab} onSelectItem={setSelectedItem} />} */}
             {activeTab === "connect" && <ConnectSection />}
+            {activeTab === "audit" && <AuditSection />}
           </AnimatePresence>
         </div>
       </main>
@@ -330,9 +413,6 @@ function PortfolioApp() {
 
       {/* User Auth Modal */}
       <AuthModal />
-
-      {/* Blog Launch Countdown Announcement Overlay */}
-      <BlogAnnouncementModal onNavigateToBlog={() => setActiveTab("blog")} />
 
       {/* AI Assistant ChatBot */}
       <ChatBot />
