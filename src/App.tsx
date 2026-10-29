@@ -171,8 +171,9 @@ function PortfolioApp() {
   return (
     <div className="min-h-screen bg-[#f5f7ff] dark:bg-[#090d16] grid-pattern relative overflow-hidden text-zinc-900 dark:text-zinc-100 transition-colors duration-300">
       {/* Background Ambient Glows */}
-      <div className="absolute top-[-10%] left-[-10%] w-[40%] h-[40%] bg-blue-500/5 dark:bg-blue-600/10 blur-[120px] rounded-full pointer-events-none" />
-      <div className="absolute bottom-[-10%] right-[-10%] w-[40%] h-[40%] bg-indigo-500/5 dark:bg-indigo-600/10 blur-[120px] rounded-full pointer-events-none" />
+      {/* Radial gradients instead of blur filters: blur repaints on scroll and flickers in Chrome */}
+      <div className="absolute top-[-20%] left-[-20%] w-[60%] h-[60%] bg-radial from-blue-500/5 dark:from-blue-600/10 to-transparent to-70% pointer-events-none" />
+      <div className="absolute bottom-[-20%] right-[-20%] w-[60%] h-[60%] bg-radial from-indigo-500/5 dark:from-indigo-600/10 to-transparent to-70% pointer-events-none" />
 
       {/* Mobile Top Header */}
       <header className="w-full md:hidden flex items-center justify-between px-5 py-3.5 border-b border-zinc-200 dark:border-zinc-800 bg-[#f5f7ff]/90 dark:bg-[#090d16]/90 backdrop-blur-xl sticky top-0 z-40">
@@ -221,7 +222,7 @@ function PortfolioApp() {
       </header>
 
       {/* Extended Sidebar */}
-      <aside className="fixed left-0 top-0 h-full w-64 border-r border-zinc-200/80 dark:border-zinc-800/80 bg-white/90 dark:bg-[#0f1422]/90 backdrop-blur-xl flex flex-col justify-between p-6 z-50 max-md:hidden overflow-y-auto custom-scrollbar">
+      <aside className="fixed left-0 top-0 h-full w-64 border-r border-zinc-200/80 dark:border-zinc-800/80 bg-white dark:bg-[#0f1422] flex flex-col justify-between p-6 z-50 max-md:hidden overflow-y-auto custom-scrollbar">
         {/* Top Header */}
         <div>
           <div className="mb-6 px-3">

@@ -45,16 +45,7 @@ function ProjectGallery({ images, name, onExpand }: { images: string[]; name: st
   return (
     <div className="space-y-3">
       {/* Stage */}
-      <div className="relative aspect-[16/10] rounded-2xl overflow-hidden bg-zinc-900 border border-zinc-200 dark:border-zinc-800 shadow-sm group/gallery select-none">
-        {/* Blurred backdrop so portrait screenshots fill the frame without cropping */}
-        <img
-          src={images[index]}
-          alt=""
-          aria-hidden
-          className="absolute inset-0 w-full h-full object-cover scale-110 blur-2xl opacity-50"
-          referrerPolicy="no-referrer"
-        />
-
+      <div className="relative aspect-[16/10] rounded-2xl overflow-hidden bg-zinc-100 dark:bg-zinc-900 border border-zinc-200 dark:border-zinc-800 shadow-sm group/gallery select-none">
         <AnimatePresence initial={false} custom={direction} mode="popLayout">
           <motion.img
             key={index}
