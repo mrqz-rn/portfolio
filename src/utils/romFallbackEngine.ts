@@ -7,6 +7,68 @@ import { getMyStatus } from "../data";
 export function getRomFallbackReply(userQuery: string): string {
   const query = userQuery.toLowerCase().trim();
 
+  // Lead to Cash Portal (Power Mac Center) — before ESS-PORTAL, which matches "portal"
+  if (
+    query.includes("l2c") ||
+    query.includes("lead to cash") ||
+    query.includes("lead-to-cash") ||
+    query.includes("waiver") ||
+    query.includes("lead management") ||
+    query.includes("the loop")
+  ) {
+    return (
+      `**Lead to Cash Portal (L2C Portal)** is an internal platform for Power Mac Center and The Loop:\n\n` +
+      `• **Purpose**: Digitizes customer waivers and centralizes lead management, so customers can be tracked from first contact through to a completed sale.\n` +
+      `• **Ron's Role**: Design, development, testing, deployment, and maintenance.\n\n` +
+      `For deeper technical details, reach out to Ron at [marquez.ronrons@gmail.com](mailto:marquez.ronrons@gmail.com).`
+    );
+  }
+
+  // WMedLaw DTR & Payroll — before SPOTT, which matches "dtr"
+  if (
+    query.includes("payroll system") ||
+    query.includes("timekeeping-dtr") ||
+    (query.includes("wmed") && (query.includes("dtr") || query.includes("payroll") || query.includes("timekeeping")))
+  ) {
+    return (
+      `**WMedLaw DTR** is a Daily Time Record (DTR) and payroll system built for WMedLaw:\n\n` +
+      `• **Purpose**: Digitizes employee timekeeping, consolidates attendance records, and supports payroll processing.\n` +
+      `• **Tech Stack**: Next.js, Supabase, Vercel.\n\n` +
+      `For deeper technical details, reach out to Ron at [marquez.ronrons@gmail.com](mailto:marquez.ronrons@gmail.com).`
+    );
+  }
+
+  // Side & IoT projects
+  if (query.includes("juala") || query.includes("bird")) {
+    return (
+      `**Juala De Amor** is an IoT-enabled smart cage system for pet bird owners, designed to ensure optimal care, safety, and comfort for their birds.\n\n` +
+      `• **Tech Stack**: Android, Arduino, Firebase.`
+    );
+  }
+
+  if (query.includes("recsys") || query.includes("drying") || query.includes("clothes")) {
+    return (
+      `**ReCSys** is an automated IoT smart drying system that lets users dry clothes outdoors while protecting them from sudden rain or intense sunlight.\n\n` +
+      `• **Tech Stack**: Android, Arduino, Firebase.`
+    );
+  }
+
+  if (query.includes("quickcharge") || query.includes("quick charge") || query.includes("charging")) {
+    return (
+      `**QuickCharge-Fi** is a budget-friendly charging and Wi-Fi station for students in shared spaces such as libraries, dormitories, and study halls, built for high traffic at minimal cost.\n\n` +
+      `• **Tech Stack**: Android, Arduino, PHP, MySQL.`
+    );
+  }
+
+  if (query.includes("iot") || query.includes("side project") || query.includes("arduino")) {
+    return (
+      `Ron's **Side & IoT projects** include:\n\n` +
+      `1. **Juala De Amor**: IoT smart bird cage system (Android, Arduino, Firebase).\n` +
+      `2. **ReCSys**: Automated smart clothes-drying system (Android, Arduino, Firebase).\n` +
+      `3. **QuickCharge-Fi**: Student charging & Wi-Fi station (Android, Arduino, PHP, MySQL).`
+    );
+  }
+
   // SWFS (Sterling Workforce System)
   if (
     query.includes("swfs") ||
@@ -104,7 +166,7 @@ export function getRomFallbackReply(userQuery: string): string {
       `  - Integrated WebSockets and asynchronous queue workers for zero-latency live ticket calling and status updates.\n` +
       `  - Built the technician & admin management console for ticket handling and wait time monitoring.\n` +
       `  - Optimized database schemas for tracking customer throughput and peak hour metrics.\n` +
-      `• **Tech Stack**: Vue.js, Laravel, MariaDB, WebSockets, Queue.`
+      `• **Tech Stack**: Web Kiosk, WebSockets, Redis, Hexnode (kiosk device management).`
     );
   }
 
@@ -146,7 +208,7 @@ export function getRomFallbackReply(userQuery: string): string {
     query.includes("law firm")
   ) {
     return (
-      `**WMedLaw** is the digital web platform and client management portal for a Houston-based legal firm:\n\n` +
+      `**WMedLaw** is the digital web platform and client management portal for a Texas-based legal firm:\n\n` +
       `• **Purpose**: Serves as the central digital face for the law firm with high availability, SEO optimization, and streamlined client intake.\n` +
       `• **Ron's Key Contributions**:\n` +
       `  - Engineered responsive layouts, legal service directories, and client intake workflows.\n` +
@@ -248,16 +310,20 @@ export function getRomFallbackReply(userQuery: string): string {
   ) {
     return (
       `Here are Ron's primary enterprise production platforms:\n\n` +
-      `1. **PMCIE LMS** (Learning Management System): Training batch administration, module tracking, and analytics dashboard (Vue.js, Laravel, MariaDB).\n` +
-      `2. **MobileCare Queuing** (AASP Queuing System): Real-time customer check-in kiosk and live ticket calling platform (Vue.js, Laravel, MariaDB, WebSockets).\n` +
-      `3. **Basecamp TMS** (Training Monitoring System): Training management and scheduling with OTRS integration (Vue.js, Laravel, MariaDB).\n` +
-      `4. **SWFS** (Sterling Workforce System): Comprehensive HRIS & payroll solution with BIR Tax, Alphalist, and Last Pay computation (Vue.js, CodeIgniter, MariaDB).\n` +
-      `5. **SPOTT** (Sterling Paper Online Time Tracker): Mobile & web Daily Time Record (DTR) app (Ionic, Vue.js, CodeIgniter).\n` +
-      `6. **ESS-PORTAL** (Employee Self-Service Portal): Centralized timekeeping and HR portal integrated with SPOTT logs (Vue.js, CodeIgniter, MySQL).\n` +
-      `7. **OBS** (Onboarding System): Full recruitment and new-hire onboarding platform (Vue.js, CodeIgniter, MySQL).\n` +
-      `8. **Nexus-IMS** (Inventory Management System): Multi-warehouse inventory tracking & gatekeeper workflow for Trillion Residence (Vue.js, Laravel, MySQL).\n` +
-      `9. **Asia CEO Forum**: Modernized Next.js platform for national business event series.\n\n` +
-      `Ask me about any specific project (e.g. *"What is Nexus-IMS?"* or *"Tell me about PMCIE LMS"*) for more details!`
+      `1. **MobileCare Queuing** (AASP Queuing System): Real-time customer check-in kiosk and live ticket calling platform (Web Kiosk, WebSockets, Redis, Hexnode).\n` +
+      `2. **Lead to Cash Portal** (L2C): Digital waiver and lead management platform for Power Mac Center and The Loop.\n` +
+      `3. **PMCIE LMS** (Learning Management System): Training batch administration, module tracking, and analytics dashboard (Vue.js, Laravel, MariaDB).\n` +
+      `4. **Basecamp TMS** (Training Monitoring System): Training management and scheduling with OTRS integration (Vue.js, Laravel, MariaDB).\n` +
+      `5. **WMedLaw DTR** (DTR & Payroll System): Employee timekeeping and payroll system for WMedLaw (Next.js, Supabase, Vercel).\n` +
+      `6. **WMedLaw Web Platform**: Official website and client intake portal for a Texas-based law firm (WordPress, PHP).\n` +
+      `7. **Nexus-IMS** (Inventory Management System): Multi-warehouse inventory tracking & gatekeeper workflow for Trillion Residence (Vue.js, Laravel, MySQL).\n` +
+      `8. **SWFS** (Sterling Workforce System): Comprehensive HRIS & payroll solution with BIR Tax, Alphalist, and Last Pay computation (Vue.js, CodeIgniter, MariaDB).\n` +
+      `9. **SPOTT** (Sterling Paper Online Time Tracker): Mobile & web Daily Time Record (DTR) app (Ionic, Vue.js, CodeIgniter).\n` +
+      `10. **ESS-PORTAL** (Employee Self-Service Portal): Centralized timekeeping and HR portal integrated with SPOTT logs (Vue.js, CodeIgniter, MySQL).\n` +
+      `11. **OBS** (Onboarding System): Full recruitment and new-hire onboarding platform (Vue.js, CodeIgniter, MySQL).\n` +
+      `12. **Asia CEO Forum**: Modernized Next.js platform for national business event series.\n\n` +
+      `**Side & IoT projects**: Juala De Amor (smart bird cage), ReCSys (smart clothes-drying system), and QuickCharge-Fi (student charging & Wi-Fi station).\n\n` +
+      `Ask me about any specific project (e.g. *"What is Nexus-IMS?"* or *"Tell me about the Lead to Cash Portal"*) for more details!`
     );
   }
  

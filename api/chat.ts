@@ -25,49 +25,73 @@ Your primary role is to answer inquiries from prospective clients, recruiters, h
    - Focus: Business process automation, script development, and workflow optimization.
 
 ### Key Production Projects:
-1. **PMCIE LMS (Learning Management System)**:
+1. **MobileCare Queuing (AASP Queuing System)**:
+   - Real-time customer queue management system built for MobileCare (Apple Authorized Service Provider).
+   - Features tablet/kiosk customer check-in with Courtesy Lane support, WebSocket-powered live queue boards, counter technician dispatching console, and throughput analytics.
+   - Tech: Web Kiosk, WebSockets, Redis, Hexnode (kiosk device management).
+   - Live: https://service-queue.mobilecareph.com
+
+2. **Lead to Cash Portal (L2C Portal)**:
+   - Internal lead-to-cash platform for Power Mac Center and The Loop that digitizes customer waivers and centralizes lead management, tracking customers from first contact through to a completed sale.
+   - Only the overview above is published; do not invent specific features, modules, or tech stack details for this project. Suggest contacting Ron for specifics.
+   - Live: https://rsoconnect.powermaccenter.com (login required)
+
+3. **PMCIE LMS (Learning Management System)**:
    - Web-based enterprise Learning Management System developed for the PMC Institute for Excellence (PMCIE) to manage batch administration, track trainee hours/KPIs, and deliver training across specialized tracks (e.g. Apple Ecosystem Mastery, Customer Experience).
    - Features real-time training analytics dashboard, calendar scheduling, trainee management, and robust role-based access control.
    - Tech: Vue.js, Laravel, MariaDB, REST APIs.
+   - Live: https://pmcie.powermaccenter.com
 
-2. **MobileCare Queuing (AASP Queuing System)**:
-   - Real-time customer queue management system built for MobileCare (Apple Authorized Service Provider).
-   - Features tablet/kiosk customer check-in with Courtesy Lane support, WebSocket-powered live queue boards, counter technician dispatching console, and throughput analytics.
-   - Tech: Vue.js, Laravel, MariaDB, WebSockets, Queue.
-
-3. **Basecamp TMS (Training Monitoring System)**:
+4. **Basecamp TMS (Training Monitoring System)**:
    - Web-based enterprise platform streamlining the scheduling, tracking, and reporting of training activities across teams.
    - Built with role-based access control (Trainer, Supervisor, Assistant Supervisor, Manager, Director, Guest), calendar view, and custom OTRS integration to convert training requests into records.
    - Tech: Vue.js, Laravel, MariaDB, OTRS Integration, Tailwind CSS.
 
-4. **SWFS (Sterling Workforce System)**:
-   - A modern enterprise HRIS and payroll solution built for Sterling Paper Group of Companies to replace legacy systems.
-   - Ron led the implementation of major system modules including BIR Tax Computation, Alphalist Generation, Employee Clearance Processing, and Last Pay Computation.
-   - Restructured data models to boost system performance and led legacy database migration.
-   - Tech: Vue.js, PHP (CodeIgniter), MariaDB.
+5. **WMedLaw DTR (DTR & Payroll System)**:
+   - Internal Daily Time Record (DTR) and payroll system built for WMedLaw to digitize employee timekeeping, consolidate attendance records, and support payroll processing.
+   - Only the overview above is published; do not invent specific features or modules for this project. Suggest contacting Ron for specifics.
+   - Tech: Next.js, Supabase, Vercel.
+   - Live: https://timekeeping-dtr.vercel.app (login required)
 
-5. **SPOTT (Sterling Paper Online Time Tracker)**:
-   - Mobile and web application serving as a digital Daily Time Record (DTR) for employees to track work hours accurately.
-   - Ron served as Lead Developer, building RESTful APIs for user attendance logs (attlogs) and transition from manual to digital timekeeping.
-   - Tech: Ionic, Vue.js, CodeIgniter, MariaDB.
+6. **WMedLaw Web Platform**:
+   - Official web platform and client management portal for WMedLaw, a Texas-based legal firm.
+   - Built with high availability, SEO optimization, responsive layout architectures, and streamlined client inquiry workflows.
+   - Tech: WordPress, PHP, JavaScript, SEO, UI/UX.
+   - Live: https://wmedlaw.com
 
-6. **ESS-PORTAL (Employee Self-Service Portal)**:
-   - Centralized self-service portal for employees and HR teams for timekeeping and request filing, integrated with SPOTT attendance logs.
-   - Tech: Vue.js, CodeIgniter, MySQL.
-
-7. **OBS (Onboarding System)**:
-   - Streamlines recruitment and onboarding from job posting and applications to new hire onboarding.
-   - Tech: Vue.js, CodeIgniter, MySQL.
-
-9. **Nexus-IMS (Inventory Management System)**:
+7. **Nexus-IMS (Inventory Management System)**:
    - Comprehensive multi-warehouse Inventory Management System developed for Trillion Residence.
    - Features Gatekeeper Administrative Approval workflow for stock transfers, stock-in provisioning, and stock-out deductions with immutable audit logs.
    - Includes real-time valuation dashboard, batch intake terminal with automated barcode generation, aging stock liabilities, consumption velocity analytics, and PDF/CSV reporting.
    - Tech: Vue.js, Laravel, MySQL, Tailwind CSS, REST APIs.
 
-10. **Asia CEO Forum Website**:
+8. **SWFS (Sterling Workforce System)**:
+   - A modern enterprise HRIS and payroll solution built for Sterling Paper Group of Companies to replace legacy systems.
+   - Ron led the implementation of major modules and optimizations: BIR Tax Computation, Alphalist Generation, Employee Clearance Processing, and Last Pay Computation.
+   - Restructured data models to boost system performance and led legacy database migration.
+   - Tech: Vue.js, PHP (CodeIgniter), MariaDB.
+
+9. **SPOTT (Sterling Paper Online Time Tracker)**:
+   - Mobile and web application serving as a digital Daily Time Record (DTR) for employees to track work hours accurately.
+   - Ron served as Lead Developer, building RESTful APIs for user attendance logs (attlogs) and transition from manual to digital timekeeping.
+   - Tech: Ionic, Vue.js, CodeIgniter, MariaDB.
+
+10. **ESS-PORTAL (Employee Self-Service Portal)**:
+   - Centralized self-service portal for employees and HR teams for timekeeping and request filing, integrated with SPOTT attendance logs.
+   - Tech: Vue.js, CodeIgniter, MySQL.
+
+11. **OBS (Onboarding System)**:
+   - Streamlines recruitment and onboarding from job posting and applications to new hire onboarding.
+   - Tech: Vue.js, CodeIgniter, MySQL.
+
+12. **Asia CEO Forum Website**:
    - Modernized website for the premier national business event series in the Philippines.
    - Tech: Next.js, NoSQL.
+
+### Side & IoT Projects:
+- **Juala De Amor**: IoT-enabled smart bird cage system for pet bird owners, monitoring care, safety, and comfort. Tech: Android, Arduino, Firebase.
+- **ReCSys**: Automated IoT smart clothes-drying system that protects laundry hung outdoors from sudden rain or intense sunlight. Tech: Android, Arduino, Firebase.
+- **QuickCharge-Fi**: Budget-friendly device charging and Wi-Fi station for students in shared spaces (libraries, dorms, study halls). Tech: Android, Arduino, PHP, MySQL.
 
 ### Technical Arsenal:
 - **Languages**: PHP, TypeScript, JavaScript, SQL, HTML5, CSS3, Python, C#
@@ -131,7 +155,7 @@ Your primary role is to answer inquiries from prospective clients, recruiters, h
 - Use precise technical terminology when discussing architecture, engineering stacks, diagnostics, hardware repairs, and project roadmaps.
 - **Schedule & Availability Inquiries**: When asked about Ron's schedule, working hours, availability, or what he is doing right now, explain his weekly routine (Mon–Fri 8am–5pm core engineering, 7pm–9:30pm evening consultation/free time, weekend rest windows) and recommend reaching out via email or booking a discovery session.
 - **Hardware & Repair Inquiries**: When a visitor or client asks if Ron offers **hardware services, PC/laptop repairs, troubleshooting, cleaning, OS reinstall, parts upgrades, or screen replacement**, ALWAYS confirm that **YES, Ron provides professional hardware diagnostics, PC/laptop repair & maintenance services, and on-site servicing**. Provide the exact rates clearly.
-- When asked about specific projects like **PMCIE LMS**, **MobileCare Queuing**, **Basecamp TMS**, **Nexus-IMS**, **SWFS**, **SPOTT**, **ESS-PORTAL**, **OBS**, explain their purpose, technologies, and Ron's exact contributions.
+- When asked about specific projects like **MobileCare Queuing**, **Lead to Cash Portal**, **PMCIE LMS**, **Basecamp TMS**, **WMedLaw DTR**, **Nexus-IMS**, **SWFS**, **SPOTT**, **ESS-PORTAL**, **OBS**, or the side projects (**Juala De Amor**, **ReCSys**, **QuickCharge-Fi**), explain their purpose, technologies, and Ron's exact contributions. Only state details listed above; never invent features.
 - When asked about services or pricing, provide exact rates clearly (e.g. Free 20m discovery, ₱1k/hr advisory, ₱600 diagnostics, ₱1,200 OS provisioning, ₱800 thermal overhaul, ₱600 hardware install, ₱2.5k–₱8k+ screen replacements, custom enterprise quotes).
 - Format responses clearly with markdown formatting (bullet points, bold text, links). When presenting lists of projects, experience, or skills, use structured numbered or bulleted lists for clean readability on mobile screens rather than wide markdown tables.
 - When asked about hiring or contacting Ron, provide his email (marquez.ronrons@gmail.com) and LinkedIn link.
@@ -216,6 +240,85 @@ function generateKnowledgeReply(lastUserMessage: string): string {
       `• ⚙️ **Hardware Installation & Upgrades**: **₱600** — Installation and testing of RAM, SSD, GPU, power supplies, or internal peripherals.\n` +
       `• 💻 **Laptop Screen Replacement**: **₱2.5k – ₱8k+** *(depending on unit model)* — Display panel replacement and calibration for cracked or damaged screens.\n\n` +
       `To schedule a repair or service, feel free to email Ron directly at [marquez.ronrons@gmail.com](mailto:marquez.ronrons@gmail.com)!`
+    );
+  }
+
+  // Lead to Cash Portal (Power Mac Center) — before ESS-PORTAL, which matches "portal"
+  if (
+    query.includes("l2c") ||
+    query.includes("lead to cash") ||
+    query.includes("lead-to-cash") ||
+    query.includes("waiver") ||
+    query.includes("lead management") ||
+    query.includes("the loop")
+  ) {
+    return (
+      `**Lead to Cash Portal (L2C Portal)** is an internal platform for Power Mac Center and The Loop:\n\n` +
+      `• **Purpose**: Digitizes customer waivers and centralizes lead management, so customers can be tracked from first contact through to a completed sale.\n` +
+      `• **Ron's Role**: Design, development, testing, deployment, and maintenance.\n\n` +
+      `For deeper technical details, reach out to Ron at [marquez.ronrons@gmail.com](mailto:marquez.ronrons@gmail.com).`
+    );
+  }
+
+  // WMedLaw DTR & Payroll — before SPOTT, which matches "dtr"
+  if (
+    query.includes("payroll system") ||
+    query.includes("timekeeping-dtr") ||
+    (query.includes("wmed") && (query.includes("dtr") || query.includes("payroll") || query.includes("timekeeping")))
+  ) {
+    return (
+      `**WMedLaw DTR** is a Daily Time Record (DTR) and payroll system built for WMedLaw:\n\n` +
+      `• **Purpose**: Digitizes employee timekeeping, consolidates attendance records, and supports payroll processing.\n` +
+      `• **Tech Stack**: Next.js, Supabase, Vercel.\n\n` +
+      `For deeper technical details, reach out to Ron at [marquez.ronrons@gmail.com](mailto:marquez.ronrons@gmail.com).`
+    );
+  }
+
+  // Side & IoT projects
+  if (query.includes("juala") || query.includes("bird")) {
+    return (
+      `**Juala De Amor** is an IoT-enabled smart cage system for pet bird owners, designed to ensure optimal care, safety, and comfort for their birds.\n\n` +
+      `• **Tech Stack**: Android, Arduino, Firebase.`
+    );
+  }
+
+  if (query.includes("recsys") || query.includes("drying") || query.includes("clothes")) {
+    return (
+      `**ReCSys** is an automated IoT smart drying system that lets users dry clothes outdoors while protecting them from sudden rain or intense sunlight.\n\n` +
+      `• **Tech Stack**: Android, Arduino, Firebase.`
+    );
+  }
+
+  if (query.includes("quickcharge") || query.includes("quick charge") || query.includes("charging")) {
+    return (
+      `**QuickCharge-Fi** is a budget-friendly charging and Wi-Fi station for students in shared spaces such as libraries, dormitories, and study halls, built for high traffic at minimal cost.\n\n` +
+      `• **Tech Stack**: Android, Arduino, PHP, MySQL.`
+    );
+  }
+
+  if (query.includes("iot") || query.includes("side project") || query.includes("arduino")) {
+    return (
+      `Ron's **Side & IoT projects** include:\n\n` +
+      `1. **Juala De Amor**: IoT smart bird cage system (Android, Arduino, Firebase).\n` +
+      `2. **ReCSys**: Automated smart clothes-drying system (Android, Arduino, Firebase).\n` +
+      `3. **QuickCharge-Fi**: Student charging & Wi-Fi station (Android, Arduino, PHP, MySQL).`
+    );
+  }
+
+  // WMedLaw
+  if (
+    query.includes("wmedlaw") ||
+    query.includes("wmed") ||
+    query.includes("law firm")
+  ) {
+    return (
+      `**WMedLaw** is the digital web platform and client management portal for a Texas-based legal firm:\n\n` +
+      `• **Purpose**: Serves as the central digital face for the law firm with high availability, SEO optimization, and streamlined client intake.\n` +
+      `• **Ron's Key Contributions**:\n` +
+      `  - Engineered responsive layouts, legal service directories, and client intake workflows.\n` +
+      `  - Implemented database caching optimizations and security hardening.\n` +
+      `  - Executed technical SEO strategies to increase organic search discovery.\n` +
+      `• **Tech Stack**: WordPress, PHP, JavaScript, SEO, UI/UX.`
     );
   }
 
@@ -336,7 +439,7 @@ function generateKnowledgeReply(lastUserMessage: string): string {
       `  - Integrated WebSockets and asynchronous queue workers for zero-latency live ticket calling and status updates.\n` +
       `  - Built the technician & admin management console for ticket handling and wait time monitoring.\n` +
       `  - Optimized database schemas for tracking customer throughput and peak hour metrics.\n` +
-      `• **Tech Stack**: Vue.js, Laravel, MariaDB, WebSockets, Queue.`
+      `• **Tech Stack**: Web Kiosk, WebSockets, Redis, Hexnode (kiosk device management).`
     );
   }
 
@@ -430,15 +533,20 @@ function generateKnowledgeReply(lastUserMessage: string): string {
   ) {
     return (
       `Here are Ron's primary enterprise production platforms:\n\n` +
-      `1. **PMCIE LMS** (Learning Management System): Training batch administration, module tracking, and analytics dashboard (Vue.js, Laravel, MariaDB).\n` +
-      `2. **MobileCare Queuing** (AASP Queuing System): Real-time customer check-in kiosk and live ticket calling platform (Vue.js, Laravel, MariaDB, WebSockets).\n` +
-      `3. **Basecamp TMS** (Training Monitoring System): Training management and scheduling with OTRS integration (Vue.js, Laravel, MariaDB).\n` +
-      `4. **SWFS** (Sterling Workforce System): Comprehensive HRIS & payroll solution with BIR Tax, Alphalist, and Last Pay computation (Vue.js, CodeIgniter, MariaDB).\n` +
-      `5. **SPOTT** (Sterling Paper Online Time Tracker): Mobile & web Daily Time Record (DTR) app (Ionic, Vue.js, CodeIgniter).\n` +
-      `6. **ESS-PORTAL** (Employee Self-Service Portal): Centralized timekeeping and HR portal integrated with SPOTT logs (Vue.js, CodeIgniter, MySQL).\n` +
-      `7. **OBS** (Onboarding System): Full recruitment and new-hire onboarding platform (Vue.js, CodeIgniter, MySQL).\n` +
-      `8. **Asia CEO Forum**: Modernized Next.js platform for national business event series.\n\n` +
-      `Ask me about any specific project (e.g. *"What is SWFS?"* or *"Tell me about SPOTT"*) for more details!`
+      `1. **MobileCare Queuing** (AASP Queuing System): Real-time customer check-in kiosk and live ticket calling platform (Web Kiosk, WebSockets, Redis, Hexnode).\n` +
+      `2. **Lead to Cash Portal** (L2C): Digital waiver and lead management platform for Power Mac Center and The Loop.\n` +
+      `3. **PMCIE LMS** (Learning Management System): Training batch administration, module tracking, and analytics dashboard (Vue.js, Laravel, MariaDB).\n` +
+      `4. **Basecamp TMS** (Training Monitoring System): Training management and scheduling with OTRS integration (Vue.js, Laravel, MariaDB).\n` +
+      `5. **WMedLaw DTR** (DTR & Payroll System): Employee timekeeping and payroll system for WMedLaw (Next.js, Supabase, Vercel).\n` +
+      `6. **WMedLaw Web Platform**: Official website and client intake portal for a Texas-based law firm (WordPress, PHP).\n` +
+      `7. **Nexus-IMS** (Inventory Management System): Multi-warehouse inventory tracking & gatekeeper workflow for Trillion Residence (Vue.js, Laravel, MySQL).\n` +
+      `8. **SWFS** (Sterling Workforce System): Comprehensive HRIS & payroll solution with BIR Tax, Alphalist, and Last Pay computation (Vue.js, CodeIgniter, MariaDB).\n` +
+      `9. **SPOTT** (Sterling Paper Online Time Tracker): Mobile & web Daily Time Record (DTR) app (Ionic, Vue.js, CodeIgniter).\n` +
+      `10. **ESS-PORTAL** (Employee Self-Service Portal): Centralized timekeeping and HR portal integrated with SPOTT logs (Vue.js, CodeIgniter, MySQL).\n` +
+      `11. **OBS** (Onboarding System): Full recruitment and new-hire onboarding platform (Vue.js, CodeIgniter, MySQL).\n` +
+      `12. **Asia CEO Forum**: Modernized Next.js platform for national business event series.\n\n` +
+      `**Side & IoT projects**: Juala De Amor (smart bird cage), ReCSys (smart clothes-drying system), and QuickCharge-Fi (student charging & Wi-Fi station).\n\n` +
+      `Ask me about any specific project (e.g. *"What is Nexus-IMS?"* or *"Tell me about the Lead to Cash Portal"*) for more details!`
     );
   }
 

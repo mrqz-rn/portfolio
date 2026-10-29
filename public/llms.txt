@@ -18,8 +18,17 @@
 - **AI Integrations**: Gemini, Claude, OpenAI APIs, automated document processing, smart chatbots
 
 ## Key Projects
+- **MobileCare Queuing**: Real-time queue management system for an Apple Authorized Service Provider (AASP) featuring kiosk intake, live dispatching, and WebSockets.
+- **Lead to Cash Portal**: Digital waiver and lead management platform for Power Mac Center and The Loop.
 - **PMCIE LMS**: Web-based Learning Management System for PMC Institute for Excellence with automated batch scheduling, curriculum tracking, and analytics dashboards.
-- **MobileCare Queuing**: Real-time queue management system for Apple Authorized Service Provider (AASP) featuring kiosk intake, live dispatching, and WebSockets.
 - **Basecamp TMS**: Training Monitoring System streamlining scheduling, evaluation, and role-based training records.
+- **WMedLaw DTR**: Daily Time Record and payroll system for WMedLaw built with Next.js and Supabase.
+- **WMedLaw Web Platform**: Official website and client intake portal for a Texas-based law firm.
 - **Nexus-IMS**: Enterprise Inventory Management System with multi-warehouse tracking and gatekeeper approval workflows.
+- **SWFS**: HRIS and payroll solution with BIR tax, alphalist, and last pay computation.
 - **SPOTT**: Mobile Daily Time Record (DTR) and attendance tracking application built with Ionic, Vue, and REST APIs.
+
+## Side & IoT Projects
+- **Juala De Amor**: IoT smart bird cage system (Android, Arduino, Firebase).
+- **ReCSys**: Automated smart clothes-drying system (Android, Arduino, Firebase).
+- **QuickCharge-Fi**: Student charging and Wi-Fi station (Android, Arduino, PHP, MySQL).
