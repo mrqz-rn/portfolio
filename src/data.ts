@@ -171,8 +171,43 @@ export const certs = [
 
 export const works = [
   {
+    id: 7,
+    name: 'Mobile Care Queuing',
+    link: "https://service-queue.mobilecareph.com",
+    desc: "Queuing System",
+    description: 'A real-time customer queue management system built for MobileCare, an Apple Authorized Service Provider (AASP). Streamlines customer intake, ticket dispensing, lane dispatching, and waiting area status displays via interactive kiosk stations and live boards.',
+    tech: ['Web-Kiosk', 'WebSocket', 'Redis', 'Hexnode'],
+    involvement: ['Design', 'Development', 'Testing', 'Deployment', 'Maintenance'],
+    company: "Mobile Care",
+    details: [
+      "Engineered a full-stack real-time queue management system for MobileCare service centers to automate customer check-ins, service counter routing, and ticketing workflows.",
+      "Developed an intuitive tablet/kiosk self-service check-in interface enabling customers to register arrivals, view information guides, and select specialized service paths including Courtesy Lane.",
+      "Integrated WebSockets and asynchronous queue workers to enable instantaneous live queue number broadcasts and display updates across service counter screens with zero latency.",
+      "Built a centralized technician and admin management console with role-based access to call next tickets, reassign lanes, record repair intake logs, and monitor average customer wait times.",
+      "Designed and optimized database schemas to capture operational metrics, customer throughput, and peak hour trends to assist management in workforce allocation."
+    ],
+    images: ['works/queue/img1.webp', 'works/queue/img2.webp']
+  },
+  {
+    id: 7,
+    name: 'Lead to Cash Portal',
+    link: "https://rsoconnect.powermaccenter.com",
+    desc: "Digital Waiver & Lead Management",
+    description: 'L2C Portal is an internal lead-to-cash platform for Power Mac Center and The Loop. It digitizes customer waivers and centralizes lead management, so customer interactions can be tracked from first contact through to a completed sale.',
+    tech: ['Django', 'PostgreSQL', 'Docker', 'REST API'],
+    involvement: ['Design', 'Development', 'Testing', 'Deployment', 'Maintenance'],
+    company: "Power Mac Center",
+    details: [
+      "Developed the L2C Portal, a lead-to-cash platform for Power Mac Center and The Loop that brings customer waivers and lead tracking into one system.",
+      "Replaced paper-based customer waivers with digital waiver forms, making records easier to file, search, and retrieve.",
+      "Built lead management workflows so staff can capture customer leads and follow each one through to conversion."
+    ],
+    images: ['works/l2c/img1.png']
+  },
+  {
     id: 6,
     name: 'PMCIE LMS',
+    link: "https://pmcie.powermaccenter.com",
     desc: "Learning Management System",
     description: 'A web-based Learning Management System designed for the PMC Institute for Excellence (PMCIE) to streamline course administration, batch scheduling, trainee progress tracking, and training analytics across specialized organizational training programs.',
     tech: ['Web', 'Vue', 'Laravel', 'MariaDB', 'REST API'],
@@ -187,26 +222,11 @@ export const works = [
     ],
     images: ['works/lms/img1.webp', 'works/lms/img2.webp']
   },
-  {
-    id: 7,
-    name: 'MobileCare Queuing',
-    desc: "Queuing System",
-    description: 'A real-time customer queue management system built for MobileCare, an Apple Authorized Service Provider (AASP). Streamlines customer intake, ticket dispensing, lane dispatching, and waiting area status displays via interactive kiosk stations and live boards.',
-    tech: ['Web', 'Vue', 'Laravel', 'MariaDB', 'WebSocket', 'Queue'],
-    involvement: ['Design', 'Development', 'Testing', 'Deployment', 'Maintenance'],
-    company: "MpbileCare",
-    details: [
-      "Engineered a full-stack real-time queue management system for MobileCare service centers to automate customer check-ins, service counter routing, and ticketing workflows.",
-      "Developed an intuitive tablet/kiosk self-service check-in interface enabling customers to register arrivals, view information guides, and select specialized service paths including Courtesy Lane.",
-      "Integrated WebSockets and asynchronous queue workers to enable instantaneous live queue number broadcasts and display updates across service counter screens with zero latency.",
-      "Built a centralized technician and admin management console with role-based access to call next tickets, reassign lanes, record repair intake logs, and monitor average customer wait times.",
-      "Designed and optimized database schemas to capture operational metrics, customer throughput, and peak hour trends to assist management in workforce allocation."
-    ],
-    images: ['works/queue/img1.webp', 'works/queue/img2.webp']
-  },
+  
 {
   id: 1,
   name: 'Basecamp TMS',
+  link: "https://tms.basecamp.com.ph",
   desc: "Training Monitoring System",
   description: 'A web-based Training Monitoring System designed to streamline the scheduling, tracking, and reporting of training activities across teams. Supports role-based access for Trainers, Supervisors, Managers, Admins, and Directors to manage training records, certifications, and performance analytics.',
   tech: ['Web', 'Vue', 'Laravel', 'MariaDB',  'OTRS Integration', ],
@@ -306,6 +326,22 @@ export const works = [
 
 
 export const projects = [
+  {
+      id: 10,
+      name: 'WMedLaw DTR',
+      desc: "DTR & Payroll System",
+      description: 'An internal Daily Time Record (DTR) and payroll system built for WMedLaw to digitize employee timekeeping, consolidate attendance records, and support accurate payroll processing.',
+      tech: ['NextJS', 'Supabase', 'Vercel'],
+      involvement: ['System Design', 'Full-Stack Development', 'Database Design', 'Deployment'],
+      company: "WMedLaw",
+      link: "https://timekeeping-dtr.vercel.app/",
+      details: [
+        "Built a web-based Daily Time Record (DTR) system for WMedLaw, replacing manual time tracking with a centralized digital timekeeping workflow.",
+        "Implemented the backend on Supabase for authentication and attendance data storage, with the application built in Next.js and deployed on Vercel.",
+        "Connected attendance records to payroll processing so that recorded hours feed directly into payroll computation, reducing manual encoding."
+      ],
+      images: ['works/wmed2/img1.png','works/wmed2/img2.png','works/wmed2/img3.png','works/wmed2/img4.png','works/wmed2/img5.png','works/wmed2/img6.png']
+    },
     {
       id: 8,
       name: 'WMedLaw',
